@@ -1,0 +1,306 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A7EDBED148C20D3003B4C14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7EDBEC148C20D3003B4C14 /* UIKit.framework */; };
+		2A7EDBEF148C20D3003B4C14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7EDBEE148C20D3003B4C14 /* Foundation.framework */; };
+		2A7EDBF1148C20D3003B4C14 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7EDBF0148C20D3003B4C14 /* CoreGraphics.framework */; };
+		2A7EDBF7148C20D3003B4C14 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDBF5148C20D3003B4C14 /* InfoPlist.strings */; };
+		2A7EDBF9148C20D3003B4C14 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDBF8148C20D3003B4C14 /* main.m */; };
+		2A7EDBFD148C20D3003B4C14 /* suruga_homeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDBFC148C20D3003B4C14 /* suruga_homeAppDelegate.m */; };
+		2A7EDC00148C20D3003B4C14 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDBFE148C20D3003B4C14 /* MainWindow.xib */; };
+		2A7EDC03148C20D3003B4C14 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDC02148C20D3003B4C14 /* FirstViewController.m */; };
+		2A7EDC06148C20D3003B4C14 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDC05148C20D3003B4C14 /* SecondViewController.m */; };
+		2A7EDC09148C20D3003B4C14 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDC07148C20D3003B4C14 /* FirstView.xib */; };
+		2A7EDC0C148C20D3003B4C14 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDC0A148C20D3003B4C14 /* SecondView.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2A7EDBE8148C20D3003B4C14 /* suruga_home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = suruga_home.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A7EDBEC148C20D3003B4C14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2A7EDBEE148C20D3003B4C14 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2A7EDBF0148C20D3003B4C14 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2A7EDBF4148C20D3003B4C14 /* suruga_home-Info.plist */ = {isa = PBXFileReference; path = "suruga_home-Info.plist"; sourceTree = "<group>"; };
+		2A7EDBF6148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2A7EDBF8148C20D3003B4C14 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2A7EDBFA148C20D3003B4C14 /* suruga_home-Prefix.pch */ = {isa = PBXFileReference; path = "suruga_home-Prefix.pch"; sourceTree = "<group>"; };
+		2A7EDBFB148C20D3003B4C14 /* suruga_homeAppDelegate.h */ = {isa = PBXFileReference; path = suruga_homeAppDelegate.h; sourceTree = "<group>"; };
+		2A7EDBFC148C20D3003B4C14 /* suruga_homeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = suruga_homeAppDelegate.m; sourceTree = "<group>"; };
+		2A7EDBFF148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		2A7EDC01148C20D3003B4C14 /* FirstViewController.h */ = {isa = PBXFileReference; path = FirstViewController.h; sourceTree = "<group>"; };
+		2A7EDC02148C20D3003B4C14 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		2A7EDC04148C20D3003B4C14 /* SecondViewController.h */ = {isa = PBXFileReference; path = SecondViewController.h; sourceTree = "<group>"; };
+		2A7EDC05148C20D3003B4C14 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		2A7EDC08148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
+		2A7EDC0B148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2A7EDBE5148C20D3003B4C14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A7EDBED148C20D3003B4C14 /* UIKit.framework in Frameworks */,
+				2A7EDBEF148C20D3003B4C14 /* Foundation.framework in Frameworks */,
+				2A7EDBF1148C20D3003B4C14 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2A7EDBDD148C20D3003B4C14 = {
+			isa = PBXGroup;
+			children = (
+				2A7EDBF2148C20D3003B4C14 /* suruga_home */,
+				2A7EDBEB148C20D3003B4C14 /* Frameworks */,
+				2A7EDBE9148C20D3003B4C14 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2A7EDBE9148C20D3003B4C14 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A7EDBE8148C20D3003B4C14 /* suruga_home.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A7EDBEB148C20D3003B4C14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A7EDBEC148C20D3003B4C14 /* UIKit.framework */,
+				2A7EDBEE148C20D3003B4C14 /* Foundation.framework */,
+				2A7EDBF0148C20D3003B4C14 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2A7EDBF2148C20D3003B4C14 /* suruga_home */ = {
+			isa = PBXGroup;
+			children = (
+				2A7EDBFB148C20D3003B4C14 /* suruga_homeAppDelegate.h */,
+				2A7EDBFC148C20D3003B4C14 /* suruga_homeAppDelegate.m */,
+				2A7EDBFE148C20D3003B4C14 /* MainWindow.xib */,
+				2A7EDC01148C20D3003B4C14 /* FirstViewController.h */,
+				2A7EDC02148C20D3003B4C14 /* FirstViewController.m */,
+				2A7EDC04148C20D3003B4C14 /* SecondViewController.h */,
+				2A7EDC05148C20D3003B4C14 /* SecondViewController.m */,
+				2A7EDC07148C20D3003B4C14 /* FirstView.xib */,
+				2A7EDC0A148C20D3003B4C14 /* SecondView.xib */,
+				2A7EDBF3148C20D3003B4C14 /* Supporting Files */,
+			);
+			path = suruga_home;
+			sourceTree = "<group>";
+		};
+		2A7EDBF3148C20D3003B4C14 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2A7EDBF4148C20D3003B4C14 /* suruga_home-Info.plist */,
+				2A7EDBF5148C20D3003B4C14 /* InfoPlist.strings */,
+				2A7EDBF8148C20D3003B4C14 /* main.m */,
+				2A7EDBFA148C20D3003B4C14 /* suruga_home-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2A7EDBE7148C20D3003B4C14 /* suruga_home */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A7EDC0F148C20D3003B4C14 /* Build configuration list for PBXNativeTarget "suruga_home" */;
+			buildPhases = (
+				2A7EDBE4148C20D3003B4C14 /* Sources */,
+				2A7EDBE5148C20D3003B4C14 /* Frameworks */,
+				2A7EDBE6148C20D3003B4C14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = suruga_home;
+			productName = suruga_home;
+			productReference = 2A7EDBE8148C20D3003B4C14 /* suruga_home.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2A7EDBDF148C20D3003B4C14 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 2A7EDBE2148C20D3003B4C14 /* Build configuration list for PBXProject "suruga_home" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2A7EDBDD148C20D3003B4C14;
+			productRefGroup = 2A7EDBE9148C20D3003B4C14 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2A7EDBE7148C20D3003B4C14 /* suruga_home */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2A7EDBE6148C20D3003B4C14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A7EDBF7148C20D3003B4C14 /* InfoPlist.strings in Resources */,
+				2A7EDC00148C20D3003B4C14 /* MainWindow.xib in Resources */,
+				2A7EDC09148C20D3003B4C14 /* FirstView.xib in Resources */,
+				2A7EDC0C148C20D3003B4C14 /* SecondView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2A7EDBE4148C20D3003B4C14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A7EDBF9148C20D3003B4C14 /* main.m in Sources */,
+				2A7EDBFD148C20D3003B4C14 /* suruga_homeAppDelegate.m in Sources */,
+				2A7EDC03148C20D3003B4C14 /* FirstViewController.m in Sources */,
+				2A7EDC06148C20D3003B4C14 /* SecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2A7EDBF5148C20D3003B4C14 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A7EDBF6148C20D3003B4C14 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2A7EDBFE148C20D3003B4C14 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A7EDBFF148C20D3003B4C14 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		2A7EDC07148C20D3003B4C14 /* FirstView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A7EDC08148C20D3003B4C14 /* en */,
+			);
+			name = FirstView.xib;
+			sourceTree = "<group>";
+		};
+		2A7EDC0A148C20D3003B4C14 /* SecondView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A7EDC0B148C20D3003B4C14 /* en */,
+			);
+			name = SecondView.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2A7EDC0D148C20D3003B4C14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2A7EDC0E148C20D3003B4C14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2A7EDC10148C20D3003B4C14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "suruga_home/suruga_home-Prefix.pch";
+				INFOPLIST_FILE = "suruga_home/suruga_home-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2A7EDC11148C20D3003B4C14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "suruga_home/suruga_home-Prefix.pch";
+				INFOPLIST_FILE = "suruga_home/suruga_home-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2A7EDBE2148C20D3003B4C14 /* Build configuration list for PBXProject "suruga_home" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A7EDC0D148C20D3003B4C14 /* Debug */,
+				2A7EDC0E148C20D3003B4C14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A7EDC0F148C20D3003B4C14 /* Build configuration list for PBXNativeTarget "suruga_home" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A7EDC10148C20D3003B4C14 /* Debug */,
+				2A7EDC11148C20D3003B4C14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2A7EDBDF148C20D3003B4C14 /* Project object */;
+}
