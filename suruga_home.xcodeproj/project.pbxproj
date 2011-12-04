@@ -14,10 +14,10 @@
 		2A7EDBF9148C20D3003B4C14 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDBF8148C20D3003B4C14 /* main.m */; };
 		2A7EDBFD148C20D3003B4C14 /* suruga_homeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDBFC148C20D3003B4C14 /* suruga_homeAppDelegate.m */; };
 		2A7EDC00148C20D3003B4C14 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDBFE148C20D3003B4C14 /* MainWindow.xib */; };
-		2A7EDC03148C20D3003B4C14 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDC02148C20D3003B4C14 /* FirstViewController.m */; };
-		2A7EDC06148C20D3003B4C14 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDC05148C20D3003B4C14 /* SecondViewController.m */; };
-		2A7EDC09148C20D3003B4C14 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDC07148C20D3003B4C14 /* FirstView.xib */; };
-		2A7EDC0C148C20D3003B4C14 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDC0A148C20D3003B4C14 /* SecondView.xib */; };
+		2A7EDC03148C20D3003B4C14 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDC02148C20D3003B4C14 /* TaskViewController.m */; };
+		2A7EDC06148C20D3003B4C14 /* CompareTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDC05148C20D3003B4C14 /* CompareTableViewController.m */; };
+		2A7EDC09148C20D3003B4C14 /* TaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDC07148C20D3003B4C14 /* TaskView.xib */; };
+		2A7EDC0C148C20D3003B4C14 /* CompareTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDC0A148C20D3003B4C14 /* CompareTableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,19 +25,19 @@
 		2A7EDBEC148C20D3003B4C14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2A7EDBEE148C20D3003B4C14 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2A7EDBF0148C20D3003B4C14 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2A7EDBF4148C20D3003B4C14 /* suruga_home-Info.plist */ = {isa = PBXFileReference; path = "suruga_home-Info.plist"; sourceTree = "<group>"; };
+		2A7EDBF4148C20D3003B4C14 /* suruga_home-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "suruga_home-Info.plist"; sourceTree = "<group>"; };
 		2A7EDBF6148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2A7EDBF8148C20D3003B4C14 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2A7EDBFA148C20D3003B4C14 /* suruga_home-Prefix.pch */ = {isa = PBXFileReference; path = "suruga_home-Prefix.pch"; sourceTree = "<group>"; };
-		2A7EDBFB148C20D3003B4C14 /* suruga_homeAppDelegate.h */ = {isa = PBXFileReference; path = suruga_homeAppDelegate.h; sourceTree = "<group>"; };
+		2A7EDBFA148C20D3003B4C14 /* suruga_home-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "suruga_home-Prefix.pch"; sourceTree = "<group>"; };
+		2A7EDBFB148C20D3003B4C14 /* suruga_homeAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = suruga_homeAppDelegate.h; sourceTree = "<group>"; };
 		2A7EDBFC148C20D3003B4C14 /* suruga_homeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = suruga_homeAppDelegate.m; sourceTree = "<group>"; };
 		2A7EDBFF148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		2A7EDC01148C20D3003B4C14 /* FirstViewController.h */ = {isa = PBXFileReference; path = FirstViewController.h; sourceTree = "<group>"; };
-		2A7EDC02148C20D3003B4C14 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		2A7EDC04148C20D3003B4C14 /* SecondViewController.h */ = {isa = PBXFileReference; path = SecondViewController.h; sourceTree = "<group>"; };
-		2A7EDC05148C20D3003B4C14 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		2A7EDC08148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
-		2A7EDC0B148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		2A7EDC01148C20D3003B4C14 /* TaskViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
+		2A7EDC02148C20D3003B4C14 /* TaskViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
+		2A7EDC04148C20D3003B4C14 /* CompareTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompareTableViewController.h; sourceTree = "<group>"; };
+		2A7EDC05148C20D3003B4C14 /* CompareTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompareTableViewController.m; sourceTree = "<group>"; };
+		2A7EDC08148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TaskView.xib; sourceTree = "<group>"; };
+		2A7EDC0B148C20D3003B4C14 /* en */ = {isa = PBXFileReference; name = en; path = en.lproj/CompareTableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,12 +87,8 @@
 				2A7EDBFB148C20D3003B4C14 /* suruga_homeAppDelegate.h */,
 				2A7EDBFC148C20D3003B4C14 /* suruga_homeAppDelegate.m */,
 				2A7EDBFE148C20D3003B4C14 /* MainWindow.xib */,
-				2A7EDC01148C20D3003B4C14 /* FirstViewController.h */,
-				2A7EDC02148C20D3003B4C14 /* FirstViewController.m */,
-				2A7EDC04148C20D3003B4C14 /* SecondViewController.h */,
-				2A7EDC05148C20D3003B4C14 /* SecondViewController.m */,
-				2A7EDC07148C20D3003B4C14 /* FirstView.xib */,
-				2A7EDC0A148C20D3003B4C14 /* SecondView.xib */,
+				2A7EDC12148C2157003B4C14 /* Tasks */,
+				2A7EDC13148C2163003B4C14 /* Compare */,
 				2A7EDBF3148C20D3003B4C14 /* Supporting Files */,
 			);
 			path = suruga_home;
@@ -107,6 +103,26 @@
 				2A7EDBFA148C20D3003B4C14 /* suruga_home-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2A7EDC12148C2157003B4C14 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				2A7EDC01148C20D3003B4C14 /* TaskViewController.h */,
+				2A7EDC02148C20D3003B4C14 /* TaskViewController.m */,
+				2A7EDC07148C20D3003B4C14 /* TaskView.xib */,
+			);
+			name = Tasks;
+			sourceTree = "<group>";
+		};
+		2A7EDC13148C2163003B4C14 /* Compare */ = {
+			isa = PBXGroup;
+			children = (
+				2A7EDC04148C20D3003B4C14 /* CompareTableViewController.h */,
+				2A7EDC05148C20D3003B4C14 /* CompareTableViewController.m */,
+				2A7EDC0A148C20D3003B4C14 /* CompareTableViewController.xib */,
+			);
+			name = Compare;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,8 +174,8 @@
 			files = (
 				2A7EDBF7148C20D3003B4C14 /* InfoPlist.strings in Resources */,
 				2A7EDC00148C20D3003B4C14 /* MainWindow.xib in Resources */,
-				2A7EDC09148C20D3003B4C14 /* FirstView.xib in Resources */,
-				2A7EDC0C148C20D3003B4C14 /* SecondView.xib in Resources */,
+				2A7EDC09148C20D3003B4C14 /* TaskView.xib in Resources */,
+				2A7EDC0C148C20D3003B4C14 /* CompareTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,8 +188,8 @@
 			files = (
 				2A7EDBF9148C20D3003B4C14 /* main.m in Sources */,
 				2A7EDBFD148C20D3003B4C14 /* suruga_homeAppDelegate.m in Sources */,
-				2A7EDC03148C20D3003B4C14 /* FirstViewController.m in Sources */,
-				2A7EDC06148C20D3003B4C14 /* SecondViewController.m in Sources */,
+				2A7EDC03148C20D3003B4C14 /* TaskViewController.m in Sources */,
+				2A7EDC06148C20D3003B4C14 /* CompareTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,20 +212,20 @@
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
-		2A7EDC07148C20D3003B4C14 /* FirstView.xib */ = {
+		2A7EDC07148C20D3003B4C14 /* TaskView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2A7EDC08148C20D3003B4C14 /* en */,
 			);
-			name = FirstView.xib;
+			name = TaskView.xib;
 			sourceTree = "<group>";
 		};
-		2A7EDC0A148C20D3003B4C14 /* SecondView.xib */ = {
+		2A7EDC0A148C20D3003B4C14 /* CompareTableViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2A7EDC0B148C20D3003B4C14 /* en */,
 			);
-			name = SecondView.xib;
+			name = CompareTableViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
