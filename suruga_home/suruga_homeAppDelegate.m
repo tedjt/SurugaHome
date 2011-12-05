@@ -12,6 +12,7 @@
 
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
+@synthesize taskTableViewController = _taskTableViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -65,6 +66,7 @@
 {
     [_window release];
     [_tabBarController release];
+    [_taskTableViewController release];
     [super dealloc];
 }
 

@@ -7,11 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+@class TaskTableViewController;
 
-@interface suruga_homeAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface suruga_homeAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
+    TaskTableViewController *_taskTableViewController;
+}
+
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
+
+@property (nonatomic, retain) IBOutlet TaskTableViewController *taskTableViewController;
 
 @end

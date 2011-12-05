@@ -14,10 +14,11 @@
 		2A7EDBF9148C20D3003B4C14 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDBF8148C20D3003B4C14 /* main.m */; };
 		2A7EDBFD148C20D3003B4C14 /* suruga_homeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDBFC148C20D3003B4C14 /* suruga_homeAppDelegate.m */; };
 		2A7EDC00148C20D3003B4C14 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDBFE148C20D3003B4C14 /* MainWindow.xib */; };
-		2A7EDC03148C20D3003B4C14 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDC02148C20D3003B4C14 /* TaskViewController.m */; };
 		2A7EDC06148C20D3003B4C14 /* CompareTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDC05148C20D3003B4C14 /* CompareTableViewController.m */; };
-		2A7EDC09148C20D3003B4C14 /* TaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDC07148C20D3003B4C14 /* TaskView.xib */; };
 		2A7EDC0C148C20D3003B4C14 /* CompareTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDC0A148C20D3003B4C14 /* CompareTableViewController.xib */; };
+		2A7EDC18148C3DB0003B4C14 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7EDC17148C3DB0003B4C14 /* CoreData.framework */; };
+		2A7EDC1C148C4240003B4C14 /* TaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EDC1A148C4240003B4C14 /* TaskTableViewController.m */; };
+		2A7EDC1D148C4240003B4C14 /* TaskTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7EDC1B148C4240003B4C14 /* TaskTableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,12 +33,13 @@
 		2A7EDBFB148C20D3003B4C14 /* suruga_homeAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = suruga_homeAppDelegate.h; sourceTree = "<group>"; };
 		2A7EDBFC148C20D3003B4C14 /* suruga_homeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = suruga_homeAppDelegate.m; sourceTree = "<group>"; };
 		2A7EDBFF148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		2A7EDC01148C20D3003B4C14 /* TaskViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
-		2A7EDC02148C20D3003B4C14 /* TaskViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
 		2A7EDC04148C20D3003B4C14 /* CompareTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompareTableViewController.h; sourceTree = "<group>"; };
 		2A7EDC05148C20D3003B4C14 /* CompareTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompareTableViewController.m; sourceTree = "<group>"; };
-		2A7EDC08148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TaskView.xib; sourceTree = "<group>"; };
-		2A7EDC0B148C20D3003B4C14 /* en */ = {isa = PBXFileReference; name = en; path = en.lproj/CompareTableViewController.xib; sourceTree = "<group>"; };
+		2A7EDC0B148C20D3003B4C14 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CompareTableViewController.xib; sourceTree = "<group>"; };
+		2A7EDC17148C3DB0003B4C14 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2A7EDC19148C4240003B4C14 /* TaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTableViewController.h; sourceTree = "<group>"; };
+		2A7EDC1A148C4240003B4C14 /* TaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewController.m; sourceTree = "<group>"; };
+		2A7EDC1B148C4240003B4C14 /* TaskTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskTableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A7EDC18148C3DB0003B4C14 /* CoreData.framework in Frameworks */,
 				2A7EDBED148C20D3003B4C14 /* UIKit.framework in Frameworks */,
 				2A7EDBEF148C20D3003B4C14 /* Foundation.framework in Frameworks */,
 				2A7EDBF1148C20D3003B4C14 /* CoreGraphics.framework in Frameworks */,
@@ -74,6 +77,7 @@
 		2A7EDBEB148C20D3003B4C14 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2A7EDC17148C3DB0003B4C14 /* CoreData.framework */,
 				2A7EDBEC148C20D3003B4C14 /* UIKit.framework */,
 				2A7EDBEE148C20D3003B4C14 /* Foundation.framework */,
 				2A7EDBF0148C20D3003B4C14 /* CoreGraphics.framework */,
@@ -108,9 +112,9 @@
 		2A7EDC12148C2157003B4C14 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
-				2A7EDC01148C20D3003B4C14 /* TaskViewController.h */,
-				2A7EDC02148C20D3003B4C14 /* TaskViewController.m */,
-				2A7EDC07148C20D3003B4C14 /* TaskView.xib */,
+				2A7EDC19148C4240003B4C14 /* TaskTableViewController.h */,
+				2A7EDC1A148C4240003B4C14 /* TaskTableViewController.m */,
+				2A7EDC1B148C4240003B4C14 /* TaskTableViewController.xib */,
 			);
 			name = Tasks;
 			sourceTree = "<group>";
@@ -174,8 +178,8 @@
 			files = (
 				2A7EDBF7148C20D3003B4C14 /* InfoPlist.strings in Resources */,
 				2A7EDC00148C20D3003B4C14 /* MainWindow.xib in Resources */,
-				2A7EDC09148C20D3003B4C14 /* TaskView.xib in Resources */,
 				2A7EDC0C148C20D3003B4C14 /* CompareTableViewController.xib in Resources */,
+				2A7EDC1D148C4240003B4C14 /* TaskTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,8 +192,8 @@
 			files = (
 				2A7EDBF9148C20D3003B4C14 /* main.m in Sources */,
 				2A7EDBFD148C20D3003B4C14 /* suruga_homeAppDelegate.m in Sources */,
-				2A7EDC03148C20D3003B4C14 /* TaskViewController.m in Sources */,
 				2A7EDC06148C20D3003B4C14 /* CompareTableViewController.m in Sources */,
+				2A7EDC1C148C4240003B4C14 /* TaskTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,14 +214,6 @@
 				2A7EDBFF148C20D3003B4C14 /* en */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		2A7EDC07148C20D3003B4C14 /* TaskView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2A7EDC08148C20D3003B4C14 /* en */,
-			);
-			name = TaskView.xib;
 			sourceTree = "<group>";
 		};
 		2A7EDC0A148C20D3003B4C14 /* CompareTableViewController.xib */ = {

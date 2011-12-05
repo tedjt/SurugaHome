@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  TaskTableViewController.h
 //  suruga_home
 //
 //  Created by Ted Tomlinson on 12/4/11.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
+@interface TaskTableViewController : UITableViewController
 
 @end
