@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="10K549" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Address" representedClassName="Address">
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0"/>
+        <attribute name="state" optional="YES" attributeType="String"/>
+        <attribute name="street" optional="YES" attributeType="String"/>
+        <attribute name="zip" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
+        <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="address" inverseEntity="Home"/>
+    </entity>
+    <entity name="BudgetItem" representedClassName="BudgetItem">
+        <attribute name="amount" optional="YES" attributeType="Double"/>
+        <attribute name="inInitialBudget" optional="YES" attributeType="Boolean"/>
+        <attribute name="isExpense" optional="YES" attributeType="Boolean"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Furniture" representedClassName="Furniture">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="image" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Image"/>
+        <relationship name="room" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Room" inverseName="furniture" inverseEntity="Room"/>
+    </entity>
+    <entity name="Home" representedClassName="Home">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <relationship name="address" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="home" inverseEntity="Address"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="home" inverseEntity="Image"/>
+        <relationship name="price" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Price" inverseName="home" inverseEntity="Price"/>
+        <relationship name="rating" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Rating" inverseName="home" inverseEntity="Rating"/>
+    </entity>
+    <entity name="Image" representedClassName="Image">
+        <attribute name="pathToFull" optional="YES" attributeType="String"/>
+        <attribute name="thumb" optional="YES" attributeType="Transformable"/>
+        <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="images" inverseEntity="Home"/>
+    </entity>
+    <entity name="Price" representedClassName="Price">
+        <attribute name="fees" optional="YES" attributeType="Double" defaultValueString="0.0"/>
+        <attribute name="initialCost" optional="YES" attributeType="Double" defaultValueString="0.0"/>
+        <attribute name="runningCost" optional="YES" attributeType="Double" defaultValueString="0.0"/>
+        <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="price" inverseEntity="Home"/>
+    </entity>
+    <entity name="Rating" representedClassName="Rating">
+        <attribute name="food" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="kitchen" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="location" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="overall" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
+        <attribute name="parks" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="size" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="transportation" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="rating" inverseEntity="Home"/>
+    </entity>
+    <entity name="Room" representedClassName="Room">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="furniture" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Furniture" inverseName="room" inverseEntity="Furniture"/>
+    </entity>
+    <entity name="Task" representedClassName="Task">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="completed" optional="YES" attributeType="Boolean"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date"/>
+        <attribute name="dueDate" optional="YES" attributeType="Date"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="UserData" representedClassName="UserData">
+        <attribute name="isRenting" optional="YES" attributeType="Boolean"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="reason" optional="YES" attributeType="String"/>
+        <attribute name="when" optional="YES" attributeType="Date"/>
+    </entity>
+    <elements>
+        <element name="Address" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="BudgetItem" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Furniture" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Home" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Price" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="Rating" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="Room" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Task" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="UserData" positionX="160" positionY="192" width="128" height="105"/>
+    </elements>
+</model>
