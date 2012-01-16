@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-@class TaskTableViewController;
+#import "Three20/Three20.h"
+@class StartUpViewController;
 
 @interface suruga_homeAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
-    TaskTableViewController *_taskTableViewController;
+    StartUpViewController *_startUpViewController;
 }
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
@@ -19,9 +20,11 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet StartUpViewController *startUpViewController;
 
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
-@property (nonatomic, retain) IBOutlet TaskTableViewController *taskTableViewController;
+- (void)saveContext;
+- (NSURL *)applicationDocumentsDirectory;
 
 @end
