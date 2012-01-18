@@ -16,10 +16,15 @@
     UITextField *feesTextField;
     UITextField *rentTextField;
     UITextField *insuranceTextField;
+    UIScrollView *scrollView;
+    UITextField *activeField;
     
     Price *price;
     
     id <PriceViewControllerDelegate> parentController;
+    
+    UIBarButtonItem * saveButton;
+    UIBarButtonItem * doneButton;
     
     
 }
@@ -29,6 +34,11 @@
 @property (nonatomic, retain) IBOutlet UITextField *feesTextField;
 @property (nonatomic, retain) IBOutlet UITextField *rentTextField;
 @property (nonatomic, retain) IBOutlet UITextField *insuranceTextField;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
+
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
 
 @property (nonatomic, retain) Price *price;
 

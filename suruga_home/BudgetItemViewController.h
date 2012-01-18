@@ -11,7 +11,7 @@
 @class BudgetItem;
 @protocol BudgetItemDetailDelegate;
 
-@interface BudgetItemViewController : UIViewController {
+@interface BudgetItemViewController : UIViewController <UITextFieldDelegate> {
     UITextField *nameTextField;
     UITextField *amountTextField;
     UILabel *notesLabel;

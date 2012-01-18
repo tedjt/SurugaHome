@@ -13,7 +13,7 @@
 
 @protocol EditTaskItemViewControllerDelegate;
 
-@interface EditTaskItemViewController : UIViewController {
+@interface EditTaskItemViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
     UITextField *name;
     UITextField *category;
     UITextField *dueDate;
@@ -22,8 +22,10 @@
     NSDateFormatter *dateFormatter;
     Task *task;
     id <EditTaskItemViewControllerDelegate> parentController;
+    
+    NSArray *categoryPickerArray;
+    UIPickerView *categoryPicker;
 }
-@property (nonatomic, assign) BOOL isNewTask;
 @property (nonatomic, retain) IBOutlet UITextField *name;
 @property (nonatomic, retain) IBOutlet UITextField *category;
 @property (nonatomic, retain) IBOutlet UITextField *dueDate;
@@ -34,6 +36,10 @@
 
 @property (nonatomic, retain) Task *task;
 @property (nonatomic, assign) id <EditTaskItemViewControllerDelegate>parentController;
+
+@property(nonatomic, retain) NSArray *categoryPickerArray;
+@property (nonatomic, retain) UIPickerView *categoryPicker;
+@property BOOL hasNewCategory;
 
 
 - (IBAction)cancel:(id)sender;

@@ -9,12 +9,13 @@
 #import "TaskTableViewController.h"
 #import "suruga_homeAppDelegate.h"
 #import "Task.h"
+#import "Category.h"
 
 //#import "TaskTableViewCell.h"
 
 @implementation TaskTableViewController
 
-@synthesize managedObjectContext, addingManagedObjectContext, fetchedResultsController;
+@synthesize managedObjectContext, fetchedResultsController;
 
 
 - (void)didReceiveMemoryWarning
@@ -93,10 +94,10 @@
     if (cell == nil) {
         cell = [[[TaskListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease]; 
         cell.touchIconDelegate = self; 
-        cell.touchIconIndexPath = indexPath;
     }
     
     // Configure the cell...
+    cell.touchIconIndexPath = indexPath;
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -130,11 +131,14 @@
         exit(-1);  // Fail
     }
     
+    [self.tableView reloadData];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	// Display the authors' names as section headings.
-    return [[[fetchedResultsController sections] objectAtIndex:section] name];
+	// Display the category Names as section headings.
+    NSIndexPath *p = [NSIndexPath indexPathForRow:0 inSection:section];
+    Task *t = [fetchedResultsController objectAtIndexPath:p];
+    return t.category.name;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -179,16 +183,8 @@
 	
     EditTaskItemViewController *taskViewController = [[EditTaskItemViewController alloc] initWithNibName:@"EditTaskItemViewController" bundle:nil];
     taskViewController.parentController = self;
-	
-	// Create a new managed object context for the new book -- set its persistent store coordinator to the same as that from the fetched results controller's context.
-	NSManagedObjectContext *addingContext = [[NSManagedObjectContext alloc] init];
-	self.addingManagedObjectContext = addingContext;
-	[addingContext release];
-	
-	[addingManagedObjectContext setPersistentStoreCoordinator:[[fetchedResultsController managedObjectContext] persistentStoreCoordinator]];
     
-	taskViewController.task = (Task *)[NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:addingContext];
-    taskViewController.isNewTask = YES;
+	taskViewController.task = (Task *)[NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:taskViewController];
 	
@@ -204,51 +200,18 @@
 - (void)taskViewController:(EditTaskItemViewController *)controller didFinishWithSave:(BOOL)save {
 	
 	if (save) {
-		/*
-		 The new task is associated with the task controller's managed object context.
-		 This is good because it means that any edits that are made don't affect the application's main managed object context -- it's a way of keeping disjoint edits in a separate scratchpad -- but it does make it more difficult to get the new book registered with the fetched results controller.
-		 First, you have to save the new book.  This means it will be added to the persistent store.  Then you can retrieve a corresponding managed object into the application delegate's context.  Normally you might do this using a fetch or using objectWithID: -- for example
-		 
-		 NSManagedObjectID *newBookID = [controller.book objectID];
-		 NSManagedObject *newBook = [applicationContext objectWithID:newBookID];
-		 
-		 These techniques, though, won't update the fetch results controller, which only observes change notifications in its context.
-		 You don't want to tell the fetch result controller to perform its fetch again because this is an expensive operation.
-		 You can, though, update the main context using mergeChangesFromContextDidSaveNotification: which will emit change notifications that the fetch results controller will observe.
-		 To do this:
-		 1	Register as an observer of the task controller's change notifications
-		 2	Perform the save
-		 3	In the notification method (addControllerContextDidSave:), merge the changes
-		 4	Unregister as an observer
-		 */
-		NSNotificationCenter *dnc = [NSNotificationCenter defaultCenter];
-		[dnc addObserver:self selector:@selector(taskControllerContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:addingManagedObjectContext];
 		
 		NSError *error;
-		if (![addingManagedObjectContext save:&error]) {
+		if (![managedObjectContext save:&error]) {
 			// Update to handle the error appropriately.
 			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 			exit(-1);  // Fail
 		}
-		[dnc removeObserver:self name:NSManagedObjectContextDidSaveNotification object:addingManagedObjectContext];
 	}
-	// Release the adding managed object context.
-	self.addingManagedObjectContext = nil;
     
 	// Dismiss the modal view to return to the main list
     [self dismissModalViewControllerAnimated:YES];
 }
-
-/**
- Notification from the add controller's context's save operation. This is used to update the fetched results controller's managed object context with the new book instead of performing a fetch (which would be a much more computationally expensive operation).
- */
-- (void)taskControllerContextDidSave:(NSNotification*)saveNotification {
-	
-	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
-	// Merging changes causes the fetched results controller to update its results
-	[context mergeChangesFromContextDidSaveNotification:saveNotification];	
-}
-
 
 #pragma mark -
 #pragma mark Fetched results controller
@@ -268,23 +231,25 @@
 	[fetchRequest setEntity:entity];
 	
 	// Create the sort descriptors array.
-	NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-	NSSortDescriptor *categoryDescriptor = [[NSSortDescriptor alloc] initWithKey:@"category" ascending:YES];
-    NSSortDescriptor *completedDescriptor = [[NSSortDescriptor alloc] initWithKey:@"completed" ascending:YES];
-	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameDescriptor, categoryDescriptor, completedDescriptor, nil];
+	NSSortDescriptor *categoryDescriptor = [[NSSortDescriptor alloc] initWithKey:@"category.order" ascending:YES];
+    //NSSortDescriptor *completedDescriptor = [[NSSortDescriptor alloc] initWithKey:@"completed" ascending:YES];
+    NSSortDescriptor *dueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dueDate" ascending:YES];
+    NSSortDescriptor *orderDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: categoryDescriptor, orderDescriptor, dueDescriptor, nil];
 	[fetchRequest setSortDescriptors:sortDescriptors];
 	
 	// Create and initialize the fetch results controller.
-	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"category" cacheName:@"Root"];
+	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"category.order" cacheName:@"Root"];
 	self.fetchedResultsController = aFetchedResultsController;
 	fetchedResultsController.delegate = self;
 	
 	// Memory management.
 	[aFetchedResultsController release];
 	[fetchRequest release];
-	[nameDescriptor release];
+	[dueDescriptor release];
 	[categoryDescriptor release];
-    [completedDescriptor release];
+    //[completedDescriptor release];
+    [orderDescriptor release];
 	[sortDescriptors release];
 	
 	return fetchedResultsController;
@@ -354,7 +319,6 @@
 - (void)dealloc {
 	[fetchedResultsController release];
 	[managedObjectContext release];
-	[addingManagedObjectContext release];
     [super dealloc];
 }
 

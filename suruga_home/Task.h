@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
+@class Category;
 @interface Task : NSManagedObject {
 @private
 }
@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSDate * creationDate;
 @property (nonatomic, retain) NSDate * dueDate;
 @property (nonatomic, retain) NSNumber * completed;
-@property (nonatomic, retain) NSString * category;
+@property (nonatomic, retain) Category * category;
+@property (nonatomic, retain) NSNumber * order;
 
 @end

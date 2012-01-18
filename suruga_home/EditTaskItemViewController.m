@@ -8,9 +8,10 @@
 
 #import "EditTaskItemViewController.h"
 #import "Task.h"
+#import "Category.h"
 
 @implementation EditTaskItemViewController
-@synthesize isNewTask, completedSwitch, name, category, dueDate, datePicker, dateFormatter, task, parentController;
+@synthesize completedSwitch, name, category, dueDate, datePicker, dateFormatter, task, parentController, categoryPickerArray, categoryPicker, hasNewCategory;
 
 #pragma mark - PRIVATE FUNCTIONS
 - (void)keyBoardDatePicker 
@@ -39,6 +40,73 @@
     [keyboardDoneButtonView release];
 }
 
+#pragma mark - PRIVATE FUNCTIONS
+- (void)keyBoardCategoryPicker 
+{
+    self.categoryPickerArray = [Category fetchCategoriesWithContext:self.task.managedObjectContext];
+    //TODO - make this work for Type Category selection.
+    // create a UIPicker view as a custom keyboard view
+    self.categoryPicker = [[[UIPickerView alloc] init] autorelease];
+    self.categoryPicker.showsSelectionIndicator = YES;
+    categoryPicker.dataSource = self;
+    categoryPicker.delegate = self;
+    //TODO - initialize the typePicker fields from typeArray.
+    
+    //Set typePicker as the inputView for textFieldType
+    category.inputView = self.categoryPicker;
+    
+    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
+    // Prepare done button
+    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+    keyboardDoneButtonView.barStyle = UIBarStyleDefault;
+    keyboardDoneButtonView.translucent = YES;
+    keyboardDoneButtonView.tintColor = nil;
+    [keyboardDoneButtonView sizeToFit];
+    
+    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerDone:)] autorelease];
+    UIBarButtonItem* newButton = [[[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerNew:)] autorelease];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, newButton, nil]];
+    
+    // Plug the keyboardDoneButtonView into the text field...
+    category.inputAccessoryView = keyboardDoneButtonView;
+    [keyboardDoneButtonView release];
+}
+- (IBAction)categoryPickerDone:(id)sender{   
+    [self.category resignFirstResponder];
+}
+- (IBAction)categoryPickerNew:(id)sender{   
+    //TODO - change keyboard layout
+    self.hasNewCategory = YES;
+    category.inputView = nil;
+    [category resignFirstResponder];
+    category.text = nil;
+    [category becomeFirstResponder];
+    category.inputView = self.categoryPicker;
+}
+
+# pragma mark UIPickerViewDataSource
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [self.categoryPickerArray count];
+}
+
+# pragma mark UIPickerViewDelegate
+- (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [(Category *)[categoryPickerArray objectAtIndex:row] valueForKey:@"name"];
+}
+
+- (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    if (row != -1){
+        self.hasNewCategory = NO;
+        self.task.category =  [categoryPickerArray objectAtIndex:row];
+        self.category.text = [(Category *)[categoryPickerArray objectAtIndex:row] valueForKey:@"name"];
+        self.categoryPicker.tag = row;
+    }
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -54,7 +122,7 @@
         self.name.text = self.task.name;
     } else { self.title = @"New Task";}
     if(self.task.category != nil) {
-        self.category.text = self.task.category;
+        self.category.text = self.task.category.name;
     }
     if(self.task.dueDate != nil) {
         self.dueDate.text = [self.dateFormatter stringFromDate: self.task.dueDate];
@@ -62,6 +130,7 @@
     self.completedSwitch.on = [self.task.completed intValue] != 0;
     //self.title = self.task.name;//@"New Task";
     [self keyBoardDatePicker];
+    [self keyBoardCategoryPicker];
     
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)] autorelease];
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)] autorelease];
@@ -102,6 +171,14 @@
     [dueDate resignFirstResponder];
 }
 
+#pragma mark - Text Field Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 #pragma mark -
 #pragma mark Save and cancel operations
 
@@ -111,22 +188,14 @@
 
 - (IBAction)save:(id)sender {
     self.task.name = name.text;
-    self.task.category = category.text;
+    if (self.hasNewCategory) {
+        self.task.category = (Category *)[NSEntityDescription insertNewObjectForEntityForName:@"Category" inManagedObjectContext:task.managedObjectContext];
+        self.task.category.name = category.text;
+        self.task.category.order = [NSNumber numberWithInt:([[self.categoryPickerArray valueForKeyPath:@"@max.order"] intValue] + 1)];
+    }
     self.task.dueDate = [self.dateFormatter dateFromString: dueDate.text];
     self.task.completed =  [NSNumber numberWithBool: completedSwitch.on];
-    if (self.isNewTask) {
-        [parentController taskViewController:self didFinishWithSave:YES];
-    } else{
-        // Save the changes.
-		NSError *error;
-		if (![self.task.managedObjectContext save:&error]) {
-			// Update to handle the error appropriately.
-			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-			exit(-1);  // Fail
-		}
-        // Dismiss the modal view to return to the main list
-        [self dismissModalViewControllerAnimated:YES];
-    }
+    [parentController taskViewController:self didFinishWithSave:YES];
 }
 
 - (void)dealloc {

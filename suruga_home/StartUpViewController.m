@@ -8,6 +8,10 @@
 
 #import "StartUpViewController.h"
 #import "suruga_homeAppDelegate.h"
+#import "extThree20JSON/SBJson.h"
+#import "Category.h"
+#import "Task.h"
+#import "BudgetItem.h"
 
 @implementation StartUpViewController
 @synthesize whenTextField;
@@ -18,8 +22,50 @@
 @synthesize dateFormatter;
 @synthesize datePicker;
 @synthesize userData;
-
+/*
+ {"name":"Find A House",
+ "order": 1,
+ "tasks": [
+     {"name": "Choose a move date",
+     "order": 1,},
+     {"name": "Choose home size, amenities",
+     "order": 2},
+     {"name": "Ch
+ */
 #pragma mark - PRIVATE FUNCTIONS
+- (void)buildStaticData
+{
+   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"introData" ofType:@"json"];
+    NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    NSDictionary *results = [fileContent JSONValue];
+	
+	NSArray *categories = [results objectForKey:@"categories"];
+    for (NSDictionary *category in categories) {
+        Category *c =(Category*) [NSEntityDescription insertNewObjectForEntityForName:@"Category" inManagedObjectContext:self.userData.managedObjectContext];
+        
+        c.order = [NSNumber numberWithInt:[[category objectForKey:@"order"] intValue]];
+        c.name = [category objectForKey:@"name"];
+        NSArray *tasks = [category objectForKey:@"tasks"];
+        for (NSDictionary *task in tasks) {
+            Task *t =(Task*) [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.userData.managedObjectContext];
+            
+            t.name = [task objectForKey:@"name"];
+            t.order = [NSNumber numberWithInt:[[task objectForKey:@"order"] intValue]];
+            t.category = c;
+        }
+    }
+    NSArray *budgetItems = [results objectForKey:@"budget_items"];
+    for (NSDictionary *item in budgetItems) {
+        BudgetItem *b =(BudgetItem*) [NSEntityDescription insertNewObjectForEntityForName:@"BudgetItem" inManagedObjectContext:self.userData.managedObjectContext];
+        
+        b.name = [item objectForKey:@"name"];
+        b.notes = [item objectForKey:@"notes"]; 
+        b.amount = [NSNumber numberWithInt:[[item objectForKey:@"amount"] intValue]];
+        b.isExpense = [NSNumber numberWithInt:[[item objectForKey:@"isExpense"] intValue]];
+        b.inInitialBudget = [NSNumber numberWithInt:[[item objectForKey:@"inInitialBudget"] intValue]];
+    }
+}
+
 - (void)keyBoardDatePicker 
 {
     // create a UIPicker view as a custom keyboard view
@@ -97,6 +143,8 @@
         self.userData.reason = reasonTextField.text;
         self.userData.when = [self.dateFormatter dateFromString: whenTextField.text];
         self.userData.isRenting = [NSNumber numberWithBool:isRentingSwitch.on];
+        
+        [self buildStaticData];
 
         NSError *error;
         if (![self.userData.managedObjectContext save:&error]) {

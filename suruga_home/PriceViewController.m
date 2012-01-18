@@ -15,8 +15,10 @@
 @synthesize feesTextField;
 @synthesize rentTextField;
 @synthesize insuranceTextField;
+@synthesize scrollView;
 @synthesize price;
 @synthesize parentController;
+@synthesize saveButton, doneButton;
 
 #pragma mark - Private Functions
 - (void)setPrices
@@ -47,7 +49,10 @@
     // Do any additional setup after loading the view from its nib.
     
     //Nav bar buttons
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)] autorelease];
+    self.saveButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)] autorelease];
+    self.doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)] autorelease];
+    
+    self.navigationItem.rightBarButtonItem = self.saveButton;
     
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)] autorelease];
     
@@ -61,6 +66,13 @@
     self.rentTextField.keyboardType = UIKeyboardTypeDecimalPad;
     self.insuranceTextField.keyboardType = UIKeyboardTypeDecimalPad;
     
+    //Register for keyboard events
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(keyboardWillBeHidden:)
+        name:UIKeyboardWillHideNotification object:nil];
+    
 }
 
 - (void)viewDidUnload
@@ -71,6 +83,7 @@
     [self setRentTextField:nil];
     [self setInsuranceTextField:nil];
     self.price = nil;
+    [self setScrollView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -89,6 +102,7 @@
     [rentTextField release];
     [insuranceTextField release];
     [price release];
+    [scrollView release];
     [super dealloc];
 }
 #pragma mark - Model Methods
@@ -112,6 +126,51 @@
     
     return YES;
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeField = textField;
+    self.navigationItem.rightBarButtonItem = self.doneButton;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    activeField = nil;
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, CGPointMake(activeField.frame.origin.x, activeField.frame.origin.y + activeField.frame.size.height))) {
+        CGPoint scrollPoint = CGPointMake(0.0,activeField.frame.origin.y-kbSize.height + (self.view.frame.size.height - scrollView.frame.size.height));
+        [scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+- (IBAction)done:(id)sender {
+    [activeField resignFirstResponder];
+    self.navigationItem.rightBarButtonItem = self.saveButton;
+}
+#pragma mark -
 #pragma mark -
 
 @end

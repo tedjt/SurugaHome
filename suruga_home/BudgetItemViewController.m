@@ -16,23 +16,6 @@
 @synthesize item;
 @synthesize parentController;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -79,5 +62,13 @@
     self.item.amount = [NSNumber numberWithDouble:[amountTextField.text doubleValue]];
     //Save
     [self.parentController budgetItemViewController:self didFinishWithSave:YES];
+}
+
+#pragma mark Text Field Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return YES;
 }
 @end

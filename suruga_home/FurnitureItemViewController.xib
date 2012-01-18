@@ -68,6 +68,7 @@
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 						<float key="IBUIMinimumFontSize">17</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+							<int key="IBUIReturnKeyType">9</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 					</object>
@@ -473,6 +474,8 @@
 							<string>textFieldName</string>
 							<string>textFieldPrice</string>
 							<string>textFieldType</string>
+							<string>typePicker</string>
+							<string>typePickerArray</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -481,6 +484,8 @@
 							<string>UITextField</string>
 							<string>UITextField</string>
 							<string>UITextField</string>
+							<string>UIPickerView</string>
+							<string>NSArray</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -492,6 +497,8 @@
 							<string>textFieldName</string>
 							<string>textFieldPrice</string>
 							<string>textFieldType</string>
+							<string>typePicker</string>
+							<string>typePickerArray</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -514,6 +521,14 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">textFieldType</string>
 								<string key="candidateClassName">UITextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">typePicker</string>
+								<string key="candidateClassName">UIPickerView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">typePickerArray</string>
+								<string key="candidateClassName">NSArray</string>
 							</object>
 						</object>
 					</object>

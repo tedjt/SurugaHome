@@ -8,6 +8,7 @@
 
 #import "FinancialHomeViewController.h"
 #import "BudgetTableViewController.h"
+#import "FinancialAdviceViewController.h"
 #import "suruga_homeAppDelegate.h"
 
 @implementation FinancialHomeViewController
@@ -155,5 +156,7 @@
 }
 
 - (IBAction)financialAdviceClicked:(id)sender {
+    FinancialAdviceViewController * vc = [[FinancialAdviceViewController alloc] initWithNibName:@"FinancialAdviceViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

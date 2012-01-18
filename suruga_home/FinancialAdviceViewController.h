@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FinancialAdviceViewController : UIViewController
+@interface FinancialAdviceViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+    UITableView *mTableView;
+    
+    //TEmp
+    NSMutableData *responseData;
+	NSMutableArray *tweets;
+}
+
+@property (nonatomic, retain) IBOutlet UITableView *mTableView;
+@property (nonatomic, retain) NSMutableArray *tweets;
 
 @end

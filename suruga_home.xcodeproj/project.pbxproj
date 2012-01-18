@@ -123,6 +123,11 @@
 		2AE329DA14C4C84200325402 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE329D914C4C84200325402 /* UserData.m */; };
 		2AE329DE14C4E3FD00325402 /* FinancialAdviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE329DC14C4E3FB00325402 /* FinancialAdviceViewController.m */; };
 		2AE329DF14C4E3FD00325402 /* FinancialAdviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AE329DD14C4E3FC00325402 /* FinancialAdviceViewController.xib */; };
+		2AE32A2A14C51E7F00325402 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE32A2514C51E7F00325402 /* Tweet.m */; };
+		2AE32A2B14C51E7F00325402 /* Twitter_SearchAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE32A2714C51E7F00325402 /* Twitter_SearchAppDelegate.m */; };
+		2AE32A2C14C51E7F00325402 /* Twitter_SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE32A2914C51E7F00325402 /* Twitter_SearchViewController.m */; };
+		2AE32A2F14C605CA00325402 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE32A2E14C605C800325402 /* Category.m */; };
+		2AE32A3114C61B3700325402 /* introData.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AE32A3014C61B3700325402 /* introData.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -468,6 +473,15 @@
 		2AE329DB14C4E3FB00325402 /* FinancialAdviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancialAdviceViewController.h; sourceTree = "<group>"; };
 		2AE329DC14C4E3FB00325402 /* FinancialAdviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancialAdviceViewController.m; sourceTree = "<group>"; };
 		2AE329DD14C4E3FC00325402 /* FinancialAdviceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinancialAdviceViewController.xib; sourceTree = "<group>"; };
+		2AE32A2414C51E7F00325402 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
+		2AE32A2514C51E7F00325402 /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
+		2AE32A2614C51E7F00325402 /* Twitter_SearchAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twitter_SearchAppDelegate.h; sourceTree = "<group>"; };
+		2AE32A2714C51E7F00325402 /* Twitter_SearchAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Twitter_SearchAppDelegate.m; sourceTree = "<group>"; };
+		2AE32A2814C51E7F00325402 /* Twitter_SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twitter_SearchViewController.h; sourceTree = "<group>"; };
+		2AE32A2914C51E7F00325402 /* Twitter_SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Twitter_SearchViewController.m; sourceTree = "<group>"; };
+		2AE32A2D14C605C700325402 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		2AE32A2E14C605C800325402 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		2AE32A3014C61B3700325402 /* introData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = introData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -532,6 +546,7 @@
 				2A038461149BB565000E0B49 /* logo2.png */,
 				2A038462149BB565000E0B49 /* logo3.png */,
 				2A038463149BB565000E0B49 /* logo4.png */,
+				2AE32A3014C61B3700325402 /* introData.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -709,6 +724,8 @@
 		2A34B493148C72490055D300 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2AE32A2D14C605C700325402 /* Category.h */,
+				2AE32A2E14C605C800325402 /* Category.m */,
 				2AE329D814C4C84200325402 /* UserData.h */,
 				2AE329D914C4C84200325402 /* UserData.m */,
 				2A501A0614C35C1900ECA0D8 /* Price.h */,
@@ -753,6 +770,7 @@
 		2A487B2514C0D7DE001B9601 /* Financial */ = {
 			isa = PBXGroup;
 			children = (
+				2AE32A2314C51E7E00325402 /* FinancialAdvice */,
 				2A991FAA14C29280002C47AB /* BudgetItemViewController.h */,
 				2A991FAB14C29281002C47AB /* BudgetItemViewController.m */,
 				2A991FAC14C29281002C47AB /* BudgetItemViewController.xib */,
@@ -922,6 +940,19 @@
 				2AE329CF14C4B99F00325402 /* DCRoundSwitchToggleLayer.m */,
 			);
 			path = DCRoundSwitch;
+			sourceTree = "<group>";
+		};
+		2AE32A2314C51E7E00325402 /* FinancialAdvice */ = {
+			isa = PBXGroup;
+			children = (
+				2AE32A2414C51E7F00325402 /* Tweet.h */,
+				2AE32A2514C51E7F00325402 /* Tweet.m */,
+				2AE32A2614C51E7F00325402 /* Twitter_SearchAppDelegate.h */,
+				2AE32A2714C51E7F00325402 /* Twitter_SearchAppDelegate.m */,
+				2AE32A2814C51E7F00325402 /* Twitter_SearchViewController.h */,
+				2AE32A2914C51E7F00325402 /* Twitter_SearchViewController.m */,
+			);
+			path = FinancialAdvice;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1188,6 +1219,7 @@
 				2AE3297114C4841000325402 /* StartUpViewController.xib in Resources */,
 				2AE3297614C48FBE00325402 /* home_background.png in Resources */,
 				2AE329DF14C4E3FD00325402 /* FinancialAdviceViewController.xib in Resources */,
+				2AE32A3114C61B3700325402 /* introData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1245,6 +1277,10 @@
 				2AE329D314C4B99F00325402 /* DCRoundSwitchToggleLayer.m in Sources */,
 				2AE329DA14C4C84200325402 /* UserData.m in Sources */,
 				2AE329DE14C4E3FD00325402 /* FinancialAdviceViewController.m in Sources */,
+				2AE32A2A14C51E7F00325402 /* Tweet.m in Sources */,
+				2AE32A2B14C51E7F00325402 /* Twitter_SearchAppDelegate.m in Sources */,
+				2AE32A2C14C51E7F00325402 /* Twitter_SearchViewController.m in Sources */,
+				2AE32A2F14C605CA00325402 /* Category.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,5 +15,6 @@
 @dynamic dueDate;
 @dynamic completed;
 @dynamic category;
+@dynamic order;
 
 @end
