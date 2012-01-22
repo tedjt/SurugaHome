@@ -30,7 +30,7 @@
 }
 
 - (void)setUpTextFields {
-	self.textFieldName = [[UITextField alloc] initWithFrame:CGRectMake(110,10,185,30)];
+	self.textFieldName = [[[UITextField alloc] initWithFrame:CGRectMake(110,10,185,30)] autorelease];
 	
 	textFieldName.borderStyle = UITextBorderStyleBezel;
 	textFieldName.textColor = [UIColor blackColor];
@@ -51,7 +51,7 @@
 	// Add an accessibility label that describes what the text field is for.
 	[textFieldName setAccessibilityLabel:NSLocalizedString(@"Name Text Field", @"Name Text Field Accessibility Label")];
 	
-	self.labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(110,10,185,30)];
+	self.labelPrice = [[[UILabel alloc] initWithFrame:CGRectMake(110,10,185,30)] autorelease];
 	labelPrice.textColor = [UIColor blackColor];
 	labelPrice.font = [UIFont systemFontOfSize:17.0];
 	labelPrice.backgroundColor = [UIColor whiteColor];	

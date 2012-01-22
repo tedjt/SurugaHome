@@ -21,6 +21,6 @@
 
 - (double) getSum;
 - (double) getInitialSum;
-- (double) getRunningSum;
+- (int) getRunningSum;
 
 @end

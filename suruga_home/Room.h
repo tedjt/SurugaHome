@@ -15,6 +15,7 @@
 @private
 }
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) NSSet *furniture;
 
 - (NSString *) sumPrices;

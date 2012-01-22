@@ -7,16 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Three20/Three20.h"
 
 @interface FinancialAdviceViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     UITableView *mTableView;
+    UILabel *questionLabel;
+    UIImageView *imageView;
     
-    //TEmp
+    //Data holders
+    NSDictionary *dataDict;
+    NSURL *requestUrl;
     NSMutableData *responseData;
-	NSMutableArray *tweets;
+	NSMutableArray *options;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *mTableView;
-@property (nonatomic, retain) NSMutableArray *tweets;
+@property (nonatomic, retain) NSMutableArray *options;
+@property (nonatomic, retain) IBOutlet UILabel *questionLabel;
+@property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, retain) NSDictionary *dataDict;
+@property (nonatomic, retain) NSURL *requestUrl;
 
 @end

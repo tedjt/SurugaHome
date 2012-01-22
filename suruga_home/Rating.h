@@ -22,5 +22,13 @@
 @property (nonatomic, retain) NSNumber * size;
 @property (nonatomic, retain) NSNumber * kitchen;
 @property (nonatomic, retain) Home *home;
+/*
+ 1. Size/Arrangement of room
+ 2. Price
+ 3. Surrounding environment
+ 4. Access
+ 5. Convenience
+ 6. Facilities/neat
+ */
 
 @end

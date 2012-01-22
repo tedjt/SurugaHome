@@ -9,8 +9,10 @@
 #import "EditTaskItemViewController.h"
 #import "Task.h"
 #import "Category.h"
+#import "FinancialAdviceViewController.h"
 
 @implementation EditTaskItemViewController
+@synthesize advisorButton;
 @synthesize completedSwitch, name, category, dueDate, datePicker, dateFormatter, task, parentController, categoryPickerArray, categoryPicker, hasNewCategory;
 
 #pragma mark - PRIVATE FUNCTIONS
@@ -136,6 +138,7 @@
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)] autorelease];
     
     self.editing = YES;
+    self.advisorButton.hidden = (nil == self.task.advisorUrl);
 
 }
 
@@ -145,6 +148,7 @@
     [self setCategory:nil];
     [self setDueDate:nil];
     [self setCompletedSwitch:nil];
+    [self setAdvisorButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -198,6 +202,13 @@
     [parentController taskViewController:self didFinishWithSave:YES];
 }
 
+- (IBAction)advisorButtonClicked:(id)sender {
+    FinancialAdviceViewController * vc = [[FinancialAdviceViewController alloc] initWithNibName:@"FinancialAdviceViewController" bundle:nil];
+    vc.requestUrl = [NSURL URLWithString:self.task.advisorUrl]; 
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc release];
+}
+
 - (void)dealloc {
     [name release];
     [category release];
@@ -206,6 +217,7 @@
     [dateFormatter release];
     [task release];
     [completedSwitch release];
+    [advisorButton release];
     [super dealloc];
 }
 @end

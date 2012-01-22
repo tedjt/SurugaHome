@@ -14,6 +14,7 @@
 @interface BudgetItemViewController : UIViewController <UITextFieldDelegate> {
     UITextField *nameTextField;
     UITextField *amountTextField;
+    UIButton *advisorButton;
     UILabel *notesLabel;
     
     BudgetItem *item;
@@ -24,9 +25,11 @@
 
 @property (nonatomic, retain) IBOutlet UITextField *nameTextField;
 @property (nonatomic, retain) IBOutlet UITextField *amountTextField;
+@property (nonatomic, retain) IBOutlet UIButton *advisorButton;
 @property (nonatomic, retain) IBOutlet UILabel *notesLabel;
 @property (nonatomic, retain) BudgetItem *item;
 @property (nonatomic, assign) id <BudgetItemDetailDelegate>parentController;
+- (IBAction)advisorButtonClicked:(id)sender;
 @end
 
 @protocol BudgetItemDetailDelegate

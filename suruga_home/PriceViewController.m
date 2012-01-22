@@ -142,18 +142,18 @@
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
     NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGRect kbFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbFrame.size.height, 0.0);
     scrollView.contentInset = contentInsets;
     scrollView.scrollIndicatorInsets = contentInsets;
     
     // If active text field is hidden by keyboard, scroll it so it's visible
     // Your application might not need or want this behavior.
     CGRect aRect = self.view.frame;
-    aRect.size.height -= kbSize.height;
+    aRect.size.height -= kbFrame.size.height;
     if (!CGRectContainsPoint(aRect, CGPointMake(activeField.frame.origin.x, activeField.frame.origin.y + activeField.frame.size.height))) {
-        CGPoint scrollPoint = CGPointMake(0.0,activeField.frame.origin.y-kbSize.height + (self.view.frame.size.height - scrollView.frame.size.height));
+        CGPoint scrollPoint = CGPointMake(0.0,activeField.frame.origin.y + activeField.frame.size.height - (self.view.frame.size.height-kbFrame.size.height));
         [scrollView setContentOffset:scrollPoint animated:YES];
     }
 }

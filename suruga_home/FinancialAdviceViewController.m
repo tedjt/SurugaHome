@@ -8,13 +8,42 @@
 
 #import "FinancialAdviceViewController.h"
 #import "extThree20JSON/SBJson.h"
+#import "FinancialAdvisorAnswerViewController.h"
 
 @implementation FinancialAdviceViewController
 @synthesize mTableView;
 
 //TEMP
-@synthesize tweets;
+@synthesize options;
+@synthesize questionLabel;
+@synthesize imageView;
+@synthesize dataDict;
+@synthesize requestUrl;
 
+- (id)initWithNavigatorURL:(NSURL*)URL query:(NSDictionary*)query {
+    
+    if (self = [super init]) {
+        //TODO -some initialization from query values
+//        for (MyObject* item in [query objectForKey:@"arrayData"])
+//            //... do something with item ...
+//        }
+
+    }
+    return self;
+}
+# pragma mark PRIVATE FUNCTIONS
+- (void)setUpViewFromDictionary {
+    if (nil != dataDict && [@"question_slide" isEqualToString:[dataDict objectForKey:@"type"]]) {
+        //Get the first page data
+        NSArray * optionList = [dataDict objectForKey:@"option_list"];
+        [self setOptions: [NSMutableArray arrayWithArray: optionList]];
+        self.title = NSLocalizedString(@"Questions", @"Advisor Question Slide Title");
+        self.questionLabel.text = [dataDict objectForKey:@"question"];
+        self.imageView.image = [UIImage imageWithData:
+                                [NSData dataWithContentsOfURL:[NSURL URLWithString:[dataDict objectForKey:@"question"]]]];
+        [self.mTableView reloadData];
+    }
+}
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -24,15 +53,26 @@
     //Start loading table view data
     responseData = [[NSMutableData data] retain];
 	//tweets = [NSMutableArray array];
-	NSURLRequest *request = [NSURLRequest requestWithURL:
+    if (nil != dataDict) {
+        [self setUpViewFromDictionary];
+    }
+    else if (nil != requestUrl) {
+        [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL: requestUrl] delegate:self];
+    } else {
+        NSURLRequest *request = [NSURLRequest requestWithURL:
 							 [NSURL URLWithString:@"http://topangapetresort2.appspot.com/suruga"]];
-	[[NSURLConnection alloc] initWithRequest:request delegate:self];
+        [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    }
     //http://search.twitter.com/search.json?q=mobtuts&rpp=5
 }
 
 - (void)viewDidUnload
 {
     self.mTableView = nil;
+    [questionLabel release];
+    questionLabel = nil;
+    [self setQuestionLabel:nil];
+    [self setImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -49,7 +89,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     
-    return (nil != tweets ? [tweets count] : 0);
+    return (nil != options ? [options count] : 0);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,10 +109,9 @@
     }
     
     // Configure the cell...
+	NSDictionary *aOption = [options objectAtIndex:[indexPath row]];
     
-	NSDictionary *aTweet = [tweets objectAtIndex:[indexPath row]];
-    
-    cell.textLabel.text = [aTweet objectForKey:@"text"];
+    cell.textLabel.text = [aOption objectForKey:@"option_text"];
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
 	cell.textLabel.font = [UIFont systemFontOfSize:12];
 	cell.textLabel.minimumFontSize = 10;
@@ -93,7 +132,42 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *aOption = [options objectAtIndex:[indexPath row]];
+    if ([@"question_slide" isEqualToString:[aOption objectForKey:@"next_type"]]) {
+        FinancialAdviceViewController * vc = [[FinancialAdviceViewController alloc] initWithNibName:@"FinancialAdviceViewController" bundle:nil];
+        vc.dataDict = [aOption objectForKey:@"next_slide"];
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
+    } else {
+        //assume answer slide
+        FinancialAdvisorAnswerViewController * vc = [[FinancialAdvisorAnswerViewController alloc] initWithNibName:@"FinancialAdvisorAnswerViewController" bundle:nil];
+        vc.dataDict = [aOption objectForKey:@"next_slide"];
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
+    }
+    /*
+     {
+     "type": "question_slide",
+     "question": "This is question1",
+     "image_url": "www.test0_1.com",
+     "option_list": [ {}, {}]
+     }
+     {"next_type": "answer_slide || question_slide",
+     "option_text": "Option 1",
+     "next_slide": { }
+     }
+     
+     {"type" : "answer_slide",
+     "overall_text": "When",
+     "good_text": "1. asdf",
+     "compare_text":"",
+     "suruga_text": "Suruga Offers this card",
+     "suruga_link": "http://suruga.jp"
+     }
+     */
+    
     // Navigation logic may go here. Create and push another view controller.
+    
 	/*
 	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
      // ...
@@ -120,21 +194,36 @@
 	NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 	[responseData release];
 	
-	NSDictionary *results = [responseString JSONValue];
-	
-	NSArray *allResults = [results objectForKey:@"results"];
-    if (nil != allResults) {
-        //Get the first page data
-        NSArray * questionList = [[allResults objectAtIndex:0]  objectForKey:@"question_list"];
-        self.title = [[allResults objectAtIndex:0]  objectForKey:@"text"];
-        [self setTweets: [NSMutableArray arrayWithArray: questionList]];
-        [self.mTableView reloadData];
+    self.dataDict = [responseString JSONValue];
+    [responseString release];
+    [self setUpViewFromDictionary];
+    /*
+    {
+        "type": "question_slide",
+        "question": "This is question1",
+        "image_url": "www.test0_1.com",
+        "option_list": [ {}, {}]
     }
+    {"next_type": "answer_slide || question_slide",
+     "option_text": "Option 1",
+     "next_slide": { }
+    }
+    
+    {"type" : "answer_slide",
+        "overall_text": "When",
+        "good_text": "1. asdf",
+        "compare_text":"",
+        "suruga_text": "Suruga Offers this card",
+        "suruga_link": "http://suruga.jp"
+    }
+     */
 }
 
 
 - (void)dealloc {
     [mTableView release];
+    [questionLabel release];
+    [imageView release];
     [super dealloc];
 }
 @end

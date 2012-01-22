@@ -8,6 +8,7 @@
 
 #import "suruga_homeAppDelegate.h"
 #import "StartUpViewController.h"
+#import "FinancialAdviceViewController.h"
 
 
 @implementation suruga_homeAppDelegate
@@ -126,7 +127,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Set up Three20 url navigation:
+    TTNavigator *navigator = [TTNavigator navigator];
+    navigator.window = self.window;
+    TTURLMap *map = navigator.URLMap;
+    [map from:@"tt://FinancialAdviceViewController" 
+    toViewController:[FinancialAdviceViewController class]];
+    [map from:@"tt://tabController" 
+    toSharedViewController:[self.tabBarController class]];
+    
+    
     // Add the tab bar controller's current view as a subview of the window
     UserData *ud = [UserData fetchUserDataWithContext:self.managedObjectContext];
     //[self.managedObjectContext deleteObject:ud];
@@ -136,6 +146,7 @@
         self.startUpViewController.userData =(UserData*) [NSEntityDescription insertNewObjectForEntityForName:@"UserData" inManagedObjectContext:self.managedObjectContext];
         self.window.rootViewController = self.startUpViewController;
     } else {
+        //[[TTNavigator navigator] openURLAction: [[TTURLAction actionWithURLPath:@"tt://restaurant/Chotchkie's"] applyAnimated:YES]];
         self.window.rootViewController = self.tabBarController;
     }
     // Let us download large images

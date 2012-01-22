@@ -18,6 +18,7 @@
     UITextField *category;
     UITextField *dueDate;
     UIDatePicker *datePicker;
+    UIButton *advisorButton;
     DCRoundSwitch *completedSwitch;
     NSDateFormatter *dateFormatter;
     Task *task;
@@ -31,6 +32,7 @@
 @property (nonatomic, retain) IBOutlet UITextField *dueDate;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 @property (nonatomic, retain) IBOutlet UIDatePicker *datePicker; 
+@property (nonatomic, retain) IBOutlet UIButton *advisorButton;
 @property (nonatomic, retain) IBOutlet DCRoundSwitch *completedSwitch;
 
 
@@ -44,6 +46,7 @@
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
+- (IBAction)advisorButtonClicked:(id)sender;
 @end
 
 

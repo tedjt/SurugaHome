@@ -78,6 +78,16 @@
         runningTotalLabel.backgroundColor = [UIColor redColor];
         runningTotalLabel.textColor = [UIColor blackColor];
     }
+    
+    //Set label Text
+    //TODO internationalize
+    initialExpenseLabel.text = [NSString stringWithFormat:@"$%d", (int)initialCost];
+    initialIncomeLabel.text = [NSString stringWithFormat:@"$%d", (int)initialIncome];
+    initialTotalLabel.text = [NSString stringWithFormat:@"$%d", (int)initialLeftover];initialExpenseLabel.text = [NSString stringWithFormat:@"$%d", initialCost];
+    runningExpenseLabel.text = [NSString stringWithFormat:@"$%d", (int)runningCost];
+    runningIncomeLabel.text = [NSString stringWithFormat:@"$%d", (int)runningIncome];
+    runningTotalLabel.text = [NSString stringWithFormat:@"$%d", (int)runningLeftover];
+    
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -156,7 +166,14 @@
 }
 
 - (IBAction)financialAdviceClicked:(id)sender {
+//    [[TTNavigator navigator] openURLAction:
+//     [[TTURLAction actionWithURLPath:@"tt://FinancialAdviceViewController"] applyAnimated:YES]];
+    
+//    [[TTNavigator navigator] openURLAction:[[TTURLAction actionWithURLPath:@"tt://restaurant/Chotchkie's"]
+//    applyQuery:[NSDictionary dictionaryWithObject:arr forKey:@"arraydata"]]];
+
     FinancialAdviceViewController * vc = [[FinancialAdviceViewController alloc] initWithNibName:@"FinancialAdviceViewController" bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
+    [vc release];
 }
 @end

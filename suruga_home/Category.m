@@ -17,7 +17,7 @@
 
 + (NSArray *)fetchCategoriesWithContext: (NSManagedObjectContext *) context {
     //Initialize Data Arrays
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
     
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Category" inManagedObjectContext:context];
@@ -26,7 +26,6 @@
     NSError *error;
     // Fetch Tasks Item
     return [context executeFetchRequest:fetchRequest error:&error];
-    [fetchRequest release];
 //    if (a.count > 0) {
 //        NSMutableSet *set = [[[NSMutableSet alloc] init] autorelease];
 //        for (Task *t in a) {

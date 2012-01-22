@@ -46,6 +46,11 @@
     //Get forward geocoded address
     if(self.home.address.latitude != nil) {
         [self setMapViewZoom];
+    } else { 
+        [self.mapView.userLocation addObserver:self  
+            forKeyPath:@"location"  
+            options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)  
+            context:NULL]; 
     }
 
     //Nav bar buttons
@@ -217,7 +222,7 @@
 - (void)setMapViewZoom {
     CLLocationCoordinate2D c = [self.home.address getCoordinate];
     if (fabs(c.latitude) > 0.0001) {
-        [self.mapView addAnnotation: [[MKPlacemark alloc] initWithCoordinate:c addressDictionary:nil]];
+        [self.mapView addAnnotation: [[[MKPlacemark alloc] initWithCoordinate:c addressDictionary:nil] autorelease]];
                                       
     //     SVPlacemark *placemark = [[SVPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng) addressDictionary:formattedAddressDict]
         MKCoordinateRegion region;

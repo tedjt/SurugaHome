@@ -16,5 +16,6 @@
 @dynamic completed;
 @dynamic category;
 @dynamic order;
+@dynamic advisorUrl;
 
 @end

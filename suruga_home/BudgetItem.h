@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSNumber * amount;
 @property (nonatomic, retain) NSNumber * isExpense;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * advisorUrl;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * inInitialBudget;
 

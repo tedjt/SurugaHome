@@ -43,7 +43,6 @@
     if (self.scrollView == nil) {
         self.scrollView = [[[UIScrollView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     }
-    
     [self layoutImages];
 	
 	// Create cancel button
@@ -64,7 +63,10 @@
     for(UIView *subview in [self.scrollView subviews]) {
         [subview removeFromSuperview];
     }
-    
+    UIImageView * iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blue_back.png"]];
+    iv.contentMode = UIViewContentModeScaleToFill;
+    [self.scrollView addSubview:iv];
+    [iv release];
     //add internet buttons
 	UIButton * imagesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     imagesButton.frame = CGRectMake(24, 25, 170, 30);

@@ -10,6 +10,7 @@
         <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="address" inverseEntity="Home"/>
     </entity>
     <entity name="BudgetItem" representedClassName="BudgetItem">
+        <attribute name="advisorUrl" optional="YES" attributeType="String"/>
         <attribute name="amount" optional="YES" attributeType="Double"/>
         <attribute name="inInitialBudget" optional="YES" attributeType="Boolean"/>
         <attribute name="isExpense" optional="YES" attributeType="Boolean"/>
@@ -59,9 +60,11 @@
     </entity>
     <entity name="Room" representedClassName="Room">
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="furniture" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Furniture" inverseName="room" inverseEntity="Furniture"/>
     </entity>
     <entity name="Task" representedClassName="Task">
+        <attribute name="advisorUrl" optional="YES" attributeType="String"/>
         <attribute name="completed" optional="YES" attributeType="Boolean"/>
         <attribute name="creationDate" optional="YES" attributeType="Date"/>
         <attribute name="dueDate" optional="YES" attributeType="Date"/>
@@ -78,14 +81,14 @@
     <elements>
         <element name="Address" positionX="160" positionY="192" width="128" height="150"/>
         <element name="BudgetItem" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Category" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Furniture" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Home" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Price" positionX="160" positionY="192" width="128" height="105"/>
         <element name="Rating" positionX="160" positionY="192" width="128" height="165"/>
-        <element name="Room" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Room" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Task" positionX="160" positionY="192" width="128" height="135"/>
         <element name="UserData" positionX="160" positionY="192" width="128" height="105"/>
-        <element name="Category" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>

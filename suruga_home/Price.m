@@ -21,8 +21,8 @@
         return [self.initialCost doubleValue] + [self.fees doubleValue];
     
 }
-- (double) getRunningSum {
-    return [self.runningCost doubleValue];
+- (int) getRunningSum {
+    return [self.runningCost intValue];
 }
 
 @end

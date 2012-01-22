@@ -12,6 +12,8 @@
 #import "Category.h"
 #import "Task.h"
 #import "BudgetItem.h"
+#import "Room.h"
+#import "Furniture.h"
 
 @implementation StartUpViewController
 @synthesize whenTextField;
@@ -39,6 +41,7 @@
     NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     NSDictionary *results = [fileContent JSONValue];
 	
+    //Tasks
 	NSArray *categories = [results objectForKey:@"categories"];
     for (NSDictionary *category in categories) {
         Category *c =(Category*) [NSEntityDescription insertNewObjectForEntityForName:@"Category" inManagedObjectContext:self.userData.managedObjectContext];
@@ -50,20 +53,44 @@
             Task *t =(Task*) [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.userData.managedObjectContext];
             
             t.name = [task objectForKey:@"name"];
+            t.advisorUrl = [task objectForKey:@"advisor_url"];
             t.order = [NSNumber numberWithInt:[[task objectForKey:@"order"] intValue]];
             t.category = c;
         }
     }
+    
+    //Budget Items
     NSArray *budgetItems = [results objectForKey:@"budget_items"];
     for (NSDictionary *item in budgetItems) {
         BudgetItem *b =(BudgetItem*) [NSEntityDescription insertNewObjectForEntityForName:@"BudgetItem" inManagedObjectContext:self.userData.managedObjectContext];
         
         b.name = [item objectForKey:@"name"];
+        b.advisorUrl = [item objectForKey:@"advisor_url"];
         b.notes = [item objectForKey:@"notes"]; 
         b.amount = [NSNumber numberWithInt:[[item objectForKey:@"amount"] intValue]];
         b.isExpense = [NSNumber numberWithInt:[[item objectForKey:@"isExpense"] intValue]];
         b.inInitialBudget = [NSNumber numberWithInt:[[item objectForKey:@"inInitialBudget"] intValue]];
     }
+    
+    //Rooms
+    //Tasks
+	NSArray *rooms = [results objectForKey:@"rooms"];
+    for (NSDictionary *room in rooms) {
+        Room *r =(Room*) [NSEntityDescription insertNewObjectForEntityForName:@"Room" inManagedObjectContext:self.userData.managedObjectContext];
+        //TODO - add in room icons
+        r.name = [room objectForKey:@"name"];
+        r.type = [room objectForKey:@"type"];
+        NSArray *furniture = [room objectForKey:@"furniture"];
+        for (NSDictionary *item in furniture) {
+            Furniture *f =(Furniture*) [NSEntityDescription insertNewObjectForEntityForName:@"Furniture" inManagedObjectContext:self.userData.managedObjectContext];
+            
+            f.name = [item objectForKey:@"name"];
+            f.type = [item objectForKey:@"type"];
+            f.price = [NSNumber numberWithInt:[[item objectForKey:@"price"] intValue]];
+            f.room = r;
+        }
+    }
+    //Homes
 }
 
 - (void)keyBoardDatePicker 

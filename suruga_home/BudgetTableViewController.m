@@ -37,7 +37,7 @@
 	self.tableView.editing = NO;
 	
 	if (self.isInitial) {
-        self.title=NSLocalizedString(@"Iniital Budget ",@"Initial Budget List Title");
+        self.title=NSLocalizedString(@"Initial Budget ",@"Initial Budget List Title");
     } else {
         self.title = self.title=NSLocalizedString(@"Running Budget ",@"Running Budget List Title");
     }
@@ -133,7 +133,7 @@
     amountField.text = [item.amount stringValue];
     amountField.keyboardType = UIKeyboardTypeDecimalPad;
     amountField.delegate = self;
-    amountField.accessibilityHint = [NSString stringWithFormat:@"%d,%d",indexPath.section,indexPath.row];
+    //[amountField setAccessibilityHint:[NSString stringWithFormat:@"%d,%d",indexPath.section,indexPath.row]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     //TODO - Actually configure the cell to display a budget item
@@ -231,19 +231,29 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     //TODO update the object in the cell based on tag.
-	NSArray* indexPath = [textField.accessibilityHint componentsSeparatedByString: @","];
-    int section = [[indexPath objectAtIndex:0] intValue];
-    int row = [[indexPath objectAtIndex:1] intValue];
-    NSMutableArray *a = section == 0 ? costItems : incomeItems;
-    BudgetItem *item = [a objectAtIndex:row];
-    item.amount = [NSNumber numberWithInt: [textField.text intValue]];
-    NSError *error;
-    if (![self.managedObjectContext save:&error]) {
-        // Update to handle the error appropriately.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        exit(-1);  // Fail
+	//NSArray* indexPath = [textField.accessibilityValue componentsSeparatedByString: @","];
+    //int section = [[indexPath objectAtIndex:0] intValue];
+    //int row = [[indexPath objectAtIndex:1] intValue];
+    for (UIView *parent = [textField superview]; parent != nil; parent = [parent superview]) {
+        if ([parent isKindOfClass: [UITableViewCell class]]) {
+            UITableViewCell *cell = (UITableViewCell *) parent;               
+            NSIndexPath *path = [self.tableView indexPathForCell: cell];
+            
+            // now use the index path
+            NSMutableArray *a = path.section == 0 ? costItems : incomeItems;
+            BudgetItem *item = [a objectAtIndex:path.row];
+            item.amount = [NSNumber numberWithInt: [textField.text intValue]];
+            NSError *error;
+            if (![self.managedObjectContext save:&error]) {
+                // Update to handle the error appropriately.
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                exit(-1);  // Fail
+            }
+
+            break; // for
+        }
     }
-	return YES;
+    return YES;
 }
 
 - (IBAction)done:(id)sender {

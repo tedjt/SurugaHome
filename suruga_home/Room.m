@@ -13,6 +13,7 @@
 @implementation Room
 @dynamic name;
 @dynamic furniture;
+@dynamic type;
 
 - (NSString *) sumPrices {
     double total_cost = 0.0;

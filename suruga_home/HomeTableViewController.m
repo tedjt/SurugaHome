@@ -11,6 +11,7 @@
 #import "Home.h"
 #import "Address.h"
 #import "Image.h"
+#import "Price.h"
 #import "HomeMapAnnotation.h"
 
 //#import "TaskTableViewCell.h"
@@ -41,7 +42,7 @@
 	self.mTableView.allowsSelection = YES;
 	self.mTableView.allowsSelectionDuringEditing = YES;
     // Set the table view's row height
-    self.mTableView.rowHeight = 44.0;
+    self.mTableView.rowHeight = 88.0;
 	
 	self.title=NSLocalizedString(@"Home List",@"Home List Title");
     
@@ -56,7 +57,7 @@
 	}
     
     //Configure MapView
-    self.mapView = [[MKMapView alloc] initWithFrame: CGRectMake(scrollView.frame.size.width, 0, scrollView.frame.size.width, scrollView.frame.size.height)];
+    self.mapView = [[[MKMapView alloc] initWithFrame: CGRectMake(scrollView.frame.size.width, 0, scrollView.frame.size.width, scrollView.frame.size.height)]autorelease];
     self.mapView.delegate = self;
     [self.scrollView addSubview:self.mapView];
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 2, self.scrollView.frame.size.height);
@@ -123,7 +124,10 @@
     if (imageObject != nil) {
         cell.imageView.image = [UIImage imageWithData:imageObject.thumb];
     }
-    cell.detailTextLabel.text = home.address.street;
+    //TODO internationailize
+    cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+    cell.detailTextLabel.numberOfLines = 4;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n$%d", home.address.street, [home.price getRunningSum]];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

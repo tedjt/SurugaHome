@@ -41,7 +41,7 @@
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newRoom:)] autorelease];
 	
 	// Set the table view's row height
-    self.tableView.rowHeight = 44.0;
+    self.tableView.rowHeight = 88.0;
 	
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error]) {
@@ -128,6 +128,14 @@
     
     //TODO - make this the total cost of furniture items.
     cell.detailTextLabel.text = [room sumPrices];
+    
+    if ([room.type isEqualToString:@"Kitchen"]) {
+        cell.imageView.image = [UIImage imageNamed:@"kitchen_icon.jpg"];
+    } else if ([room.type isEqualToString:@"Bedroom"]) {
+        cell.imageView.image = [UIImage imageNamed:@"bedroom-icon.png"];
+    } else if ([room.type isEqualToString:@"Living Room"]) {
+        cell.imageView.image = [UIImage imageNamed:@"living-room-icon.jpg"];
+    }
 }
 
 

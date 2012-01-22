@@ -8,10 +8,12 @@
 
 #import "BudgetItemViewController.h"
 #import "BudgetItem.h"
+#import "FinancialAdviceViewController.h"
 
 @implementation BudgetItemViewController
 @synthesize nameTextField;
 @synthesize amountTextField;
+@synthesize advisorButton;
 @synthesize notesLabel;
 @synthesize item;
 @synthesize parentController;
@@ -34,6 +36,7 @@
     amountTextField.keyboardType = UIKeyboardTypeDecimalPad;
     notesLabel.text = item.notes;
     [notesLabel sizeToFit];
+     self.advisorButton.hidden = (nil == self.item.advisorUrl);
     
 }
 
@@ -43,6 +46,7 @@
     [self setAmountTextField:nil];
     [self setNotesLabel:nil];
     self.item = nil;
+    [self setAdvisorButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -53,6 +57,7 @@
     [amountTextField release];
     [notesLabel release];
     [item release];
+    [advisorButton release];
     [super dealloc];
 }
 
@@ -70,5 +75,11 @@
     [textField resignFirstResponder];
     
     return YES;
+}
+- (IBAction)advisorButtonClicked:(id)sender {
+    FinancialAdviceViewController * vc = [[FinancialAdviceViewController alloc] initWithNibName:@"FinancialAdviceViewController" bundle:nil];
+    vc.requestUrl = [NSURL URLWithString:self.item.advisorUrl]; 
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc release];
 }
 @end
