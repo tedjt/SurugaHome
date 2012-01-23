@@ -10,7 +10,7 @@
 #import "DCRoundSwitch.h"
 #import "UserData.h"
 
-@interface StartUpViewController : UIViewController <UITextFieldDelegate> {
+@interface StartUpViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
     UITextField *nameTextField;
     UITextField *reasonTextField;
     DCRoundSwitch *isRentingSwitch;
@@ -20,6 +20,10 @@
     
     NSDateFormatter *dateFormatter;
     UIDatePicker *datePicker;
+    
+    NSArray *reasonPickerArray;
+    UIPickerView *reasonPicker;
+    
     
     UserData *userData;
 }
@@ -31,6 +35,9 @@
 
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 @property (nonatomic, retain) UIDatePicker *datePicker;
+@property (nonatomic, retain) UIPickerView *reasonPicker;
+@property (nonatomic, retain) NSArray *reasonPickerArray;
+
 
 @property (nonatomic, retain) UserData *userData;
 

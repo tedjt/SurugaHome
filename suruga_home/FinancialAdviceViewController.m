@@ -40,7 +40,7 @@
         self.title = NSLocalizedString(@"Questions", @"Advisor Question Slide Title");
         self.questionLabel.text = [dataDict objectForKey:@"question"];
         self.imageView.image = [UIImage imageWithData:
-                                [NSData dataWithContentsOfURL:[NSURL URLWithString:[dataDict objectForKey:@"question"]]]];
+                                [NSData dataWithContentsOfURL:[NSURL URLWithString:[dataDict objectForKey:@"image_url"]]]];
         [self.mTableView reloadData];
     }
 }
@@ -50,6 +50,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    
     //Start loading table view data
     responseData = [[NSMutableData data] retain];
 	//tweets = [NSMutableArray array];
@@ -59,8 +61,10 @@
     else if (nil != requestUrl) {
         [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL: requestUrl] delegate:self];
     } else {
-        NSURLRequest *request = [NSURLRequest requestWithURL:
-							 [NSURL URLWithString:@"http://topangapetresort2.appspot.com/suruga"]];
+        NSURLRequest *request = 
+        [NSURLRequest requestWithURL:
+         [NSURL URLWithString:@"http://tedjt.scripts.mit.edu/suruga/"]];
+							 //[NSURL URLWithString:@"http://topangapetresort2.appspot.com/suruga"]];
         [[NSURLConnection alloc] initWithRequest:request delegate:self];
     }
     //http://search.twitter.com/search.json?q=mobtuts&rpp=5

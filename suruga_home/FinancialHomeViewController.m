@@ -61,7 +61,7 @@
         initialTotalLabel.textColor = [UIColor blackColor];
     }
     double runningLeftover = fabs(runningCost - runningIncome);
-    if ( initialIncome > initialCost ) {
+    if ( runningIncome > runningCost ) {
         double delta = (runningCost / (runningIncome <0.001 ? 1 : runningIncome));
         runningIncomeLabel.frame = CGRectMake(10, 144, 64, 100);
         runningExpenseLabel.frame = CGRectMake(76, 144+100 * (1 - delta), 64, 100 * delta);
@@ -83,7 +83,7 @@
     //TODO internationalize
     initialExpenseLabel.text = [NSString stringWithFormat:@"$%d", (int)initialCost];
     initialIncomeLabel.text = [NSString stringWithFormat:@"$%d", (int)initialIncome];
-    initialTotalLabel.text = [NSString stringWithFormat:@"$%d", (int)initialLeftover];initialExpenseLabel.text = [NSString stringWithFormat:@"$%d", initialCost];
+    initialTotalLabel.text = [NSString stringWithFormat:@"$%d", (int)initialLeftover];
     runningExpenseLabel.text = [NSString stringWithFormat:@"$%d", (int)runningCost];
     runningIncomeLabel.text = [NSString stringWithFormat:@"$%d", (int)runningIncome];
     runningTotalLabel.text = [NSString stringWithFormat:@"$%d", (int)runningLeftover];

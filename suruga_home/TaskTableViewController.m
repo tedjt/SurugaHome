@@ -170,13 +170,13 @@
     // Pass the selected task to the new view controller.
     taskViewController.task = selectedTask;
     
-    // Create a modal view controller to handle the task view.
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:taskViewController];
-	[self.navigationController presentModalViewController:navController animated:YES];
+    // Push a details view controller to navigation stack
+    //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:taskViewController];
+	[self.navigationController pushViewController:taskViewController animated:YES];
     
     // Clean up
 	[taskViewController release];
-    [navController release];
+    //[navController release];
 }
 
 - (IBAction)addTask {
@@ -186,12 +186,11 @@
     
 	taskViewController.task = (Task *)[NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:managedObjectContext];
 	
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:taskViewController];
-	
-    [self.navigationController presentModalViewController:navController animated:YES];
+	//UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:taskViewController];
+    [self.navigationController pushViewController:taskViewController animated:YES];
 	
 	[taskViewController release];
-	[navController release];
+	//[navController release];
 }
 
 /**
@@ -209,8 +208,8 @@
 		}
 	}
     
-	// Dismiss the modal view to return to the main list
-    [self dismissModalViewControllerAnimated:YES];
+	// Dismiss the edit view to return to the main list
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark -

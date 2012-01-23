@@ -54,6 +54,7 @@
 	self.navigationItem.leftBarButtonItem = cancelButton;
 	[cancelButton release];
     self.view = self.scrollView;
+    self.scrollView.backgroundColor = [UIColor blackColor];
 	
 	[super viewDidLoad];
 }
@@ -63,10 +64,10 @@
     for(UIView *subview in [self.scrollView subviews]) {
         [subview removeFromSuperview];
     }
-    UIImageView * iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blue_back.png"]];
-    iv.contentMode = UIViewContentModeScaleToFill;
-    [self.scrollView addSubview:iv];
-    [iv release];
+//    UIImageView * iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blue_back.png"]];
+//    iv.contentMode = UIViewContentModeScaleToFill;
+//    [self.scrollView addSubview:iv];
+    //[iv release];
     //add internet buttons
 	UIButton * imagesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     imagesButton.frame = CGRectMake(24, 25, 170, 30);

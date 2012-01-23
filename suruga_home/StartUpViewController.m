@@ -24,6 +24,8 @@
 @synthesize dateFormatter;
 @synthesize datePicker;
 @synthesize userData;
+@synthesize reasonPicker;
+@synthesize reasonPickerArray;
 /*
  {"name":"Find A House",
  "order": 1,
@@ -119,6 +121,78 @@
     [keyboardDoneButtonView release];
 }
 
+#pragma mark - PRIVATE FUNCTIONS
+- (void)keyBoardReasonPicker 
+{
+    self.reasonPickerArray = [NSArray arrayWithObjects:
+                            NSLocalizedString(@"Marriage", @"marriage reason picker choice"),
+                            NSLocalizedString(@"Birth of a Child",@"child reason picker choice"),
+                            NSLocalizedString(@"Job Change",@"Job change reason picker choice"),
+                            NSLocalizedString(@"Current Room is small",@"small room reason picker choice"),
+                            NSLocalizedString(@"University",@"University Reason Picker Choice"),
+                            NSLocalizedString(@"Independence",@"Independence Reason picker choice"),
+                            nil];
+    //TODO - make this work for Type Category selection.
+    // create a UIPicker view as a custom keyboard view
+    self.reasonPicker = [[[UIPickerView alloc] init] autorelease];
+    self.reasonPicker.showsSelectionIndicator = YES;
+    reasonPicker.dataSource = self;
+    reasonPicker.delegate = self;
+    //TODO - initialize the typePicker fields from typeArray.
+    
+    //Set typePicker as the inputView for textFieldType
+    reasonTextField.inputView = self.reasonPicker;
+    
+    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
+    // Prepare done button
+    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+    keyboardDoneButtonView.barStyle = UIBarStyleDefault;
+    keyboardDoneButtonView.translucent = YES;
+    keyboardDoneButtonView.tintColor = nil;
+    [keyboardDoneButtonView sizeToFit];
+    
+    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(reasonPickerDone:)] autorelease];
+    UIBarButtonItem* newButton = [[[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStyleBordered target:self action:@selector(reasonPickerNew:)] autorelease];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, newButton, nil]];
+    
+    // Plug the keyboardDoneButtonView into the text field...
+    reasonTextField.inputAccessoryView = keyboardDoneButtonView;
+    [keyboardDoneButtonView release];
+}
+- (IBAction)reasonPickerDone:(id)sender{   
+    [self.reasonTextField resignFirstResponder];
+}
+- (IBAction)reasonPickerNew:(id)sender{   
+    //TODO - change keyboard layout
+    reasonTextField.inputView = nil;
+    [reasonTextField resignFirstResponder];
+    reasonTextField.text = nil;
+    [reasonTextField becomeFirstResponder];
+    reasonTextField.inputView = self.reasonPicker;
+}
+
+# pragma mark UIPickerViewDataSource
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [self.reasonPickerArray count];
+}
+
+# pragma mark UIPickerViewDelegate
+- (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [reasonPickerArray objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    if (row != -1){
+        self.userData.reason =  [reasonPickerArray objectAtIndex:row];
+        self.reasonTextField.text = [reasonPickerArray objectAtIndex:row];
+        self.reasonPicker.tag = row;
+    }
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -130,6 +204,7 @@
     
     //Setup date keyboard view
     [self keyBoardDatePicker];
+    [self keyBoardReasonPicker];
     
     //Register for keyboard events
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
@@ -241,7 +316,7 @@
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
     if (!CGRectContainsPoint(aRect, CGPointMake(activeField.frame.origin.x, activeField.frame.origin.y + activeField.frame.size.height))) {
-        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-kbSize.height);
+        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-kbSize.height + 100);
         [scrollView setContentOffset:scrollPoint animated:YES];
     }
 }
