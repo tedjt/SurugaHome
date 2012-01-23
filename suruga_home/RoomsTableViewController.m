@@ -129,11 +129,11 @@
     //TODO - make this the total cost of furniture items.
     cell.detailTextLabel.text = [room sumPrices];
     
-    if ([room.type isEqualToString:@"Kitchen"]) {
+    if ([room.type isEqualToString:NSLocalizedString(@"Kitchen", @"Kitchen Category")]) {
         cell.imageView.image = [UIImage imageNamed:@"kitchen_icon.jpg"];
-    } else if ([room.type isEqualToString:@"Bedroom"]) {
+    } else if ([room.type isEqualToString:NSLocalizedString(@"Bedroom", @"BedRoom category")]) {
         cell.imageView.image = [UIImage imageNamed:@"bedroom-icon.png"];
-    } else if ([room.type isEqualToString:@"Living Room"]) {
+    } else if ([room.type isEqualToString:NSLocalizedString(@"Living Room", @"Living Room category")]) {
         cell.imageView.image = [UIImage imageNamed:@"living-room-icon.jpg"];
     }
 }

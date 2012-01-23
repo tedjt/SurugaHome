@@ -47,7 +47,7 @@
 	
 	// Create cancel button
 	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] 
-									 initWithTitle:@"Cancel" 
+									 initWithTitle:NSLocalizedString(@"Cancel", @"Cancel button text") 
 									 style:UIBarButtonItemStylePlain 
 									 target:self 
 									 action:@selector(cancel:)];
@@ -71,7 +71,7 @@
     //add internet buttons
 	UIButton * imagesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     imagesButton.frame = CGRectMake(24, 25, 170, 30);
-    [imagesButton setTitle:@"Web Images" forState:UIControlStateNormal]; 
+    [imagesButton setTitle:NSLocalizedString(@"Web Images", @"Web Images Title") forState:UIControlStateNormal]; 
     [imagesButton addTarget:self 
                      action:@selector(webButtonClicked:) 
            forControlEvents:UIControlEventTouchUpInside];
@@ -116,7 +116,7 @@
     
     // Create delete button
 	UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] 
-									 initWithTitle:@"Delete" 
+									 initWithTitle:NSLocalizedString(@"Delete", @"Delete Button Text")
 									 style:UIBarButtonItemStylePlain 
 									 target:self 
 									 action:@selector(delete:)];

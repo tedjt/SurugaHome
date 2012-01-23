@@ -38,7 +38,7 @@
     item.urlThumb = theThumbImageURL;
     item.size = theSize;
     
-    TTDPRINT(@"Creating photo with image: %@, thumb: %@, caption: %@, size: (%f, %f)", theImageURL, theThumbImageURL, theCaption, theSize.width, theSize.height);
+    //TTDPRINT(@"Creating photo with image: %@, thumb: %@, caption: %@, size: (%f, %f)", theImageURL, theThumbImageURL, theCaption, theSize.width, theSize.height);
     
     return item;
 }

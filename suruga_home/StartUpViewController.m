@@ -19,6 +19,7 @@
 @synthesize whenTextField;
 @synthesize nameTextField;
 @synthesize reasonTextField;
+@synthesize layoutTextField;
 @synthesize isRentingSwitch;
 @synthesize scrollView;
 @synthesize dateFormatter;
@@ -26,16 +27,9 @@
 @synthesize userData;
 @synthesize reasonPicker;
 @synthesize reasonPickerArray;
-/*
- {"name":"Find A House",
- "order": 1,
- "tasks": [
-     {"name": "Choose a move date",
-     "order": 1,},
-     {"name": "Choose home size, amenities",
-     "order": 2},
-     {"name": "Ch
- */
+@synthesize layoutPicker;
+@synthesize layoutPickerArray;
+
 #pragma mark - PRIVATE FUNCTIONS
 - (void)buildStaticData
 {
@@ -113,7 +107,7 @@
     keyboardDoneButtonView.tintColor = nil;
     [keyboardDoneButtonView sizeToFit];
     
-    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(doneClicked:)] autorelease];
+    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(doneClicked:)] autorelease];
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
     
     // Plug the keyboardDoneButtonView into the text field...
@@ -151,14 +145,57 @@
     keyboardDoneButtonView.tintColor = nil;
     [keyboardDoneButtonView sizeToFit];
     
-    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(reasonPickerDone:)] autorelease];
-    UIBarButtonItem* newButton = [[[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStyleBordered target:self action:@selector(reasonPickerNew:)] autorelease];
+    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(reasonPickerDone:)] autorelease];
+    UIBarButtonItem* newButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"New", @"New Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(reasonPickerNew:)] autorelease];
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, newButton, nil]];
     
     // Plug the keyboardDoneButtonView into the text field...
     reasonTextField.inputAccessoryView = keyboardDoneButtonView;
     [keyboardDoneButtonView release];
 }
+- (void)keyBoardLayoutPicker 
+{
+    self.layoutPickerArray = [NSArray arrayWithObjects:
+                              [NSArray arrayWithObjects:
+                                NSLocalizedString(@"0 Baths", @"0 Baths"),
+                                NSLocalizedString(@"1 Baths", @"1 Baths"),
+                                NSLocalizedString(@"2 Baths", @"2 Baths"),
+                                NSLocalizedString(@"3 Baths", @"3 Baths"),
+                                  nil],
+                              [NSArray arrayWithObjects:
+                               NSLocalizedString(@"0 Bedrooms", @"0 Bedrooms"),
+                               NSLocalizedString(@"1 Bedrooms", @"1 Bedrooms"),
+                               NSLocalizedString(@"2 Bedrooms", @"2 Bedrooms"),
+                               NSLocalizedString(@"3 Bedrooms", @"3 Bedrooms"),
+                               nil], 
+                            nil];
+    //TODO - make this work for Type Category selection.
+    // create a UIPicker view as a custom keyboard view
+    self.layoutPicker = [[[UIPickerView alloc] init] autorelease];
+    self.layoutPicker.showsSelectionIndicator = YES;
+    layoutPicker.dataSource = self;
+    layoutPicker.delegate = self;
+    //TODO - initialize the typePicker fields from typeArray.
+    
+    //Set typePicker as the inputView for textFieldType
+    layoutTextField.inputView = self.layoutPicker;
+    
+    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
+    // Prepare done button
+    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+    keyboardDoneButtonView.barStyle = UIBarStyleDefault;
+    keyboardDoneButtonView.translucent = YES;
+    keyboardDoneButtonView.tintColor = nil;
+    [keyboardDoneButtonView sizeToFit];
+    
+    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(layoutPickerDone:)] autorelease];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
+    
+    // Plug the keyboardDoneButtonView into the text field...
+    layoutTextField.inputAccessoryView = keyboardDoneButtonView;
+    [keyboardDoneButtonView release];
+}
+
 - (IBAction)reasonPickerDone:(id)sender{   
     [self.reasonTextField resignFirstResponder];
 }
@@ -171,25 +208,70 @@
     reasonTextField.inputView = self.reasonPicker;
 }
 
+- (IBAction)layoutPickerDone:(id)sender{   
+    [self.layoutTextField resignFirstResponder];
+}
+
 # pragma mark UIPickerViewDataSource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
+    if (pickerView == self.reasonPicker) {
+        return 1;
+    }
+    else if (pickerView == self.layoutPicker) {
+        return 2;
+    }
+    else {
+        return 1;
+    }
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [self.reasonPickerArray count];
+    if (pickerView == self.reasonPicker) {
+        return [self.reasonPickerArray count];
+    }
+    else if (pickerView == self.layoutPicker) {
+        return [[self.layoutPickerArray objectAtIndex:component] count];
+    }
+    else {
+        return 0;
+    }
 }
 
 # pragma mark UIPickerViewDelegate
 - (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [reasonPickerArray objectAtIndex:row];
+    if (thePickerView == self.reasonPicker) {
+        return [reasonPickerArray objectAtIndex:row];
+    }
+    else if (thePickerView == self.layoutPicker) {
+        return [[self.layoutPickerArray objectAtIndex:component] objectAtIndex:row];
+    }
+    else {
+        return nil;
+    }
 }
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (row != -1){
-        self.userData.reason =  [reasonPickerArray objectAtIndex:row];
-        self.reasonTextField.text = [reasonPickerArray objectAtIndex:row];
-        self.reasonPicker.tag = row;
+        if (thePickerView == self.reasonPicker) {
+            self.userData.reason =  [reasonPickerArray objectAtIndex:row];
+            self.reasonTextField.text = [reasonPickerArray objectAtIndex:row];
+            self.reasonPicker.tag = row;
+        }
+        else if (thePickerView == self.layoutPicker) {
+            NSArray* ta = [layoutTextField.text componentsSeparatedByString: @", "];
+            if (ta.count > 1) {
+                if (component == 0 ) {
+                    layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:row], [ta objectAtIndex:1]];
+                }
+                else {
+                    layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[ta objectAtIndex:0], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:row]];
+                }
+            }
+            else {
+                layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:(component == 0 ? row : 0)], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:(component == 1 ? row : 0)]];
+            }
+            self.layoutPicker.tag = row;
+        }
     }
 }
 
@@ -199,12 +281,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.isRentingSwitch.onText = NSLocalizedString(@"Renting", @"");
-	self.isRentingSwitch.offText = NSLocalizedString(@"Buying", @"");
+    self.isRentingSwitch.onText = NSLocalizedString(@"Renting", @"Renting Option");
+	self.isRentingSwitch.offText = NSLocalizedString(@"Buying", @"Buying Option");
     
     //Setup date keyboard view
     [self keyBoardDatePicker];
     [self keyBoardReasonPicker];
+    [self keyBoardLayoutPicker];
+    
+    self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, 1000);
     
     //Register for keyboard events
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
@@ -224,6 +309,7 @@
     [self setScrollView:nil];
     self.datePicker = nil;
     self.dateFormatter = nil;
+    [self setLayoutTextField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -279,6 +365,7 @@
     [scrollView release];
     [datePicker release];
     [dateFormatter release];
+    [layoutTextField release];
     [super dealloc];
 }
 

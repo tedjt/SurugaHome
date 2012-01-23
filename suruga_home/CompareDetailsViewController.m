@@ -57,7 +57,7 @@
     frame.size = self.scrollView.frame.size;
     
     CustomImagePicker *imagePicker = [[CustomImagePicker alloc] initWithScrollView:[[[UIScrollView alloc] initWithFrame:frame] autorelease]];
-    imagePicker.title = @"Choose Custom Image";
+    imagePicker.title = NSLocalizedString(@"Home Images", @"Custom Image Picker Title");
     [imagePicker addImage:[UIImage imageNamed:@"logo1.png"]];
 	[imagePicker addImage:[UIImage imageNamed:@"logo2.png"]];
 	[imagePicker addImage:[UIImage imageNamed:@"logo3.png"]];

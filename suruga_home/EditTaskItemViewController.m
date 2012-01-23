@@ -34,7 +34,7 @@
     keyboardDoneButtonView.tintColor = nil;
     [keyboardDoneButtonView sizeToFit];
     
-    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(doneClicked:)] autorelease];
+    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(doneClicked:)] autorelease];
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
     
     // Plug the keyboardDoneButtonView into the text field...
@@ -65,8 +65,8 @@
     keyboardDoneButtonView.tintColor = nil;
     [keyboardDoneButtonView sizeToFit];
     
-    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerDone:)] autorelease];
-    UIBarButtonItem* newButton = [[[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerNew:)] autorelease];
+    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerDone:)] autorelease];
+    UIBarButtonItem* newButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"New", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerNew:)] autorelease];
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, newButton, nil]];
     
     // Plug the keyboardDoneButtonView into the text field...
@@ -122,7 +122,7 @@
     if(self.task.name != nil) {
         self.title = self.task.name;
         self.name.text = self.task.name;
-    } else { self.title = @"New Task";}
+    } else { self.title = NSLocalizedString(@"New Task", @"New Task Nav Title");}
     if(self.task.category != nil) {
         self.category.text = self.task.category.name;
     }

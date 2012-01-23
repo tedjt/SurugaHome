@@ -103,6 +103,9 @@
 		2AA6EB1514CBD6240097F647 /* bedroom-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1214CBD6240097F647 /* bedroom-icon.png */; };
 		2AA6EB1614CBD6240097F647 /* kitchen_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1314CBD6240097F647 /* kitchen_icon.jpg */; };
 		2AA6EB1714CBD6240097F647 /* living-room-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1414CBD6240097F647 /* living-room-icon.jpg */; };
+		2AA6EB1B14CE04760097F647 /* budget_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1814CE04750097F647 /* budget_icon.png */; };
+		2AA6EB1C14CE04760097F647 /* home_cross_section.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1914CE04750097F647 /* home_cross_section.png */; };
+		2AA6EB1D14CE04760097F647 /* home_finder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1A14CE04750097F647 /* home_finder.png */; };
 		2AE3297014C4841000325402 /* StartUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE3296E14C4841000325402 /* StartUpViewController.m */; };
 		2AE3297114C4841000325402 /* StartUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AE3296F14C4841000325402 /* StartUpViewController.xib */; };
 		2AE3297614C48FBE00325402 /* home_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE3297514C48FBE00325402 /* home_background.png */; };
@@ -437,6 +440,9 @@
 		2AA6EB1214CBD6240097F647 /* bedroom-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bedroom-icon.png"; sourceTree = "<group>"; };
 		2AA6EB1314CBD6240097F647 /* kitchen_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kitchen_icon.jpg; sourceTree = "<group>"; };
 		2AA6EB1414CBD6240097F647 /* living-room-icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "living-room-icon.jpg"; sourceTree = "<group>"; };
+		2AA6EB1814CE04750097F647 /* budget_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = budget_icon.png; sourceTree = "<group>"; };
+		2AA6EB1914CE04750097F647 /* home_cross_section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_cross_section.png; sourceTree = "<group>"; };
+		2AA6EB1A14CE04750097F647 /* home_finder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_finder.png; sourceTree = "<group>"; };
 		2AE3296D14C4841000325402 /* StartUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartUpViewController.h; sourceTree = "<group>"; };
 		2AE3296E14C4841000325402 /* StartUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartUpViewController.m; sourceTree = "<group>"; };
 		2AE3296F14C4841000325402 /* StartUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartUpViewController.xib; sourceTree = "<group>"; };
@@ -506,6 +512,9 @@
 		2A03845F149BB54C000E0B49 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2AA6EB1814CE04750097F647 /* budget_icon.png */,
+				2AA6EB1914CE04750097F647 /* home_cross_section.png */,
+				2AA6EB1A14CE04750097F647 /* home_finder.png */,
 				2AA6EB1214CBD6240097F647 /* bedroom-icon.png */,
 				2AA6EB1314CBD6240097F647 /* kitchen_icon.jpg */,
 				2AA6EB1414CBD6240097F647 /* living-room-icon.jpg */,
@@ -1181,6 +1190,9 @@
 				2AA6EB1514CBD6240097F647 /* bedroom-icon.png in Resources */,
 				2AA6EB1614CBD6240097F647 /* kitchen_icon.jpg in Resources */,
 				2AA6EB1714CBD6240097F647 /* living-room-icon.jpg in Resources */,
+				2AA6EB1B14CE04760097F647 /* budget_icon.png in Resources */,
+				2AA6EB1C14CE04760097F647 /* home_cross_section.png in Resources */,
+				2AA6EB1D14CE04760097F647 /* home_finder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

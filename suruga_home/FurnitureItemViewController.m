@@ -51,7 +51,7 @@
     keyboardDoneButtonView.tintColor = nil;
     [keyboardDoneButtonView sizeToFit];
     
-    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(typePickerDone:)] autorelease];
+    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(typePickerDone:)] autorelease];
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
     
     // Plug the keyboardDoneButtonView into the text field...

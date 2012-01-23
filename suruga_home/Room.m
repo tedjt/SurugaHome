@@ -21,7 +21,7 @@
     for (Furniture *f in furnitureSet) {
         total_cost = total_cost + [f.price doubleValue];
     }
-    return [NSString stringWithFormat:@"$%.2lf",total_cost];
+    return [NSString stringWithFormat:@"$%d",(int)total_cost];
 }
 
 @end

@@ -63,7 +63,7 @@
     if(self.home.name != nil) {
         self.title = self.home.name;
         self.nameTextField.text = self.home.name;
-    } else { self.title = @"New Home";}
+    } else { self.title = NSLocalizedString(@"New Home", @"New Home Nav Title");}
     if(self.home.phone != nil) {
         self.phoneTextField.text = self.home.phone;
     }
@@ -158,7 +158,7 @@
 
 - (IBAction)imageButtonClicked:(id)sender {
     CustomImagePicker *imagePicker = [[CustomImagePicker alloc] init];
-    imagePicker.title = @"Home Images";
+    imagePicker.title = NSLocalizedString(@"Home Images", @"Home Thumbs view title");
     [self updateHomeObject];
     imagePicker.home = self.home;
 

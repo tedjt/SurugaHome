@@ -35,7 +35,7 @@
 	textFieldName.borderStyle = UITextBorderStyleBezel;
 	textFieldName.textColor = [UIColor blackColor];
 	textFieldName.font = [UIFont systemFontOfSize:17.0];
-	textFieldName.placeholder = @"<enter name>";
+	textFieldName.placeholder = NSLocalizedString(@"<enter name>", @"Room Name Field Label");
 	textFieldName.backgroundColor = [UIColor whiteColor];
 	textFieldName.autocorrectionType = UITextAutocorrectionTypeNo;	// no auto correction support
 	
@@ -91,7 +91,7 @@
     [super viewDidLoad];
 	
 	if(room.name == nil || [room.name isEqualToString: @""]){
-		self.navigationItem.title = @"New Box";
+		self.navigationItem.title = NSLocalizedString(@"New Room", @"New Room Nav Title");
 	}else{
 		self.navigationItem.title = room.name;
 	}
@@ -128,10 +128,10 @@
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section{
 	if(section == 0){
-		return @"Room Information";
+		return NSLocalizedString(@"Room Information", @"Room info header title");
 	}
 	else{
-		return @"Furniture Items";
+		return NSLocalizedString(@"Furniture Items", @"Furniture items header title");
 	}
 }
 
@@ -149,14 +149,14 @@
 		// return a metadata listing
 		if(indexPath.row == 0){
 			UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,10,110,30)];
-			nameLabel.text = @"Name:";
+			nameLabel.text = NSLocalizedString(@"Name:", @"Room Name label text");
 			nameLabel.backgroundColor = [UIColor clearColor];
 			[cell addSubview:nameLabel];
 			[cell addSubview:textFieldName];
             [nameLabel release];
 		} else if(indexPath.row == 1){
 			UILabel * priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,10,110,30)];
-			priceLabel.text = @"Total Cost:";
+			priceLabel.text = NSLocalizedString(@"Total Cost:", @"Room Cost label text");
 			priceLabel.backgroundColor = [UIColor clearColor];
 			[cell addSubview:priceLabel];
             
