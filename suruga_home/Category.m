@@ -36,4 +36,18 @@
 //    return nil;
 }
 
++ (Category *)fetchCategoryWithName: (NSString *) name context: (NSManagedObjectContext *) context {
+    //Initialize Data Arrays
+    NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+    
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Category" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"name == %@", name]];
+    
+    NSError *error;
+    // Fetch Tasks Item
+    return [[context executeFetchRequest:fetchRequest error:&error] objectAtIndex:0];
+}
+
 @end

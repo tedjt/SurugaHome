@@ -37,8 +37,8 @@
         self.managedObjectContext = [(suruga_homeAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
     }
 	
-	self.navigationItem.leftBarButtonItem = self.editButtonItem;
-	self.mTableView.editing = NO;
+	//self.navigationItem.leftBarButtonItem = self.editButtonItem;
+	self.mTableView.editing = YES; //NO
 	self.mTableView.allowsSelection = YES;
 	self.mTableView.allowsSelectionDuringEditing = YES;
     // Set the table view's row height
@@ -215,24 +215,6 @@
 - (void)homeDetailViewController:(HomeDetailViewController *)controller didFinishWithSave:(BOOL)save {
 	
 	if (save) {
-		/*
-		 The new task is associated with the task controller's managed object context.
-		 This is good because it means that any edits that are made don't affect the application's main managed object context -- it's a way of keeping disjoint edits in a separate scratchpad -- but it does make it more difficult to get the new book registered with the fetched results controller.
-		 First, you have to save the new book.  This means it will be added to the persistent store.  Then you can retrieve a corresponding managed object into the application delegate's context.  Normally you might do this using a fetch or using objectWithID: -- for example
-		 
-		 NSManagedObjectID *newBookID = [controller.book objectID];
-		 NSManagedObject *newBook = [applicationContext objectWithID:newBookID];
-		 
-		 These techniques, though, won't update the fetch results controller, which only observes change notifications in its context.
-		 You don't want to tell the fetch result controller to perform its fetch again because this is an expensive operation.
-		 You can, though, update the main context using mergeChangesFromContextDidSaveNotification: which will emit change notifications that the fetch results controller will observe.
-		 To do this:
-		 1	Register as an observer of the task controller's change notifications
-		 2	Perform the save
-		 3	In the notification method (addControllerContextDidSave:), merge the changes
-		 4	Unregister as an observer
-		 */
-        // Save the changes.
 		NSError *error;
 		if (![self.fetchedResultsController.managedObjectContext save:&error]) {
 			// Update to handle the error appropriately.

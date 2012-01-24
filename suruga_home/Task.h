@@ -14,6 +14,7 @@
 @private
 }
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * advisorUrl;
 @property (nonatomic, retain) NSDate * creationDate;
 @property (nonatomic, retain) NSDate * dueDate;

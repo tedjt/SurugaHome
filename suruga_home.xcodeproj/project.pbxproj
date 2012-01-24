@@ -106,6 +106,11 @@
 		2AA6EB1B14CE04760097F647 /* budget_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1814CE04750097F647 /* budget_icon.png */; };
 		2AA6EB1C14CE04760097F647 /* home_cross_section.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1914CE04750097F647 /* home_cross_section.png */; };
 		2AA6EB1D14CE04760097F647 /* home_finder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1A14CE04750097F647 /* home_finder.png */; };
+		2AA6EB2214CE5F8C0097F647 /* HomeLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA6EB2014CE5F8C0097F647 /* HomeLaunchViewController.m */; };
+		2AA6EB2314CE5F8C0097F647 /* HomeLaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB2114CE5F8C0097F647 /* HomeLaunchViewController.xib */; };
+		2AA6EB2614CE78540097F647 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA6EB2514CE78540097F647 /* HomeViewController.m */; };
+		2AA6EB2914CE7E0E0097F647 /* LayoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA6EB2814CE7E0D0097F647 /* LayoutViewController.m */; };
+		2AA6EB2C14CE7EEB0097F647 /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA6EB2B14CE7EEA0097F647 /* BudgetViewController.m */; };
 		2AE3297014C4841000325402 /* StartUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE3296E14C4841000325402 /* StartUpViewController.m */; };
 		2AE3297114C4841000325402 /* StartUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AE3296F14C4841000325402 /* StartUpViewController.xib */; };
 		2AE3297614C48FBE00325402 /* home_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE3297514C48FBE00325402 /* home_background.png */; };
@@ -443,6 +448,15 @@
 		2AA6EB1814CE04750097F647 /* budget_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = budget_icon.png; sourceTree = "<group>"; };
 		2AA6EB1914CE04750097F647 /* home_cross_section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_cross_section.png; sourceTree = "<group>"; };
 		2AA6EB1A14CE04750097F647 /* home_finder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_finder.png; sourceTree = "<group>"; };
+		2AA6EB1F14CE5F8C0097F647 /* HomeLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeLaunchViewController.h; sourceTree = "<group>"; };
+		2AA6EB2014CE5F8C0097F647 /* HomeLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeLaunchViewController.m; sourceTree = "<group>"; };
+		2AA6EB2114CE5F8C0097F647 /* HomeLaunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeLaunchViewController.xib; sourceTree = "<group>"; };
+		2AA6EB2414CE78530097F647 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		2AA6EB2514CE78540097F647 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		2AA6EB2714CE7E0D0097F647 /* LayoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutViewController.h; sourceTree = "<group>"; };
+		2AA6EB2814CE7E0D0097F647 /* LayoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutViewController.m; sourceTree = "<group>"; };
+		2AA6EB2A14CE7EEA0097F647 /* BudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BudgetViewController.h; sourceTree = "<group>"; };
+		2AA6EB2B14CE7EEA0097F647 /* BudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetViewController.m; sourceTree = "<group>"; };
 		2AE3296D14C4841000325402 /* StartUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartUpViewController.h; sourceTree = "<group>"; };
 		2AE3296E14C4841000325402 /* StartUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartUpViewController.m; sourceTree = "<group>"; };
 		2AE3296F14C4841000325402 /* StartUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartUpViewController.xib; sourceTree = "<group>"; };
@@ -854,6 +868,7 @@
 				2AE3296E14C4841000325402 /* StartUpViewController.m */,
 				2AE3296F14C4841000325402 /* StartUpViewController.xib */,
 				2A34B493148C72490055D300 /* Model */,
+				2AA6EB1E14CE5F4C0097F647 /* TabPages */,
 				2A7EDC12148C2157003B4C14 /* Tasks */,
 				2A7EDC13148C2163003B4C14 /* Compare */,
 				2A487B0414BDFE6C001B9601 /* Furniture */,
@@ -906,6 +921,22 @@
 				2A03841414984C47000E0B49 /* CompareDetailsViewController.xib */,
 			);
 			name = Compare;
+			sourceTree = "<group>";
+		};
+		2AA6EB1E14CE5F4C0097F647 /* TabPages */ = {
+			isa = PBXGroup;
+			children = (
+				2AA6EB1F14CE5F8C0097F647 /* HomeLaunchViewController.h */,
+				2AA6EB2014CE5F8C0097F647 /* HomeLaunchViewController.m */,
+				2AA6EB2114CE5F8C0097F647 /* HomeLaunchViewController.xib */,
+				2AA6EB2414CE78530097F647 /* HomeViewController.h */,
+				2AA6EB2514CE78540097F647 /* HomeViewController.m */,
+				2AA6EB2714CE7E0D0097F647 /* LayoutViewController.h */,
+				2AA6EB2814CE7E0D0097F647 /* LayoutViewController.m */,
+				2AA6EB2A14CE7EEA0097F647 /* BudgetViewController.h */,
+				2AA6EB2B14CE7EEA0097F647 /* BudgetViewController.m */,
+			);
+			name = TabPages;
 			sourceTree = "<group>";
 		};
 		2AE329C714C4B99F00325402 /* DCRoundSwitch */ = {
@@ -1193,6 +1224,7 @@
 				2AA6EB1B14CE04760097F647 /* budget_icon.png in Resources */,
 				2AA6EB1C14CE04760097F647 /* home_cross_section.png in Resources */,
 				2AA6EB1D14CE04760097F647 /* home_finder.png in Resources */,
+				2AA6EB2314CE5F8C0097F647 /* HomeLaunchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1255,6 +1287,10 @@
 				2AE32A2C14C51E7F00325402 /* Twitter_SearchViewController.m in Sources */,
 				2AE32A2F14C605CA00325402 /* Category.m in Sources */,
 				2A8407CB14CB785B0054D2C5 /* FinancialAdvisorAnswerViewController.m in Sources */,
+				2AA6EB2214CE5F8C0097F647 /* HomeLaunchViewController.m in Sources */,
+				2AA6EB2614CE78540097F647 /* HomeViewController.m in Sources */,
+				2AA6EB2914CE7E0E0097F647 /* LayoutViewController.m in Sources */,
+				2AA6EB2C14CE7EEB0097F647 /* BudgetViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

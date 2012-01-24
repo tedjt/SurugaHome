@@ -11,6 +11,7 @@
 
 @implementation Task
 @dynamic name;
+@dynamic notes;
 @dynamic creationDate;
 @dynamic dueDate;
 @dynamic completed;

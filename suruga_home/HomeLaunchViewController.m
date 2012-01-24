@@ -1,30 +1,30 @@
 //
-//  TaskTableViewController.m
+//  HomeLaunchViewController.m
 //  suruga_home
 //
-//  Created by Ted Tomlinson on 12/4/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Ted Tomlinson on 1/23/12.
+//  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "TaskTableViewController.h"
+#import "HomeLaunchViewController.h"
 #import "suruga_homeAppDelegate.h"
+#import "HomeTableViewController.h"
 #import "Task.h"
 #import "Category.h"
 
-//#import "TaskTableViewCell.h"
+@implementation HomeLaunchViewController
+@synthesize managedObjectContext;
+@synthesize fetchedResultsController;
+@synthesize mTableView;
+@synthesize imageButton;
+@synthesize textButton;
+@synthesize checklistLabel;
 
-@implementation TaskTableViewController
-
-@synthesize managedObjectContext, fetchedResultsController;
-
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
+//conifigurable
+@synthesize pageTitle;
+@synthesize nextVC;
+@synthesize fetchPredicate;
+@synthesize category;
 
 #pragma mark - View lifecycle
 
@@ -37,13 +37,13 @@
     }
 	
 	self.navigationItem.leftBarButtonItem = self.editButtonItem;
-	self.tableView.editing = NO;
-	self.tableView.allowsSelection = YES;
-	self.tableView.allowsSelectionDuringEditing = YES;
+	self.mTableView.editing = NO;
+	self.mTableView.allowsSelection = YES;
+	self.mTableView.allowsSelectionDuringEditing = YES;
     // Set the table view's row height
-    self.tableView.rowHeight = 44.0;
+    self.mTableView.rowHeight = 44.0;
 	
-	self.title=NSLocalizedString(@"Task List",@"Task List Title");
+	self.title=self.pageTitle;
     
     // Configure the add button.
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTask)];
@@ -56,21 +56,30 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
 	}
-
+    
 }
 
 - (void)viewDidUnload
 {
+    [self setImageButton:nil];
+    [self setTextButton:nil];
+    [self setChecklistLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [self setMTableView:nil];
     self.fetchedResultsController = nil;
+    
+    //configurable options
+    self.pageTitle = nil;
+    self.nextVC = nil;
+    self.fetchPredicate = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-	[self.tableView reloadData];
+	[self.mTableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -131,14 +140,19 @@
         exit(-1);  // Fail
     }
     
-    [self.tableView reloadData];
+    [self.mTableView reloadData];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	// Display the category Names as section headings.
-    NSIndexPath *p = [NSIndexPath indexPathForRow:0 inSection:section];
-    Task *t = [fetchedResultsController objectAtIndexPath:p];
-    return t.category.name;
+	// Display the category Names as section headings, but not for the default category
+    if (section == 0) {
+        return nil;
+    }
+    else {
+        NSIndexPath *p = [NSIndexPath indexPathForRow:0 inSection:section];
+        Task *t = [fetchedResultsController objectAtIndexPath:p];
+        return t.category.name;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,6 +174,11 @@
 
 #pragma mark - Table view delegate
 
+- (void) setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing: editing animated: animated];
+    [self.mTableView setEditing:editing animated:animated];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Create and push a detail view controller.
@@ -169,9 +188,6 @@
     Task *selectedTask = (Task *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
     // Pass the selected task to the new view controller.
     taskViewController.task = selectedTask;
-    
-    // Push a details view controller to navigation stack
-    //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:taskViewController];
 	[self.navigationController pushViewController:taskViewController animated:YES];
     
     // Clean up
@@ -185,12 +201,18 @@
     taskViewController.parentController = self;
     
 	taskViewController.task = (Task *)[NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:managedObjectContext];
+    taskViewController.task.category = self.category;
 	
 	//UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:taskViewController];
     [self.navigationController pushViewController:taskViewController animated:YES];
 	
 	[taskViewController release];
 	//[navController release];
+}
+
+- (IBAction)homesButtonClicked:(id)sender {
+    [self.navigationController pushViewController:self.nextVC animated:YES];	
+    
 }
 
 /**
@@ -234,11 +256,15 @@
     //NSSortDescriptor *completedDescriptor = [[NSSortDescriptor alloc] initWithKey:@"completed" ascending:YES];
     NSSortDescriptor *dueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dueDate" ascending:YES];
     NSSortDescriptor *orderDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
-	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: categoryDescriptor, orderDescriptor, dueDescriptor, nil];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: categoryDescriptor, dueDescriptor, orderDescriptor, nil];
 	[fetchRequest setSortDescriptors:sortDescriptors];
+    
+    //Set up predicate
+    [NSFetchedResultsController deleteCacheWithName:self.pageTitle];
+    fetchRequest.predicate = self.fetchPredicate;
 	
 	// Create and initialize the fetch results controller.
-	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"category.order" cacheName:@"FullTasks"];
+	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"category.order" cacheName:self.pageTitle];
 	self.fetchedResultsController = aFetchedResultsController;
 	fetchedResultsController.delegate = self;
 	
@@ -261,13 +287,13 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
 	// The fetch controller is about to start sending change notifications, so prepare the table view for updates.
-	[self.tableView beginUpdates];
+	[self.mTableView beginUpdates];
 }
 
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
 	
-	UITableView *tableView = self.tableView;
+	UITableView *tableView = self.mTableView;
     
 	switch(type) {
 			
@@ -296,11 +322,11 @@
 	switch(type) {
 			
 		case NSFetchedResultsChangeInsert:
-			[self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			[self.mTableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 			
 		case NSFetchedResultsChangeDelete:
-			[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			[self.mTableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 	}
 }
@@ -308,17 +334,23 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
 	// The fetch controller has sent all current change notifications, so tell the table view to process all updates.
-	[self.tableView endUpdates];
+	[self.mTableView endUpdates];
 }
 
 
 #pragma mark -
-#pragma mark memory maanagement
 
 - (void)dealloc {
-	[fetchedResultsController release];
+    [mTableView release];
+    [fetchedResultsController release];
 	[managedObjectContext release];
+    //Configurable
+    [pageTitle release];
+    [nextVC release];
+    [fetchPredicate release];
+    [imageButton release];
+    [textButton release];
+    [checklistLabel release];
     [super dealloc];
 }
-
 @end

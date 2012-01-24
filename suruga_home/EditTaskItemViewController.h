@@ -13,13 +13,17 @@
 
 @protocol EditTaskItemViewControllerDelegate;
 
-@interface EditTaskItemViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
+@interface EditTaskItemViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
     UITextField *name;
     UITextField *category;
     UITextField *dueDate;
     UIDatePicker *datePicker;
     UIButton *advisorButton;
     DCRoundSwitch *completedSwitch;
+    UITextView *notesTextField;
+    UIBarButtonItem *doneButton;
+    UIBarButtonItem *saveButton;
+    UIScrollView *scrollView;
     NSDateFormatter *dateFormatter;
     Task *task;
     id <EditTaskItemViewControllerDelegate> parentController;
@@ -34,6 +38,10 @@
 @property (nonatomic, retain) IBOutlet UIDatePicker *datePicker; 
 @property (nonatomic, retain) IBOutlet UIButton *advisorButton;
 @property (nonatomic, retain) IBOutlet DCRoundSwitch *completedSwitch;
+@property (nonatomic, retain) IBOutlet UITextView *notesTextField;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 
 
 @property (nonatomic, retain) Task *task;

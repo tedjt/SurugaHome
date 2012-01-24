@@ -12,8 +12,11 @@
 #import "FinancialAdviceViewController.h"
 
 @implementation EditTaskItemViewController
+@synthesize notesTextField;
+@synthesize scrollView;
 @synthesize advisorButton;
 @synthesize completedSwitch, name, category, dueDate, datePicker, dateFormatter, task, parentController, categoryPickerArray, categoryPicker, hasNewCategory;
+@synthesize doneButton, saveButton;
 
 #pragma mark - PRIVATE FUNCTIONS
 - (void)keyBoardDatePicker 
@@ -34,8 +37,8 @@
     keyboardDoneButtonView.tintColor = nil;
     [keyboardDoneButtonView sizeToFit];
     
-    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(doneClicked:)] autorelease];
-    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
+    UIBarButtonItem* doneB = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(doneClicked:)] autorelease];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneB, nil]];
     
     // Plug the keyboardDoneButtonView into the text field...
     dueDate.inputAccessoryView = keyboardDoneButtonView;
@@ -65,9 +68,9 @@
     keyboardDoneButtonView.tintColor = nil;
     [keyboardDoneButtonView sizeToFit];
     
-    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerDone:)] autorelease];
+    UIBarButtonItem* doneB = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerDone:)] autorelease];
     UIBarButtonItem* newButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"New", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerNew:)] autorelease];
-    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, newButton, nil]];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneB, newButton, nil]];
     
     // Plug the keyboardDoneButtonView into the text field...
     category.inputAccessoryView = keyboardDoneButtonView;
@@ -129,16 +132,30 @@
     if(self.task.dueDate != nil) {
         self.dueDate.text = [self.dateFormatter stringFromDate: self.task.dueDate];
     }
+    self.notesTextField.text = task.notes;
     self.completedSwitch.on = [self.task.completed intValue] != 0;
-    //self.title = self.task.name;//@"New Task";
+    
+    // Set up keyboard pickers for date and category fields.
     [self keyBoardDatePicker];
     [self keyBoardCategoryPicker];
     
+    //Set up Nav bar items
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)] autorelease];
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)] autorelease];
     
-    self.editing = YES;
+    self.doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)] autorelease];
+    
+    self.saveButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)] autorelease];
+    self.navigationItem.rightBarButtonItem = saveButton;
+    
+    //self.editing = YES;
     self.advisorButton.hidden = (nil == self.task.advisorUrl);
+    
+    //Register for keyboard events
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(keyboardWillBeHidden:)
+        name:UIKeyboardWillHideNotification object:nil];
 
 }
 
@@ -149,6 +166,8 @@
     [self setDueDate:nil];
     [self setCompletedSwitch:nil];
     [self setAdvisorButton:nil];
+    [self setNotesTextField:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -183,6 +202,40 @@
     return YES;
 }
 
+
+#pragma mark - Text View Delegate and scroll view handlers
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    self.navigationItem.rightBarButtonItem = self.doneButton;
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    if (self.navigationItem.rightBarButtonItem == self.doneButton ) {
+        NSDictionary* info = [aNotification userInfo];
+        CGRect kbFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+        
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbFrame.size.height, 0.0);
+        scrollView.contentInset = contentInsets;
+        scrollView.scrollIndicatorInsets = contentInsets;
+        [scrollView setContentOffset:CGPointMake(0.0,120) animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+- (IBAction)done:(id)sender {
+    [notesTextField resignFirstResponder];
+    self.navigationItem.rightBarButtonItem = self.saveButton;
+}
+
 #pragma mark -
 #pragma mark Save and cancel operations
 
@@ -192,6 +245,7 @@
 
 - (IBAction)save:(id)sender {
     self.task.name = name.text;
+    self.task.notes = notesTextField.text;
     if (self.hasNewCategory) {
         self.task.category = (Category *)[NSEntityDescription insertNewObjectForEntityForName:@"Category" inManagedObjectContext:task.managedObjectContext];
         self.task.category.name = category.text;
@@ -218,6 +272,8 @@
     [task release];
     [completedSwitch release];
     [advisorButton release];
+    [notesTextField release];
+    [scrollView release];
     [super dealloc];
 }
 @end

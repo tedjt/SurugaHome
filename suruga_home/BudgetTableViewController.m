@@ -41,7 +41,6 @@
     } else {
         self.title = self.title=NSLocalizedString(@"Running Budget ",@"Running Budget List Title");
     }
-	
 	//add a button
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
     //Done button

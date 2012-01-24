@@ -28,9 +28,10 @@
     if (managedObjectContext == nil) { 
         self.managedObjectContext = [(suruga_homeAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
     }
-	
-	self.navigationItem.leftBarButtonItem = self.editButtonItem;
-	self.tableView.editing = NO;
+    // Set to editing so we don't lose our nav controller
+	self.tableView.editing = YES;
+	//self.navigationItem.leftBarButtonItem = self.editButtonItem;
+	//self.tableView.editing = NO;
 	self.tableView.allowsSelection = YES;
 	self.tableView.allowsSelectionDuringEditing = YES;
 

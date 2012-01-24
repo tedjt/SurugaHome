@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSSet *tasks;
 
 + (NSArray *)fetchCategoriesWithContext: (NSManagedObjectContext *) context;
++ (Category *)fetchCategoryWithName: (NSString *) name context: (NSManagedObjectContext *) context;
 
 @end
 

@@ -405,10 +405,10 @@ typedef NSUInteger SVGeocoderRequestState;
 
 - (NSString*)encodedURLParameterString {
     NSString *result = (NSString*)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                          (CFStringRef)self,
-                                                                          NULL,
-                                                                          CFSTR(":/=,!$&'()*+;[]@#?|"),
-                                                                          kCFStringEncodingUTF8);
+                (CFStringRef)self,
+                        NULL,
+                    CFSTR(":/=,!$&'()*+;[]@#?|"),
+            kCFStringEncodingUTF8);
 	return [result autorelease];
 }
 
