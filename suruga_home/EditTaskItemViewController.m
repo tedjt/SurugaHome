@@ -69,7 +69,7 @@
     [keyboardDoneButtonView sizeToFit];
     
     UIBarButtonItem* doneB = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerDone:)] autorelease];
-    UIBarButtonItem* newButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"New", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerNew:)] autorelease];
+    UIBarButtonItem* newButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"New", @"New Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(categoryPickerNew:)] autorelease];
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneB, newButton, nil]];
     
     // Plug the keyboardDoneButtonView into the text field...

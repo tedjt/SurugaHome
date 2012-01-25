@@ -17,6 +17,7 @@
 @synthesize options;
 @synthesize questionLabel;
 @synthesize imageView;
+@synthesize loadingIndicator;
 @synthesize dataDict;
 @synthesize requestUrl;
 
@@ -59,8 +60,12 @@
         [self setUpViewFromDictionary];
     }
     else if (nil != requestUrl) {
+        [loadingIndicator setHidden:NO];
+        [self.loadingIndicator startAnimating];  
         [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL: requestUrl] delegate:self];
     } else {
+        [loadingIndicator setHidden:NO];
+        [self.loadingIndicator startAnimating];  
         NSURLRequest *request = 
         [NSURLRequest requestWithURL:
          [NSURL URLWithString:@"http://tedjt.scripts.mit.edu/suruga/"]];
@@ -77,6 +82,7 @@
     questionLabel = nil;
     [self setQuestionLabel:nil];
     [self setImageView:nil];
+    [self setLoadingIndicator:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -201,6 +207,10 @@
     self.dataDict = [responseString JSONValue];
     [responseString release];
     [self setUpViewFromDictionary];
+    
+    // Hid Loading indicator
+    [self.loadingIndicator stopAnimating];
+    [self.loadingIndicator setHidden:YES];
     /*
     {
         "type": "question_slide",
@@ -228,6 +238,7 @@
     [mTableView release];
     [questionLabel release];
     [imageView release];
+    [loadingIndicator release];
     [super dealloc];
 }
 @end

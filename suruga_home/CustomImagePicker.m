@@ -68,9 +68,17 @@
 //    iv.contentMode = UIViewContentModeScaleToFill;
 //    [self.scrollView addSubview:iv];
     //[iv release];
+    //Add camaera button
+    UIButton * cameraButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    cameraButton.frame = CGRectMake(165, 25, 120, 30);
+    [cameraButton setTitle:NSLocalizedString(@"Camera", @"Camera Images Title") forState:UIControlStateNormal]; 
+    [cameraButton addTarget:self 
+                     action:@selector(cameraButtonClicked:) 
+           forControlEvents:UIControlEventTouchUpInside];
+    [self.scrollView addSubview:cameraButton];
     //add internet buttons
 	UIButton * imagesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    imagesButton.frame = CGRectMake(24, 25, 170, 30);
+    imagesButton.frame = CGRectMake(24, 25, 130, 30);
     [imagesButton setTitle:NSLocalizedString(@"Web Images", @"Web Images Title") forState:UIControlStateNormal]; 
     [imagesButton addTarget:self 
                      action:@selector(webButtonClicked:) 
@@ -171,27 +179,14 @@
 	[super dealloc];
 }
 
-#pragma mark Photo
-
-- (IBAction)cameraButtonClick:(id)sender{
-    
-    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-	picker.delegate = self;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-	
-	[self presentModalViewController:picker animated:YES];
-    [picker release];
-}
-
-
-- (void) webThumbsViewController:(WebThumbsViewController *)webThumbsViewController didAddPhoto:(UIImage *)image 
-{
-	if(image){
-
+#pragma mark private Photo
+- (void) addPhoto: (UIImage *) photo {
+    if(photo){
+        
 		// Create an image object for the new image.
 		Image *imageObject = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:self.home.managedObjectContext];
         
-        [imageObject setValuesFromImage:image];
+        [imageObject setValuesFromImage:photo];
         [home addImagesObject:imageObject];
         [self.images addObject:imageObject];
         
@@ -202,9 +197,30 @@
 			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 			exit(-1);  // Fail
 		}
-        [webThumbsViewController.navigationController popViewControllerAnimated:YES];
 		[self layoutImages];
 	}
+}
+#pragma mark Photo
+
+- (IBAction)cameraButtonClicked:(id)sender{
+    
+    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+	picker.delegate = self;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+	
+	[self presentModalViewController:picker animated:YES];
+    [picker release];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [self addPhoto:[info objectForKey:@"UIImagePickerControllerOriginalImage"]];
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+- (void) webThumbsViewController:(WebThumbsViewController *)webThumbsViewController didAddPhoto:(UIImage *)image 
+{
+    [self addPhoto:image];
+    [webThumbsViewController.navigationController popViewControllerAnimated:YES];
     //[self.navigationController popViewControllerAnimated:YES];    
 	//[self dismissModalViewControllerAnimated: YES];
 }

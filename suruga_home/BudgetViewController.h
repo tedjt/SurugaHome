@@ -8,6 +8,9 @@
 
 #import "HomeLaunchViewController.h"
 
-@interface BudgetViewController : HomeLaunchViewController
+@interface BudgetViewController : HomeLaunchViewController {
+}
+
+- (IBAction)advisorPressed;
 
 @end

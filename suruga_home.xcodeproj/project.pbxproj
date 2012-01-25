@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2A03841514984C47000E0B49 /* CompareDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03841314984C47000E0B49 /* CompareDetailsViewController.m */; };
 		2A03841614984C47000E0B49 /* CompareDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A03841414984C47000E0B49 /* CompareDetailsViewController.xib */; };
-		2A03841814992462000E0B49 /* suruga_en.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2A03841714992462000E0B49 /* suruga_en.sqlite */; };
 		2A03845C14994B33000E0B49 /* CustomImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03845914994B33000E0B49 /* CustomImagePicker.m */; };
 		2A03845D14994B33000E0B49 /* UIImageExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03845B14994B33000E0B49 /* UIImageExtras.m */; };
 		2A03846C149E65D3000E0B49 /* PhotoAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03846A149E65D3000E0B49 /* PhotoAppViewController.m */; };
@@ -100,9 +99,6 @@
 		2A991FA614C229DA002C47AB /* BudgetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A991FA514C229DA002C47AB /* BudgetCell.xib */; };
 		2A991FAD14C29281002C47AB /* BudgetItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A991FAB14C29281002C47AB /* BudgetItemViewController.m */; };
 		2A991FAE14C29281002C47AB /* BudgetItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A991FAC14C29281002C47AB /* BudgetItemViewController.xib */; };
-		2AA6EB1514CBD6240097F647 /* bedroom-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1214CBD6240097F647 /* bedroom-icon.png */; };
-		2AA6EB1614CBD6240097F647 /* kitchen_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1314CBD6240097F647 /* kitchen_icon.jpg */; };
-		2AA6EB1714CBD6240097F647 /* living-room-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1414CBD6240097F647 /* living-room-icon.jpg */; };
 		2AA6EB1B14CE04760097F647 /* budget_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1814CE04750097F647 /* budget_icon.png */; };
 		2AA6EB1C14CE04760097F647 /* home_cross_section.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1914CE04750097F647 /* home_cross_section.png */; };
 		2AA6EB1D14CE04760097F647 /* home_finder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1A14CE04750097F647 /* home_finder.png */; };
@@ -111,6 +107,14 @@
 		2AA6EB2614CE78540097F647 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA6EB2514CE78540097F647 /* HomeViewController.m */; };
 		2AA6EB2914CE7E0E0097F647 /* LayoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA6EB2814CE7E0D0097F647 /* LayoutViewController.m */; };
 		2AA6EB2C14CE7EEB0097F647 /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA6EB2B14CE7EEA0097F647 /* BudgetViewController.m */; };
+		2AA6EB2F14CF48370097F647 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB2D14CF48360097F647 /* Localizable.strings */; };
+		2AA6EB3514CF4F400097F647 /* tab_home_finder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB3414CF4F3F0097F647 /* tab_home_finder.png */; };
+		2AA6EB3714CF514B0097F647 /* tab_budget_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB3614CF51450097F647 /* tab_budget_icon.png */; };
+		2AA6EB3914CF53DA0097F647 /* tab_move_in.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB3814CF53D60097F647 /* tab_move_in.png */; };
+		2ABF0FB514CF691000509EE8 /* living-room-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABF0FB414CF691000509EE8 /* living-room-icon.png */; };
+		2ABF0FB714CF6AEC00509EE8 /* kitchen_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABF0FB614CF6AEC00509EE8 /* kitchen_icon.png */; };
+		2ABF0FB914CF6B9F00509EE8 /* bedroom_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABF0FB814CF6B9F00509EE8 /* bedroom_icon.png */; };
+		2ABF0FBB14CF6E0A00509EE8 /* advisor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABF0FBA14CF6E0A00509EE8 /* advisor.png */; };
 		2AE3297014C4841000325402 /* StartUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE3296E14C4841000325402 /* StartUpViewController.m */; };
 		2AE3297114C4841000325402 /* StartUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AE3296F14C4841000325402 /* StartUpViewController.xib */; };
 		2AE3297614C48FBE00325402 /* home_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE3297514C48FBE00325402 /* home_background.png */; };
@@ -310,7 +314,6 @@
 		2A03841214984C47000E0B49 /* CompareDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareDetailsViewController.h; sourceTree = "<group>"; };
 		2A03841314984C47000E0B49 /* CompareDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompareDetailsViewController.m; sourceTree = "<group>"; };
 		2A03841414984C47000E0B49 /* CompareDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompareDetailsViewController.xib; sourceTree = "<group>"; };
-		2A03841714992462000E0B49 /* suruga_en.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = suruga_en.sqlite; sourceTree = "<group>"; };
 		2A03845814994B33000E0B49 /* CustomImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImagePicker.h; sourceTree = "<group>"; };
 		2A03845914994B33000E0B49 /* CustomImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImagePicker.m; sourceTree = "<group>"; };
 		2A03845A14994B33000E0B49 /* UIImageExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageExtras.h; sourceTree = "<group>"; };
@@ -442,9 +445,6 @@
 		2A991FAA14C29280002C47AB /* BudgetItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BudgetItemViewController.h; sourceTree = "<group>"; };
 		2A991FAB14C29281002C47AB /* BudgetItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetItemViewController.m; sourceTree = "<group>"; };
 		2A991FAC14C29281002C47AB /* BudgetItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BudgetItemViewController.xib; sourceTree = "<group>"; };
-		2AA6EB1214CBD6240097F647 /* bedroom-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bedroom-icon.png"; sourceTree = "<group>"; };
-		2AA6EB1314CBD6240097F647 /* kitchen_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kitchen_icon.jpg; sourceTree = "<group>"; };
-		2AA6EB1414CBD6240097F647 /* living-room-icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "living-room-icon.jpg"; sourceTree = "<group>"; };
 		2AA6EB1814CE04750097F647 /* budget_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = budget_icon.png; sourceTree = "<group>"; };
 		2AA6EB1914CE04750097F647 /* home_cross_section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_cross_section.png; sourceTree = "<group>"; };
 		2AA6EB1A14CE04750097F647 /* home_finder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_finder.png; sourceTree = "<group>"; };
@@ -457,6 +457,15 @@
 		2AA6EB2814CE7E0D0097F647 /* LayoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutViewController.m; sourceTree = "<group>"; };
 		2AA6EB2A14CE7EEA0097F647 /* BudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BudgetViewController.h; sourceTree = "<group>"; };
 		2AA6EB2B14CE7EEA0097F647 /* BudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetViewController.m; sourceTree = "<group>"; };
+		2AA6EB2E14CF48370097F647 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2AA6EB3014CF484B0097F647 /* ja-JP */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ja-JP"; path = "ja-JP.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		2AA6EB3414CF4F3F0097F647 /* tab_home_finder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_home_finder.png; sourceTree = "<group>"; };
+		2AA6EB3614CF51450097F647 /* tab_budget_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_budget_icon.png; sourceTree = "<group>"; };
+		2AA6EB3814CF53D60097F647 /* tab_move_in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_move_in.png; sourceTree = "<group>"; };
+		2ABF0FB414CF691000509EE8 /* living-room-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "living-room-icon.png"; sourceTree = "<group>"; };
+		2ABF0FB614CF6AEC00509EE8 /* kitchen_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitchen_icon.png; sourceTree = "<group>"; };
+		2ABF0FB814CF6B9F00509EE8 /* bedroom_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bedroom_icon.png; sourceTree = "<group>"; };
+		2ABF0FBA14CF6E0A00509EE8 /* advisor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = advisor.png; sourceTree = "<group>"; };
 		2AE3296D14C4841000325402 /* StartUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartUpViewController.h; sourceTree = "<group>"; };
 		2AE3296E14C4841000325402 /* StartUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartUpViewController.m; sourceTree = "<group>"; };
 		2AE3296F14C4841000325402 /* StartUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartUpViewController.xib; sourceTree = "<group>"; };
@@ -526,12 +535,16 @@
 		2A03845F149BB54C000E0B49 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2AA6EB1814CE04750097F647 /* budget_icon.png */,
-				2AA6EB1914CE04750097F647 /* home_cross_section.png */,
+				2ABF0FBA14CF6E0A00509EE8 /* advisor.png */,
 				2AA6EB1A14CE04750097F647 /* home_finder.png */,
-				2AA6EB1214CBD6240097F647 /* bedroom-icon.png */,
-				2AA6EB1314CBD6240097F647 /* kitchen_icon.jpg */,
-				2AA6EB1414CBD6240097F647 /* living-room-icon.jpg */,
+				2AA6EB3414CF4F3F0097F647 /* tab_home_finder.png */,
+				2AA6EB1814CE04750097F647 /* budget_icon.png */,
+				2AA6EB3614CF51450097F647 /* tab_budget_icon.png */,
+				2AA6EB3814CF53D60097F647 /* tab_move_in.png */,
+				2AA6EB1914CE04750097F647 /* home_cross_section.png */,
+				2ABF0FB814CF6B9F00509EE8 /* bedroom_icon.png */,
+				2ABF0FB614CF6AEC00509EE8 /* kitchen_icon.png */,
+				2ABF0FB414CF691000509EE8 /* living-room-icon.png */,
 				2AE3297514C48FBE00325402 /* home_background.png */,
 				2A8407C414C87C4A0054D2C5 /* blue_back.png */,
 				2A487B2314BE31BC001B9601 /* section_box_camera.png */,
@@ -881,8 +894,8 @@
 		2A7EDBF3148C20D3003B4C14 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2AA6EB2D14CF48360097F647 /* Localizable.strings */,
 				2A03845F149BB54C000E0B49 /* Resources */,
-				2A03841714992462000E0B49 /* suruga_en.sqlite */,
 				2A34B48C148C71C60055D300 /* suruga.xcdatamodeld */,
 				2A7EDBF4148C20D3003B4C14 /* suruga_home-Info.plist */,
 				2A7EDBF5148C20D3003B4C14 /* InfoPlist.strings */,
@@ -1006,6 +1019,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"ja-JP",
 			);
 			mainGroup = 2A7EDBDD148C20D3003B4C14;
 			productRefGroup = 2A7EDBE9148C20D3003B4C14 /* Products */;
@@ -1183,7 +1197,6 @@
 				2A7EDC1D148C4240003B4C14 /* TaskTableViewController.xib in Resources */,
 				2A34B49B148C9C8E0055D300 /* EditTaskItemViewController.xib in Resources */,
 				2A03841614984C47000E0B49 /* CompareDetailsViewController.xib in Resources */,
-				2A03841814992462000E0B49 /* suruga_en.sqlite in Resources */,
 				2A03846D149E65D3000E0B49 /* PhotoAppViewController.xib in Resources */,
 				2A20477B14A3D76A00BFDC23 /* HomeDetailViewController.xib in Resources */,
 				2A20478614A50F8900BFDC23 /* HomeDetailViewController 2.xib in Resources */,
@@ -1218,13 +1231,18 @@
 				2A8407C514C87C4A0054D2C5 /* blue_back.png in Resources */,
 				2A8407C714C87EA00054D2C5 /* camera_button.png in Resources */,
 				2A8407CC14CB785B0054D2C5 /* FinancialAdvisorAnswerViewController.xib in Resources */,
-				2AA6EB1514CBD6240097F647 /* bedroom-icon.png in Resources */,
-				2AA6EB1614CBD6240097F647 /* kitchen_icon.jpg in Resources */,
-				2AA6EB1714CBD6240097F647 /* living-room-icon.jpg in Resources */,
 				2AA6EB1B14CE04760097F647 /* budget_icon.png in Resources */,
 				2AA6EB1C14CE04760097F647 /* home_cross_section.png in Resources */,
 				2AA6EB1D14CE04760097F647 /* home_finder.png in Resources */,
 				2AA6EB2314CE5F8C0097F647 /* HomeLaunchViewController.xib in Resources */,
+				2AA6EB2F14CF48370097F647 /* Localizable.strings in Resources */,
+				2AA6EB3514CF4F400097F647 /* tab_home_finder.png in Resources */,
+				2AA6EB3714CF514B0097F647 /* tab_budget_icon.png in Resources */,
+				2AA6EB3914CF53DA0097F647 /* tab_move_in.png in Resources */,
+				2ABF0FB514CF691000509EE8 /* living-room-icon.png in Resources */,
+				2ABF0FB714CF6AEC00509EE8 /* kitchen_icon.png in Resources */,
+				2ABF0FB914CF6B9F00509EE8 /* bedroom_icon.png in Resources */,
+				2ABF0FBB14CF6E0A00509EE8 /* advisor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1354,6 +1372,15 @@
 				2A7EDBFF148C20D3003B4C14 /* en */,
 			);
 			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		2AA6EB2D14CF48360097F647 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AA6EB2E14CF48370097F647 /* en */,
+				2AA6EB3014CF484B0097F647 /* ja-JP */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

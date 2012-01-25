@@ -131,11 +131,11 @@
     cell.detailTextLabel.text = [room sumPrices];
     
     if ([room.type isEqualToString:NSLocalizedString(@"Kitchen", @"Kitchen Category")]) {
-        cell.imageView.image = [UIImage imageNamed:@"kitchen_icon.jpg"];
+        cell.imageView.image = [UIImage imageNamed:@"kitchen_icon.png"];
     } else if ([room.type isEqualToString:NSLocalizedString(@"Bedroom", @"BedRoom category")]) {
-        cell.imageView.image = [UIImage imageNamed:@"bedroom-icon.png"];
+        cell.imageView.image = [UIImage imageNamed:@"bedroom_icon.png"];
     } else if ([room.type isEqualToString:NSLocalizedString(@"Living Room", @"Living Room category")]) {
-        cell.imageView.image = [UIImage imageNamed:@"living-room-icon.jpg"];
+        cell.imageView.image = [UIImage imageNamed:@"living-room-icon.png"];
     }
 }
 

@@ -73,9 +73,13 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="140549415">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="22598341">
-						<string key="IBUITitle">Item</string>
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="888411733">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="424920714">
+						<string key="IBUITitle">Move In</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">tab_move_in.png</string>
+						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 					<reference key="IBUIParentViewController" ref="1034742383"/>
@@ -86,7 +90,7 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="418431723">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="450738035">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
@@ -97,12 +101,12 @@
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="759167173">
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="664992017">
+						<object class="IBUIViewController" id="391538822">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="260467345">
 								<string key="IBUITitle">Root View Controller</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="140549415"/>
+							<reference key="IBUIParentViewController" ref="888411733"/>
 							<string key="IBUINibName">HomeLaunchViewController</string>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
@@ -115,9 +119,13 @@
 				</object>
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUINavigationController" id="358559980">
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="355964961">
-							<string key="IBUITitle">Item</string>
+					<object class="IBUINavigationController" id="1007091224">
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="921933754">
+							<string key="IBUITitle">Find a Home</string>
+							<object class="NSCustomResource" key="IBUIImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">tab_home_finder.png</string>
+							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<reference key="IBUIParentViewController" ref="1034742383"/>
@@ -128,7 +136,7 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIHorizontal">NO</bool>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="85547450">
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="327761911">
 							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrameSize">{0, 0}</string>
@@ -139,12 +147,12 @@
 						</object>
 						<object class="NSMutableArray" key="IBUIViewControllers">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIViewController" id="901235815">
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="382916519">
+							<object class="IBUIViewController" id="1058114032">
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="920838549">
 									<string key="IBUITitle">Root View Controller</string>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
-								<reference key="IBUIParentViewController" ref="358559980"/>
+								<reference key="IBUIParentViewController" ref="1007091224"/>
 								<string key="IBUINibName">HomeLaunchViewController</string>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="IBUIInterfaceOrientation">1</int>
@@ -155,9 +163,14 @@
 							</object>
 						</object>
 					</object>
-					<object class="IBUINavigationController" id="220452054">
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="969240994">
-							<string key="IBUITitle">Item</string>
+					<reference ref="888411733"/>
+					<object class="IBUINavigationController" id="989389822">
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="710667967">
+							<string key="IBUITitle">Plan Budget</string>
+							<object class="NSCustomResource" key="IBUIImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">tab_budget_icon.png</string>
+							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<reference key="IBUIParentViewController" ref="1034742383"/>
@@ -168,7 +181,7 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIHorizontal">NO</bool>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="497363042">
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="760684030">
 							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrameSize">{0, 0}</string>
@@ -179,12 +192,12 @@
 						</object>
 						<object class="NSMutableArray" key="IBUIViewControllers">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIViewController" id="1012596407">
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="1059584655">
+							<object class="IBUIViewController" id="74267865">
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="1047604821">
 									<string key="IBUITitle">Root View Controller</string>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
-								<reference key="IBUIParentViewController" ref="220452054"/>
+								<reference key="IBUIParentViewController" ref="989389822"/>
 								<string key="IBUINibName">HomeLaunchViewController</string>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="IBUIInterfaceOrientation">1</int>
@@ -195,7 +208,6 @@
 							</object>
 						</object>
 					</object>
-					<reference ref="140549415"/>
 				</object>
 				<object class="IBUITabBar" key="IBUITabBar" id="795333663">
 					<reference key="NSNextResponder"/>
@@ -449,9 +461,9 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="795333663"/>
-							<reference ref="358559980"/>
-							<reference ref="220452054"/>
-							<reference ref="140549415"/>
+							<reference ref="1007091224"/>
+							<reference ref="888411733"/>
+							<reference ref="989389822"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -472,38 +484,38 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">201</int>
-						<reference key="object" ref="358559980"/>
+						<reference key="object" ref="1007091224"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="85547450"/>
-							<reference ref="901235815"/>
-							<reference ref="355964961"/>
+							<reference ref="327761911"/>
+							<reference ref="1058114032"/>
+							<reference ref="921933754"/>
 						</object>
 						<reference key="parent" ref="1034742383"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">202</int>
-						<reference key="object" ref="85547450"/>
-						<reference key="parent" ref="358559980"/>
+						<reference key="object" ref="327761911"/>
+						<reference key="parent" ref="1007091224"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">203</int>
-						<reference key="object" ref="901235815"/>
+						<reference key="object" ref="1058114032"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="382916519"/>
+							<reference ref="920838549"/>
 						</object>
-						<reference key="parent" ref="358559980"/>
+						<reference key="parent" ref="1007091224"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">204</int>
-						<reference key="object" ref="382916519"/>
-						<reference key="parent" ref="901235815"/>
+						<reference key="object" ref="920838549"/>
+						<reference key="parent" ref="1058114032"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">205</int>
-						<reference key="object" ref="355964961"/>
-						<reference key="parent" ref="358559980"/>
+						<reference key="object" ref="921933754"/>
+						<reference key="parent" ref="1007091224"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">130</int>
@@ -647,73 +659,73 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">206</int>
-						<reference key="object" ref="220452054"/>
+						<reference key="object" ref="888411733"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="969240994"/>
-							<reference ref="1012596407"/>
-							<reference ref="497363042"/>
+							<reference ref="424920714"/>
+							<reference ref="391538822"/>
+							<reference ref="450738035"/>
 						</object>
 						<reference key="parent" ref="1034742383"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">207</int>
-						<reference key="object" ref="969240994"/>
-						<reference key="parent" ref="220452054"/>
+						<reference key="object" ref="424920714"/>
+						<reference key="parent" ref="888411733"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">208</int>
-						<reference key="object" ref="1012596407"/>
+						<reference key="object" ref="391538822"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1059584655"/>
+							<reference ref="260467345"/>
 						</object>
-						<reference key="parent" ref="220452054"/>
+						<reference key="parent" ref="888411733"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">209</int>
-						<reference key="object" ref="497363042"/>
-						<reference key="parent" ref="220452054"/>
+						<reference key="object" ref="450738035"/>
+						<reference key="parent" ref="888411733"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">210</int>
-						<reference key="object" ref="1059584655"/>
-						<reference key="parent" ref="1012596407"/>
+						<reference key="object" ref="260467345"/>
+						<reference key="parent" ref="391538822"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">211</int>
-						<reference key="object" ref="140549415"/>
+						<reference key="object" ref="989389822"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="22598341"/>
-							<reference ref="759167173"/>
-							<reference ref="418431723"/>
+							<reference ref="710667967"/>
+							<reference ref="74267865"/>
+							<reference ref="760684030"/>
 						</object>
 						<reference key="parent" ref="1034742383"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">212</int>
-						<reference key="object" ref="22598341"/>
-						<reference key="parent" ref="140549415"/>
+						<reference key="object" ref="710667967"/>
+						<reference key="parent" ref="989389822"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">213</int>
-						<reference key="object" ref="759167173"/>
+						<reference key="object" ref="74267865"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="664992017"/>
+							<reference ref="1047604821"/>
 						</object>
-						<reference key="parent" ref="140549415"/>
+						<reference key="parent" ref="989389822"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">214</int>
-						<reference key="object" ref="418431723"/>
-						<reference key="parent" ref="140549415"/>
+						<reference key="object" ref="760684030"/>
+						<reference key="parent" ref="989389822"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">215</int>
-						<reference key="object" ref="664992017"/>
-						<reference key="parent" ref="759167173"/>
+						<reference key="object" ref="1047604821"/>
+						<reference key="parent" ref="74267865"/>
 					</object>
 				</object>
 			</object>
@@ -865,6 +877,21 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<bool key="EncodedWithXMLCoder">YES</bool>
+			<object class="NSArray" key="dict.sortedKeys">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>tab_budget_icon.png</string>
+				<string>tab_home_finder.png</string>
+				<string>tab_move_in.png</string>
+			</object>
+			<object class="NSMutableArray" key="dict.values">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{28, 35}</string>
+				<string>{39, 25}</string>
+				<string>{35, 33}</string>
+			</object>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">534</string>
 	</data>
 </archive>

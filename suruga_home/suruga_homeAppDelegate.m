@@ -85,7 +85,6 @@
 		return __persistentStoreCoordinator;
 	}
 	NSURL *storeUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"suruga.sqlite"];
-	NSError *error = nil;
     // Put down default db if it doesn't already exist
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:[storeUrl path]]) {
@@ -103,16 +102,12 @@
 							 NSMigratePersistentStoresAutomaticallyOption,
 							 [NSNumber numberWithBool:YES],
 							 NSInferMappingModelAutomaticallyOption, nil];
-	
+	NSError *error;
 	if(![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
 		/*Error for store creation should be handled in here*/
 	}
 	
-	//return __persistentStoreCoordinator;
-    if (__persistentStoreCoordinator != nil)
-    {
-        return __persistentStoreCoordinator;
-    }
+	return __persistentStoreCoordinator;
 }
 
 #pragma mark - Application's Documents directory
@@ -210,19 +205,5 @@
     [_startUpViewController release];
     [super dealloc];
 }
-
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-{
-}
-*/
-
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
-{
-}
-*/
 
 @end

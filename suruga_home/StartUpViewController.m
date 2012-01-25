@@ -30,6 +30,8 @@
 @synthesize layoutPicker;
 @synthesize layoutPickerArray;
 
+//TODO - update user data for bedroom/bathroom preference
+
 #pragma mark - PRIVATE FUNCTIONS
 - (void)buildStaticData
 {
@@ -258,19 +260,29 @@
             self.reasonPicker.tag = row;
         }
         else if (thePickerView == self.layoutPicker) {
-            NSArray* ta = [layoutTextField.text componentsSeparatedByString: @", "];
-            if (ta.count > 1) {
-                if (component == 0 ) {
-                    layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:row], [ta objectAtIndex:1]];
-                }
-                else {
-                    layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[ta objectAtIndex:0], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:row]];
-                }
+            if (component == 0) {
+                self.userData.numBaths = [NSNumber numberWithInt: row];
+                layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:row], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:[userData.numBeds intValue]]];
             }
             else {
-                layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:(component == 0 ? row : 0)], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:(component == 1 ? row : 0)]];
+                self.userData.numBeds = [NSNumber numberWithInt: row];
+                layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:[userData.numBaths intValue]], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:row]];
             }
             self.layoutPicker.tag = row;
+//            
+//            NSArray* ta = [layoutTextField.text componentsSeparatedByString: @", "];
+//            if (ta.count > 1) {
+//                if (component == 0 ) {
+//                    layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:row], [ta objectAtIndex:1]];
+//                }
+//                else {
+//                    layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[ta objectAtIndex:0], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:row]];
+//                }
+//            }
+//            else {
+//                layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:(component == 0 ? row : 0)], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:(component == 1 ? row : 0)]];
+//            }
+//            self.layoutPicker.tag = row;
         }
     }
 }

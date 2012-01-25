@@ -13,6 +13,7 @@
     UITableView *mTableView;
     UILabel *questionLabel;
     UIImageView *imageView;
+    UIActivityIndicatorView *loadingIndicator;
     
     //Data holders
     NSDictionary *dataDict;
@@ -25,6 +26,7 @@
 @property (nonatomic, retain) NSMutableArray *options;
 @property (nonatomic, retain) IBOutlet UILabel *questionLabel;
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, retain) NSDictionary *dataDict;
 @property (nonatomic, retain) NSURL *requestUrl;
 
