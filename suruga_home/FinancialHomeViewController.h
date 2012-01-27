@@ -21,6 +21,10 @@
     UIButton *runningBudgetButton;
     UIButton *inititalBudgetButton;
     UIButton *financialAdviceButton;
+    IBOutlet UIActivityIndicatorView *loadingIndicator;
+    NSDictionary *adviceDict;
+    int runningAmount;
+    int initialAmount;
 }
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
@@ -33,6 +37,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *runningBudgetButton;
 @property (nonatomic, retain) IBOutlet UIButton *inititalBudgetButton;
 @property (nonatomic, retain) IBOutlet UIButton *financialAdviceButton;
+@property (nonatomic, retain) NSDictionary *adviceDict;
+
 
 - (IBAction)initialBudgetClicked:(id)sender;
 - (IBAction)runningBudgetClicked:(id)sender;

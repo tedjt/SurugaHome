@@ -7,6 +7,7 @@
 //
 
 #import "FinancialAdvisorAnswerViewController.h"
+#import "extThree20JSON/SBJson.h"
 
 @implementation FinancialAdvisorAnswerViewController
 @synthesize overallDetailLabel;
@@ -16,8 +17,11 @@
 @synthesize overalTitleLabel;
 @synthesize keyTitleLabel;
 @synthesize compareTitleLabel;
+@synthesize loadingIndicator;
 @synthesize scrollView;
 @synthesize dataDict;
+@synthesize requestUrl;
+@synthesize responseData;
 
 # pragma mark PRIVATE FUNCTIONS
 - (void)setUpViewFromDictionary {
@@ -122,6 +126,27 @@
      "suruga_link": "http://suruga.jp"
      }
      */
+    //Start loading table view data
+    //TODO - update this to use ASIHTTP now that I've decided to include that library. Gives us easy caching
+    self.responseData = [[NSMutableData data] retain];
+    if (nil != dataDict) {
+        [self setUpViewFromDictionary];
+    }
+    else if (nil != requestUrl) {
+        overalTitleLabel.text = NSLocalizedString(@"Loading", @"Advisor Loading Text");
+        [loadingIndicator setHidden:NO];
+        [self.loadingIndicator startAnimating];  
+        [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL: requestUrl] delegate:self];
+    } else {
+        overalTitleLabel.text = NSLocalizedString(@"Loading", @"Advisor Loading Text");
+        [self.loadingIndicator setHidden:NO];
+        [self.loadingIndicator startAnimating];  
+        NSURLRequest *request = 
+        [NSURLRequest requestWithURL:
+         [NSURL URLWithString:@"http://tedjt.scripts.mit.edu/suruga/advisor/answer/general-deposit"]];
+        //[NSURL URLWithString:@"http://topangapetresort2.appspot.com/suruga"]];
+        [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    }
     [self setUpViewFromDictionary];
 }
 
@@ -135,10 +160,50 @@
     self.keyTitleLabel = nil;
     self.compareTitleLabel = nil;
     [self setScrollView:nil];
+    [self setLoadingIndicator:nil];
+    self.responseData = nil;
+    self.requestUrl = nil;
+    self.dataDict = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+
+#pragma mark NSURLConnection delegate methods
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	[responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    //TODO pop up a text box asking for validation
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Network Error", @"Network error alert dialog title") 
+                                                    message:NSLocalizedString(@"Please check that you have a network connection", @"Network Connection validation alert dialog")
+                                                   delegate:nil 
+                                          cancelButtonTitle:NSLocalizedString(@"OK", @"dialog OK text")
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	[connection release];
+	NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+	[responseData release];
+    //TODO validate the json string using an actual jsonParse rather than JSONValue shortcut
+    self.dataDict = [responseString JSONValue];
+    [responseString release];
+    [self setUpViewFromDictionary];
+    
+    // Hide Loading indicator
+    overalTitleLabel.text = NSLocalizedString(@"Overall", @"Advisor Overal Label Text");
+    [self.loadingIndicator stopAnimating];
+    [self.loadingIndicator setHidden:YES];
+}
+
 
 - (void)dealloc {
     [overallDetailLabel release];
@@ -150,6 +215,9 @@
     [compareTitleLabel release];
     [dataDict release];
     [scrollView release];
+    [loadingIndicator release];
+    [responseData release];
+    [requestUrl release];
     [super dealloc];
 }
 @end

@@ -18,8 +18,9 @@
     //Data holders
     NSDictionary *dataDict;
     NSURL *requestUrl;
+    NSMutableArray *options;
     NSMutableData *responseData;
-	NSMutableArray *options;
+
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *mTableView;
@@ -29,5 +30,6 @@
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, retain) NSDictionary *dataDict;
 @property (nonatomic, retain) NSURL *requestUrl;
+@property (nonatomic, retain) NSMutableData *responseData;
 
 @end

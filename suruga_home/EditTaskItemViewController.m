@@ -10,6 +10,7 @@
 #import "Task.h"
 #import "Category.h"
 #import "FinancialAdviceViewController.h"
+#import "FinancialAdvisorAnswerViewController.h"
 
 @implementation EditTaskItemViewController
 @synthesize notesTextField;
@@ -257,10 +258,18 @@
 }
 
 - (IBAction)advisorButtonClicked:(id)sender {
-    FinancialAdviceViewController * vc = [[FinancialAdviceViewController alloc] initWithNibName:@"FinancialAdviceViewController" bundle:nil];
-    vc.requestUrl = [NSURL URLWithString:self.task.advisorUrl]; 
-    [self.navigationController pushViewController:vc animated:YES];
-    [vc release];
+    if ([self.task.advisorUrl rangeOfString:@"answer"].location == NSNotFound ) {
+        FinancialAdviceViewController * vc = [[FinancialAdviceViewController alloc] initWithNibName:@"FinancialAdviceViewController" bundle:nil];
+        vc.requestUrl = [NSURL URLWithString:self.task.advisorUrl]; 
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
+    }
+    else {
+        FinancialAdvisorAnswerViewController * vc = [[FinancialAdvisorAnswerViewController alloc] initWithNibName:@"FinancialAdvisorAnswerViewController" bundle:nil];
+        vc.requestUrl = [NSURL URLWithString:self.task.advisorUrl]; 
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
+    }
 }
 
 - (void)dealloc {

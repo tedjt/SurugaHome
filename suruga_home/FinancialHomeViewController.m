@@ -9,7 +9,10 @@
 #import "FinancialHomeViewController.h"
 #import "BudgetTableViewController.h"
 #import "FinancialAdviceViewController.h"
+#import "FinancialAdvisorAnswerViewController.h"
 #import "suruga_homeAppDelegate.h"
+#import "ASIHTTPRequest.h"
+#import "extThree20JSON/SBJson.h"
 
 @implementation FinancialHomeViewController
 @synthesize managedObjectContext;
@@ -23,9 +26,28 @@
 @synthesize runningBudgetButton;
 @synthesize inititalBudgetButton;
 @synthesize financialAdviceButton;
+@synthesize adviceDict;
 
 #pragma mark Private Methods
+- (void) resizeAdviceButtonForString: (NSString *) adviceText {
+    CGSize maximumLabelSize = CGSizeMake(300,80);
+    CGSize expectedLabelSize = [adviceText sizeWithFont:financialAdviceButton.titleLabel.font
+        constrainedToSize:maximumLabelSize 
+        lineBreakMode:financialAdviceButton.titleLabel.lineBreakMode]; 
+    
+    //adjust the label the the new height.
+    CGRect newFrame = financialAdviceButton.frame;
+    newFrame.size.height = expectedLabelSize.height + 15;
+    newFrame.size.width = expectedLabelSize.width + 15;
+    //TODO somehow center the button or don't adjust width.
+    financialAdviceButton.frame = newFrame;
+    [financialAdviceButton setTitle:adviceText forState:UIControlStateNormal];
+}
 - (void) layoutBarChart {
+    //Reset advice
+    self.adviceDict = nil;
+    [financialAdviceButton setTitle:NSLocalizedString(@"Budget Advice", @"Budget Advice default text") forState:UIControlStateNormal];
+    //Compute bar charts
     double initialIncome = 0.0;
     double initialCost = 0.0;
     double runningIncome = 0.0;
@@ -77,8 +99,7 @@
         runningTotalLabel.frame = CGRectMake(147, 144+100 * (1-delta), 64, 100 * delta);
         runningTotalLabel.backgroundColor = [UIColor redColor];
         runningTotalLabel.textColor = [UIColor blackColor];
-    }
-    
+    } 
     //Set label Text
     //TODO internationalize
     initialExpenseLabel.text = [NSString stringWithFormat:@"$%d", (int)initialCost];
@@ -88,6 +109,9 @@
     runningIncomeLabel.text = [NSString stringWithFormat:@"$%d", (int)runningIncome];
     runningTotalLabel.text = [NSString stringWithFormat:@"$%d", (int)runningLeftover];
     
+    //Set class instance variables
+    initialAmount = (int)(initialIncome - initialCost);
+    runningAmount = (int)(runningIncome - runningCost);
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -134,6 +158,9 @@
     [self setRunningBudgetButton:nil];
     [self setInititalBudgetButton:nil];
     [self setFinancialAdviceButton:nil];
+    self.adviceDict = nil;
+    [loadingIndicator release];
+    loadingIndicator = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -149,6 +176,8 @@
     [runningBudgetButton release];
     [inititalBudgetButton release];
     [financialAdviceButton release];
+    [adviceDict release];
+    [loadingIndicator release];
     [super dealloc];
 }
 - (IBAction)initialBudgetClicked:(id)sender {
@@ -171,9 +200,51 @@
     
 //    [[TTNavigator navigator] openURLAction:[[TTURLAction actionWithURLPath:@"tt://restaurant/Chotchkie's"]
 //    applyQuery:[NSDictionary dictionaryWithObject:arr forKey:@"arraydata"]]];
-
-    FinancialAdviceViewController * vc = [[FinancialAdviceViewController alloc] initWithNibName:@"FinancialAdviceViewController" bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
-    [vc release];
+    if (nil == self.adviceDict) {
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://tedjt.scripts.mit.edu/suruga/advisor/budget?running=%d&initial=%d", runningAmount, initialAmount]];
+        __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+        [request setCompletionBlock:^{
+            // Use when fetching binary data
+            NSData *responseData = [request responseData];
+            NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            //TODO validate the json string using an actual jsonParse rather than JSONValue shortcut
+            NSDictionary *dataDict = [responseString JSONValue];
+            NSString *adviceText = [dataDict valueForKey:@"advice_text"];
+            [financialAdviceButton setTitle:adviceText forState:UIControlStateNormal];
+            //Set dictionary that button should launch to
+            self.adviceDict = [dataDict valueForKey:@"slide"];
+            [responseString release];
+            [loadingIndicator stopAnimating];
+            [loadingIndicator setHidden:YES];
+        }];
+        [request setFailedBlock:^{
+            //NSError *error = [request error];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Network Error", @"Network error alert dialog title") 
+                message:NSLocalizedString(@"Please check that you have a network connection", @"Network Connection validation alert dialog")
+                delegate:nil 
+                cancelButtonTitle:NSLocalizedString(@"OK", @"dialog OK text")
+                otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+        }];
+        //Start request
+        [loadingIndicator setHidden:NO];
+        [loadingIndicator startAnimating]; 
+        [request startAsynchronous];
+    }
+    else {
+        if ([@"question_slide" isEqualToString:[adviceDict objectForKey:@"type"]]) {
+            FinancialAdviceViewController * vc = [[FinancialAdviceViewController alloc] initWithNibName:@"FinancialAdviceViewController" bundle:nil];
+            vc.dataDict = self.adviceDict;
+            [self.navigationController pushViewController:vc animated:YES];
+            [vc release];
+        } else {
+            //Answer slide
+            FinancialAdvisorAnswerViewController * vc = [[FinancialAdvisorAnswerViewController alloc] initWithNibName:@"FinancialAdvisorAnswerViewController" bundle:nil];
+            vc.dataDict = self.adviceDict;
+            [self.navigationController pushViewController:vc animated:YES];
+            [vc release];
+        }
+    }
 }
 @end

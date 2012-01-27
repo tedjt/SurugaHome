@@ -16,8 +16,12 @@
     UILabel *overalTitleLabel;
     UILabel *keyTitleLabel;
     UILabel *compareTitleLabel;
+    UIActivityIndicatorView *loadingIndicator;
     UIScrollView *scrollView;
     NSDictionary * dataDict;
+    NSURL *requestUrl;
+    NSMutableData *responseData;
+
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *overallDetailLabel;
@@ -27,7 +31,10 @@
 @property (nonatomic, retain) IBOutlet UILabel *overalTitleLabel;
 @property (nonatomic, retain) IBOutlet UILabel *keyTitleLabel;
 @property (nonatomic, retain) IBOutlet UILabel *compareTitleLabel;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) NSDictionary *dataDict;
+@property (nonatomic, retain) NSURL *requestUrl;
+@property (nonatomic, retain) NSMutableData *responseData;
 
 @end

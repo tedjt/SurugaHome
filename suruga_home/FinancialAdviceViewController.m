@@ -20,6 +20,7 @@
 @synthesize loadingIndicator;
 @synthesize dataDict;
 @synthesize requestUrl;
+@synthesize responseData;
 
 - (id)initWithNavigatorURL:(NSURL*)URL query:(NSDictionary*)query {
     
@@ -54,7 +55,8 @@
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     //Start loading table view data
-    responseData = [[NSMutableData data] retain];
+    //TODO - update this to use ASIHTTP now that I've decided to include that library. Gives us easy caching
+    self.responseData = [[NSMutableData data] retain];
 	//tweets = [NSMutableArray array];
     if (nil != dataDict) {
         [self setUpViewFromDictionary];
@@ -78,11 +80,13 @@
 - (void)viewDidUnload
 {
     self.mTableView = nil;
-    [questionLabel release];
-    questionLabel = nil;
-    [self setQuestionLabel:nil];
-    [self setImageView:nil];
-    [self setLoadingIndicator:nil];
+    self.questionLabel = nil;
+    self.imageView = nil;
+    self.loadingIndicator = nil;
+    self.dataDict = nil;
+    self.requestUrl = nil;
+    self.options = nil;
+    self.responseData = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -155,36 +159,6 @@
         [self.navigationController pushViewController:vc animated:YES];
         [vc release];
     }
-    /*
-     {
-     "type": "question_slide",
-     "question": "This is question1",
-     "image_url": "www.test0_1.com",
-     "option_list": [ {}, {}]
-     }
-     {"next_type": "answer_slide || question_slide",
-     "option_text": "Option 1",
-     "next_slide": { }
-     }
-     
-     {"type" : "answer_slide",
-     "overall_text": "When",
-     "good_text": "1. asdf",
-     "compare_text":"",
-     "suruga_text": "Suruga Offers this card",
-     "suruga_link": "http://suruga.jp"
-     }
-     */
-    
-    // Navigation logic may go here. Create and push another view controller.
-    
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
 }
 
 #pragma mark NSURLConnection delegate methods
@@ -197,13 +171,21 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    //TODO pop up a text box asking for validation
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Network Error", @"Network error alert dialog title") 
+                                                    message:NSLocalizedString(@"Please check that you have a network connection", @"Network Connection validation alert dialog")
+                                                   delegate:nil 
+                                          cancelButtonTitle:NSLocalizedString(@"OK", @"dialog OK text")
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	[connection release];
 	NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 	[responseData release];
-	
+    //TODO validate the json string using an actual jsonParse rather than JSONValue shortcut
     self.dataDict = [responseString JSONValue];
     [responseString release];
     [self setUpViewFromDictionary];
@@ -211,26 +193,6 @@
     // Hid Loading indicator
     [self.loadingIndicator stopAnimating];
     [self.loadingIndicator setHidden:YES];
-    /*
-    {
-        "type": "question_slide",
-        "question": "This is question1",
-        "image_url": "www.test0_1.com",
-        "option_list": [ {}, {}]
-    }
-    {"next_type": "answer_slide || question_slide",
-     "option_text": "Option 1",
-     "next_slide": { }
-    }
-    
-    {"type" : "answer_slide",
-        "overall_text": "When",
-        "good_text": "1. asdf",
-        "compare_text":"",
-        "suruga_text": "Suruga Offers this card",
-        "suruga_link": "http://suruga.jp"
-    }
-     */
 }
 
 
@@ -239,6 +201,10 @@
     [questionLabel release];
     [imageView release];
     [loadingIndicator release];
+    [dataDict release];
+    [requestUrl release];
+    [options release];
+    [responseData release];
     [super dealloc];
 }
 @end
