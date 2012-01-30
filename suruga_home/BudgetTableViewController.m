@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
 	self.tableView.editing = NO;
 	
 	if (self.isInitial) {

@@ -70,7 +70,7 @@
         [self.loadingIndicator startAnimating];  
         NSURLRequest *request = 
         [NSURLRequest requestWithURL:
-         [NSURL URLWithString:@"http://tedjt.scripts.mit.edu/suruga/"]];
+         [NSURL URLWithString:@"http://tedjt.scripts.mit.edu/suruga/advisor/question/startpoint/"]];
 							 //[NSURL URLWithString:@"http://topangapetresort2.appspot.com/suruga"]];
         [[NSURLConnection alloc] initWithRequest:request delegate:self];
     }

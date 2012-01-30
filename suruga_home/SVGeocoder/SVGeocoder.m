@@ -371,6 +371,7 @@ typedef NSUInteger SVGeocoderRequestState;
     } 
     
     else {
+        //TODO(tedjt) - check that delagate hasn't already been dealocated - use _weak and see if it is nil.
         if(error && [(NSObject*)self.delegate respondsToSelector:@selector(geocoder:didFailWithError:)])
             [self.delegate geocoder:self didFailWithError:error];
         else if([(NSObject*)self.delegate respondsToSelector:@selector(geocoder:didFindPlacemark:)])

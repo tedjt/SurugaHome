@@ -176,6 +176,7 @@
 	self.images = nil;
 	self.selectedImage = nil;
     self.scrollView = nil;
+    self.home = nil;
 	[super dealloc];
 }
 

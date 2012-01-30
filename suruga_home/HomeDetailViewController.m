@@ -47,7 +47,7 @@
     if(self.home.address.latitude != nil) {
         [self setMapViewZoom];
     } else { 
-        [self.mapView.userLocation addObserver:self  
+        [mapView.userLocation addObserver:self  
             forKeyPath:@"location"  
             options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)  
             context:NULL]; 
@@ -87,7 +87,7 @@
     [self setZipTextField:nil];
     [self setPhoneTextField:nil];
     [self setStreetTextField:nil];
-    [self setMapView:nil];
+    //[self setMapView:nil];
     [self setImageButton:nil];
     [self setRatingButton:nil];
     [self setPriceButton:nil];
@@ -97,9 +97,13 @@
 }
 
 - (void)dealloc {
-    [self.mapView.userLocation removeObserver:self forKeyPath:@"location"];
-    //[self.mapView removeFromSuperview]; // release crashes app
-    //self.mapView = nil;
+    id o = mapView.userLocation.observationInfo;
+    if (o != nil ) {
+        [self.mapView.userLocation removeObserver:self forKeyPath:@"location"];
+    }
+    //[mapView.userLocation removeObserver:self forKeyPath:@"location"];
+    [self.mapView removeFromSuperview]; // release crashes app
+    self.mapView = nil;
     [home release];
     [nameTextField release];
     [cityTextField release];
@@ -107,7 +111,7 @@
     [zipTextField release];
     [phoneTextField release];
     [streetTextField release];
-    [mapView release];
+    //[mapView release];
     [imageButton release];
     [ratingButton release];
     [priceButton release];
@@ -249,10 +253,12 @@
 }
 - (void)geocoder:(SVGeocoder *)geocoder didFailWithError:(NSError *)error
 {
-    [self.mapView.userLocation addObserver:self  
-                                forKeyPath:@"location"  
-                                   options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)  
-                                   context:NULL];
+    //[mapView.userLocation addObserver:self  
+    //    forKeyPath:@"location"  
+    //    options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)  
+    //                               context:NULL];
+    //TODO - do I need to manually observe value
+    //TODO - reset address lat/long object to nil or go with last known good value?
     [self observeValueForKeyPath:@"location" ofObject:self.mapView.userLocation change:nil context:nil];
     
 }
