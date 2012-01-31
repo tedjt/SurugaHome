@@ -13,7 +13,7 @@
 
 @implementation OneRoomTableViewController
 
-@synthesize room, textFieldName, labelPrice, roomItems;
+@synthesize room, textFieldName, textFieldWidth,textFieldLength, labelPrice, roomItems;
 
 
 #pragma mark -
@@ -29,25 +29,32 @@
     return self;
 }
 
+#pragma mark Private Function
+- (UITextField *) initializeOneTextField {
+    UITextField * textField = [[[UITextField alloc] initWithFrame:CGRectMake(110,10,185,30)] autorelease];
+    
+    textField.borderStyle = UITextBorderStyleBezel;
+	textField.textColor = [UIColor blackColor];
+	textField.font = [UIFont systemFontOfSize:17.0];
+    textField.backgroundColor = [UIColor whiteColor];
+	textField.autocorrectionType = UITextAutocorrectionTypeNo;	// no auto correction support
+	
+	textField.keyboardType = UIKeyboardTypeDefault;	// use the default type input method (entire keyboard)
+	textField.returnKeyType = UIReturnKeyDone;
+	
+	textField.clearButtonMode = UITextFieldViewModeWhileEditing;	// has a clear 'x' button to the right
+	
+	textField.tag = 1;		// tag this control so we can remove it later for recycled cells
+	
+	textField.delegate = self;	// let us be the delegate so we know when the keyboard's "Done" button is pressed
+    
+    return textField;
+}
+
 - (void)setUpTextFields {
-	self.textFieldName = [[[UITextField alloc] initWithFrame:CGRectMake(110,10,185,30)] autorelease];
+	self.textFieldName = [self initializeOneTextField];
 	
-	textFieldName.borderStyle = UITextBorderStyleBezel;
-	textFieldName.textColor = [UIColor blackColor];
-	textFieldName.font = [UIFont systemFontOfSize:17.0];
 	textFieldName.placeholder = NSLocalizedString(@"<enter name>", @"Room Name Field Label");
-	textFieldName.backgroundColor = [UIColor whiteColor];
-	textFieldName.autocorrectionType = UITextAutocorrectionTypeNo;	// no auto correction support
-	
-	textFieldName.keyboardType = UIKeyboardTypeDefault;	// use the default type input method (entire keyboard)
-	textFieldName.returnKeyType = UIReturnKeyDone;
-	
-	textFieldName.clearButtonMode = UITextFieldViewModeWhileEditing;	// has a clear 'x' button to the right
-	
-	textFieldName.tag = 1;		// tag this control so we can remove it later for recycled cells
-	
-	textFieldName.delegate = self;	// let us be the delegate so we know when the keyboard's "Done" button is pressed
-	
 	// Add an accessibility label that describes what the text field is for.
 	[textFieldName setAccessibilityLabel:NSLocalizedString(@"Name Text Field", @"Name Text Field Accessibility Label")];
 	
@@ -59,6 +66,16 @@
 	
 	// Add an accessibility label that describes what the text field is for.
 	[labelPrice setAccessibilityLabel:NSLocalizedString(@"Price Label Field", @"Price Label Field Accessibility label")];
+    
+    // Width
+    self.textFieldWidth = [self initializeOneTextField];
+	textFieldWidth.placeholder = NSLocalizedString(@"<enter width>", @"Room Width Field Label");
+    [textFieldWidth setAccessibilityLabel:NSLocalizedString(@"Width Text Field", @"Name Text Field Accessibility Label")];
+    
+    //Length
+    self.textFieldLength = [self initializeOneTextField];
+	textFieldLength.placeholder = NSLocalizedString(@"<enter length>", @"Room Length Field Label");
+	[textFieldLength setAccessibilityLabel:NSLocalizedString(@"Width Text Field", @"Name Text Field Accessibility Label")];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -101,6 +118,8 @@
 	self.tableView.allowsSelectionDuringEditing = YES;
 
 	self.textFieldName.text = self.room.name;
+    self.textFieldLength.text = self.room.length;
+    self.textFieldWidth.text = self.room.width;
 	
 	//add a button
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newFurnitureItem:)] autorelease];
@@ -119,7 +138,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     if(section ==0){
-		return 2;
+		return 4;
 	}else if(section == 1){
 		return [roomItems count];
 	}
@@ -163,6 +182,20 @@
             self.labelPrice.text = [self.room sumPrices];
 			[cell addSubview:labelPrice];
             [priceLabel release];
+		} else if(indexPath.row == 2){
+			UILabel * widthLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,10,110,30)];
+			widthLabel.text = NSLocalizedString(@"Width:", @"Room Width label text");
+			widthLabel.backgroundColor = [UIColor clearColor];
+			[cell addSubview:widthLabel];
+			[cell addSubview:textFieldWidth];
+            [widthLabel release];
+		} else if(indexPath.row == 3){
+            UILabel * lengthLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,10,110,30)];
+			lengthLabel.text = NSLocalizedString(@"Length:", @"Room Length label text");
+			lengthLabel.backgroundColor = [UIColor clearColor];
+			[cell addSubview:lengthLabel];
+			[cell addSubview:textFieldLength];
+            [lengthLabel release];
 		}
 		return cell;
 	}
@@ -231,6 +264,8 @@
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
     self.textFieldName = nil;
+    self.textFieldWidth = nil;
+    self.textFieldLength = nil;
     self.labelPrice = nil;
 }
 
@@ -249,7 +284,11 @@
 	if (textField == textFieldName) {
 		self.room.name = textFieldName.text;
 		self.navigationItem.title = textFieldName.text;
-	}
+	} else if (textField == textFieldWidth) {
+        self.room.width = textFieldWidth.text;
+    } else if (textField == textFieldLength) {
+        self.room.length = textFieldLength.text;
+    }
 	
     //TODO make conditional save.
 	[self saveData];
@@ -307,6 +346,8 @@
 
 - (void)dealloc {
 	[textFieldName release];
+    [textFieldWidth release];
+    [textFieldLength release];
     [labelPrice release];
     [roomItems release];
     [room release];

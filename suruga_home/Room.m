@@ -12,6 +12,8 @@
 
 @implementation Room
 @dynamic name;
+@dynamic width;
+@dynamic length;
 @dynamic furniture;
 @dynamic type;
 

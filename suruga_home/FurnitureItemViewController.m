@@ -12,6 +12,8 @@
 @implementation FurnitureItemViewController
 @synthesize textFieldPrice;
 @synthesize textFieldType;
+@synthesize textFieldWidth;
+@synthesize textFieldLength;
 @synthesize typePicker;
 @synthesize typePickerArray;
 
@@ -105,7 +107,9 @@
 	self.editing = YES;
 	
 	self.textFieldName.text = self.furniture.name;
-	self.textFieldName.clearButtonMode = UITextFieldViewModeWhileEditing;	// has a clear 'x' button to the right
+    self.textFieldWidth.text = self.furniture.width;
+    self.textFieldLength.text = self.furniture.length;
+    textFieldName.clearButtonMode = UITextFieldViewModeWhileEditing; // has a clear 'x' button to the right
     
     self.textFieldPrice.keyboardType = UIKeyboardTypeDecimalPad;
 	self.textFieldPrice.text = [self.furniture.price stringValue];
@@ -131,6 +135,8 @@
     [self setTextFieldPrice:nil];
     [self setTextFieldType:nil];
     [self setTextFieldName:nil];
+    [self setTextFieldWidth:nil];
+    [self setTextFieldLength:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -141,6 +147,8 @@
     [textFieldPrice release];
     [textFieldType release];
     [textFieldName release];
+    [textFieldWidth release];
+    [textFieldLength release];
     [super dealloc];
 }
 
@@ -157,6 +165,10 @@
 		self.navigationItem.title = textFieldName.text;
 	} else if (textField == textFieldPrice) {
         self.furniture.price = [NSNumber numberWithDouble:[textFieldPrice.text doubleValue]];
+    } else if (textField == textFieldWidth) {
+        furniture.width = textField.text;
+    } else if (textField == textFieldLength) {
+        furniture.length = textField.text;
     }
 	
     //TODO - make conditional save

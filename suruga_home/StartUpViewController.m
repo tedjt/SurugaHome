@@ -301,7 +301,7 @@
     [self keyBoardReasonPicker];
     [self keyBoardLayoutPicker];
     
-    self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, 1000);
+    self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, 1300);
     
     //Register for keyboard events
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];

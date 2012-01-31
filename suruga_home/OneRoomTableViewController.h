@@ -13,6 +13,8 @@
 @interface OneRoomTableViewController : UITableViewController < UITextFieldDelegate>{
 	Room *room;
 	UITextField	*textFieldName;
+    UITextField	*textFieldWidth;
+    UITextField	*textFieldLength;
 	UILabel *labelPrice;
 	
 	NSMutableArray *roomItems;
@@ -21,6 +23,8 @@
 
 
 @property (nonatomic, retain) IBOutlet UITextField	*textFieldName;
+@property (nonatomic, retain) IBOutlet UITextField	*textFieldWidth;
+@property (nonatomic, retain) IBOutlet UITextField	*textFieldLength;
 @property (nonatomic, retain) IBOutlet UILabel	*labelPrice;
 
 @property (nonatomic, retain) Room *room;

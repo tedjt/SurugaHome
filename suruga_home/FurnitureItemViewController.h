@@ -29,6 +29,8 @@
 @property (nonatomic, retain) IBOutlet UITextField * textFieldName;
 @property (nonatomic, retain) IBOutlet UITextField *textFieldPrice;
 @property (nonatomic, retain) IBOutlet UITextField *textFieldType;
+@property (retain, nonatomic) IBOutlet UITextField *textFieldWidth;
+@property (retain, nonatomic) IBOutlet UITextField *textFieldLength;
 @property (nonatomic, retain) IBOutlet UIPickerView *typePicker;
 @property (nonatomic, retain) IBOutlet NSArray *typePickerArray;
 @property (nonatomic, retain) IBOutlet UIImageView * imageView;

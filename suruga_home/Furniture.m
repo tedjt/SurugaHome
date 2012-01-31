@@ -12,6 +12,8 @@
 
 @implementation Furniture
 @dynamic name;
+@dynamic length;
+@dynamic width;
 @dynamic price;
 @dynamic type;
 @dynamic room;

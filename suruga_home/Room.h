@@ -15,6 +15,8 @@
 @private
 }
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * width;
+@property (nonatomic, retain) NSString * length;
 @property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) NSSet *furniture;
 

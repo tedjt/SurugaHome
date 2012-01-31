@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="10K549" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="872" systemVersion="10K549" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Address" representedClassName="Address">
         <attribute name="city" optional="YES" attributeType="String"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0"/>
@@ -23,9 +23,11 @@
         <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="category" inverseEntity="Task"/>
     </entity>
     <entity name="Furniture" representedClassName="Furniture">
+        <attribute name="length" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0"/>
         <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="width" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="image" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Image"/>
         <relationship name="room" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Room" inverseName="furniture" inverseEntity="Room"/>
     </entity>
@@ -59,8 +61,10 @@
         <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="rating" inverseEntity="Home"/>
     </entity>
     <entity name="Room" representedClassName="Room">
+        <attribute name="length" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="width" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="furniture" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Furniture" inverseName="room" inverseEntity="Furniture"/>
     </entity>
     <entity name="Task" representedClassName="Task">
@@ -85,12 +89,12 @@
         <element name="Address" positionX="160" positionY="192" width="128" height="150"/>
         <element name="BudgetItem" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Category" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="Furniture" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Furniture" positionX="160" positionY="192" width="128" height="150"/>
         <element name="Home" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Price" positionX="160" positionY="192" width="128" height="105"/>
         <element name="Rating" positionX="160" positionY="192" width="128" height="165"/>
-        <element name="Room" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Room" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Task" positionX="160" positionY="192" width="128" height="165"/>
         <element name="UserData" positionX="160" positionY="192" width="128" height="135"/>
     </elements>
