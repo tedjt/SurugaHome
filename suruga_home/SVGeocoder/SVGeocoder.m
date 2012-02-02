@@ -58,6 +58,7 @@ typedef NSUInteger SVGeocoderRequestState;
     [request release];
     [connection cancel];
     [connection release];
+    [(NSObject *) delegate release];
     
     self.timeoutTimer = nil;
     self.completionBlock = nil;
@@ -372,13 +373,15 @@ typedef NSUInteger SVGeocoderRequestState;
     
     else {
         //TODO(tedjt) - check that delagate hasn't already been dealocated - use _weak and see if it is nil.
-        if(error && [(NSObject*)self.delegate respondsToSelector:@selector(geocoder:didFailWithError:)])
-            [self.delegate geocoder:self didFailWithError:error];
-        else if([(NSObject*)self.delegate respondsToSelector:@selector(geocoder:didFindPlacemark:)])
-            [self.delegate geocoder:self didFindPlacemark:[response objectAtIndex:0]];
-        
-        else if([(NSObject*)self.delegate respondsToSelector:@selector(geocoder:didFindPlacemarks:)])
-            [self.delegate geocoder:self didFindPlacemarks:response];
+        if (self.delegate != nil) {
+            if(error && [(NSObject*)self.delegate respondsToSelector:@selector(geocoder:didFailWithError:)])
+                [self.delegate geocoder:self didFailWithError:error];
+            else if([(NSObject*)self.delegate respondsToSelector:@selector(geocoder:didFindPlacemark:)])
+                [self.delegate geocoder:self didFindPlacemark:[response objectAtIndex:0]];
+            
+            else if([(NSObject*)self.delegate respondsToSelector:@selector(geocoder:didFindPlacemarks:)])
+                [self.delegate geocoder:self didFindPlacemarks:response];
+        }
     }
     
     [self finish];

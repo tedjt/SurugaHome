@@ -37,7 +37,7 @@ typedef enum {
 
 // old API; these methods will soon get deprecated
 
-@property (nonatomic, assign) id<SVGeocoderDelegate> delegate;
+@property (nonatomic, retain) id<SVGeocoderDelegate> delegate;
 @property (readonly, getter = isQuerying) BOOL querying;
 
 // Reverse Geocoder

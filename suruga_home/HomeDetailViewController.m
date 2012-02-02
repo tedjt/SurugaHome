@@ -218,7 +218,7 @@
 - (void) updateAddressCoordinates {
     //Get forward geocoded address
     if (self.home.address != nil) {
-        SVGeocoder *geocodeRequest = [[SVGeocoder alloc] initWithAddress:[self.home.address getFormattedAddress]];
+        SVGeocoder *geocodeRequest = [[[SVGeocoder alloc] initWithAddress:[self.home.address getFormattedAddress]] autorelease];
         [geocodeRequest setDelegate:self];
         [geocodeRequest startAsynchronous];
     }
