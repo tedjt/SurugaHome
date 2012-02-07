@@ -274,12 +274,12 @@
     if (![streetTextField.text isEqualToString:a.street] ||
         ![cityTextField.text isEqualToString:a.city] ||
         ![stateTextField.text isEqualToString:a.state] ||
-        [zipTextField.text integerValue] != [zipTextField.text integerValue])
+        [zipTextField.text integerValue] != [a.zip intValue])
     {
-        self.home.address.street = streetTextField.text;
-        self.home.address.city = cityTextField.text;
-        self.home.address.state = stateTextField.text;
-        self.home.address.zip = [NSNumber numberWithInt:[zipTextField.text intValue]];
+        a.street = streetTextField.text;
+        a.city = cityTextField.text;
+        a.state = stateTextField.text;
+        a.zip = [NSNumber numberWithInt:[zipTextField.text intValue]];
         //update coordinates
         [self updateAddressCoordinates];      
     }
