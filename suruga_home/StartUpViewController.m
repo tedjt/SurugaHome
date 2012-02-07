@@ -16,14 +16,11 @@
 #import "Furniture.h"
 
 @implementation StartUpViewController
-@synthesize whenTextField;
 @synthesize nameTextField;
 @synthesize reasonTextField;
 @synthesize layoutTextField;
 @synthesize isRentingSwitch;
 @synthesize scrollView;
-@synthesize dateFormatter;
-@synthesize datePicker;
 @synthesize userData;
 @synthesize reasonPicker;
 @synthesize reasonPickerArray;
@@ -35,7 +32,7 @@
 #pragma mark - PRIVATE FUNCTIONS
 - (void)buildStaticData
 {
-   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"introData" ofType:@"json"];
+   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"introData_jp" ofType:@"json"];
     NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     NSDictionary *results = [fileContent JSONValue];
 	
@@ -89,32 +86,6 @@
         }
     }
     //Homes
-}
-
-- (void)keyBoardDatePicker 
-{
-    // create a UIPicker view as a custom keyboard view
-    self.datePicker = [[[UIDatePicker alloc] init] autorelease];
-    datePicker.datePickerMode = UIDatePickerModeDate;
-    if ([self.dateFormatter dateFromString: whenTextField.text] != nil) {
-        datePicker.date = [self.dateFormatter dateFromString: whenTextField.text];
-    }
-    whenTextField.inputView = datePicker;
-    
-    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
-    // Prepare done button
-    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
-    keyboardDoneButtonView.barStyle = UIBarStyleDefault;
-    keyboardDoneButtonView.translucent = YES;
-    keyboardDoneButtonView.tintColor = nil;
-    [keyboardDoneButtonView sizeToFit];
-    
-    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(doneClicked:)] autorelease];
-    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
-    
-    // Plug the keyboardDoneButtonView into the text field...
-    whenTextField.inputAccessoryView = keyboardDoneButtonView;
-    [keyboardDoneButtonView release];
 }
 
 #pragma mark - PRIVATE FUNCTIONS
@@ -297,7 +268,6 @@
 	self.isRentingSwitch.offText = NSLocalizedString(@"Buying", @"Buying Option");
     
     //Setup date keyboard view
-    [self keyBoardDatePicker];
     [self keyBoardReasonPicker];
     [self keyBoardLayoutPicker];
     
@@ -315,12 +285,9 @@
 - (void)viewDidUnload
 {
     [self setNameTextField:nil];
-    [self setWhenTextField:nil];
     [self setReasonTextField:nil];
     [self setIsRentingSwitch:nil];
     [self setScrollView:nil];
-    self.datePicker = nil;
-    self.dateFormatter = nil;
     [self setLayoutTextField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -336,12 +303,10 @@
 - (IBAction)registerButtonClicked:(id)sender {
     //TODO - animate flip over to tab bar view
     if (nameTextField.text.length > 0 &&
-        reasonTextField.text.length > 0 &&
-        whenTextField.text.length > 0) {
+        reasonTextField.text.length > 0) {
         //Set field values
         self.userData.name = nameTextField.text;
         self.userData.reason = reasonTextField.text;
-        self.userData.when = [self.dateFormatter dateFromString: whenTextField.text];
         self.userData.isRenting = [NSNumber numberWithBool:isRentingSwitch.on];
         
         [self buildStaticData];
@@ -371,12 +336,9 @@
 }
 - (void)dealloc {
     [nameTextField release];
-    [whenTextField release];
     [reasonTextField release];
     [isRentingSwitch release];
     [scrollView release];
-    [datePicker release];
-    [dateFormatter release];
     [layoutTextField release];
     [super dealloc];
 }
@@ -428,26 +390,5 @@
     scrollView.scrollIndicatorInsets = contentInsets;
 }
 #pragma mark -
-#pragma mark Date Formatter
 
-- (NSDateFormatter *)dateFormatter {	
-	if (dateFormatter == nil) {
-		dateFormatter = [[NSDateFormatter alloc] init];
-		[dateFormatter setDateStyle:NSDateFormatterShortStyle];
-		[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-	}
-	return dateFormatter;
-}
-
-#pragma mark -
-#pragma mark Date Picker actions
-
-//See KeyboardDatePicker private function.
-
-- (void)doneClicked:(id)sender {
-    whenTextField.text = [self.dateFormatter stringFromDate:self.datePicker.date];
-    [whenTextField resignFirstResponder];
-}
-
-#pragma mark -
 @end
