@@ -114,6 +114,7 @@
 		2ABF0FB914CF6B9F00509EE8 /* bedroom_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABF0FB814CF6B9F00509EE8 /* bedroom_icon.png */; };
 		2ABF0FBB14CF6E0A00509EE8 /* advisor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABF0FBA14CF6E0A00509EE8 /* advisor.png */; };
 		2AC22BE714D86C4700429892 /* suruga_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AC22BE614D86C4700429892 /* suruga_logo.png */; };
+		2AD0D90214E0E8F0000CFA4A /* checklist.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AD0D90114E0E8F0000CFA4A /* checklist.png */; };
 		2ADDB3D714D1D7BD0000956B /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADDB3BE14D1D7BD0000956B /* ASIAuthenticationDialog.m */; };
 		2ADDB3D814D1D7BD0000956B /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADDB3C114D1D7BD0000956B /* ASIDataCompressor.m */; };
 		2ADDB3D914D1D7BD0000956B /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADDB3C314D1D7BD0000956B /* ASIDataDecompressor.m */; };
@@ -355,6 +356,7 @@
 		2ABF0FB814CF6B9F00509EE8 /* bedroom_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bedroom_icon.png; sourceTree = "<group>"; };
 		2ABF0FBA14CF6E0A00509EE8 /* advisor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = advisor.png; sourceTree = "<group>"; };
 		2AC22BE614D86C4700429892 /* suruga_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suruga_logo.png; sourceTree = "<group>"; };
+		2AD0D90114E0E8F0000CFA4A /* checklist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checklist.png; sourceTree = "<group>"; };
 		2ADDB3BD14D1D7BD0000956B /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		2ADDB3BE14D1D7BD0000956B /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		2ADDB3BF14D1D7BD0000956B /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				2AC22BE614D86C4700429892 /* suruga_logo.png */,
 				2ABF0FBA14CF6E0A00509EE8 /* advisor.png */,
 				2AA6EB1A14CE04750097F647 /* home_finder.png */,
+				2AD0D90114E0E8F0000CFA4A /* checklist.png */,
 				2AA6EB3414CF4F3F0097F647 /* tab_home_finder.png */,
 				2AA6EB1814CE04750097F647 /* budget_icon.png */,
 				2AA6EB3614CF51450097F647 /* tab_budget_icon.png */,
@@ -1063,6 +1066,7 @@
 				2AC22BE714D86C4700429892 /* suruga_logo.png in Resources */,
 				2AEFBEA714D9096100AF4A5E /* introData_jp.json in Resources */,
 				2A59B47B14DB004F00EF35DF /* Three20.bundle in Resources */,
+				2AD0D90214E0E8F0000CFA4A /* checklist.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

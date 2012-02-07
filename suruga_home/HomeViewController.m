@@ -8,7 +8,6 @@
 
 #import "HomeViewController.h"
 #import "HomeTableViewController.h"
-#import "Category.h"
 
 @implementation HomeViewController
 
@@ -17,14 +16,11 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    self.fetchPredicate = [NSPredicate predicateWithFormat:@"category.name == %@", @"Find A House"];
     self.pageTitle = NSLocalizedString(@"Find a Home", @"Homes list nav title");
     self.nextVC = [[[HomeTableViewController alloc] initWithNibName:@"HomeTableViewController" bundle:nil] autorelease];
     
     [super viewDidLoad];
-    
-    self.category = [Category fetchCategoryWithName:@"Find A House" context:self.managedObjectContext];
-    self.checklistLabel.text = NSLocalizedString(@"Find a Home Checklist", @"Homes list checklist title");
+    self.categoryName = @"Find A House";
     [self.imageButton setImage:[UIImage imageNamed:@"home_finder.png"] forState:UIControlStateNormal];
     NSString *title = NSLocalizedString(@"My Homes", @"Home Launcher title");
     [self.textButton setTitle:title forState:UIControlStateNormal];

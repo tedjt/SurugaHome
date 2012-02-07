@@ -14,10 +14,12 @@
 @interface TaskTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, EditTaskItemViewControllerDelegate, TaskListTableViewCellDelegate> {
     
     NSFetchedResultsController *fetchedResultsController;
-    NSManagedObjectContext *managedObjectContext;	    
+    NSManagedObjectContext *managedObjectContext;	 
+    NSString *categoryName;
 }
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, retain) NSString *categoryName;
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 

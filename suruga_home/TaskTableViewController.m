@@ -15,16 +15,7 @@
 
 @implementation TaskTableViewController
 
-@synthesize managedObjectContext, fetchedResultsController;
-
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
+@synthesize managedObjectContext, fetchedResultsController, categoryName;
 
 #pragma mark - View lifecycle
 
@@ -36,7 +27,6 @@
         self.managedObjectContext = [(suruga_homeAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
     }
 	
-	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 	self.tableView.editing = NO;
 	self.tableView.allowsSelection = YES;
 	self.tableView.allowsSelectionDuringEditing = YES;
@@ -47,8 +37,11 @@
     
     // Configure the add button.
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTask)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    
+    //self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
+    
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     NSError *error;
 	if (![[self fetchedResultsController] performFetch:&error]) {
@@ -185,6 +178,10 @@
     taskViewController.parentController = self;
     
 	taskViewController.task = (Task *)[NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:managedObjectContext];
+    
+    if (self.categoryName != nil) {
+        taskViewController.task.category = [Category fetchCategoryWithName:self.categoryName context:self.managedObjectContext];
+    }
 	
 	//UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:taskViewController];
     [self.navigationController pushViewController:taskViewController animated:YES];
@@ -236,9 +233,13 @@
     NSSortDescriptor *orderDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: categoryDescriptor, orderDescriptor, dueDescriptor, nil];
 	[fetchRequest setSortDescriptors:sortDescriptors];
+    
+    //Set up predicate
+    [NSFetchedResultsController deleteCacheWithName:self.categoryName];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"category.name == %@", self.categoryName];
 	
 	// Create and initialize the fetch results controller.
-	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"category.order" cacheName:@"FullTasks"];
+	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"category.order" cacheName:self.categoryName];
 	self.fetchedResultsController = aFetchedResultsController;
 	fetchedResultsController.delegate = self;
 	

@@ -8,7 +8,6 @@
 
 #import "BudgetViewController.h"
 #import "FinancialHomeViewController.h"
-#import "Category.h"
 #import "FinancialAdviceViewController.h"
 
 @implementation BudgetViewController
@@ -18,16 +17,14 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    self.fetchPredicate = [NSPredicate predicateWithFormat:@"category.name == %@", @"Financial Planning"];
     self.pageTitle = NSLocalizedString(@"Budget Planning", @"Budget Planning Home Title");
     self.nextVC = [[[FinancialHomeViewController alloc] initWithNibName:@"FinancialHomeViewController" bundle:nil] autorelease];
     
     [super viewDidLoad];
     
-    self.category = [Category fetchCategoryWithName:@"Financial Planning" context:self.managedObjectContext];
+    self.categoryName = @"Financial Planning";
     
     //Set view fields
-    self.checklistLabel.text = NSLocalizedString(@"Budget plan checklist", @"budget checklist title");
     [self.imageButton setImage:[UIImage imageNamed:@"budget_icon.png"] forState:UIControlStateNormal];
     NSString *title = NSLocalizedString(@"Plan Budget", @"Budget Launcher title");
     [self.textButton setTitle:title forState:UIControlStateNormal];
@@ -37,7 +34,7 @@
     
     //Add an advisor button to this view
     //Add the icon
-    CGRect buttonFrame = CGRectMake( 13, 210, 95, 70 );
+    CGRect buttonFrame = CGRectMake( 13, 262, 95, 70 );
     UIButton *button = [[UIButton alloc] initWithFrame: buttonFrame];
     [button setImage:[UIImage imageNamed:@"advisor.png"] forState:UIControlStateNormal];
     [button addTarget:self 
@@ -47,7 +44,7 @@
     [button release];
     
     //Description Button
-    UIButton *advisorDescription = [[UIButton alloc] initWithFrame: CGRectMake( 108, 219, 412, 52)];
+    UIButton *advisorDescription = [[UIButton alloc] initWithFrame: CGRectMake( 108, 272, 412, 52)];
     //Set text
     NSString *advisorTitle = NSLocalizedString(@"Advisor", @"Advisor button Title");
     [advisorDescription setTitle:advisorTitle forState:UIControlStateNormal];
