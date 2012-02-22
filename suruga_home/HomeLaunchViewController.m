@@ -14,6 +14,9 @@
 @implementation HomeLaunchViewController
 @synthesize imageButton;
 @synthesize textButton;
+@synthesize pageDescriptionLabel;
+@synthesize checklistDetailsLabel;
+@synthesize featureDetailLabel;
 
 //conifigurable
 @synthesize pageTitle;
@@ -33,6 +36,9 @@
 {
     [self setImageButton:nil];
     [self setTextButton:nil];
+    [self setPageDescriptionLabel:nil];
+    [self setChecklistDetailsLabel:nil];
+    [self setFeatureDetailLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -67,6 +73,9 @@
     [categoryName release];
     [imageButton release];
     [textButton release];
+    [pageDescriptionLabel release];
+    [checklistDetailsLabel release];
+    [featureDetailLabel release];
     [super dealloc];
 }
 @end

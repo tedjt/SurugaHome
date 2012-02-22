@@ -25,6 +25,10 @@
 @synthesize managedObjectContext, fetchedResultsController;
 
 #pragma mark - Private Functions
+enum {
+    kTermLabelTag = 1,
+    kDetailLabelTag = 2
+};
 
 #pragma mark - View lifecycle
 
@@ -42,7 +46,7 @@
 	self.mTableView.allowsSelection = YES;
 	self.mTableView.allowsSelectionDuringEditing = YES;
     // Set the table view's row height
-    self.mTableView.rowHeight = 88.0;
+    self.mTableView.rowHeight = 117.0;
 	
 	self.title=NSLocalizedString(@"Home List",@"Home List Title");
     
@@ -102,11 +106,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *HomeCellId = @"HomeTableViewCellId";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HomeCellId];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        // Load the top-level objects from the custom cell XIB.
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"HomeTableViewCell" owner:self options:nil];
+        // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+        cell = [topLevelObjects objectAtIndex:0];
     }
     
     // Configure the cell...
@@ -115,19 +122,41 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    //Enum to hold the cell element tags
+    enum {
+        kHomeImageViewTag = 1,
+        kNameLabelTag = 2,
+        kRatingImageTag = 3,
+        kPriceLabelTag = 4,
+        kAddressLabelTag = 5
+    };
 	
     // Configure the cell to show the tasks's name
+    UIImageView *homeImageView = (UIImageView *)[cell viewWithTag:kHomeImageViewTag];
+    UILabel *nameLabel = (UILabel *)[cell viewWithTag: kNameLabelTag];
+    UIImageView *ratingImageView = (UIImageView *)[cell viewWithTag:kRatingImageTag];
+    UILabel *priceLabel = (UILabel *)[cell viewWithTag: kPriceLabelTag];
+    UILabel *addressLabel = (UILabel *)[cell viewWithTag: kAddressLabelTag];
+
 	Home  *home = [fetchedResultsController objectAtIndexPath:indexPath];
-	cell.textLabel.text = home.name;
+	nameLabel.text = home.name;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     Image *imageObject = [home.images anyObject];
     if (imageObject != nil) {
-        cell.imageView.image = [UIImage imageWithData:imageObject.thumb];
+        homeImageView.image = [UIImage imageWithData:imageObject.thumb];
+    }
+    if (home.rating.overall != nil) {
+        ratingImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d_stars.png", [home.rating.overall intValue]]];                                          
     }
     //TODO internationailize
+    priceLabel.text = [NSString stringWithFormat:@"$%d",[home.price getRunningSum]];
+    addressLabel.text = home.address.street;
+    //TODO internationailize
+    /*
     cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
     cell.detailTextLabel.numberOfLines = 4;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n$%d", home.address.street, [home.price getRunningSum]];
+     */
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -19,6 +19,7 @@
 @synthesize nameTextField;
 @synthesize reasonTextField;
 @synthesize layoutTextField;
+@synthesize sizeTextField;
 @synthesize isRentingSwitch;
 @synthesize scrollView;
 @synthesize userData;
@@ -26,13 +27,15 @@
 @synthesize reasonPickerArray;
 @synthesize layoutPicker;
 @synthesize layoutPickerArray;
+@synthesize sizePicker;
+@synthesize sizePickerArray;
 
 //TODO - update user data for bedroom/bathroom preference
 
 #pragma mark - PRIVATE FUNCTIONS
 - (void)buildStaticData
 {
-   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"introData_jp" ofType:@"json"];
+   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"introData" ofType:@"json"];
     NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     NSDictionary *results = [fileContent JSONValue];
 	
@@ -168,6 +171,48 @@
     layoutTextField.inputAccessoryView = keyboardDoneButtonView;
     [keyboardDoneButtonView release];
 }
+- (void)keyBoardSizePicker 
+{
+    self.sizePickerArray = [NSArray arrayWithObjects:
+                              NSLocalizedString(@"1 person", @"1 person"),
+                              NSLocalizedString(@"2 people",@"2 people"),
+                              NSLocalizedString(@"3 people",@"3 people"),
+                              NSLocalizedString(@"4 people",@"4 people"),
+                              NSLocalizedString(@"5 people",@"5 people"),
+                              NSLocalizedString(@"6 people",@"6 people"),
+                              NSLocalizedString(@"7 people",@"7 people"),
+                              NSLocalizedString(@"8 people",@"8 people"),
+                              NSLocalizedString(@"9 people",@"9 people"),
+                              NSLocalizedString(@"10 people",@"10 people"),
+                              nil];
+    //TODO - make this work for Type Category selection.
+    // create a UIPicker view as a custom keyboard view
+    self.sizePicker = [[[UIPickerView alloc] init] autorelease];
+    sizePicker.showsSelectionIndicator = YES;
+    sizePicker.dataSource = self;
+    sizePicker.delegate = self;
+    //TODO - initialize the typePicker fields from typeArray.
+    
+    //Set typePicker as the inputView for textFieldType
+    sizeTextField.inputView = self.sizePicker;
+    
+    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
+    // Prepare done button
+    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+    keyboardDoneButtonView.barStyle = UIBarStyleDefault;
+    keyboardDoneButtonView.translucent = YES;
+    keyboardDoneButtonView.tintColor = nil;
+    [keyboardDoneButtonView sizeToFit];
+    
+    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(sizePickerDone:)] autorelease];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
+    
+    // Plug the keyboardDoneButtonView into the text field...
+    reasonTextField.inputAccessoryView = keyboardDoneButtonView;
+    [keyboardDoneButtonView release];
+}
+
+
 
 - (IBAction)reasonPickerDone:(id)sender{   
     [self.reasonTextField resignFirstResponder];
@@ -183,6 +228,10 @@
 
 - (IBAction)layoutPickerDone:(id)sender{   
     [self.layoutTextField resignFirstResponder];
+}
+
+- (IBAction)sizePickerDone:(id)sender{   
+    [self.sizeTextField resignFirstResponder];
 }
 
 # pragma mark UIPickerViewDataSource
@@ -205,6 +254,9 @@
     else if (pickerView == self.layoutPicker) {
         return [[self.layoutPickerArray objectAtIndex:component] count];
     }
+    else if (pickerView == self.sizePicker) {
+        return [self.sizePickerArray count];
+    }
     else {
         return 0;
     }
@@ -217,6 +269,8 @@
     }
     else if (thePickerView == self.layoutPicker) {
         return [[self.layoutPickerArray objectAtIndex:component] objectAtIndex:row];
+    } else if (thePickerView == self.sizePicker) {
+        return [sizePickerArray objectAtIndex:row];
     }
     else {
         return nil;
@@ -229,6 +283,11 @@
             self.userData.reason =  [reasonPickerArray objectAtIndex:row];
             self.reasonTextField.text = [reasonPickerArray objectAtIndex:row];
             self.reasonPicker.tag = row;
+        }
+        else if (thePickerView == self.sizePicker) {
+            self.userData.numPeople =  [NSNumber numberWithInt: row+1];
+            self.sizeTextField.text = [sizePickerArray objectAtIndex:row];
+            self.sizePicker.tag = row;
         }
         else if (thePickerView == self.layoutPicker) {
             if (component == 0) {
@@ -270,6 +329,7 @@
     //Setup date keyboard view
     [self keyBoardReasonPicker];
     [self keyBoardLayoutPicker];
+    [self keyBoardSizePicker];
     
     self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, 1300);
     
@@ -280,6 +340,20 @@
      selector:@selector(keyboardWillBeHidden:)
      name:UIKeyboardWillHideNotification object:nil];
     
+    if (self.userData == nil) {
+        self.userData = [UserData fetchUserDataWithContext:[(suruga_homeAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]];
+        
+    }
+    if (self.userData.name != nil) {
+        //Fill in values
+        nameTextField.text = userData.name;
+        reasonTextField.text = userData.reason;
+        layoutTextField.text = [NSString stringWithFormat:@"%d Baths, %d Bedrooms", [userData.numBaths intValue], [userData.numBeds intValue]];
+        isRentingSwitch.on = (bool)userData.isRenting;
+        sizeTextField.text = [userData.numPeople stringValue];
+    }
+    
+    
 }
 
 - (void)viewDidUnload
@@ -289,6 +363,13 @@
     [self setIsRentingSwitch:nil];
     [self setScrollView:nil];
     [self setLayoutTextField:nil];
+    [self setSizeTextField:nil];
+    self.layoutPicker = nil;
+    self.layoutPickerArray = nil;
+    self.reasonPicker = nil;
+    self.reasonPickerArray = nil;
+    self.sizePicker = nil;
+    self.sizePickerArray = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -302,8 +383,8 @@
 
 - (IBAction)registerButtonClicked:(id)sender {
     //TODO - animate flip over to tab bar view
-    if (nameTextField.text.length > 0 &&
-        reasonTextField.text.length > 0) {
+    if ((nameTextField.text.length > 0 &&
+        reasonTextField.text.length > 0) || YES) {
         //Set field values
         self.userData.name = nameTextField.text;
         self.userData.reason = reasonTextField.text;
@@ -340,6 +421,14 @@
     [isRentingSwitch release];
     [scrollView release];
     [layoutTextField release];
+    [sizeTextField release];
+    
+    [layoutPicker release];
+    [layoutPickerArray release];
+    [reasonPicker release];
+    [reasonPickerArray release];
+    [sizePicker release];
+    [sizePickerArray release];
     [super dealloc];
 }
 

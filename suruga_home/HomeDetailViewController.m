@@ -77,6 +77,13 @@
     if (self.home.rating != nil) {
         [self.ratingButton setImage: [UIImage imageNamed:[NSString stringWithFormat:@"%d_stars.png", [self.home.rating.overall intValue]]] forState:UIControlStateNormal];                                          
     }
+    if (self.home.price != nil) {
+        NSString *title = [NSString stringWithFormat:@"$%.2lf",[self.home.price getInitialSum]];
+        [self.priceButton setTitle:title forState:UIControlStateNormal];
+        [self.priceButton setTitle:title forState:UIControlStateHighlighted];
+        [self.priceButton setTitle:title forState:UIControlStateDisabled];
+        [self.priceButton setTitle:title forState:UIControlStateSelected];
+    }
 }
 
 - (void)viewDidUnload
@@ -209,7 +216,11 @@
 {
     //TODO change this depending on rent vs buy
     //TODO change to use yen instead of dollars.
-    self.priceButton.titleLabel.text = [NSString stringWithFormat:@"$%.2lf",[self.home.price getInitialSum]];
+    NSString *title = [NSString stringWithFormat:@"$%.2lf",[self.home.price getInitialSum]];
+    [self.priceButton setTitle:title forState:UIControlStateNormal];
+    [self.priceButton setTitle:title forState:UIControlStateHighlighted];
+    [self.priceButton setTitle:title forState:UIControlStateDisabled];
+    [self.priceButton setTitle:title forState:UIControlStateSelected];
     //[NSString stringWithFormat:@"$%.2lf",[(Price *)[self.home valueForKey:@"price"] getInitialSum]];
     
     [self dismissModalViewControllerAnimated:YES];

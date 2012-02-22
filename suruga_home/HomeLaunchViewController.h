@@ -17,6 +17,9 @@
 }
 @property (nonatomic, retain) IBOutlet UIButton *imageButton;
 @property (nonatomic, retain) IBOutlet UIButton *textButton;
+@property (retain, nonatomic) IBOutlet UILabel *pageDescriptionLabel;
+@property (retain, nonatomic) IBOutlet UILabel *checklistDetailsLabel;
+@property (retain, nonatomic) IBOutlet UILabel *featureDetailLabel;
 
 //Configuration properties
 @property (nonatomic, retain) NSString *pageTitle;

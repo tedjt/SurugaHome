@@ -135,7 +135,6 @@
     //[amountField setAccessibilityHint:[NSString stringWithFormat:@"%d,%d",indexPath.section,indexPath.row]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    //TODO - Actually configure the cell to display a budget item
 }
 #pragma mark -
 #pragma mark Editing

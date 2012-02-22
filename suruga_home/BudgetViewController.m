@@ -23,6 +23,8 @@
     [super viewDidLoad];
     
     self.categoryName = @"Financial Planning";
+    self.pageDescriptionLabel.text = NSLocalizedString(@"Use this page when budget planning your move. First use the checklist to get organized and plan. Then use the budget function to estimate long and short term costs after your move. The Advisor function can help you make financial decisions like savings or loans.", @"Financial tab description text");
+    self.checklistDetailsLabel.text = NSLocalizedString(@"Manage tasks for budget planning", @"Financial Tab checklist details text");
     
     //Set view fields
     [self.imageButton setImage:[UIImage imageNamed:@"budget_icon.png"] forState:UIControlStateNormal];
@@ -31,10 +33,11 @@
     [self.textButton setTitle:title forState:UIControlStateHighlighted];
     [self.textButton setTitle:title forState:UIControlStateDisabled];
     [self.textButton setTitle:title forState:UIControlStateSelected];
+    self.featureDetailLabel.text = NSLocalizedString(@"Plan your budget", @"Financial Tab Layout Budget details text");
     
     //Add an advisor button to this view
     //Add the icon
-    CGRect buttonFrame = CGRectMake( 13, 262, 95, 70 );
+    CGRect buttonFrame = CGRectMake( 13, 277, 95, 70 );
     UIButton *button = [[UIButton alloc] initWithFrame: buttonFrame];
     [button setImage:[UIImage imageNamed:@"advisor.png"] forState:UIControlStateNormal];
     [button addTarget:self 
@@ -44,7 +47,7 @@
     [button release];
     
     //Description Button
-    UIButton *advisorDescription = [[UIButton alloc] initWithFrame: CGRectMake( 108, 272, 412, 52)];
+    UIButton *advisorDescription = [[UIButton alloc] initWithFrame: CGRectMake( 108, 287, 412, 52)];
     //Set text
     NSString *advisorTitle = NSLocalizedString(@"Advisor", @"Advisor button Title");
     [advisorDescription setTitle:advisorTitle forState:UIControlStateNormal];
@@ -59,6 +62,17 @@
     
     [self.view addSubview: advisorDescription];
     [advisorDescription release];
+    //Details label.
+    UILabel *advisorDetailsLabel = [[UILabel alloc] initWithFrame:CGRectMake(112, 332, 194, 20)];
+    advisorDetailsLabel.minimumFontSize = 10.;
+    advisorDetailsLabel.adjustsFontSizeToFitWidth = YES;
+    advisorDetailsLabel.backgroundColor = [UIColor clearColor];
+    advisorDetailsLabel.lineBreakMode = UILineBreakModeWordWrap;
+    advisorDetailsLabel.numberOfLines = 1;
+    advisorDetailsLabel.text = NSLocalizedString(@"Get financial advice", @"Financial Tab Advisor details text");
+    advisorDetailsLabel.font = [UIFont fontWithName:@"Helvetica" size:12.0];
+    [self.view addSubview:advisorDetailsLabel];
+    [advisorDetailsLabel release];
 }
 
 - (IBAction)advisorPressed {

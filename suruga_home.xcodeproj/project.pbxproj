@@ -89,6 +89,7 @@
 		2A991FA414C2279C002C47AB /* BudgetTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A991FA314C2279C002C47AB /* BudgetTableViewController.m */; };
 		2A991FA614C229DA002C47AB /* BudgetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A991FA514C229DA002C47AB /* BudgetCell.xib */; };
 		2A991FAD14C29281002C47AB /* BudgetItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A991FAB14C29281002C47AB /* BudgetItemViewController.m */; };
+		2AA26E9F14F34B4000A29026 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AA26E9E14F34B4000A29026 /* HomeTableViewCell.xib */; };
 		2AA6EB1B14CE04760097F647 /* budget_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1814CE04750097F647 /* budget_icon.png */; };
 		2AA6EB1C14CE04760097F647 /* home_cross_section.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1914CE04750097F647 /* home_cross_section.png */; };
 		2AA6EB1D14CE04760097F647 /* home_finder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB1A14CE04750097F647 /* home_finder.png */; };
@@ -326,6 +327,7 @@
 		2A991FA514C229DA002C47AB /* BudgetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BudgetCell.xib; sourceTree = "<group>"; };
 		2A991FAA14C29280002C47AB /* BudgetItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BudgetItemViewController.h; sourceTree = "<group>"; };
 		2A991FAB14C29281002C47AB /* BudgetItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetItemViewController.m; sourceTree = "<group>"; };
+		2AA26E9E14F34B4000A29026 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
 		2AA6EB1814CE04750097F647 /* budget_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = budget_icon.png; sourceTree = "<group>"; };
 		2AA6EB1914CE04750097F647 /* home_cross_section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_cross_section.png; sourceTree = "<group>"; };
 		2AA6EB1A14CE04750097F647 /* home_finder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_finder.png; sourceTree = "<group>"; };
@@ -787,6 +789,7 @@
 				2A204A7014B2A25600BFDC23 /* HomeTableViewController.h */,
 				2A204A7114B2A25600BFDC23 /* HomeTableViewController.m */,
 				2A0FA6DC14BB8E0B00E601A4 /* HomeTableViewController.xib */,
+				2AA26E9E14F34B4000A29026 /* HomeTableViewCell.xib */,
 				2A0FA6E214BBF20000E601A4 /* MapViewList */,
 				2A204A9314B630C400BFDC23 /* HomeDetails */,
 				2A03841214984C47000E0B49 /* CompareDetailsViewController.h */,
@@ -1067,6 +1070,7 @@
 				2AEFBEA714D9096100AF4A5E /* introData_jp.json in Resources */,
 				2A59B47B14DB004F00EF35DF /* Three20.bundle in Resources */,
 				2AD0D90214E0E8F0000CFA4A /* checklist.png in Resources */,
+				2AA26E9F14F34B4000A29026 /* HomeTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

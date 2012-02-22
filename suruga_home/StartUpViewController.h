@@ -24,11 +24,15 @@
     NSArray *layoutPickerArray;
     UIPickerView *layoutPicker;
     
+    NSArray *sizePickerArray;
+    UIPickerView *sizePicker;
+    
     UserData *userData;
 }
 @property (nonatomic, retain) IBOutlet UITextField *nameTextField;
 @property (nonatomic, retain) IBOutlet UITextField *reasonTextField;
 @property (nonatomic, retain) IBOutlet UITextField *layoutTextField;
+@property (retain, nonatomic) IBOutlet UITextField *sizeTextField;
 @property (nonatomic, retain) IBOutlet DCRoundSwitch *isRentingSwitch;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 
@@ -36,6 +40,8 @@
 @property (nonatomic, retain) NSArray *reasonPickerArray;
 @property (nonatomic, retain) UIPickerView *layoutPicker;
 @property (nonatomic, retain) NSArray *layoutPickerArray;
+@property (nonatomic, retain) UIPickerView *sizePicker;
+@property (nonatomic, retain) NSArray *sizePickerArray;
 
 
 @property (nonatomic, retain) UserData *userData;

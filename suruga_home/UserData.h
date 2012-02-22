@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSDate * when;
 @property (nonatomic, retain) NSNumber * numBeds;
 @property (nonatomic, retain) NSNumber * numBaths;
+@property (nonatomic, retain) NSNumber * numPeople;
 
 + (UserData *)fetchUserDataWithContext: (NSManagedObjectContext *) context;
 

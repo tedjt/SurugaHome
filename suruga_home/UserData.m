@@ -16,6 +16,7 @@
 @dynamic when;
 @dynamic numBeds;
 @dynamic numBaths;
+@dynamic numPeople;
 
 + (UserData *)fetchUserDataWithContext: (NSManagedObjectContext *) context {
     //Initialize Data Arrays

@@ -82,6 +82,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="numBaths" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
         <attribute name="numBeds" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
+        <attribute name="numPeople" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="reason" optional="YES" attributeType="String"/>
         <attribute name="when" optional="YES" attributeType="Date"/>
     </entity>
@@ -96,6 +97,6 @@
         <element name="Rating" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Room" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Task" positionX="160" positionY="192" width="128" height="165"/>
-        <element name="UserData" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="UserData" positionX="160" positionY="192" width="128" height="150"/>
     </elements>
 </model>
