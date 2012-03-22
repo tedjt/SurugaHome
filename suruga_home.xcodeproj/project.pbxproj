@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A03841514984C47000E0B49 /* CompareDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03841314984C47000E0B49 /* CompareDetailsViewController.m */; };
-		2A03841614984C47000E0B49 /* CompareDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A03841414984C47000E0B49 /* CompareDetailsViewController.xib */; };
 		2A03845C14994B33000E0B49 /* CustomImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03845914994B33000E0B49 /* CustomImagePicker.m */; };
 		2A03845D14994B33000E0B49 /* UIImageExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03845B14994B33000E0B49 /* UIImageExtras.m */; };
 		2A03846C149E65D3000E0B49 /* PhotoAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03846A149E65D3000E0B49 /* PhotoAppViewController.m */; };
@@ -22,7 +20,6 @@
 		2A20477314A3D03000BFDC23 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A20477214A3D03000BFDC23 /* Image.m */; };
 		2A20477614A3D14E00BFDC23 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A20477514A3D14E00BFDC23 /* Address.m */; };
 		2A20477A14A3D76A00BFDC23 /* HomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A20477814A3D76A00BFDC23 /* HomeDetailViewController.m */; };
-		2A20477B14A3D76A00BFDC23 /* HomeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A20477914A3D76A00BFDC23 /* HomeDetailViewController.xib */; };
 		2A20478014A3F43400BFDC23 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A20477F14A3F43400BFDC23 /* MapKit.framework */; };
 		2A20478614A50F8900BFDC23 /* HomeDetailViewController 2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A20478514A50F8900BFDC23 /* HomeDetailViewController 2.xib */; };
 		2A20479214A7E34800BFDC23 /* DLStarRatingControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A20478814A7E34400BFDC23 /* DLStarRatingControl.m */; };
@@ -102,6 +99,8 @@
 		2AA6EB3514CF4F400097F647 /* tab_home_finder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB3414CF4F3F0097F647 /* tab_home_finder.png */; };
 		2AA6EB3714CF514B0097F647 /* tab_budget_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB3614CF51450097F647 /* tab_budget_icon.png */; };
 		2AA6EB3914CF53DA0097F647 /* tab_move_in.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AA6EB3814CF53D60097F647 /* tab_move_in.png */; };
+		2AB1323C14FB4A6D00741ABD /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB1323A14FB4A6D00741ABD /* NotesViewController.m */; };
+		2AB1323D14FB4A6D00741ABD /* NotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AB1323B14FB4A6D00741ABD /* NotesViewController.xib */; };
 		2ABF0FB514CF691000509EE8 /* living-room-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABF0FB414CF691000509EE8 /* living-room-icon.png */; };
 		2ABF0FB714CF6AEC00509EE8 /* kitchen_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABF0FB614CF6AEC00509EE8 /* kitchen_icon.png */; };
 		2ABF0FB914CF6B9F00509EE8 /* bedroom_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABF0FB814CF6B9F00509EE8 /* bedroom_icon.png */; };
@@ -130,7 +129,6 @@
 		2ADDB3E414D1D7FF0000956B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADDB3E314D1D7FF0000956B /* SystemConfiguration.framework */; };
 		2ADDB3E614D1D8120000956B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADDB3E514D1D8120000956B /* MobileCoreServices.framework */; };
 		2ADDB3E814D1D82A0000956B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADDB3E714D1D82A0000956B /* libz.dylib */; };
-		2ADDB3E914D318190000956B /* FinancialHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ADDB3EB14D318190000956B /* FinancialHomeViewController.xib */; };
 		2ADDB3EC14D318200000956B /* BudgetItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ADDB3EE14D318200000956B /* BudgetItemViewController.xib */; };
 		2AE3297014C4841000325402 /* StartUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE3296E14C4841000325402 /* StartUpViewController.m */; };
 		2AE3297114C4841000325402 /* StartUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AE3296F14C4841000325402 /* StartUpViewController.xib */; };
@@ -148,6 +146,7 @@
 		2AE32A2F14C605CA00325402 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE32A2E14C605C800325402 /* Category.m */; };
 		2AE32A3114C61B3700325402 /* introData.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AE32A3014C61B3700325402 /* introData.json */; };
 		2AEFBEA714D9096100AF4A5E /* introData_jp.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AEFBEA614D9096100AF4A5E /* introData_jp.json */; };
+		2AF92394151AD18700175774 /* FinancialHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AF92395151AD18700175774 /* FinancialHomeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,9 +202,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2A03841214984C47000E0B49 /* CompareDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareDetailsViewController.h; sourceTree = "<group>"; };
-		2A03841314984C47000E0B49 /* CompareDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompareDetailsViewController.m; sourceTree = "<group>"; };
-		2A03841414984C47000E0B49 /* CompareDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompareDetailsViewController.xib; sourceTree = "<group>"; };
 		2A03845814994B33000E0B49 /* CustomImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImagePicker.h; sourceTree = "<group>"; };
 		2A03845914994B33000E0B49 /* CustomImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImagePicker.m; sourceTree = "<group>"; };
 		2A03845A14994B33000E0B49 /* UIImageExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageExtras.h; sourceTree = "<group>"; };
@@ -228,7 +224,6 @@
 		2A20477514A3D14E00BFDC23 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		2A20477714A3D76A00BFDC23 /* HomeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeDetailViewController.h; sourceTree = "<group>"; };
 		2A20477814A3D76A00BFDC23 /* HomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeDetailViewController.m; sourceTree = "<group>"; };
-		2A20477914A3D76A00BFDC23 /* HomeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeDetailViewController.xib; sourceTree = "<group>"; };
 		2A20477F14A3F43400BFDC23 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2A20478514A50F8900BFDC23 /* HomeDetailViewController 2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "HomeDetailViewController 2.xib"; sourceTree = "<group>"; };
 		2A20478714A7E34300BFDC23 /* DLStarRatingControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLStarRatingControl.h; sourceTree = "<group>"; };
@@ -345,6 +340,9 @@
 		2AA6EB3414CF4F3F0097F647 /* tab_home_finder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_home_finder.png; sourceTree = "<group>"; };
 		2AA6EB3614CF51450097F647 /* tab_budget_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_budget_icon.png; sourceTree = "<group>"; };
 		2AA6EB3814CF53D60097F647 /* tab_move_in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_move_in.png; sourceTree = "<group>"; };
+		2AB1323914FB4A6D00741ABD /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
+		2AB1323A14FB4A6D00741ABD /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
+		2AB1323B14FB4A6D00741ABD /* NotesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotesViewController.xib; sourceTree = "<group>"; };
 		2ABF0FB414CF691000509EE8 /* living-room-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "living-room-icon.png"; sourceTree = "<group>"; };
 		2ABF0FB614CF6AEC00509EE8 /* kitchen_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitchen_icon.png; sourceTree = "<group>"; };
 		2ABF0FB814CF6B9F00509EE8 /* bedroom_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bedroom_icon.png; sourceTree = "<group>"; };
@@ -386,9 +384,7 @@
 		2ADDB3E314D1D7FF0000956B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2ADDB3E514D1D8120000956B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		2ADDB3E714D1D82A0000956B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		2ADDB3EA14D318190000956B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FinancialHomeViewController.xib; sourceTree = "<group>"; };
 		2ADDB3ED14D318200000956B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BudgetItemViewController.xib; sourceTree = "<group>"; };
-		2ADDB3EF14D3182E0000956B /* ja-JP */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "ja-JP"; path = "ja-JP.lproj/FinancialHomeViewController.xib"; sourceTree = "<group>"; };
 		2AE3296D14C4841000325402 /* StartUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartUpViewController.h; sourceTree = "<group>"; };
 		2AE3296E14C4841000325402 /* StartUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartUpViewController.m; sourceTree = "<group>"; };
 		2AE3296F14C4841000325402 /* StartUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartUpViewController.xib; sourceTree = "<group>"; };
@@ -416,6 +412,7 @@
 		2AE32A2E14C605C800325402 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
 		2AE32A3014C61B3700325402 /* introData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = introData.json; sourceTree = "<group>"; };
 		2AEFBEA614D9096100AF4A5E /* introData_jp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = introData_jp.json; sourceTree = "<group>"; };
+		2AF92395151AD18700175774 /* FinancialHomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinancialHomeViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -577,6 +574,7 @@
 				2A20477714A3D76A00BFDC23 /* HomeDetailViewController.h */,
 				2A20477814A3D76A00BFDC23 /* HomeDetailViewController.m */,
 				2A20478514A50F8900BFDC23 /* HomeDetailViewController 2.xib */,
+				2AB1323E14FB4A7600741ABD /* NotesViewController */,
 				2A501A0514C35B7500ECA0D8 /* PriceViewController */,
 				2A204A9214B62F5D00BFDC23 /* RatingController */,
 				2A03845E14994B3B000E0B49 /* ImagePicker */,
@@ -650,7 +648,7 @@
 				2A8407CA14CB785A0054D2C5 /* FinancialAdvisorAnswerViewController.xib */,
 				2A991F9A14C1E08A002C47AB /* FinancialHomeViewController.h */,
 				2A991F9B14C1E08A002C47AB /* FinancialHomeViewController.m */,
-				2ADDB3EB14D318190000956B /* FinancialHomeViewController.xib */,
+				2AF92395151AD18700175774 /* FinancialHomeViewController.xib */,
 			);
 			name = Financial;
 			sourceTree = "<group>";
@@ -792,10 +790,6 @@
 				2AA26E9E14F34B4000A29026 /* HomeTableViewCell.xib */,
 				2A0FA6E214BBF20000E601A4 /* MapViewList */,
 				2A204A9314B630C400BFDC23 /* HomeDetails */,
-				2A03841214984C47000E0B49 /* CompareDetailsViewController.h */,
-				2A03841314984C47000E0B49 /* CompareDetailsViewController.m */,
-				2A20477914A3D76A00BFDC23 /* HomeDetailViewController.xib */,
-				2A03841414984C47000E0B49 /* CompareDetailsViewController.xib */,
 			);
 			name = Compare;
 			sourceTree = "<group>";
@@ -814,6 +808,16 @@
 				2AA6EB2B14CE7EEA0097F647 /* BudgetViewController.m */,
 			);
 			name = TabPages;
+			sourceTree = "<group>";
+		};
+		2AB1323E14FB4A7600741ABD /* NotesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AB1323914FB4A6D00741ABD /* NotesViewController.h */,
+				2AB1323A14FB4A6D00741ABD /* NotesViewController.m */,
+				2AB1323B14FB4A6D00741ABD /* NotesViewController.xib */,
+			);
+			name = NotesViewController;
 			sourceTree = "<group>";
 		};
 		2ACDDFE314E10BC7003D1A9C /* Products */ = {
@@ -944,6 +948,9 @@
 /* Begin PBXProject section */
 		2A7EDBDF148C20D3003B4C14 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 2A7EDBE2148C20D3003B4C14 /* Build configuration list for PBXProject "suruga_home" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -1019,9 +1026,7 @@
 				2A7EDC00148C20D3003B4C14 /* MainWindow.xib in Resources */,
 				2A7EDC1D148C4240003B4C14 /* TaskTableViewController.xib in Resources */,
 				2A34B49B148C9C8E0055D300 /* EditTaskItemViewController.xib in Resources */,
-				2A03841614984C47000E0B49 /* CompareDetailsViewController.xib in Resources */,
 				2A03846D149E65D3000E0B49 /* PhotoAppViewController.xib in Resources */,
-				2A20477B14A3D76A00BFDC23 /* HomeDetailViewController.xib in Resources */,
 				2A20478614A50F8900BFDC23 /* HomeDetailViewController 2.xib in Resources */,
 				2A20479414A7E34800BFDC23 /* star.png in Resources */,
 				2A20479514A7E34800BFDC23 /* star@2x.png in Resources */,
@@ -1042,7 +1047,7 @@
 				2A487B1414BDFEE3001B9601 /* FurnitureItemViewController.xib in Resources */,
 				2A487B1614BDFEE3001B9601 /* OneRoomTableViewController.xib in Resources */,
 				2A487B2414BE31BD001B9601 /* section_box_camera.png in Resources */,
-				2ADDB3E914D318190000956B /* FinancialHomeViewController.xib in Resources */,
+				2AF92394151AD18700175774 /* FinancialHomeViewController.xib in Resources */,
 				2A991FA614C229DA002C47AB /* BudgetCell.xib in Resources */,
 				2ADDB3EC14D318200000956B /* BudgetItemViewController.xib in Resources */,
 				2A501A0414C35B6E00ECA0D8 /* PriceViewController.xib in Resources */,
@@ -1071,6 +1076,7 @@
 				2A59B47B14DB004F00EF35DF /* Three20.bundle in Resources */,
 				2AD0D90214E0E8F0000CFA4A /* checklist.png in Resources */,
 				2AA26E9F14F34B4000A29026 /* HomeTableViewCell.xib in Resources */,
+				2AB1323D14FB4A6D00741ABD /* NotesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1087,7 +1093,6 @@
 				2A34B48E148C71C60055D300 /* suruga.xcdatamodeld in Sources */,
 				2A34B492148C72440055D300 /* Task.m in Sources */,
 				2A34B49A148C9C8E0055D300 /* EditTaskItemViewController.m in Sources */,
-				2A03841514984C47000E0B49 /* CompareDetailsViewController.m in Sources */,
 				2A03845C14994B33000E0B49 /* CustomImagePicker.m in Sources */,
 				2A03845D14994B33000E0B49 /* UIImageExtras.m in Sources */,
 				2A03846C149E65D3000E0B49 /* PhotoAppViewController.m in Sources */,
@@ -1146,6 +1151,7 @@
 				2ADDB3DD14D1D7BD0000956B /* ASIInputStream.m in Sources */,
 				2ADDB3DE14D1D7BD0000956B /* ASINetworkQueue.m in Sources */,
 				2ADDB3E014D1D7BD0000956B /* Reachability.m in Sources */,
+				2AB1323C14FB4A6D00741ABD /* NotesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1188,15 +1194,6 @@
 				2AA6EB3014CF484B0097F647 /* ja-JP */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		2ADDB3EB14D318190000956B /* FinancialHomeViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2ADDB3EA14D318190000956B /* en */,
-				2ADDB3EF14D3182E0000956B /* ja-JP */,
-			);
-			name = FinancialHomeViewController.xib;
 			sourceTree = "<group>";
 		};
 		2ADDB3EE14D318200000956B /* BudgetItemViewController.xib */ = {
@@ -1267,6 +1264,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "suruga_home/suruga_home-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"${BUILD_DIR}/three20",
 					../three20/Build/Products/three20,
@@ -1292,6 +1290,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "suruga_home/suruga_home-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"${BUILD_DIR}/three20",
 					../three20/Build/Products/three20,
@@ -1345,6 +1344,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "suruga_home/suruga_home-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"${BUILD_DIR}/three20",
 					../three20/Build/Products/three20,

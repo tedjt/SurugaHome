@@ -14,6 +14,7 @@
 #import "SVGeocoder.h"
 
 @class Home;
+@class DCRoundSwitch;
 @protocol HomeDetailViewControllerDelegate;
 
 @interface HomeDetailViewController : UIViewController <RatingViewControllerDelegate, PriceViewControllerDelegate, SVGeocoderDelegate, UITextFieldDelegate> {
@@ -44,12 +45,16 @@
 @property (nonatomic, retain) IBOutlet UIButton *imageButton;
 @property (nonatomic, retain) IBOutlet UIButton *ratingButton;
 @property (nonatomic, retain) IBOutlet UIButton *priceButton;
+@property (retain, nonatomic) IBOutlet UIButton *notesButton;
+@property (retain, nonatomic) IBOutlet DCRoundSwitch *isRentSwitch;
 
 - (IBAction)textFieldOutside:(id)sender; //Deprecated function
 
 - (IBAction)imageButtonClicked:(id)sender;
 - (IBAction)ratingButtonClicked:(id)sender;
 - (IBAction)priceButtonClicked:(id)sender;
+- (IBAction)notesButtonClicked:(id)sender;
+- (IBAction)isRentSwitched:(id)sender;
 
 - (void) updateHomeObject;
 - (void) setMapViewZoom;

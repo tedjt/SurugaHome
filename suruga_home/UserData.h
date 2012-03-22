@@ -22,5 +22,7 @@
 @property (nonatomic, retain) NSNumber * numPeople;
 
 + (UserData *)fetchUserDataWithContext: (NSManagedObjectContext *) context;
++ (void) setUserRentingWithContext: (NSManagedObjectContext *) context val: (BOOL) val;
++ (bool) isUserRentingWithContext: (NSManagedObjectContext *) context;
 
 @end

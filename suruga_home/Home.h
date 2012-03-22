@@ -18,6 +18,8 @@
 }
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * phone;
+@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSNumber * isRent;
 @property (nonatomic, retain) Rating *rating;
 @property (nonatomic, retain) Price *price;
 @property (nonatomic, retain) NSSet *images;

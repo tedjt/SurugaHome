@@ -20,7 +20,6 @@
 @synthesize reasonTextField;
 @synthesize layoutTextField;
 @synthesize sizeTextField;
-@synthesize isRentingSwitch;
 @synthesize scrollView;
 @synthesize userData;
 @synthesize reasonPicker;
@@ -33,6 +32,7 @@
 //TODO - update user data for bedroom/bathroom preference
 
 #pragma mark - PRIVATE FUNCTIONS
+bool isNew = YES;
 - (void)buildStaticData
 {
    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"introData" ofType:@"json"];
@@ -68,6 +68,7 @@
         b.amount = [NSNumber numberWithInt:[[item objectForKey:@"amount"] intValue]];
         b.isExpense = [NSNumber numberWithInt:[[item objectForKey:@"isExpense"] intValue]];
         b.inInitialBudget = [NSNumber numberWithInt:[[item objectForKey:@"inInitialBudget"] intValue]];
+        b.isRenting = [NSNumber numberWithInt:[[item objectForKey:@"isRenting"] intValue]];
     }
     
     //Rooms
@@ -323,8 +324,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.isRentingSwitch.onText = NSLocalizedString(@"Renting", @"Renting Option");
-	self.isRentingSwitch.offText = NSLocalizedString(@"Buying", @"Buying Option");
     
     //Setup date keyboard view
     [self keyBoardReasonPicker];
@@ -349,8 +348,8 @@
         nameTextField.text = userData.name;
         reasonTextField.text = userData.reason;
         layoutTextField.text = [NSString stringWithFormat:@"%d Baths, %d Bedrooms", [userData.numBaths intValue], [userData.numBeds intValue]];
-        isRentingSwitch.on = (bool)userData.isRenting;
         sizeTextField.text = [userData.numPeople stringValue];
+        isNew = NO;
     }
     
     
@@ -360,7 +359,6 @@
 {
     [self setNameTextField:nil];
     [self setReasonTextField:nil];
-    [self setIsRentingSwitch:nil];
     [self setScrollView:nil];
     [self setLayoutTextField:nil];
     [self setSizeTextField:nil];
@@ -384,13 +382,14 @@
 - (IBAction)registerButtonClicked:(id)sender {
     //TODO - animate flip over to tab bar view
     if ((nameTextField.text.length > 0 &&
-        reasonTextField.text.length > 0) || YES) {
+        reasonTextField.text.length > 0)) {
         //Set field values
         self.userData.name = nameTextField.text;
         self.userData.reason = reasonTextField.text;
-        self.userData.isRenting = [NSNumber numberWithBool:isRentingSwitch.on];
         
-        [self buildStaticData];
+        if (isNew) {
+            [self buildStaticData];
+        }
 
         NSError *error;
         if (![self.userData.managedObjectContext save:&error]) {
@@ -418,7 +417,6 @@
 - (void)dealloc {
     [nameTextField release];
     [reasonTextField release];
-    [isRentingSwitch release];
     [scrollView release];
     [layoutTextField release];
     [sizeTextField release];

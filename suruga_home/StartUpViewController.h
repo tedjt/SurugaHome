@@ -14,7 +14,6 @@
     UITextField *nameTextField;
     UITextField *reasonTextField;
     UITextField *layoutTextField;
-    DCRoundSwitch *isRentingSwitch;
     UIScrollView *scrollView;
     UITextField *activeField;
     
@@ -33,7 +32,6 @@
 @property (nonatomic, retain) IBOutlet UITextField *reasonTextField;
 @property (nonatomic, retain) IBOutlet UITextField *layoutTextField;
 @property (retain, nonatomic) IBOutlet UITextField *sizeTextField;
-@property (nonatomic, retain) IBOutlet DCRoundSwitch *isRentingSwitch;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 
 @property (nonatomic, retain) UIPickerView *reasonPicker;

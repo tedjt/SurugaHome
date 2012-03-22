@@ -10,6 +10,7 @@
 #import "suruga_homeAppDelegate.h"
 #import "Room.h"
 #import "OneRoomTableViewController.h"
+#import "BudgetTableViewController.h"
 
 @implementation RoomsTableViewController
 
@@ -85,9 +86,17 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	Room *room = (Room *)[fetchedResultsController objectAtIndexPath:indexPath];
-    
-    [self showRoom:room editMode: self.editing animated:YES];
+    if (indexPath.section == 0) {
+        Room *room = (Room *)[fetchedResultsController objectAtIndexPath:indexPath];
+
+        [self showRoom:room editMode: self.editing animated:YES];
+    } else {
+        // Load initial budget.
+        BudgetTableViewController *budgetController = [[[BudgetTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+        budgetController.managedObjectContext = self.managedObjectContext;
+        budgetController.isInitial = YES;
+        [self.navigationController pushViewController:budgetController animated:YES];
+    }
 }
 
 
@@ -109,15 +118,29 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"RoomCellIdentifier";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+    if (indexPath.section == 0) {
+        static NSString *CellIdentifier = @"RoomCellIdentifier";
+
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        }
+
+        [self configureCell:cell atIndexPath:indexPath];	
+        return cell;
+    } else {
+        static NSString *CellIdentifier = @"RoomTotalCellId";
+
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        //Configure Cell
+        NSString *totalText = NSLocalizedString(@"Total", @"Furniture Total");
+        cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",totalText, [Room allRoomsTotalWithContext:self.managedObjectContext]];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        return cell;
     }
-    
-	[self configureCell:cell atIndexPath:indexPath];	
-    return cell;
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -139,23 +162,29 @@
     }
 }
 
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section{
+	if(section == 0){
+		return NSLocalizedString(@"Rooms", @"Rooms List header text");
+	}
+	else{
+		return NSLocalizedString(@"Total Costs", @"Rooms List Total Cost");
+	}
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSInteger count = [[fetchedResultsController sections] count];
 	
-	if (count == 0) {
-		count = 1;
-	}
-	
-    return count;
+    return count + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger numberOfRows = 0;
 	
-    if ([[fetchedResultsController sections] count] > 0) {
+    if (0 == section && [[fetchedResultsController sections] count] > 0) {
         id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
         numberOfRows = [sectionInfo numberOfObjects];
+    } else if (1 == section) {
+        numberOfRows = 1;
     }
     return numberOfRows;
 }
@@ -176,7 +205,11 @@
 
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-	return UITableViewCellEditingStyleDelete;
+    if (0 == indexPath.section) {
+        return UITableViewCellEditingStyleDelete;
+    } else {
+        return UITableViewCellEditingStyleNone;
+    }
 }
 
 #pragma mark -

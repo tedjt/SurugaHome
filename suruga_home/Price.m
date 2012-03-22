@@ -9,20 +9,23 @@
 #import "Price.h"
 
 @implementation Price
-@dynamic runningCost;
-@dynamic initialCost;
+@dynamic deposit;
 @dynamic fees;
+@dynamic insurance;
+@dynamic rentMortgage;
+@dynamic taxes;
+@dynamic upfrontRent;
 @dynamic home;
 
-- (double) getSum {
-    return [self.runningCost doubleValue] + [self.initialCost doubleValue] + [self.fees doubleValue];
+- (int) getSum {
+    return [self.deposit intValue] + [self.fees intValue] + [self.upfrontRent intValue] + [self.rentMortgage intValue] + [self.insurance intValue] + [self.taxes intValue];
 }
-- (double) getInitialSum {
-        return [self.initialCost doubleValue] + [self.fees doubleValue];
+- (int) getInitialSum {
+    return [self.deposit intValue] + [self.fees intValue] + [self.upfrontRent intValue];
     
 }
 - (int) getRunningSum {
-    return [self.runningCost intValue];
+    return  [self.rentMortgage intValue] + [self.insurance intValue] + [self.taxes intValue];
 }
 
 @end

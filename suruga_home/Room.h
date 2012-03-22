@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSSet *furniture;
 
 - (NSString *) sumPrices;
++ (NSString *) allRoomsTotalWithContext:(NSManagedObjectContext *) context;
 
 @end
 

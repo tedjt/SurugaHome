@@ -130,7 +130,6 @@
     
     UITextField *amountField = (UITextField *)[cell viewWithTag:2];
     amountField.text = [item.amount stringValue];
-    amountField.keyboardType = UIKeyboardTypeDecimalPad;
     amountField.delegate = self;
     //[amountField setAccessibilityHint:[NSString stringWithFormat:@"%d,%d",indexPath.section,indexPath.row]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -147,6 +146,8 @@
         item = (BudgetItem*) [NSEntityDescription insertNewObjectForEntityForName:@"BudgetItem" inManagedObjectContext:managedObjectContext];
         item.isExpense = [NSNumber numberWithBool:(indexPath.section == 0)];
         item.inInitialBudget = [NSNumber numberWithBool:self.isInitial];
+        // hardcode all manually created budget items to always show up.
+        item.isRenting = [NSNumber numberWithInt:3];
         //Insert the object into the table view
         NSMutableArray *a = indexPath.section == 0 ? costItems : incomeItems;
         [a addObject:item];

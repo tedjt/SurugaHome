@@ -33,7 +33,6 @@
     // Set Text field values
     nameTextField.text = item.name;
     amountTextField.text = [item.amount stringValue];
-    amountTextField.keyboardType = UIKeyboardTypeDecimalPad;
     notesLabel.text = item.notes;
     [notesLabel sizeToFit];
      self.advisorButton.hidden = (nil == self.item.advisorUrl);

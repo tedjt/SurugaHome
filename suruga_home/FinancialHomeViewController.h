@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+@class DCRoundSwitch;
 @interface FinancialHomeViewController : UIViewController {
     NSManagedObjectContext *managedObjectContext;
     
@@ -35,6 +36,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *runningExpenseLabel;
 @property (nonatomic, retain) IBOutlet UILabel *runningTotalLabel;
 @property (nonatomic, retain) IBOutlet UIButton *runningBudgetButton;
+@property (retain, nonatomic) IBOutlet DCRoundSwitch *isRentingSwitch;
 @property (nonatomic, retain) IBOutlet UIButton *inititalBudgetButton;
 @property (nonatomic, retain) IBOutlet UIButton *financialAdviceButton;
 @property (nonatomic, retain) NSDictionary *adviceDict;
@@ -43,5 +45,6 @@
 - (IBAction)initialBudgetClicked:(id)sender;
 - (IBAction)runningBudgetClicked:(id)sender;
 - (IBAction)financialAdviceClicked:(id)sender;
+- (IBAction)isRentSwitched:(id)sender;
 
 @end

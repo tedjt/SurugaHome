@@ -14,13 +14,16 @@
 @interface Price : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSNumber * runningCost;
-@property (nonatomic, retain) NSNumber * initialCost;
+@property (nonatomic, retain) NSNumber * deposit;
 @property (nonatomic, retain) NSNumber * fees;
+@property (nonatomic, retain) NSNumber * insurance;
+@property (nonatomic, retain) NSNumber * rentMortgage;
+@property (nonatomic, retain) NSNumber * taxes;
+@property (nonatomic, retain) NSNumber * upfrontRent;
 @property (nonatomic, retain) Home *home;
 
-- (double) getSum;
-- (double) getInitialSum;
+- (int) getSum;
+- (int) getInitialSum;
 - (int) getRunningSum;
 
 @end

@@ -14,6 +14,7 @@
         <attribute name="amount" optional="YES" attributeType="Double"/>
         <attribute name="inInitialBudget" optional="YES" attributeType="Boolean"/>
         <attribute name="isExpense" optional="YES" attributeType="Boolean"/>
+        <attribute name="isRenting" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
     </entity>
@@ -25,14 +26,16 @@
     <entity name="Furniture" representedClassName="Furniture">
         <attribute name="length" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0"/>
+        <attribute name="price" optional="YES" attributeType="Integer 32" defaultValueString="0.0"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="width" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="image" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Image"/>
         <relationship name="room" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Room" inverseName="furniture" inverseEntity="Room"/>
     </entity>
     <entity name="Home" representedClassName="Home">
+        <attribute name="isRent" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
         <relationship name="address" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="home" inverseEntity="Address"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="home" inverseEntity="Image"/>
@@ -45,9 +48,12 @@
         <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="images" inverseEntity="Home"/>
     </entity>
     <entity name="Price" representedClassName="Price">
-        <attribute name="fees" optional="YES" attributeType="Double" defaultValueString="0.0"/>
-        <attribute name="initialCost" optional="YES" attributeType="Double" defaultValueString="0.0"/>
-        <attribute name="runningCost" optional="YES" attributeType="Double" defaultValueString="0.0"/>
+        <attribute name="deposit" optional="YES" attributeType="Integer 32" defaultValueString="0.0"/>
+        <attribute name="fees" optional="YES" attributeType="Integer 32" defaultValueString="0.0"/>
+        <attribute name="insurance" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="rentMortgage" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="taxes" optional="YES" attributeType="Integer 32" defaultValueString="0.0"/>
+        <attribute name="upfrontRent" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="price" inverseEntity="Home"/>
     </entity>
     <entity name="Rating" representedClassName="Rating">
@@ -88,7 +94,7 @@
     </entity>
     <elements>
         <element name="Address" positionX="160" positionY="192" width="128" height="150"/>
-        <element name="BudgetItem" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="BudgetItem" positionX="160" positionY="192" width="128" height="150"/>
         <element name="Category" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Furniture" positionX="160" positionY="192" width="128" height="150"/>
         <element name="Home" positionX="160" positionY="192" width="128" height="135"/>

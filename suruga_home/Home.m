@@ -12,6 +12,8 @@
 @implementation Home
 @dynamic name;
 @dynamic phone;
+@dynamic notes;
+@dynamic isRent;
 @dynamic rating;
 @dynamic price;
 @dynamic images;

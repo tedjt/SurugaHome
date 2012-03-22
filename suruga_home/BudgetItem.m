@@ -7,17 +7,21 @@
 //
 
 #import "BudgetItem.h"
+#import "UserData.h"
 
 
 @implementation BudgetItem
 @dynamic amount;
 @dynamic isExpense;
+@dynamic isRenting;
 @dynamic name;
 @dynamic notes;
 @dynamic inInitialBudget;
 @dynamic advisorUrl;
 
 + (NSArray *)fetchBudgetItemsWithContext: (NSManagedObjectContext *) context inInitial: (BOOL) inInitial isExpense: (BOOL) expense {
+    //Figure out if user is renting our not
+    bool isRenting = [UserData isUserRentingWithContext:context];
     //Initialize Data Arrays
     NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
     
@@ -26,7 +30,7 @@
     [fetchRequest setEntity:entity];
     //Set up predicates
     NSPredicate *testForInitialAndExpense =
-    [NSPredicate predicateWithFormat:@"inInitialBudget == %@ AND isExpense == %@", [NSNumber numberWithBool:inInitial], [NSNumber numberWithBool:expense]];
+    [NSPredicate predicateWithFormat:@"inInitialBudget == %@ AND isExpense == %@ AND (isRenting == %@ OR isRenting == %@)", [NSNumber numberWithBool:inInitial], [NSNumber numberWithBool:expense], [NSNumber numberWithBool:isRenting], [NSNumber numberWithInt:3]];
     [fetchRequest setPredicate:testForInitialAndExpense];
     // Edit the sort key as appropriate.
     NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO] autorelease];

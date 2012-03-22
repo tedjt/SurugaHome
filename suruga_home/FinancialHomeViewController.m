@@ -13,6 +13,8 @@
 #import "suruga_homeAppDelegate.h"
 #import "ASIHTTPRequest.h"
 #import "extThree20JSON/SBJson.h"
+#import "DCRoundSwitch.h"
+#import "UserData.h"
 
 @implementation FinancialHomeViewController
 @synthesize managedObjectContext;
@@ -24,20 +26,21 @@
 @synthesize runningExpenseLabel;
 @synthesize runningTotalLabel;
 @synthesize runningBudgetButton;
+@synthesize isRentingSwitch;
 @synthesize inititalBudgetButton;
 @synthesize financialAdviceButton;
 @synthesize adviceDict;
 
 #pragma mark Private Methods
 - (void) resizeAdviceButtonForString: (NSString *) adviceText {
-    CGSize maximumLabelSize = CGSizeMake(300,80);
+    CGSize maximumLabelSize = CGSizeMake(300,10);
     CGSize expectedLabelSize = [adviceText sizeWithFont:financialAdviceButton.titleLabel.font
         constrainedToSize:maximumLabelSize 
         lineBreakMode:financialAdviceButton.titleLabel.lineBreakMode]; 
     
     //adjust the label the the new height.
     CGRect newFrame = financialAdviceButton.frame;
-    newFrame.size.height = expectedLabelSize.height + 15;
+    newFrame.size.height = expectedLabelSize.height + 5;
     newFrame.size.width = expectedLabelSize.width + 15;
     //TODO somehow center the button or don't adjust width.
     financialAdviceButton.frame = newFrame;
@@ -46,23 +49,23 @@
 - (void) layoutBarChart {
     //Reset advice
     self.adviceDict = nil;
-    [financialAdviceButton setTitle:NSLocalizedString(@"Budget Advice", @"Budget Advice default text") forState:UIControlStateNormal];
+    //[financialAdviceButton setTitle:NSLocalizedString(@"Budget Advice", @"Budget Advice default text") forState:UIControlStateNormal];
     //Compute bar charts
     double initialIncome = 0.0;
     double initialCost = 0.0;
     double runningIncome = 0.0;
     double runningCost = 0.0;
     for (BudgetItem *b in [BudgetItem fetchBudgetItemsWithContext:managedObjectContext inInitial:YES isExpense:NO]) {
-        initialIncome = initialIncome + [b.amount doubleValue];
+        initialIncome = initialIncome + [b.amount intValue];
     }
     for (BudgetItem *b in [BudgetItem fetchBudgetItemsWithContext:managedObjectContext inInitial:YES isExpense:YES]) {
-        initialCost = initialCost + [b.amount doubleValue];
+        initialCost = initialCost + [b.amount intValue];
     }
     for (BudgetItem *b in [BudgetItem fetchBudgetItemsWithContext:managedObjectContext inInitial:NO isExpense:NO]) {
-        runningIncome = runningIncome + [b.amount doubleValue];
+        runningIncome = runningIncome + [b.amount intValue];
     }
     for (BudgetItem *b in [BudgetItem fetchBudgetItemsWithContext:managedObjectContext inInitial:NO isExpense:YES]) {
-        runningCost = runningCost + [b.amount doubleValue];
+        runningCost = runningCost + [b.amount intValue];
     }
     double initialLeftover = fabs(initialCost - initialIncome);
     if ( initialIncome > initialCost ) {
@@ -122,20 +125,16 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //Set renting switch
+    self.isRentingSwitch.onText = NSLocalizedString(@"Renting", @"Renting Option");
+	self.isRentingSwitch.offText = NSLocalizedString(@"Buying", @"Buying Option");
     self.title = NSLocalizedString(@"Budget Planning", @"Budget Planning Home Title");
+    
     // Do any additional setup after loading the view from its nib.
     if (managedObjectContext == nil) { 
         self.managedObjectContext = [(suruga_homeAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
@@ -161,6 +160,7 @@
     self.adviceDict = nil;
     [loadingIndicator release];
     loadingIndicator = nil;
+    [self setIsRentingSwitch:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -178,6 +178,7 @@
     [financialAdviceButton release];
     [adviceDict release];
     [loadingIndicator release];
+    [isRentingSwitch release];
     [super dealloc];
 }
 - (IBAction)initialBudgetClicked:(id)sender {
@@ -246,5 +247,9 @@
             [vc release];
         }
     }
+}
+
+- (IBAction)isRentSwitched:(id)sender {
+    [UserData setUserRentingWithContext:self.managedObjectContext val: self.isRentingSwitch.on];
 }
 @end

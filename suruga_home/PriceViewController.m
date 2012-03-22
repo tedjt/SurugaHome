@@ -7,40 +7,60 @@
 //
 
 #import "PriceViewController.h"
+#import "FinancialHomeViewController.h"
 #import "Price.h"
+#import "Home.h"
 
 @implementation PriceViewController
 @synthesize depositTextField;
 @synthesize upfrontRentTextField;
 @synthesize feesTextField;
-@synthesize rentTextField;
+@synthesize rentMortgageTextField;
 @synthesize insuranceTextField;
+@synthesize taxesTextField;
+@synthesize depositLabel, feesLabel, upfrontRentLabel, rentMortgageLabel, insuranceLabel, taxesLabel;
 @synthesize scrollView;
 @synthesize price;
 @synthesize parentController;
 @synthesize saveButton, doneButton;
 
 #pragma mark - Private Functions
-- (void)setPrices
+/*
+ Layout Text fields depending on whether the home is buy or rent.
+*/
+- (void) layoutTextFields
 {
-    if (self.price != nil) {
-        self.depositTextField.text = [price.initialCost stringValue];
-        self.feesTextField.text = [price.fees stringValue];
-        self.rentTextField.text = [price.runningCost stringValue];
-        //TODO - insurance and upfront rent && property taxes
+    //Set Prices regardless of rent/buy
+    self.depositTextField.text = [price.deposit stringValue];
+    self.feesTextField.text = [price.fees stringValue];
+    self.rentMortgageTextField.text = [price.rentMortgage stringValue];
+    self.insuranceTextField.text = [price.insurance stringValue];
+    
+    if ([self.price.home.isRent boolValue]) {
+        //Set Prices
+        self.upfrontRentTextField.text = [price.upfrontRent stringValue];
+        //Change labels
+        self.rentMortgageLabel.text = NSLocalizedString(@"Rent", @"Home Price Rent Label");
+        
+        //Hide Unused fields
+        self.taxesLabel.hidden = YES;
+        self.taxesTextField.hidden = YES;
     }
+    else {
+        //Set prices
+        self.taxesTextField.text = [price.taxes stringValue];
+        //Change labels
+        self.rentMortgageLabel.text = NSLocalizedString(@"Mortgage", @"Home Price Mortgage Label");
+        
+        //Hide Unused fields
+        self.upfrontRentLabel.hidden = YES;
+        self.upfrontRentTextField.hidden = YES;
+    }
+    
 }
+
 
 #pragma mark -
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -57,14 +77,7 @@
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)] autorelease];
     
     //Set prices
-    [self setPrices];
-    
-    //Set keyboard layout
-    self.depositTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    self.upfrontRentTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    self.feesTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    self.rentTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    self.insuranceTextField.keyboardType = UIKeyboardTypeDecimalPad;
+    [self layoutTextFields];
     
     //Register for keyboard events
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
@@ -80,8 +93,15 @@
     [self setDepositTextField:nil];
     [self setUpfrontRentTextField:nil];
     [self setFeesTextField:nil];
-    [self setRentTextField:nil];
+    [self setRentMortgageTextField:nil];
     [self setInsuranceTextField:nil];
+    self.taxesTextField = nil;
+    self.depositLabel = nil;
+    self.feesLabel = nil;
+    self.upfrontRentLabel = nil;
+    self.rentMortgageLabel = nil;
+    self.insuranceLabel = nil;
+    self.taxesLabel = nil;
     self.price = nil;
     [self setScrollView:nil];
     [super viewDidUnload];
@@ -89,27 +109,40 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 - (void)dealloc {
+    //Text Fields
     [depositTextField release];
     [upfrontRentTextField release];
     [feesTextField release];
-    [rentTextField release];
+    [rentMortgageTextField release];
     [insuranceTextField release];
+    [taxesTextField release];
+    //Labels
+    [depositLabel release];
+    [feesLabel release];
+    [upfrontRentLabel release];
+    [rentMortgageLabel release];
+    [insuranceLabel release];
+    [taxesLabel release];
+    // Other objects
     [price release];
     [scrollView release];
     [super dealloc];
 }
 #pragma mark - Model Methods
 - (IBAction)save:(id)sender {
-    self.price.initialCost = [NSNumber numberWithDouble:[depositTextField.text doubleValue]];
-    self.price.fees = [NSNumber numberWithDouble:[feesTextField.text doubleValue]];
-    self.price.runningCost = [NSNumber numberWithDouble:[rentTextField.text doubleValue]];
+    //Set Prices regardless of rent/buy
+    self.price.deposit = [NSNumber numberWithInt:[depositTextField.text intValue]];
+    self.price.fees = [NSNumber numberWithInt:[feesTextField.text intValue]];
+    self.price.rentMortgage = [NSNumber numberWithInt:[rentMortgageTextField.text intValue]];
+    self.price.insurance = [NSNumber numberWithInt:[insuranceTextField.text intValue]];
+    //Handle rent/buy specific prices
+    if ([self.price.home.isRent boolValue]) {
+        self.price.upfrontRent = [NSNumber numberWithInt:[upfrontRentTextField.text intValue]];
+    }
+    else {
+        self.price.taxes = [NSNumber numberWithInt:[taxesTextField.text intValue]];
+    }
     // Dismiss the modal view to return to the main list
     [self.parentController dismissPriceViewController:self ];
 }
@@ -173,4 +206,10 @@
 #pragma mark -
 #pragma mark -
 
+- (IBAction)budgetButtonClicked:(id)sender {
+    FinancialHomeViewController *budgetView = [[FinancialHomeViewController alloc] initWithNibName:@"FinancialHomeViewController" bundle:nil];
+    
+    [self.navigationController pushViewController:budgetView animated:YES];
+    [budgetView release];
+}
 @end

@@ -14,10 +14,11 @@
     UITextField *depositTextField;
     UITextField *upfrontRentTextField;
     UITextField *feesTextField;
-    UITextField *rentTextField;
+    UITextField *rentMortgageTextField;
     UITextField *insuranceTextField;
     UIScrollView *scrollView;
     UITextField *activeField;
+    NSMutableArray *textFieldArray; 
     
     Price *price;
     
@@ -32,8 +33,15 @@
 @property (nonatomic, retain) IBOutlet UITextField *depositTextField;
 @property (nonatomic, retain) IBOutlet UITextField *upfrontRentTextField;
 @property (nonatomic, retain) IBOutlet UITextField *feesTextField;
-@property (nonatomic, retain) IBOutlet UITextField *rentTextField;
+@property (nonatomic, retain) IBOutlet UITextField *rentMortgageTextField;
 @property (nonatomic, retain) IBOutlet UITextField *insuranceTextField;
+@property (retain, nonatomic) IBOutlet UITextField *taxesTextField;
+@property (retain, nonatomic) IBOutlet UILabel *depositLabel;
+@property (retain, nonatomic) IBOutlet UILabel *feesLabel;
+@property (retain, nonatomic) IBOutlet UILabel *upfrontRentLabel;
+@property (retain, nonatomic) IBOutlet UILabel *rentMortgageLabel;
+@property (retain, nonatomic) IBOutlet UILabel *insuranceLabel;
+@property (retain, nonatomic) IBOutlet UILabel *taxesLabel;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
@@ -43,6 +51,7 @@
 @property (nonatomic, retain) Price *price;
 
 @property (nonatomic, assign) id <PriceViewControllerDelegate>parentController;
+- (IBAction)budgetButtonClicked:(id)sender;
 
 @end
 

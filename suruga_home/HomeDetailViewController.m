@@ -8,10 +8,12 @@
 
 #import "HomeDetailViewController.h"
 #import "CustomImagePicker.h"
+#import "NotesViewController.h"
 #import "Home.h"
 #import "Address.h"
 #import "Rating.h"
 #import "Price.h"
+#import "DCRoundSwitch.h"
 
 @implementation HomeDetailViewController
 @synthesize home;
@@ -19,6 +21,8 @@
 @synthesize imageButton;
 @synthesize ratingButton;
 @synthesize priceButton;
+@synthesize notesButton;
+@synthesize isRentSwitch;
 @synthesize nameTextField;
 @synthesize cityTextField;
 @synthesize stateTextField;
@@ -41,6 +45,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //Set renting switch
+    self.isRentSwitch.onText = NSLocalizedString(@"Renting", @"Renting Option");
+	self.isRentSwitch.offText = NSLocalizedString(@"Buying", @"Buying Option");
     
     //Map View
     //Get forward geocoded address
@@ -84,6 +91,7 @@
         [self.priceButton setTitle:title forState:UIControlStateDisabled];
         [self.priceButton setTitle:title forState:UIControlStateSelected];
     }
+    self.isRentSwitch.on = [self.home.isRent boolValue];
 }
 
 - (void)viewDidUnload
@@ -98,6 +106,8 @@
     [self setImageButton:nil];
     [self setRatingButton:nil];
     [self setPriceButton:nil];
+    [self setNotesButton:nil];
+    [self setIsRentSwitch:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -122,6 +132,8 @@
     [imageButton release];
     [ratingButton release];
     [priceButton release];
+    [notesButton release];
+    [isRentSwitch release];
     [super dealloc];
 }
 
@@ -212,6 +224,21 @@
     [navController release];
 }
 
+- (IBAction)notesButtonClicked:(id)sender {
+    NotesViewController *notesView = [[NotesViewController alloc] initWithNibName:@"NotesViewController" bundle:nil];
+    notesView.home = self.home;
+    
+    //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:notesView];
+	//[self presentModalViewController:navController animated:YES];
+    [self.navigationController pushViewController:notesView animated:YES];
+    [notesView release];
+    //[navController release];
+}
+
+- (IBAction)isRentSwitched:(id)sender {
+    self.home.isRent = [NSNumber numberWithBool: self.isRentSwitch.on];
+}
+
 - (void)dismissPriceViewController:(PriceViewController *)priceViewController
 {
     //TODO change this depending on rent vs buy
@@ -294,6 +321,7 @@
         //update coordinates
         [self updateAddressCoordinates];      
     }
+    self.home.isRent = [NSNumber numberWithBool: self.isRentSwitch.on];
 }
 - (IBAction)save:(id)sender {
     [self updateHomeObject];

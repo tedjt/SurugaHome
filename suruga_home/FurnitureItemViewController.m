@@ -111,7 +111,6 @@
     self.textFieldLength.text = self.furniture.length;
     textFieldName.clearButtonMode = UITextFieldViewModeWhileEditing; // has a clear 'x' button to the right
     
-    self.textFieldPrice.keyboardType = UIKeyboardTypeDecimalPad;
 	self.textFieldPrice.text = [self.furniture.price stringValue];
     
     self.textFieldType.text = self.furniture.type;
@@ -164,7 +163,7 @@
 		self.furniture.name = textFieldName.text;
 		self.navigationItem.title = textFieldName.text;
 	} else if (textField == textFieldPrice) {
-        self.furniture.price = [NSNumber numberWithDouble:[textFieldPrice.text doubleValue]];
+        self.furniture.price = [NSNumber numberWithDouble:[textFieldPrice.text intValue]];
     } else if (textField == textFieldWidth) {
         furniture.width = textField.text;
     } else if (textField == textFieldLength) {
