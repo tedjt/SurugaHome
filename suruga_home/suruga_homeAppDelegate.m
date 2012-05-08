@@ -144,7 +144,7 @@
     [map from:@"suruga://guideTab" toViewController:[StartUpViewController class]];
     [map from:@"suruga://startUpView" toViewController:[StartUpViewController class]];
     [map from:@"suruga://FinancialAdviceViewController" toViewController:[FinancialAdviceViewController class]];
-    
+    [map from:@"suruga://GoogleMaps/(openUrl:)" toViewController:[TTWebController class]];
     // Add the tab bar controller's current view as a subview of the window
     UserData *ud = [UserData fetchUserDataWithContext:self.managedObjectContext];
     //[self.managedObjectContext deleteObject:ud];

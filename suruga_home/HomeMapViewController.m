@@ -29,6 +29,9 @@
         self.managedObjectContext = [(suruga_homeAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
     }
     
+    // Set page title
+    self.title = NSLocalizedString(@"Home Map", @"Home map Nav Title");
+    
     //Configure MapView
     self.mapView.delegate = self;
     
@@ -39,6 +42,11 @@
     [mapView setShowsUserLocation:YES];
 	[searchBar setDelegate:self];
 	googleLocalConnection = [[GoogleLocalConnection alloc] initWithDelegate:self]; 
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadMapViewAnnotations];
 }
 
 - (void)viewDidUnload
@@ -155,19 +163,11 @@
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    // Load Detail view controller
-    
-    // Create and push a detail view controller.
-	HomeDetailViewController *homeDetailViewController = [[HomeDetailViewController alloc] initWithNibName:@"HomeDetailViewController 2" bundle:nil];
-    
-    // Pass the selected Home to the new view controller.
-    homeDetailViewController.home = [(HomeMapAnnotation *) view.annotation home];
-    homeDetailViewController.parentController = self;
-    
-    // Push the task view to the navigation controller.
-    [self.navigationController pushViewController:homeDetailViewController animated:YES];
-    [homeDetailViewController release];
-    //TODO
+    NSString *url = [NSString stringWithFormat:@"https://maps.google.com/maps?q=%@", [[(HomeMapAnnotation *) view.annotation home].address gtm_stringByEscapingForURLArgument]];
+//    TTWebController *webView = [[[TTWebController alloc] init] autorelease];
+//    [webView openURL:[NSURL URLWithString:url]];
+//    [self.navigationController pushViewController:webView animated:YES];
+    TTOpenURL(url);
 }
 
 #pragma mark HomeDetailViewControllerDelegate

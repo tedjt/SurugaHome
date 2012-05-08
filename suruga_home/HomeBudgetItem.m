@@ -7,7 +7,6 @@
 //
 
 #import "HomeBudgetItem.h"
-#import "UserData.h"
 
 @implementation HomeBudgetItem
 @dynamic home;

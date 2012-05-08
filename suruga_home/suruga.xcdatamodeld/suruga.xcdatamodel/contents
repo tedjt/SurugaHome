@@ -40,12 +40,12 @@
     </entity>
     <entity name="HomeBudgetItem" representedClassName="HomeBudgetItem">
         <attribute name="advisorUrl" optional="YES" attributeType="String"/>
-        <attribute name="amount" optional="YES" attributeType="Double"/>
+        <attribute name="amount" optional="YES" attributeType="Integer 32"/>
         <attribute name="inInitialBudget" optional="YES" attributeType="Boolean"/>
         <attribute name="isRenting" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
-        <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="budgetItems" inverseEntity="Home" syncable="YES"/>
+        <relationship name="home" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="budgetItems" inverseEntity="Home" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image">
         <attribute name="pathToFull" optional="YES" attributeType="String"/>
@@ -53,13 +53,13 @@
         <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="images" inverseEntity="Home"/>
     </entity>
     <entity name="Rating" representedClassName="Rating">
-        <attribute name="food" optional="YES" attributeType="Float" defaultValueString="0"/>
-        <attribute name="kitchen" optional="YES" attributeType="Float" defaultValueString="0"/>
-        <attribute name="location" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="fifth" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="first" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="fourth" optional="YES" attributeType="Float" defaultValueString="0"/>
         <attribute name="overall" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
-        <attribute name="parks" optional="YES" attributeType="Float" defaultValueString="0"/>
-        <attribute name="size" optional="YES" attributeType="Float" defaultValueString="0"/>
-        <attribute name="transportation" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="second" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="sixth" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="third" optional="YES" attributeType="Float" defaultValueString="0"/>
         <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="rating" inverseEntity="Home"/>
     </entity>
     <entity name="Room" representedClassName="Room">
@@ -87,13 +87,12 @@
         <attribute name="numPeople" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="reason" optional="YES" attributeType="String"/>
         <attribute name="when" optional="YES" attributeType="Date"/>
-        <relationship name="defaultHomeBudgetItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HomeBudgetItem" syncable="YES"/>
     </entity>
     <elements>
         <element name="BudgetItem" positionX="160" positionY="192" width="128" height="150"/>
         <element name="Category" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Furniture" positionX="160" positionY="192" width="128" height="150"/>
-        <element name="Home" positionX="160" positionY="192" width="128" height="240"/>
+        <element name="Home" positionX="160" positionY="192" width="128" height="135"/>
         <element name="HomeBudgetItem" positionX="160" positionY="192" width="128" height="150"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Rating" positionX="160" positionY="192" width="128" height="165"/>

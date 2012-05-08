@@ -117,13 +117,20 @@
         self.title = self.home.name;
         self.nameTextField.text = self.home.name;
     } else { self.title = NSLocalizedString(@"New Home", @"New Home Nav Title");}
-    self.phoneTextField.text = self.home.phone;
-    self.addressTextField.text = self.home.address;
+    if (home.phone != nil)
+        self.phoneTextField.text = self.home.phone;
+    if (home.address != nil)
+        self.addressTextField.text = self.home.address;
     self.isRentSwitch.on = [self.home.isRent boolValue];
-    self.sizeTextField.text = [self.home.size stringValue];
+    if ([home.size intValue] != 0)
+        self.sizeTextField.text = [self.home.size stringValue];
     self.layoutTextField.text = self.home.layout;
-    self.notesTextField.text = self.home.notes;
-    self.stationTextField.text = [self.home.stationDistance stringValue];
+    if (![[home.notes stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString: @""])
+        self.notesTextField.text = self.home.notes;
+    else
+        self.notesTextField.text = NSLocalizedString(@"Notes", @"Notes hint text");
+    if ([home.stationDistance intValue] != 0)
+        self.stationTextField.text = [self.home.stationDistance stringValue];
     if (self.home.rating != nil) {
         [self.ratingButton setImage: [UIImage imageNamed:[NSString stringWithFormat:@"%d_stars.png", [self.home.rating.overall intValue]]] forState:UIControlStateNormal];                                          
     }

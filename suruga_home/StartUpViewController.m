@@ -12,6 +12,7 @@
 #import "Category.h"
 #import "Task.h"
 #import "BudgetItem.h"
+#import "HomeBudgetItem.h"
 #import "Room.h"
 #import "Furniture.h"
 #import "TextFieldPickerView.h"
@@ -62,6 +63,19 @@ bool isNew = YES;
         b.notes = [item objectForKey:@"notes"]; 
         b.amount = [NSNumber numberWithInt:[[item objectForKey:@"amount"] intValue]];
         b.isExpense = [NSNumber numberWithInt:[[item objectForKey:@"isExpense"] intValue]];
+        b.inInitialBudget = [NSNumber numberWithInt:[[item objectForKey:@"inInitialBudget"] intValue]];
+        b.isRenting = [NSNumber numberWithInt:[[item objectForKey:@"isRenting"] intValue]];
+    }
+    // Home Budget Items
+    NSArray *homeBudgetItems = [results objectForKey:@"home_budget_items"];
+    for (NSDictionary *item in homeBudgetItems) {
+        HomeBudgetItem *b =(HomeBudgetItem*) [NSEntityDescription insertNewObjectForEntityForName:@"HomeBudgetItem" inManagedObjectContext:self.userData.managedObjectContext];
+        
+        b.name = [item objectForKey:@"name"];
+        b.advisorUrl = [item objectForKey:@"advisor_url"];
+        b.notes = [item objectForKey:@"notes"];
+        b.amount = [NSNumber numberWithInt:[[item objectForKey:@"amount"] intValue]];
+        //b.home = nil;
         b.inInitialBudget = [NSNumber numberWithInt:[[item objectForKey:@"inInitialBudget"] intValue]];
         b.isRenting = [NSNumber numberWithInt:[[item objectForKey:@"isRenting"] intValue]];
     }

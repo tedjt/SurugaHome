@@ -48,7 +48,9 @@
                 [clonedSet addObject:clonedRelatedObject];
             }
         }else {
-            [cloned setValue:[source valueForKey:keyName] forKey:keyName];
+//            if ((int)[source primitiveValueForKey: keyName] != 1) {
+//                [cloned setValue:[source valueForKey:keyName] forKey:keyName];
+//            }
         }
         
     }
