@@ -181,10 +181,10 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     //TODO pop up a text box asking for validation
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Network Error", @"Network error alert dialog title") 
-                                                    message:NSLocalizedString(@"Please check that you have a network connection", @"Network Connection validation alert dialog")
-                                                   delegate:nil 
-                                          cancelButtonTitle:NSLocalizedString(@"OK", @"dialog OK text")
-                                          otherButtonTitles:nil];
+    message:NSLocalizedString(@"Please check that you have a network connection", @"Network Connection validation alert dialog")
+            delegate:nil 
+            cancelButtonTitle:NSLocalizedString(@"OK", @"dialog OK text")
+            otherButtonTitles:nil];
     [alert show];
     [alert release];
 }

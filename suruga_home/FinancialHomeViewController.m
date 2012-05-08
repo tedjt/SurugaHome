@@ -184,11 +184,12 @@
 }
 
 - (IBAction)financialAdviceClicked:(id)sender {
-//    [[TTNavigator navigator] openURLAction:
-//     [[TTURLAction actionWithURLPath:@"tt://FinancialAdviceViewController"] applyAnimated:YES]];
+    FinancialAdviceViewController * vc = [[FinancialAdviceViewController alloc] initWithNibName:@"FinancialAdviceViewController" bundle:nil]; 
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc release];
     
-//    [[TTNavigator navigator] openURLAction:[[TTURLAction actionWithURLPath:@"tt://restaurant/Chotchkie's"]
-//    applyQuery:[NSDictionary dictionaryWithObject:arr forKey:@"arraydata"]]];
+
+    /* Dynamic advice
     if (nil == self.adviceDict) {
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://tedjt.scripts.mit.edu/suruga/advisor/budget?running=%d&initial=%d", runningAmount, initialAmount]];
         __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
@@ -235,9 +236,11 @@
             [vc release];
         }
     }
+     */
 }
 
 - (IBAction)isRentSwitched:(id)sender {
     [UserData setUserRentingWithContext:self.managedObjectContext val: self.isRentingSwitch.on];
+    [self layoutBarChart];
 }
 @end

@@ -14,12 +14,12 @@
 @interface RatingViewController : UIViewController<DLStarRatingDelegate> {
     Rating *rating;
     
-    UISlider *locationSlider;
-    UISlider *transportationSlider;
-    UISlider *parksSlider;
-    UISlider *foodSlider;
-    UISlider *sizeSlider;
-    UISlider *kitchenSlider;
+    UISlider *firstSlider;
+    UISlider *secondSlider;
+    UISlider *thirdSlider;
+    UISlider *fourthSlider;
+    UISlider *fifthSlider;
+    UISlider *sixthSlider;
     DLStarRatingControl *overallRatingControl;
     
     id <RatingViewControllerDelegate> parentController;
@@ -27,12 +27,12 @@
 
 @property (nonatomic, retain) Rating *rating;
 
-@property (nonatomic, retain) IBOutlet UISlider *locationSlider;
-@property (nonatomic, retain) IBOutlet UISlider *transportationSlider;
-@property (nonatomic, retain) IBOutlet UISlider *parksSlider;
-@property (nonatomic, retain) IBOutlet UISlider *foodSlider;
-@property (nonatomic, retain) IBOutlet UISlider *sizeSlider;
-@property (nonatomic, retain) IBOutlet UISlider *kitchenSlider;
+@property (nonatomic, retain) IBOutlet UISlider *firstSlider;
+@property (nonatomic, retain) IBOutlet UISlider *secondSlider;
+@property (nonatomic, retain) IBOutlet UISlider *thirdSlider;
+@property (nonatomic, retain) IBOutlet UISlider *fourthSlider;
+@property (nonatomic, retain) IBOutlet UISlider *fifthSlider;
+@property (nonatomic, retain) IBOutlet UISlider *sixthSlider;
 @property (nonatomic, retain) DLStarRatingControl *overallRatingControl;
 
 @property (nonatomic, assign) id <RatingViewControllerDelegate> parentController;

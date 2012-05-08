@@ -11,12 +11,12 @@
 
 @implementation RatingViewController
 @synthesize rating;
-@synthesize locationSlider;
-@synthesize transportationSlider;
-@synthesize parksSlider;
-@synthesize foodSlider;
-@synthesize sizeSlider;
-@synthesize kitchenSlider;
+@synthesize firstSlider;
+@synthesize secondSlider;
+@synthesize thirdSlider;
+@synthesize fourthSlider;
+@synthesize fifthSlider;
+@synthesize sixthSlider;
 @synthesize overallRatingControl;
 @synthesize parentController;
 
@@ -45,24 +45,24 @@
 {
     if (self.rating != nil) {
         self.overallRatingControl.rating = [rating.overall intValue];
-        self.locationSlider.value = [rating.location floatValue];
-        self.transportationSlider.value = [rating.transportation floatValue];
-        self.parksSlider.value = [rating.parks floatValue];
-        self.foodSlider.value = [rating.food floatValue];
-        self.sizeSlider.value = [rating.size floatValue];
-        self.kitchenSlider.value = [rating.kitchen floatValue];
+        self.firstSlider.value = [rating.first floatValue];
+        self.secondSlider.value = [rating.second floatValue];
+        self.thirdSlider.value = [rating.third floatValue];
+        self.fourthSlider.value = [rating.fourth floatValue];
+        self.fifthSlider.value = [rating.fifth floatValue];
+        self.sixthSlider.value = [rating.sixth floatValue];
         
     }
 }
 
 - (void)viewDidUnload
 {
-    [self setLocationSlider:nil];
-    [self setTransportationSlider:nil];
-    [self setParksSlider:nil];
-    [self setFoodSlider:nil];
-    [self setSizeSlider:nil];
-    [self setKitchenSlider:nil];
+    [self setFirstSlider:nil];
+    [self setSecondSlider:nil];
+    [self setThirdSlider:nil];
+    [self setFourthSlider:nil];
+    [self setFifthSlider:nil];
+    [self setSixthSlider:nil];
     self.rating = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -70,12 +70,12 @@
 }
 
 - (void)dealloc {
-    [locationSlider release];
-    [transportationSlider release];
-    [parksSlider release];
-    [foodSlider release];
-    [sizeSlider release];
-    [kitchenSlider release];
+    [firstSlider release];
+    [secondSlider release];
+    [thirdSlider release];
+    [fourthSlider release];
+    [fifthSlider release];
+    [sixthSlider release];
     [rating release];
     [super dealloc];
 }
@@ -83,11 +83,11 @@
 #pragma mark - Model Methods
 - (IBAction)save:(id)sender {
     self.rating.overall = [NSNumber numberWithInteger: overallRatingControl.rating];
-    self.rating.transportation = [NSNumber numberWithFloat:transportationSlider.value];
-    self.rating.parks = [NSNumber numberWithFloat:parksSlider.value];
-    self.rating.food = [NSNumber numberWithFloat:foodSlider.value];
-    self.rating.size = [NSNumber numberWithFloat:sizeSlider.value];
-    self.rating.kitchen = [NSNumber numberWithFloat:kitchenSlider.value];
+    self.rating.second = [NSNumber numberWithFloat:secondSlider.value];
+    self.rating.third = [NSNumber numberWithFloat:thirdSlider.value];
+    self.rating.fourth = [NSNumber numberWithFloat:fourthSlider.value];
+    self.rating.fifth = [NSNumber numberWithFloat:fifthSlider.value];
+    self.rating.sixth = [NSNumber numberWithFloat:sixthSlider.value];
     // Dismiss the modal view to return to the main list
     [self.parentController dismissRatingViewController:self ];
 }

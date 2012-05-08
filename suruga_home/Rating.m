@@ -12,12 +12,12 @@
 
 @implementation Rating
 @dynamic overall;
-@dynamic location;
-@dynamic transportation;
-@dynamic parks;
-@dynamic food;
-@dynamic size;
-@dynamic kitchen;
+@dynamic first;
+@dynamic second;
+@dynamic third;
+@dynamic fourth;
+@dynamic fifth;
+@dynamic sixth;
 @dynamic home;
 
 @end

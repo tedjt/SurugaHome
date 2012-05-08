@@ -15,12 +15,12 @@
 @private
 }
 @property (nonatomic, retain) NSNumber * overall;
-@property (nonatomic, retain) NSNumber * location;
-@property (nonatomic, retain) NSNumber * transportation;
-@property (nonatomic, retain) NSNumber * parks;
-@property (nonatomic, retain) NSNumber * food;
-@property (nonatomic, retain) NSNumber * size;
-@property (nonatomic, retain) NSNumber * kitchen;
+@property (nonatomic, retain) NSNumber * first;
+@property (nonatomic, retain) NSNumber * second;
+@property (nonatomic, retain) NSNumber * third;
+@property (nonatomic, retain) NSNumber * fourth;
+@property (nonatomic, retain) NSNumber * fifth;
+@property (nonatomic, retain) NSNumber * sixth;
 @property (nonatomic, retain) Home *home;
 /*
  1. Size/Arrangement of room
