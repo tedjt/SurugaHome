@@ -475,6 +475,7 @@
 		2A03845E14994B3B000E0B49 /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				2A204A3314ABDB9D00BFDC23 /* JsonPhotoPicker */,
 				2A03845A14994B33000E0B49 /* UIImageExtras.h */,
 				2A03845B14994B33000E0B49 /* UIImageExtras.m */,
 				2A17552115581CCE00027978 /* HomePhotoSource.h */,
@@ -651,7 +652,6 @@
 				2A501A0514C35B7500ECA0D8 /* PriceViewController */,
 				2A204A9214B62F5D00BFDC23 /* RatingController */,
 				2A03845E14994B3B000E0B49 /* ImagePicker */,
-				2A204A3314ABDB9D00BFDC23 /* JsonPhotoPicker */,
 				2A78E9D814B92F0C00DB2305 /* SVGeocoder */,
 			);
 			name = HomeDetails;
