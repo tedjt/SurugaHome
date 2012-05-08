@@ -25,7 +25,6 @@
 		2A1755331558F24100027978 /* GTMNSString+URLArguments.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A17552F1558F24100027978 /* GTMNSString+URLArguments.m */; };
 		2A1755341558F24100027978 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 2A1755301558F24100027978 /* README.markdown */; };
 		2A1755361559078500027978 /* tab_checklist.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A1755351559078400027978 /* tab_checklist.png */; };
-		2A175539155981B600027978 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A175538155981B100027978 /* NSString+URLEncoding.m */; };
 		2A20476D14A3D00000BFDC23 /* Home.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A20476C14A3D00000BFDC23 /* Home.m */; };
 		2A20477314A3D03000BFDC23 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A20477214A3D03000BFDC23 /* Image.m */; };
 		2A20477A14A3D76A00BFDC23 /* HomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A20477814A3D76A00BFDC23 /* HomeDetailViewController.m */; };
@@ -244,8 +243,6 @@
 		2A17552F1558F24100027978 /* GTMNSString+URLArguments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+URLArguments.m"; sourceTree = "<group>"; };
 		2A1755301558F24100027978 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		2A1755351559078400027978 /* tab_checklist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_checklist.png; sourceTree = "<group>"; };
-		2A175537155981B000027978 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
-		2A175538155981B100027978 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		2A20476B14A3D00000BFDC23 /* Home.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Home.h; sourceTree = "<group>"; };
 		2A20476C14A3D00000BFDC23 /* Home.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Home.m; sourceTree = "<group>"; };
 		2A20477114A3D03000BFDC23 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
@@ -548,8 +545,6 @@
 				2A17551715576C9400027978 /* UIButton+setTitleText.m */,
 				2A17551A15577CDB00027978 /* UITextField+convertToPicker.h */,
 				2A17551B15577CDB00027978 /* UITextField+convertToPicker.m */,
-				2A175537155981B000027978 /* NSString+URLEncoding.h */,
-				2A175538155981B100027978 /* NSString+URLEncoding.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1225,7 +1220,6 @@
 				2A1755311558F24100027978 /* GoogleLocalConnection.m in Sources */,
 				2A1755321558F24100027978 /* GoogleLocalObject.m in Sources */,
 				2A1755331558F24100027978 /* GTMNSString+URLArguments.m in Sources */,
-				2A175539155981B600027978 /* NSString+URLEncoding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
