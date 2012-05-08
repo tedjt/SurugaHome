@@ -11,7 +11,7 @@
 #import <MapKit/MapKit.h>
 #import "HomeDetailViewController.h"
 
-@interface HomeTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, HomeDetailViewControllerDelegate, UIScrollViewDelegate, MKMapViewDelegate> {
+@interface HomeTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, HomeDetailViewControllerDelegate, UIScrollViewDelegate> {
     
     NSFetchedResultsController *fetchedResultsController;
     UIScrollView *scrollView;
@@ -19,7 +19,7 @@
     
     UIPageControl *pageControl;
     UITableView *mTableView;
-    MKMapView *mapView;
+    UITableView *mTableViewPrice;
 }
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
@@ -27,9 +27,11 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 @property (nonatomic, retain) IBOutlet UITableView *mTableView;
-@property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain) IBOutlet UITableView *mTableViewPrice;
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureLocationCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+
+- (void)configurePriceCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 - (IBAction)addHome;
 - (IBAction)changePage:(id)sender;

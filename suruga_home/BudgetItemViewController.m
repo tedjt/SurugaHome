@@ -7,7 +7,7 @@
 //
 
 #import "BudgetItemViewController.h"
-#import "BudgetItem.h"
+#import "BaseBudgetItem.h"
 #import "FinancialAdviceViewController.h"
 
 @implementation BudgetItemViewController
@@ -35,7 +35,7 @@
     amountTextField.text = [item.amount stringValue];
     notesLabel.text = item.notes;
     [notesLabel sizeToFit];
-     self.advisorButton.hidden = (nil == self.item.advisorUrl);
+    self.advisorButton.hidden = (nil == self.item.advisorUrl);
     
 }
 

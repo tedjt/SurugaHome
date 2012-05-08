@@ -51,23 +51,11 @@
     self.adviceDict = nil;
     //[financialAdviceButton setTitle:NSLocalizedString(@"Budget Advice", @"Budget Advice default text") forState:UIControlStateNormal];
     //Compute bar charts
-    double initialIncome = 0.0;
-    double initialCost = 0.0;
-    double runningIncome = 0.0;
-    double runningCost = 0.0;
-    for (BudgetItem *b in [BudgetItem fetchBudgetItemsWithContext:managedObjectContext inInitial:YES isExpense:NO]) {
-        initialIncome = initialIncome + [b.amount intValue];
-    }
-    for (BudgetItem *b in [BudgetItem fetchBudgetItemsWithContext:managedObjectContext inInitial:YES isExpense:YES]) {
-        initialCost = initialCost + [b.amount intValue];
-    }
-    for (BudgetItem *b in [BudgetItem fetchBudgetItemsWithContext:managedObjectContext inInitial:NO isExpense:NO]) {
-        runningIncome = runningIncome + [b.amount intValue];
-    }
-    for (BudgetItem *b in [BudgetItem fetchBudgetItemsWithContext:managedObjectContext inInitial:NO isExpense:YES]) {
-        runningCost = runningCost + [b.amount intValue];
-    }
-    double initialLeftover = fabs(initialCost - initialIncome);
+    int initialIncome = [BudgetItem sumItemsWithContext:managedObjectContext inInitial:YES isExpense:NO];
+    int initialCost = [BudgetItem sumItemsWithContext:managedObjectContext inInitial:YES isExpense:YES];
+    int runningIncome = [BudgetItem sumItemsWithContext:managedObjectContext inInitial:NO isExpense:NO];
+    int runningCost = [BudgetItem sumItemsWithContext:managedObjectContext inInitial:NO isExpense:YES];
+    int initialLeftover = fabs(initialCost - initialIncome);
     if ( initialIncome > initialCost ) {
         double delta = (initialCost / (initialIncome <0.001 ? 1 : initialIncome));
         initialIncomeLabel.frame = CGRectMake(10, 0, 64, 100);
@@ -105,12 +93,12 @@
     } 
     //Set label Text
     //TODO internationalize
-    initialExpenseLabel.text = [NSString stringWithFormat:@"$%d", (int)initialCost];
-    initialIncomeLabel.text = [NSString stringWithFormat:@"$%d", (int)initialIncome];
-    initialTotalLabel.text = [NSString stringWithFormat:@"$%d", (int)initialLeftover];
-    runningExpenseLabel.text = [NSString stringWithFormat:@"$%d", (int)runningCost];
-    runningIncomeLabel.text = [NSString stringWithFormat:@"$%d", (int)runningIncome];
-    runningTotalLabel.text = [NSString stringWithFormat:@"$%d", (int)runningLeftover];
+    initialExpenseLabel.text = [NSString stringWithFormat:@"$%d",initialCost];
+    initialIncomeLabel.text = [NSString stringWithFormat:@"$%d",initialIncome];
+    initialTotalLabel.text = [NSString stringWithFormat:@"$%d",initialLeftover];
+    runningExpenseLabel.text = [NSString stringWithFormat:@"$%d",runningCost];
+    runningIncomeLabel.text = [NSString stringWithFormat:@"$%d",runningIncome];
+    runningTotalLabel.text = [NSString stringWithFormat:@"$%d",runningLeftover];
     
     //Set class instance variables
     initialAmount = (int)(initialIncome - initialCost);

@@ -7,13 +7,13 @@
 //
 
 #import "HomeDetailViewController.h"
-#import "CustomImagePicker.h"
-#import "NotesViewController.h"
 #import "Home.h"
-#import "Address.h"
 #import "Rating.h"
-#import "Price.h"
 #import "DCRoundSwitch.h"
+#import "UIButton+setTitleText.h"
+#import "TextFieldPickerView.h"
+#import "HomePhotoSource.h"
+#import "homeThumbsViewController.h"
 
 @implementation HomeDetailViewController
 @synthesize home;
@@ -21,37 +21,79 @@
 @synthesize imageButton;
 @synthesize ratingButton;
 @synthesize priceButton;
-@synthesize notesButton;
+@synthesize notesTextField;
 @synthesize isRentSwitch;
+@synthesize scrollView;
 @synthesize nameTextField;
-@synthesize cityTextField;
-@synthesize stateTextField;
-@synthesize zipTextField;
 @synthesize phoneTextField;
-@synthesize streetTextField;
+@synthesize addressTextField;
+@synthesize sizeTextField;
+@synthesize layoutTextField;
+@synthesize stationTextField;
 @synthesize mapView;
+@synthesize doneButton, saveButton;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+#pragma mark - Private Functions
+- (void)keyBoardLayoutPicker 
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    NSArray *options = [NSArray arrayWithObjects:
+                        [NSArray arrayWithObjects:
+                         NSLocalizedString(@"0 L", @"0 L"),
+                         NSLocalizedString(@"1 L", @"1 L"),
+                         NSLocalizedString(@"2 L", @"2 L"),
+                         NSLocalizedString(@"3 L", @"3 L"),
+                         NSLocalizedString(@"4 L", @"4 L"),
+                         NSLocalizedString(@"5 L", @"5 L"),
+                         NSLocalizedString(@"6 L", @"6 L"),
+                         NSLocalizedString(@"7 L", @"7 L"),
+                         nil],
+                        [NSArray arrayWithObjects:
+                         NSLocalizedString(@"0 D", @"0 D"),
+                         NSLocalizedString(@"1 D", @"1 D"),
+                         NSLocalizedString(@"2 D", @"2 D"),
+                         NSLocalizedString(@"3 D", @"3 D"),
+                         NSLocalizedString(@"4 D", @"4 D"),
+                         NSLocalizedString(@"5 D", @"5 D"),
+                         NSLocalizedString(@"6 D", @"6 D"),
+                         NSLocalizedString(@"7 D", @"7 D"),
+                         nil], 
+                        [NSArray arrayWithObjects:
+                         NSLocalizedString(@"0 K", @"0 K"),
+                         NSLocalizedString(@"1 K", @"1 K"),
+                         NSLocalizedString(@"2 K", @"2 K"),
+                         NSLocalizedString(@"3 K", @"3 K"),
+                         NSLocalizedString(@"4 K", @"4 K"),
+                         NSLocalizedString(@"5 K", @"5 K"),
+                         NSLocalizedString(@"6 K", @"6 K"),
+                         NSLocalizedString(@"7 K", @"7 K"),
+                         nil], 
+                        nil];
+    [[[TextFieldPickerView alloc] initWithTextField:layoutTextField options:options useNewButton:NO] autorelease];
 }
 
+#pragma mark -
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self keyBoardLayoutPicker];
     //Set renting switch
     self.isRentSwitch.onText = NSLocalizedString(@"Renting", @"Renting Option");
 	self.isRentSwitch.offText = NSLocalizedString(@"Buying", @"Buying Option");
     
+    self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, 1200);
+    
+    //Register for keyboard events
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+            selector:@selector(keyboardWillBeHidden:)
+            name:UIKeyboardWillHideNotification object:nil];
+    
     //Map View
     //Get forward geocoded address
-    if(self.home.address.latitude != nil) {
+    if(self.home.latitude != nil) {
         [self setMapViewZoom];
     } else { 
         [mapView.userLocation addObserver:self  
@@ -61,9 +103,13 @@
     }
 
     //Nav bar buttons
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)] autorelease];
+    self.saveButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)] autorelease];
+    self.navigationItem.rightBarButtonItem = self.saveButton;
     
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)] autorelease];
+    
+    //Done button
+    self.doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)] autorelease];
     
     // Load home values if not nil
     // Do any additional setup after loading the view from its nib.
@@ -71,43 +117,45 @@
         self.title = self.home.name;
         self.nameTextField.text = self.home.name;
     } else { self.title = NSLocalizedString(@"New Home", @"New Home Nav Title");}
-    if(self.home.phone != nil) {
-        self.phoneTextField.text = self.home.phone;
-    }
-    if(self.home.address != nil) {
-        Address *a = self.home.address;
-        self.cityTextField.text = a.city;
-        self.stateTextField.text = a.state;
-        self.zipTextField.text = [a.zip intValue] != 0 ? [a.zip stringValue] : @"";
-        self.streetTextField.text = self.home.address.street;
-    }
+    self.phoneTextField.text = self.home.phone;
+    self.addressTextField.text = self.home.address;
+    self.isRentSwitch.on = [self.home.isRent boolValue];
+    self.sizeTextField.text = [self.home.size stringValue];
+    self.layoutTextField.text = self.home.layout;
+    self.notesTextField.text = self.home.notes;
+    self.stationTextField.text = [self.home.stationDistance stringValue];
     if (self.home.rating != nil) {
         [self.ratingButton setImage: [UIImage imageNamed:[NSString stringWithFormat:@"%d_stars.png", [self.home.rating.overall intValue]]] forState:UIControlStateNormal];                                          
     }
-    if (self.home.price != nil) {
-        NSString *title = [NSString stringWithFormat:@"$%.2lf",[self.home.price getInitialSum]];
-        [self.priceButton setTitle:title forState:UIControlStateNormal];
-        [self.priceButton setTitle:title forState:UIControlStateHighlighted];
-        [self.priceButton setTitle:title forState:UIControlStateDisabled];
-        [self.priceButton setTitle:title forState:UIControlStateSelected];
+    if (self.home.budgetItems != nil) {
+        NSString *title = [NSString stringWithFormat:@"$%d",[self.home getInitialCost]];
+        [self.priceButton setTitleText:title];
     }
-    self.isRentSwitch.on = [self.home.isRent boolValue];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    // Need to restore nav bar due to three20 bug.
+    [super viewDidAppear:animated];
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 }
 
 - (void)viewDidUnload
 {
     [self setNameTextField:nil];
-    [self setCityTextField:nil];
-    [self setStateTextField:nil];
-    [self setZipTextField:nil];
     [self setPhoneTextField:nil];
-    [self setStreetTextField:nil];
+    [self setAddressTextField:nil];
     //[self setMapView:nil];
     [self setImageButton:nil];
     [self setRatingButton:nil];
     [self setPriceButton:nil];
-    [self setNotesButton:nil];
     [self setIsRentSwitch:nil];
+    [self setSizeTextField:nil];
+    [self setLayoutTextField:nil];
+    [self setStationTextField:nil];
+    [self setNotesTextField:nil];
+    [self setScrollView:nil];
+    [self setDoneButton:nil];
+    [self setSaveButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -123,17 +171,20 @@
     self.mapView = nil;
     [home release];
     [nameTextField release];
-    [cityTextField release];
-    [stateTextField release];
-    [zipTextField release];
     [phoneTextField release];
-    [streetTextField release];
+    [addressTextField release];
     //[mapView release];
     [imageButton release];
     [ratingButton release];
     [priceButton release];
-    [notesButton release];
     [isRentSwitch release];
+    [sizeTextField release];
+    [layoutTextField release];
+    [stationTextField release];
+    [notesTextField release];
+    [scrollView release];
+    [doneButton release];
+    [saveButton release];
     [super dealloc];
 }
 
@@ -156,39 +207,79 @@
     }
 }
 
-#pragma mark Text Field
-- (IBAction)textFieldOutside:(id)sender {
-    if([sender isKindOfClass:[UITextField class]])
-    {   
-        [sender resignFirstResponder];
-        
-//        UITextView *textView = sender;
-//        // Handle text field keyboard
-//        UIBarButtonItem *barButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:textView action:@selector(resignFirstResponder)] autorelease];
-//        UIToolbar *toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
-//        toolbar.items = [NSArray arrayWithObject:barButton];
-//        
-//        textView.inputAccessoryView = toolbar;
-    }
-}
+#pragma mark - Text Field
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    
     return YES;
 }
 
-- (IBAction)imageButtonClicked:(id)sender {
-    CustomImagePicker *imagePicker = [[CustomImagePicker alloc] init];
-    imagePicker.title = NSLocalizedString(@"Home Images", @"Home Thumbs view title");
-    [self updateHomeObject];
-    imagePicker.home = self.home;
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeField = textField;
+    self.navigationItem.rightBarButtonItem = self.doneButton;
+}
 
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:imagePicker];
-    [imagePicker release];
-	[self presentModalViewController:navController animated:YES];
-    [navController release];
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    activeField = nil;
+    self.navigationItem.rightBarButtonItem = self.saveButton;
+}
+
+- (IBAction)done:(id)sender {
+    [activeField resignFirstResponder];
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (activeField != layoutTextField && !CGRectContainsPoint(aRect, CGPointMake(activeField.frame.origin.x, activeField.frame.origin.y + activeField.frame.size.height))) {
+        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-kbSize.height + 100);
+        [scrollView setContentOffset:scrollPoint animated:YES];
+    } else if ([notesTextField isFirstResponder]) {
+        CGPoint scrollPoint = CGPointMake(0.0, notesTextField.frame.origin.y-kbSize.height + 100);
+        [scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+#pragma mark -
+
+- (IBAction)imageButtonClicked:(id)sender {
+    [self updateHomeObject];
+//    CustomImagePicker *imagePicker = [[CustomImagePicker alloc] init];
+//    imagePicker.title = NSLocalizedString(@"Home Images", @"Home Thumbs view title");
+//    imagePicker.home = self.home;
+//
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:imagePicker];
+//    [imagePicker release];
+//	[self presentModalViewController:navController animated:YES];
+//    [navController release];
+    
+    HomeThumbsViewController *photoView = [[HomeThumbsViewController alloc] initWithHome:self.home];
+    //thumbs.photoSource = [[PhotoSet alloc] initWithHome:self.home];
+    //thumbs.parentController = self;
+    [self.navigationController pushViewController:photoView animated:YES];
+    TT_RELEASE_SAFELY(photoView);
 }
 
 - (IBAction)ratingButtonClicked:(id)sender {
@@ -211,58 +302,35 @@
 }
 
 - (IBAction)priceButtonClicked:(id)sender {
-    if (self.home.price == nil) {
-        self.home.price = [NSEntityDescription insertNewObjectForEntityForName:@"Price" inManagedObjectContext:self.home.managedObjectContext];
-    }
-    PriceViewController *priceView = [[PriceViewController alloc] initWithNibName:@"PriceViewController" bundle:nil];
-    priceView.price = self.home.price;
+    HomePriceTableViewController *priceView = [[HomePriceTableViewController alloc] init];
+    priceView.home = self.home;
     priceView.parentController = self;
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:priceView];
-	[self presentModalViewController:navController animated:YES];
+    [self.navigationController pushViewController:priceView animated:YES];
     [priceView release];
-    [navController release];
 }
 
-- (IBAction)notesButtonClicked:(id)sender {
-    NotesViewController *notesView = [[NotesViewController alloc] initWithNibName:@"NotesViewController" bundle:nil];
-    notesView.home = self.home;
-    
-    //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:notesView];
-	//[self presentModalViewController:navController animated:YES];
-    [self.navigationController pushViewController:notesView animated:YES];
-    [notesView release];
-    //[navController release];
+- (void)updatePrice
+{
+    //TODO change this depending on rent vs buy
+    //TODO change to use yen instead of dollars.
+    NSString *title = [NSString stringWithFormat:@"$%d",[self.home getInitialCost]];
+    [self.priceButton setTitleText:title];
 }
 
 - (IBAction)isRentSwitched:(id)sender {
     self.home.isRent = [NSNumber numberWithBool: self.isRentSwitch.on];
 }
-
-- (void)dismissPriceViewController:(PriceViewController *)priceViewController
-{
-    //TODO change this depending on rent vs buy
-    //TODO change to use yen instead of dollars.
-    NSString *title = [NSString stringWithFormat:@"$%.2lf",[self.home.price getInitialSum]];
-    [self.priceButton setTitle:title forState:UIControlStateNormal];
-    [self.priceButton setTitle:title forState:UIControlStateHighlighted];
-    [self.priceButton setTitle:title forState:UIControlStateDisabled];
-    [self.priceButton setTitle:title forState:UIControlStateSelected];
-    //[NSString stringWithFormat:@"$%.2lf",[(Price *)[self.home valueForKey:@"price"] getInitialSum]];
-    
-    [self dismissModalViewControllerAnimated:YES];
-}
 #pragma mark - SVGeocoderDelegate
 - (void) updateAddressCoordinates {
     //Get forward geocoded address
     if (self.home.address != nil) {
-        SVGeocoder *geocodeRequest = [[[SVGeocoder alloc] initWithAddress:[self.home.address getFormattedAddress]] autorelease];
+        SVGeocoder *geocodeRequest = [[[SVGeocoder alloc] initWithAddress:self.home.address] autorelease];
         [geocodeRequest setDelegate:self];
         [geocodeRequest startAsynchronous];
     }
 }
 - (void)setMapViewZoom {
-    CLLocationCoordinate2D c = [self.home.address getCoordinate];
+    CLLocationCoordinate2D c = [self.home getCoordinate];
     if (fabs(c.latitude) > 0.0001) {
         [self.mapView addAnnotation: [[[MKPlacemark alloc] initWithCoordinate:c addressDictionary:nil] autorelease]];
                                       
@@ -283,11 +351,14 @@
 - (void)geocoder:(SVGeocoder *)geocoder didFindPlacemark:(SVPlacemark *)placemark
 {
     //set address values;
-    self.home.address.latitude = [NSNumber numberWithDouble:placemark.coordinate.latitude];
-    self.home.address.longitude = [NSNumber numberWithDouble:placemark.coordinate.longitude];
+    self.home.latitude = [NSNumber numberWithDouble:placemark.coordinate.latitude];
+    self.home.longitude = [NSNumber numberWithDouble:placemark.coordinate.longitude];
     
     [self setMapViewZoom];
-    [self.parentController loadMapViewAnnotations];
+    if ([(NSObject *) self.parentController conformsToProtocol:@protocol(HomeMapViewDelegate)])
+    {
+        [(NSObject<HomeMapViewDelegate> *) self.parentController loadMapViewAnnotations];
+    }
 }
 - (void)geocoder:(SVGeocoder *)geocoder didFailWithError:(NSError *)error
 {
@@ -300,27 +371,19 @@
     [self observeValueForKeyPath:@"location" ofObject:self.mapView.userLocation change:nil context:nil];
     
 }
+
 #pragma mark - Model Methods
 - (void) updateHomeObject {
     self.home.name = nameTextField.text;
+    self.home.notes = notesTextField.text;
     self.home.phone = phoneTextField.text;
-    if (self.home.address == nil) {
-        self.home.address = [NSEntityDescription insertNewObjectForEntityForName:@"Address" inManagedObjectContext:self.home.managedObjectContext];
-        self.home.address.home = self.home;
+    if (![self.home.address isEqualToString:addressTextField.text]) {
+        self.home.address = addressTextField.text;
+        [self updateAddressCoordinates]; 
     }
-    Address *a = self.home.address;
-    if (![streetTextField.text isEqualToString:a.street] ||
-        ![cityTextField.text isEqualToString:a.city] ||
-        ![stateTextField.text isEqualToString:a.state] ||
-        [zipTextField.text integerValue] != [a.zip intValue])
-    {
-        a.street = streetTextField.text;
-        a.city = cityTextField.text;
-        a.state = stateTextField.text;
-        a.zip = [NSNumber numberWithInt:[zipTextField.text intValue]];
-        //update coordinates
-        [self updateAddressCoordinates];      
-    }
+    self.home.size = [NSNumber numberWithInt:[self.sizeTextField.text intValue]];
+    self.home.layout = self.layoutTextField.text;
+    self.home.stationDistance = [NSNumber numberWithInt: [self.stationTextField.text intValue]];
     self.home.isRent = [NSNumber numberWithBool: self.isRentSwitch.on];
 }
 - (IBAction)save:(id)sender {

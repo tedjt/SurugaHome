@@ -11,13 +11,7 @@
 
 
 @implementation BudgetItem
-@dynamic amount;
 @dynamic isExpense;
-@dynamic isRenting;
-@dynamic name;
-@dynamic notes;
-@dynamic inInitialBudget;
-@dynamic advisorUrl;
 
 + (NSArray *)fetchBudgetItemsWithContext: (NSManagedObjectContext *) context inInitial: (BOOL) inInitial isExpense: (BOOL) expense {
     //Figure out if user is renting our not
@@ -40,6 +34,14 @@
     // Fetch Cost Items
     return [context executeFetchRequest:fetchRequest error:&error];
     
+}
+
++ (int) sumItemsWithContext: (NSManagedObjectContext *) context inInitial: (BOOL) inInitial isExpense: (BOOL) expense {
+    int cost = 0;
+    for (BudgetItem *b in [BudgetItem fetchBudgetItemsWithContext:context inInitial:inInitial isExpense:expense]) {
+        cost = cost + [b.amount intValue];
+    }
+    return cost;
 }
 
 @end

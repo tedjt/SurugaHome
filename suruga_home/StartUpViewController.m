@@ -14,6 +14,7 @@
 #import "BudgetItem.h"
 #import "Room.h"
 #import "Furniture.h"
+#import "TextFieldPickerView.h"
 
 @implementation StartUpViewController
 @synthesize nameTextField;
@@ -22,12 +23,6 @@
 @synthesize sizeTextField;
 @synthesize scrollView;
 @synthesize userData;
-@synthesize reasonPicker;
-@synthesize reasonPickerArray;
-@synthesize layoutPicker;
-@synthesize layoutPickerArray;
-@synthesize sizePicker;
-@synthesize sizePickerArray;
 
 //TODO - update user data for bedroom/bathroom preference
 
@@ -95,7 +90,7 @@ bool isNew = YES;
 #pragma mark - PRIVATE FUNCTIONS
 - (void)keyBoardReasonPicker 
 {
-    self.reasonPickerArray = [NSArray arrayWithObjects:
+    NSArray *options = [NSArray arrayWithObjects:
                             NSLocalizedString(@"Marriage", @"marriage reason picker choice"),
                             NSLocalizedString(@"Birth of a Child",@"child reason picker choice"),
                             NSLocalizedString(@"Job Change",@"Job change reason picker choice"),
@@ -103,36 +98,12 @@ bool isNew = YES;
                             NSLocalizedString(@"University",@"University Reason Picker Choice"),
                             NSLocalizedString(@"Independence",@"Independence Reason picker choice"),
                             nil];
-    //TODO - make this work for Type Category selection.
-    // create a UIPicker view as a custom keyboard view
-    self.reasonPicker = [[[UIPickerView alloc] init] autorelease];
-    self.reasonPicker.showsSelectionIndicator = YES;
-    reasonPicker.dataSource = self;
-    reasonPicker.delegate = self;
-    //TODO - initialize the typePicker fields from typeArray.
-    
-    //Set typePicker as the inputView for textFieldType
-    reasonTextField.inputView = self.reasonPicker;
-    
-    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
-    // Prepare done button
-    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
-    keyboardDoneButtonView.barStyle = UIBarStyleDefault;
-    keyboardDoneButtonView.translucent = YES;
-    keyboardDoneButtonView.tintColor = nil;
-    [keyboardDoneButtonView sizeToFit];
-    
-    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(reasonPickerDone:)] autorelease];
-    UIBarButtonItem* newButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"New", @"New Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(reasonPickerNew:)] autorelease];
-    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, newButton, nil]];
-    
-    // Plug the keyboardDoneButtonView into the text field...
-    reasonTextField.inputAccessoryView = keyboardDoneButtonView;
-    [keyboardDoneButtonView release];
+    [[[TextFieldPickerView alloc] initWithTextField:reasonTextField options:options useNewButton:YES] autorelease];
+
 }
 - (void)keyBoardLayoutPicker 
 {
-    self.layoutPickerArray = [NSArray arrayWithObjects:
+    NSArray *options = [NSArray arrayWithObjects:
                               [NSArray arrayWithObjects:
                                 NSLocalizedString(@"0 Baths", @"0 Baths"),
                                 NSLocalizedString(@"1 Baths", @"1 Baths"),
@@ -146,177 +117,25 @@ bool isNew = YES;
                                NSLocalizedString(@"3 Bedrooms", @"3 Bedrooms"),
                                nil], 
                             nil];
-    //TODO - make this work for Type Category selection.
-    // create a UIPicker view as a custom keyboard view
-    self.layoutPicker = [[[UIPickerView alloc] init] autorelease];
-    self.layoutPicker.showsSelectionIndicator = YES;
-    layoutPicker.dataSource = self;
-    layoutPicker.delegate = self;
-    //TODO - initialize the typePicker fields from typeArray.
-    
-    //Set typePicker as the inputView for textFieldType
-    layoutTextField.inputView = self.layoutPicker;
-    
-    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
-    // Prepare done button
-    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
-    keyboardDoneButtonView.barStyle = UIBarStyleDefault;
-    keyboardDoneButtonView.translucent = YES;
-    keyboardDoneButtonView.tintColor = nil;
-    [keyboardDoneButtonView sizeToFit];
-    
-    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(layoutPickerDone:)] autorelease];
-    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
-    
-    // Plug the keyboardDoneButtonView into the text field...
-    layoutTextField.inputAccessoryView = keyboardDoneButtonView;
-    [keyboardDoneButtonView release];
+    [[[TextFieldPickerView alloc] initWithTextField:layoutTextField options:options useNewButton:NO] autorelease];
 }
 - (void)keyBoardSizePicker 
 {
-    self.sizePickerArray = [NSArray arrayWithObjects:
-                              NSLocalizedString(@"1 person", @"1 person"),
-                              NSLocalizedString(@"2 people",@"2 people"),
-                              NSLocalizedString(@"3 people",@"3 people"),
-                              NSLocalizedString(@"4 people",@"4 people"),
-                              NSLocalizedString(@"5 people",@"5 people"),
-                              NSLocalizedString(@"6 people",@"6 people"),
-                              NSLocalizedString(@"7 people",@"7 people"),
-                              NSLocalizedString(@"8 people",@"8 people"),
-                              NSLocalizedString(@"9 people",@"9 people"),
-                              NSLocalizedString(@"10 people",@"10 people"),
-                              nil];
-    //TODO - make this work for Type Category selection.
-    // create a UIPicker view as a custom keyboard view
-    self.sizePicker = [[[UIPickerView alloc] init] autorelease];
-    sizePicker.showsSelectionIndicator = YES;
-    sizePicker.dataSource = self;
-    sizePicker.delegate = self;
-    //TODO - initialize the typePicker fields from typeArray.
-    
-    //Set typePicker as the inputView for textFieldType
-    sizeTextField.inputView = self.sizePicker;
-    
-    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
-    // Prepare done button
-    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
-    keyboardDoneButtonView.barStyle = UIBarStyleDefault;
-    keyboardDoneButtonView.translucent = YES;
-    keyboardDoneButtonView.tintColor = nil;
-    [keyboardDoneButtonView sizeToFit];
-    
-    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done Button Text") style:UIBarButtonItemStyleBordered target:self action:@selector(sizePickerDone:)] autorelease];
-    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
-    
-    // Plug the keyboardDoneButtonView into the text field...
-    reasonTextField.inputAccessoryView = keyboardDoneButtonView;
-    [keyboardDoneButtonView release];
+    NSArray *options = [NSArray arrayWithObjects:
+                        NSLocalizedString(@"1 person", @"1 person"),
+                        NSLocalizedString(@"2 people",@"2 people"),
+                        NSLocalizedString(@"3 people",@"3 people"),
+                        NSLocalizedString(@"4 people",@"4 people"),
+                        NSLocalizedString(@"5 people",@"5 people"),
+                        NSLocalizedString(@"6 people",@"6 people"),
+                        NSLocalizedString(@"7 people",@"7 people"),
+                        NSLocalizedString(@"8 people",@"8 people"),
+                        NSLocalizedString(@"9 people",@"9 people"),
+                        NSLocalizedString(@"10 people",@"10 people"),
+                        nil];
+    [[[TextFieldPickerView alloc] initWithTextField:sizeTextField options:options useNewButton:NO] autorelease];
 }
 
-
-
-- (IBAction)reasonPickerDone:(id)sender{   
-    [self.reasonTextField resignFirstResponder];
-}
-- (IBAction)reasonPickerNew:(id)sender{   
-    //TODO - change keyboard layout
-    reasonTextField.inputView = nil;
-    [reasonTextField resignFirstResponder];
-    reasonTextField.text = nil;
-    [reasonTextField becomeFirstResponder];
-    reasonTextField.inputView = self.reasonPicker;
-}
-
-- (IBAction)layoutPickerDone:(id)sender{   
-    [self.layoutTextField resignFirstResponder];
-}
-
-- (IBAction)sizePickerDone:(id)sender{   
-    [self.sizeTextField resignFirstResponder];
-}
-
-# pragma mark UIPickerViewDataSource
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    if (pickerView == self.reasonPicker) {
-        return 1;
-    }
-    else if (pickerView == self.layoutPicker) {
-        return 2;
-    }
-    else {
-        return 1;
-    }
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    if (pickerView == self.reasonPicker) {
-        return [self.reasonPickerArray count];
-    }
-    else if (pickerView == self.layoutPicker) {
-        return [[self.layoutPickerArray objectAtIndex:component] count];
-    }
-    else if (pickerView == self.sizePicker) {
-        return [self.sizePickerArray count];
-    }
-    else {
-        return 0;
-    }
-}
-
-# pragma mark UIPickerViewDelegate
-- (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if (thePickerView == self.reasonPicker) {
-        return [reasonPickerArray objectAtIndex:row];
-    }
-    else if (thePickerView == self.layoutPicker) {
-        return [[self.layoutPickerArray objectAtIndex:component] objectAtIndex:row];
-    } else if (thePickerView == self.sizePicker) {
-        return [sizePickerArray objectAtIndex:row];
-    }
-    else {
-        return nil;
-    }
-}
-
-- (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if (row != -1){
-        if (thePickerView == self.reasonPicker) {
-            self.userData.reason =  [reasonPickerArray objectAtIndex:row];
-            self.reasonTextField.text = [reasonPickerArray objectAtIndex:row];
-            self.reasonPicker.tag = row;
-        }
-        else if (thePickerView == self.sizePicker) {
-            self.userData.numPeople =  [NSNumber numberWithInt: row+1];
-            self.sizeTextField.text = [sizePickerArray objectAtIndex:row];
-            self.sizePicker.tag = row;
-        }
-        else if (thePickerView == self.layoutPicker) {
-            if (component == 0) {
-                self.userData.numBaths = [NSNumber numberWithInt: row];
-                layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:row], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:[userData.numBeds intValue]]];
-            }
-            else {
-                self.userData.numBeds = [NSNumber numberWithInt: row];
-                layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:[userData.numBaths intValue]], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:row]];
-            }
-            self.layoutPicker.tag = row;
-//            
-//            NSArray* ta = [layoutTextField.text componentsSeparatedByString: @", "];
-//            if (ta.count > 1) {
-//                if (component == 0 ) {
-//                    layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:row], [ta objectAtIndex:1]];
-//                }
-//                else {
-//                    layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[ta objectAtIndex:0], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:row]];
-//                }
-//            }
-//            else {
-//                layoutTextField.text = [NSString stringWithFormat:@"%@, %@",[[self.layoutPickerArray objectAtIndex:0] objectAtIndex:(component == 0 ? row : 0)], [[self.layoutPickerArray objectAtIndex:1] objectAtIndex:(component == 1 ? row : 0)]];
-//            }
-//            self.layoutPicker.tag = row;
-        }
-    }
-}
 
 #pragma mark - View lifecycle
 
@@ -352,6 +171,7 @@ bool isNew = YES;
         isNew = NO;
     }
     
+    [self.navigationController setNavigationBarHidden:YES];
     
 }
 
@@ -362,21 +182,10 @@ bool isNew = YES;
     [self setScrollView:nil];
     [self setLayoutTextField:nil];
     [self setSizeTextField:nil];
-    self.layoutPicker = nil;
-    self.layoutPickerArray = nil;
-    self.reasonPicker = nil;
-    self.reasonPickerArray = nil;
-    self.sizePicker = nil;
-    self.sizePickerArray = nil;
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (IBAction)registerButtonClicked:(id)sender {
@@ -400,7 +209,9 @@ bool isNew = YES;
         // Animate the transition
         suruga_homeAppDelegate *delegate = (suruga_homeAppDelegate *) [[UIApplication sharedApplication] delegate];
         [UIView transitionWithView:delegate.window duration:0.8 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
-            delegate.window.rootViewController = delegate.tabBarController;
+            delegate.window.rootViewController = [TTNavigator navigator].rootViewController;
+           [[TTNavigator navigator] openURLAction: [[TTURLAction actionWithURLPath:@"suruga://tabbar"] applyAnimated:YES]];
+            //delegate.window.rootViewController = delegate.tabBarController;
         } completion:nil];
     }
     else {
@@ -421,12 +232,6 @@ bool isNew = YES;
     [layoutTextField release];
     [sizeTextField release];
     
-    [layoutPicker release];
-    [layoutPickerArray release];
-    [reasonPicker release];
-    [reasonPickerArray release];
-    [sizePicker release];
-    [sizePickerArray release];
     [super dealloc];
 }
 

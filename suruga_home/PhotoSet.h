@@ -9,28 +9,24 @@
 #import <Foundation/Foundation.h>
 #import "Three20/Three20.h"
 
-@class Address;
+@class Home;
 
 @interface PhotoSet : TTURLRequestModel <TTPhotoSource, TTURLResponse>
 {
     NSString *_title;
-    NSArray *_photos;
     NSMutableArray *_results;
     
-    Address* address;
+    Home* home;
 }
 extern NSString * const BASE_GOOGLE_URL;
 
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, retain) NSArray *photos;
 @property (nonatomic, readonly) NSMutableArray *results;
-@property (nonatomic, retain) Address *address;
+@property (nonatomic, retain) Home *home;
 
-- (id) initWithAddress:(Address *) address;
+- (id) initWithHome:(Home *) home;
 
 -(id<TTPhoto>)photoAtIndex:(NSInteger)index;
 
-
-+ (PhotoSet *)samplePhotoSet;
 //https://ajax.googleapis.com/ajax/services/search/images?v=1.0&imgtype=photo&rsz=8&q=<ADDRESS>
 @end

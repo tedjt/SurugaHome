@@ -9,10 +9,10 @@
 #import "HomeTableViewController.h"
 #import "suruga_homeAppDelegate.h"
 #import "Home.h"
-#import "Address.h"
 #import "Image.h"
-#import "Price.h"
 #import "HomeMapAnnotation.h"
+#import "UIButton+setTitleText.h"
+#import "BudgetTableViewController.h"
 
 //#import "TaskTableViewCell.h"
 
@@ -20,7 +20,7 @@
 @synthesize scrollView;
 @synthesize pageControl;
 @synthesize mTableView;
-@synthesize mapView;
+@synthesize mTableViewPrice;
 
 @synthesize managedObjectContext, fetchedResultsController;
 
@@ -41,12 +41,14 @@ enum {
         self.managedObjectContext = [(suruga_homeAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
     }
 	
-	//self.navigationItem.leftBarButtonItem = self.editButtonItem;
-	self.mTableView.editing = YES; //NO
+	self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    // Set up table views
+	self.mTableView.editing = NO;
 	self.mTableView.allowsSelection = YES;
 	self.mTableView.allowsSelectionDuringEditing = YES;
     // Set the table view's row height
     self.mTableView.rowHeight = 117.0;
+    
 	
 	self.title=NSLocalizedString(@"Home List",@"Home List Title");
     
@@ -60,15 +62,20 @@ enum {
 		exit(-1);  // Fail
 	}
     
-    //Configure MapView
-    self.mapView = [[[MKMapView alloc] initWithFrame: CGRectMake(scrollView.frame.size.width, 0, scrollView.frame.size.width, scrollView.frame.size.height)]autorelease];
-    self.mapView.delegate = self;
-    [self.scrollView addSubview:self.mapView];
+    // configure price comparison table
+    self.mTableViewPrice = [[[UITableView alloc] initWithFrame: CGRectMake(scrollView.frame.size.width, 0, scrollView.frame.size.width, scrollView.frame.size.height)]autorelease];
+    self.mTableViewPrice.delegate = self;
+    self.mTableViewPrice.dataSource = self;
+    self.mTableViewPrice.editing = NO;
+	self.mTableViewPrice.allowsSelection = YES;
+	self.mTableViewPrice.allowsSelectionDuringEditing = YES;
+    // Set the table view's row height
+    self.mTableViewPrice.rowHeight = 117.0;
+    
+    // Add table view to the second pane.
+    [self.scrollView addSubview:self.mTableViewPrice];
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 2, self.scrollView.frame.size.height);
     
-    // Add Annotations
-    [self loadMapViewAnnotations];
-    //TODO Make the mapview have the right zoom for the annotations.
 
 }
 
@@ -77,7 +84,7 @@ enum {
     [self setScrollView:nil];
     [self setPageControl:nil];
     [self setMTableView:nil];
-    [self setMapView:nil];
+    [self setMTableViewPrice:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -87,6 +94,7 @@ enum {
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.mTableView reloadData];
+    [self.mTableViewPrice reloadData];
     [super viewWillAppear:animated];
 }
 
@@ -106,37 +114,52 @@ enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *HomeCellId = @"HomeTableViewCellId";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HomeCellId];
-    if (cell == nil) {
-        // Load the top-level objects from the custom cell XIB.
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"HomeTableViewCell" owner:self options:nil];
-        // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
-        cell = [topLevelObjects objectAtIndex:0];
-    }
-    
+    UITableViewCell *cell;
     // Configure the cell...
-    [self configureCell:cell atIndexPath:indexPath];
+    if (tableView == self.mTableView) {
+        static NSString *HomeCellId = @"HomeTableViewCellId";
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:HomeCellId];
+        if (cell == nil) {
+            // Load the top-level objects from the custom cell XIB.
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"HomeTableViewCell" owner:self options:nil];
+            // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+            cell = [topLevelObjects objectAtIndex:0];
+        }
+        [self configureLocationCell:cell atIndexPath:indexPath];
+    }
+    else {
+        static NSString *HomeCellPriceId = @"HomeTableViewCellPriceId";
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:HomeCellPriceId];
+        if (cell == nil) {
+            // Load the top-level objects from the custom cell XIB.
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"HomeTableViewCellPrice" owner:self options:nil];
+            // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+            cell = [topLevelObjects objectAtIndex:0];
+        }
+
+        [self configurePriceCell:cell atIndexPath: indexPath];
+    }
     return cell;
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureLocationCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     //Enum to hold the cell element tags
     enum {
         kHomeImageViewTag = 1,
         kNameLabelTag = 2,
         kRatingImageTag = 3,
-        kPriceLabelTag = 4,
-        kAddressLabelTag = 5
+        kStationLabelTag = 4,
+        kSizeLabelTag = 5
     };
 	
     // Configure the cell to show the tasks's name
     UIImageView *homeImageView = (UIImageView *)[cell viewWithTag:kHomeImageViewTag];
     UILabel *nameLabel = (UILabel *)[cell viewWithTag: kNameLabelTag];
     UIImageView *ratingImageView = (UIImageView *)[cell viewWithTag:kRatingImageTag];
-    UILabel *priceLabel = (UILabel *)[cell viewWithTag: kPriceLabelTag];
-    UILabel *addressLabel = (UILabel *)[cell viewWithTag: kAddressLabelTag];
+    UILabel *stationLabel = (UILabel *)[cell viewWithTag: kStationLabelTag];
+    UILabel *sizeLabel = (UILabel *)[cell viewWithTag: kSizeLabelTag];
 
 	Home  *home = [fetchedResultsController objectAtIndexPath:indexPath];
 	nameLabel.text = home.name;
@@ -149,15 +172,63 @@ enum {
         ratingImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d_stars.png", [home.rating.overall intValue]]];                                          
     }
     //TODO internationailize
-    priceLabel.text = [NSString stringWithFormat:@"$%d",[home.price getRunningSum]];
-    addressLabel.text = home.address.street;
-    //TODO internationailize
-    /*
-    cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-    cell.detailTextLabel.numberOfLines = 4;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n$%d", home.address.street, [home.price getRunningSum]];
-     */
+    stationLabel.text = [NSString stringWithFormat:@"%d minutes", [home.stationDistance intValue]];
+    sizeLabel.text = [NSString stringWithFormat:@"%d square meters", [home.size intValue]]; 
 }
+
+- (void)configurePriceCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    //Enum to hold the cell element tags
+    enum {
+        kHomeImageViewTag = 1,
+        kInitialTag = 2,
+        kInitialCapacityTag = 3,
+        kRunningTag = 4,
+        kRunningCapacityTag = 5
+    };
+	
+    // Configure the cell to show the tasks's name
+    UIImageView *homeImageView = (UIImageView *)[cell viewWithTag:kHomeImageViewTag];
+    UILabel *initialCost = (UILabel *)[cell viewWithTag: kInitialTag];
+    UIButton *initialCapacity = (UIButton *) [cell viewWithTag:kInitialCapacityTag];
+    UILabel *runningCost = (UILabel *)[cell viewWithTag: kRunningTag];
+    UIButton *runningCapacity = (UIButton *) [cell viewWithTag:kRunningCapacityTag];
+    
+	Home  *home = [fetchedResultsController objectAtIndexPath:indexPath];
+    // Set initial cost labels
+    initialCost.text = [NSString stringWithFormat:NSLocalizedString(@"$%d", @"Dollar formated cost"),[home getInitialCost]];
+    [initialCapacity setTitleText: [NSString stringWithFormat:NSLocalizedString(@"$%d", @"Dollar formated cost"),[home getInitialCapacity]]];
+    [initialCapacity addTarget:self action:@selector(initialBudgetClicked:)
+     forControlEvents:UIControlEventTouchUpInside];
+    // Set Running cost labels
+    runningCost.text = [NSString stringWithFormat:NSLocalizedString(@"$%d", @"Dollar formated cost"),[home getRunningCost]];
+    [runningCapacity setTitleText: [NSString stringWithFormat:NSLocalizedString(@"$%d", @"Dollar formated cost"),[home getRunningCapacity]]];
+    [runningCapacity addTarget:self action:@selector(runningBudgetClicked:)
+              forControlEvents:UIControlEventTouchUpInside];
+    // Set home image if available.
+    Image *imageObject = [home.images anyObject];
+    if (imageObject != nil) {
+        homeImageView.image = [UIImage imageWithData:imageObject.thumb];
+    }
+    // TODO Set capacity buttons to link to appropriate budget. (three20)
+    // Set disclosure indictor
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+}
+
+//Budget Actions
+- (IBAction)initialBudgetClicked:(id)sender {
+    BudgetTableViewController *budgetController = [[[BudgetTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+    budgetController.managedObjectContext = self.managedObjectContext;
+    budgetController.isInitial = YES;
+    [self.navigationController pushViewController:budgetController animated:YES];
+}
+
+- (IBAction)runningBudgetClicked:(id)sender {
+    BudgetTableViewController *budgetController = [[[BudgetTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+    budgetController.managedObjectContext = self.managedObjectContext;
+    budgetController.isInitial = NO;
+    [self.navigationController pushViewController:budgetController animated:YES];
+}
+
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -180,7 +251,6 @@ enum {
 			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 			exit(-1);  // Fail
 		}
-        [self loadMapViewAnnotations];
     }   
 }
 
@@ -189,6 +259,7 @@ enum {
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated {
     [super setEditing: editing animated: animated];
     [self.mTableView setEditing:editing animated:animated];
+    [self.mTableViewPrice setEditing:editing animated:animated];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -211,6 +282,7 @@ enum {
     HomeDetailViewController *detailViewController = [[HomeDetailViewController alloc] initWithNibName:@"HomeDetailViewController 2" bundle:nil];
     
 	detailViewController.home = (Home *)[NSEntityDescription insertNewObjectForEntityForName:@"Home" inManagedObjectContext:managedObjectContext];
+    [detailViewController.home populateDefaultBudgetItems];
     detailViewController.parentController = self;
 	
     // Push the task view to the navigation controller.
@@ -256,32 +328,6 @@ enum {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void) loadMapViewAnnotations {
-    //Remove all annotations
-    for (id annotation in self.mapView.annotations) {
-        if (![annotation isKindOfClass:[MKUserLocation class]]){
-            [self.mapView removeAnnotation:annotation];
-        }
-    }
-    // add annotations.
-    for (Home *home in [self.fetchedResultsController fetchedObjects])
-    {
-        if (home.address != nil && home.address.latitude != nil && fabs([home.address.latitude doubleValue]) > 0.001) {
-            HomeMapAnnotation *annotation = [[[HomeMapAnnotation alloc] init] autorelease];
-            annotation.title = home.name;
-            annotation.subtitle = [home.address getFormattedAddress];
-            annotation.coordinate = [home.address getCoordinate];
-            Image *imageObject = [home.images anyObject];
-            if (imageObject != nil) {
-                annotation.image = [UIImage imageWithData:imageObject.thumb];
-            }
-            annotation.home = home;
-            [self.mapView addAnnotation:annotation];
-        }
-    }
-}
-
-
 #pragma mark -
 #pragma mark Fetched results controller
 
@@ -305,6 +351,7 @@ enum {
 	[fetchRequest setSortDescriptors:sortDescriptors];
 	
 	// Create and initialize the fetch results controller.
+    [NSFetchedResultsController deleteCacheWithName:@"Root"];  
 	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"name" cacheName:@"Root"];
 	self.fetchedResultsController = aFetchedResultsController;
 	fetchedResultsController.delegate = self;
@@ -326,14 +373,11 @@ enum {
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
 	// The fetch controller is about to start sending change notifications, so prepare the table view for updates.
 	[self.mTableView beginUpdates];
+    [self.mTableViewPrice beginUpdates];
 }
 
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-	
-	UITableView *tableView = self.mTableView;
-    
-	switch(type) {
+- (void) commitChangeType:(NSFetchedResultsChangeType)type atIndexPath:(NSIndexPath *) indexPath newIndexPath:(NSIndexPath *) newIndexPath tableView:(UITableView *) tableView {
+    switch(type) {
 			
 		case NSFetchedResultsChangeInsert:
 			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -344,7 +388,11 @@ enum {
 			break;
 			
 		case NSFetchedResultsChangeUpdate:
-			[self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            if (tableView == self.mTableView) {
+                [self configureLocationCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            } else {
+                [self configurePriceCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            }
 			break;
 			
 		case NSFetchedResultsChangeMove:
@@ -352,8 +400,14 @@ enum {
             [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 	}
+
 }
 
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    //Commit change to both table views.
+    [self commitChangeType:type atIndexPath:indexPath newIndexPath:newIndexPath tableView:self.mTableView];
+    [self commitChangeType:type atIndexPath:indexPath newIndexPath:newIndexPath tableView:self.mTableViewPrice];
+}
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
 	
@@ -361,10 +415,12 @@ enum {
 			
 		case NSFetchedResultsChangeInsert:
 			[self.mTableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            [self.mTableViewPrice insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 			
 		case NSFetchedResultsChangeDelete:
 			[self.mTableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            [self.mTableViewPrice deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 	}
 }
@@ -373,67 +429,12 @@ enum {
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
 	// The fetch controller has sent all current change notifications, so tell the table view to process all updates.
 	[self.mTableView endUpdates];
+    [self.mTableViewPrice endUpdates];
 }
 
 
 #pragma mark -
 
-#pragma mark MKMapViewDelegate
-
-- (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation
-{
-    // if it's the user location, just return nil.
-    if ([annotation isKindOfClass:[MKUserLocation class]])
-        return nil;
-    
-    // handle custom annotations for each home.
-
-    // try to dequeue an existing pin view first
-    static NSString* HomeAnnotationIdentifier = @"homeAnnotationIdentifier";
-    MKPinAnnotationView* pinView = (MKPinAnnotationView *)
-    [mapView dequeueReusableAnnotationViewWithIdentifier:HomeAnnotationIdentifier];
-    if (!pinView)
-    {
-        // if an existing pin view was not available, create one
-        MKPinAnnotationView* customPinView = [[[MKPinAnnotationView alloc] 
-            initWithAnnotation:annotation reuseIdentifier:HomeAnnotationIdentifier] autorelease];
-        customPinView.pinColor = MKPinAnnotationColorRed;
-        //customPinView.animatesDrop = YES;
-        customPinView.canShowCallout = YES;
-        
-        // add a detail disclosure button to the callout which will open a new view controller page
-        //
-        // note: you can assign a specific call out accessory view, or as MKMapViewDelegate you can implement:
-        //  - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control;
-        //
-        customPinView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        
-        //TODO
-        customPinView.leftCalloutAccessoryView = [[[UIImageView alloc] initWithImage:[(HomeMapAnnotation *) annotation image]] autorelease];
-        
-        return customPinView;
-        } else {
-            pinView.annotation = annotation;
-            pinView.leftCalloutAccessoryView =[[[UIImageView alloc] initWithImage:[(HomeMapAnnotation *) annotation image]] autorelease];
-        }
-        return pinView;
-}
-
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    // Load Detail view controller
-    
-    // Create and push a detail view controller.
-	HomeDetailViewController *homeDetailViewController = [[HomeDetailViewController alloc] initWithNibName:@"HomeDetailViewController 2" bundle:nil];
-    
-    // Pass the selected Home to the new view controller.
-    homeDetailViewController.home = [(HomeMapAnnotation *) view.annotation home];
-    homeDetailViewController.parentController = self;
-    
-    // Push the task view to the navigation controller.
-    [self.navigationController pushViewController:homeDetailViewController animated:YES];
-    [homeDetailViewController release];
-    //TODO
-}
 
 #pragma mark memory maanagement
 
@@ -443,7 +444,7 @@ enum {
     [scrollView release];
     [pageControl release];
     [mTableView release];
-    [mapView release];
+    [mTableViewPrice release];
     [super dealloc];
 }
 

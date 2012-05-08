@@ -10,22 +10,21 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "RatingViewController.h"
-#import "PriceViewController.h"
+#import "HomePriceTableViewController.h"
 #import "SVGeocoder.h"
 
 @class Home;
 @class DCRoundSwitch;
 @protocol HomeDetailViewControllerDelegate;
 
-@interface HomeDetailViewController : UIViewController <RatingViewControllerDelegate, PriceViewControllerDelegate, SVGeocoderDelegate, UITextFieldDelegate> {
+
+@interface HomeDetailViewController : UIViewController <RatingViewControllerDelegate, HomePriceTableViewControllerDelegate, SVGeocoderDelegate, UITextFieldDelegate> {
     Home *home;
     id <HomeDetailViewControllerDelegate> parentController;
     UITextField *nameTextField;
-    UITextField *cityTextField;
-    UITextField *stateTextField;
-    UITextField *zipTextField;
     UITextField *phoneTextField;
-    UITextField *streetTextField;
+    UITextField *addressTextField;
+    UITextField *activeField;
     MKMapView *mapView;
     UIButton *imageButton;
     UIButton *ratingButton;
@@ -36,24 +35,25 @@
 @property (nonatomic, assign) id <HomeDetailViewControllerDelegate>parentController;
 
 @property (nonatomic, retain) IBOutlet UITextField *nameTextField;
-@property (nonatomic, retain) IBOutlet UITextField *cityTextField;
-@property (nonatomic, retain) IBOutlet UITextField *stateTextField;
-@property (nonatomic, retain) IBOutlet UITextField *zipTextField;
 @property (nonatomic, retain) IBOutlet UITextField *phoneTextField;
-@property (nonatomic, retain) IBOutlet UITextField *streetTextField;
+@property (nonatomic, retain) IBOutlet UITextField *addressTextField;
+@property (retain, nonatomic) IBOutlet UITextField *sizeTextField;
+@property (retain, nonatomic) IBOutlet UITextField *layoutTextField;
+@property (retain, nonatomic) IBOutlet UITextField *stationTextField;
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) IBOutlet UIButton *imageButton;
 @property (nonatomic, retain) IBOutlet UIButton *ratingButton;
 @property (nonatomic, retain) IBOutlet UIButton *priceButton;
-@property (retain, nonatomic) IBOutlet UIButton *notesButton;
+@property (retain, nonatomic) IBOutlet UITextView *notesTextField;
 @property (retain, nonatomic) IBOutlet DCRoundSwitch *isRentSwitch;
+@property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
 
-- (IBAction)textFieldOutside:(id)sender; //Deprecated function
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
 
 - (IBAction)imageButtonClicked:(id)sender;
 - (IBAction)ratingButtonClicked:(id)sender;
 - (IBAction)priceButtonClicked:(id)sender;
-- (IBAction)notesButtonClicked:(id)sender;
 - (IBAction)isRentSwitched:(id)sender;
 
 - (void) updateHomeObject;
@@ -63,7 +63,9 @@
 
 @protocol HomeDetailViewControllerDelegate
 - (void)homeDetailViewController:(HomeDetailViewController *)controller didFinishWithSave:(BOOL)save;
+@end
 
+@protocol HomeMapViewDelegate
 - (void) loadMapViewAnnotations;
 
 @end

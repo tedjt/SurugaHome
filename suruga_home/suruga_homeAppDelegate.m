@@ -9,8 +9,12 @@
 #import "suruga_homeAppDelegate.h"
 #import "StartUpViewController.h"
 #import "FinancialAdviceViewController.h"
+#import "TabBarController.h"
 
-
+#import "HomeTableViewController.h"
+#import "HomeMapViewController.h"
+#import "FinancialHomeViewController.h"
+ 
 @implementation suruga_homeAppDelegate
 
 @synthesize window = _window;
@@ -124,13 +128,22 @@
 {
     // Set up Three20 url navigation:
     TTNavigator *navigator = [TTNavigator navigator];
+    [navigator setSupportsShakeToReload:YES];
+    [navigator setPersistenceMode:TTNavigatorPersistenceModeAll];
     navigator.window = self.window;
     TTURLMap *map = navigator.URLMap;
-    [map from:@"tt://FinancialAdviceViewController" 
-    toViewController:[FinancialAdviceViewController class]];
-    [map from:@"tt://tabController" 
-    toSharedViewController:[self.tabBarController class]];
-    
+    // A navigator will default to TTWebController class when no URL match will be met
+    [map from:@"*" toViewController:[TTWebController class]];
+    // My controller maps.
+    // Tab Bar
+    [map from:@"suruga://tabbar" toSharedViewController:[TabBarController class]];
+    // Individual Tabs
+    [map from:@"suruga://comparisonTab" toViewController:[HomeTableViewController class]];
+    [map from:@"suruga://budgetTab" toViewController:[FinancialHomeViewController class]];
+    [map from:@"suruga://mapTab" toViewController:[HomeMapViewController class]];
+    [map from:@"suruga://guideTab" toViewController:[StartUpViewController class]];
+    [map from:@"suruga://startUpView" toViewController:[StartUpViewController class]];
+    [map from:@"suruga://FinancialAdviceViewController" toViewController:[FinancialAdviceViewController class]];
     
     // Add the tab bar controller's current view as a subview of the window
     UserData *ud = [UserData fetchUserDataWithContext:self.managedObjectContext];
@@ -138,16 +151,25 @@
     //[self.managedObjectContext save:nil];
     ud = [UserData fetchUserDataWithContext:self.managedObjectContext];
     if (ud == nil) {
-        self.startUpViewController.userData =(UserData*) [NSEntityDescription insertNewObjectForEntityForName:@"UserData" inManagedObjectContext:self.managedObjectContext];
+        self.startUpViewController.userData = (UserData*) [NSEntityDescription insertNewObjectForEntityForName:@"UserData" inManagedObjectContext:self.managedObjectContext];
+        //[navigator openURLAction:[TTURLAction actionWithURLPath:@"suruga://startUpView"]];
         self.window.rootViewController = self.startUpViewController;
     } else {
-        //[[TTNavigator navigator] openURLAction: [[TTURLAction actionWithURLPath:@"tt://restaurant/Chotchkie's"] applyAnimated:YES]];
-        self.window.rootViewController = self.tabBarController;
+        // Try restoring
+        if (! [navigator restoreViewControllers]) {
+            [[TTNavigator navigator] openURLAction: [[TTURLAction actionWithURLPath:@"suruga://tabbar"] applyAnimated:YES]];
+        }
+        //self.window.rootViewController = self.tabBarController;
     }
     // Let us download large images
     [[TTURLRequestQueue mainQueue] setMaxContentLength:0];
     //make window visible.
-    [self.window makeKeyAndVisible];
+    //[self.window makeKeyAndVisible];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication*)application handleOpenURL:(NSURL*)URL {
+    TTOpenURL([URL absoluteString]);
     return YES;
 }
 
