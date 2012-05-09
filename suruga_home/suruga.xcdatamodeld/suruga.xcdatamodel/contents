@@ -48,8 +48,10 @@
         <relationship name="home" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="budgetItems" inverseEntity="Home" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image">
+        <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="pathToFull" optional="YES" attributeType="String"/>
         <attribute name="thumb" optional="YES" attributeType="Transformable"/>
+        <attribute name="width" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="home" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="images" inverseEntity="Home"/>
     </entity>
     <entity name="Rating" representedClassName="Rating">
@@ -94,7 +96,7 @@
         <element name="Furniture" positionX="160" positionY="192" width="128" height="150"/>
         <element name="Home" positionX="160" positionY="192" width="128" height="135"/>
         <element name="HomeBudgetItem" positionX="160" positionY="192" width="128" height="150"/>
-        <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Image" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Rating" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Room" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Task" positionX="160" positionY="192" width="128" height="165"/>

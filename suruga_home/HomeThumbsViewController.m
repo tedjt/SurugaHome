@@ -27,7 +27,8 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.photoSource = [[HomePhotoSource alloc] initWithHome:self.home];
+    [(HomePhotoSource*) self.photoSource  reloadData];
+    [self refresh];
 }
 
 - (TTPhotoViewController*)createPhotoViewController {
@@ -96,7 +97,7 @@
 			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 			exit(-1);  // Fail
 		}
-        self.photoSource = [[HomePhotoSource alloc] initWithHome:self.home];
+        [(HomePhotoSource*) self.photoSource  reloadData];
 		[self refresh];
 	}
 }

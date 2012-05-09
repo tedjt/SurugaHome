@@ -13,6 +13,8 @@
 @implementation Image
 @dynamic thumb;
 @dynamic pathToFull;
+@dynamic width;
+@dynamic height;
 
 # pragma mark private functions
 
@@ -35,8 +37,14 @@
     NSString *filepath = [NSString stringWithFormat:@"%@/%@", imagePath, self.pathToFull];
     
     // Save the image 
-    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+    
+    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation([image imageByScalingAndCroppingForSize:CGSizeMake(640, 920)])];
     [imageData writeToFile:filepath atomically:YES];
+    
+
+    //Set Width and height
+    self.width = [NSNumber numberWithFloat: image.size.width];
+    self.height = [NSNumber numberWithFloat: image.size.height];
 }
 
 //TODO support scaling the returned image.

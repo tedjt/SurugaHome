@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSMutableArray *photos;
 
 - (id)initWithHome: (Home *) home;
+- (void)reloadData;
 - (void)deletePhotoAtIndex: (NSUInteger) index;
 
 @end

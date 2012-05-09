@@ -17,6 +17,8 @@
 }
 @property (nonatomic, retain) id thumb;
 @property (nonatomic, retain) NSString * pathToFull;
+@property (nonatomic, retain) NSNumber * width;
+@property (nonatomic, retain) NSNumber * height;
 
 - (void) setValuesFromImage: (UIImage *) image;
 - (UIImage*) getLargeImage;

@@ -17,18 +17,22 @@
         self.title = home.name;
         
         // Populate photos array.
-        NSMutableArray *a = [NSMutableArray arrayWithCapacity:home.images.count];
-        int index = 0;
-        for (Image *i in home.images) {
-            HomePhoto *p = [[[HomePhoto alloc] initWithImage:i] autorelease];
-            p.photoSource = self;
-            p.index = index;
-            [a addObject:p];
-            index++;
-        }
-        self.photos = a;      
+        [self reloadData];
     }
     return self;
+}
+
+- (void)reloadData {
+    NSMutableArray *a = [NSMutableArray arrayWithCapacity:home.images.count];
+    int index = 0;
+    for (Image *i in home.images) {
+        HomePhoto *p = [[[HomePhoto alloc] initWithImage:i] autorelease];
+        p.photoSource = self;
+        p.index = index;
+        [a addObject:p];
+        index++;
+    }
+    self.photos = a;
 }
 
 - (void)deletePhotoAtIndex: (NSUInteger) index {
@@ -77,10 +81,9 @@
 - (id)initWithImage:(Image*) theImage {
     if ((self = [super init])) {
         self.image = theImage;
-        UIImage *largeImage = [image getLargeImage];
-        self.url = [[TTURLCache sharedCache] storeTemporaryImage:largeImage toDisk:NO];
+        self.url = [NSString stringWithFormat:@"documents://%@", image.pathToFull];
         self.thumbUrl = [[TTURLCache sharedCache] storeTemporaryData:image.thumb];
-        self.size = [largeImage size];//CGSizeMake(640, 920);
+        self.size = CGSizeMake([image.width floatValue], [image.height floatValue]);//[largeImage size];
         self.index = NSIntegerMax;
         self.photoSource = nil;
         self.caption = nil;
