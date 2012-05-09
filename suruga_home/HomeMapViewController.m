@@ -163,7 +163,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    NSString *url = [NSString stringWithFormat:@"https://maps.google.com/maps?q=%@", [[(HomeMapAnnotation *) view.annotation home].address gtm_stringByEscapingForURLArgument]];
+    NSString *url = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", [[(HomeMapAnnotation *) view.annotation home].address gtm_stringByEscapingForURLArgument]];
 //    TTWebController *webView = [[[TTWebController alloc] init] autorelease];
 //    [webView openURL:[NSURL URLWithString:url]];
 //    [self.navigationController pushViewController:webView animated:YES];

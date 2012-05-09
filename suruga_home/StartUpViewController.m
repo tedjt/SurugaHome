@@ -16,6 +16,7 @@
 #import "Room.h"
 #import "Furniture.h"
 #import "TextFieldPickerView.h"
+#import "ASIHTTPRequest.h"
 
 @implementation StartUpViewController
 @synthesize nameTextField;
@@ -29,11 +30,9 @@
 
 #pragma mark - PRIVATE FUNCTIONS
 bool isNew = YES;
-- (void)buildStaticData
+- (void) buildStaticData: (NSString *) data
 {
-   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"introData" ofType:@"json"];
-    NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    NSDictionary *results = [fileContent JSONValue];
+    NSDictionary *results = [data JSONValue];
 	
     //Tasks
 	NSArray *categories = [results objectForKey:@"categories"];
@@ -211,7 +210,14 @@ bool isNew = YES;
         self.userData.reason = reasonTextField.text;
         
         if (isNew) {
-            [self buildStaticData];
+            NSURL *url = [NSURL URLWithString:@"http://glurban10.mit.edu/suruga/initial_data"];
+            __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+            [request setCompletionBlock:^{
+                // Use when fetching text data
+                NSString *s = [request responseString];
+                [self buildStaticData: [request responseString]];
+            }];
+            [request startAsynchronous];
         }
 
         NSError *error;

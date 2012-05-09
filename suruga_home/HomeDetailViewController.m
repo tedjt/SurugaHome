@@ -71,6 +71,15 @@
     [[[TextFieldPickerView alloc] initWithTextField:layoutTextField options:options useNewButton:NO] autorelease];
 }
 
+- (void) updateAddressCoordinates {
+    //Get forward geocoded address
+    if (self.home.address != nil) {
+        SVGeocoder *geocodeRequest = [[[SVGeocoder alloc] initWithAddress:self.home.address] autorelease];
+        [geocodeRequest setDelegate:self];
+        [geocodeRequest startAsynchronous];
+    }
+}
+
 #pragma mark -
 #pragma mark - View lifecycle
 
@@ -232,6 +241,10 @@
 {
     activeField = nil;
     self.navigationItem.rightBarButtonItem = self.saveButton;
+    if (textField == addressTextField && ![addressTextField.text isEqualToString:home.address]) {
+        home.address = addressTextField.text;
+        [self updateAddressCoordinates];
+    }
 }
 
 - (IBAction)done:(id)sender {
@@ -273,18 +286,7 @@
 
 - (IBAction)imageButtonClicked:(id)sender {
     [self updateHomeObject];
-//    CustomImagePicker *imagePicker = [[CustomImagePicker alloc] init];
-//    imagePicker.title = NSLocalizedString(@"Home Images", @"Home Thumbs view title");
-//    imagePicker.home = self.home;
-//
-//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:imagePicker];
-//    [imagePicker release];
-//	[self presentModalViewController:navController animated:YES];
-//    [navController release];
-    
     HomeThumbsViewController *photoView = [[HomeThumbsViewController alloc] initWithHome:self.home];
-    //thumbs.photoSource = [[PhotoSet alloc] initWithHome:self.home];
-    //thumbs.parentController = self;
     [self.navigationController pushViewController:photoView animated:YES];
     TT_RELEASE_SAFELY(photoView);
 }
@@ -328,14 +330,6 @@
     self.home.isRent = [NSNumber numberWithBool: self.isRentSwitch.on];
 }
 #pragma mark - SVGeocoderDelegate
-- (void) updateAddressCoordinates {
-    //Get forward geocoded address
-    if (self.home.address != nil) {
-        SVGeocoder *geocodeRequest = [[[SVGeocoder alloc] initWithAddress:self.home.address] autorelease];
-        [geocodeRequest setDelegate:self];
-        [geocodeRequest startAsynchronous];
-    }
-}
 - (void)setMapViewZoom {
     CLLocationCoordinate2D c = [self.home getCoordinate];
     if (fabs(c.latitude) > 0.0001) {
