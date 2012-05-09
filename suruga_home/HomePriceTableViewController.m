@@ -81,7 +81,7 @@
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section{
 	if(section == 0){
-		return NSLocalizedString(@"Initial Costs", @"Home Initial Costs List Header section text");
+		return NSLocalizedString(@"Fixed Costs", @"Home Fixed Costs List Header section text");
 	}
 	else{
         return NSLocalizedString(@"Running Costs", @"Home Running Costs List Header section text");

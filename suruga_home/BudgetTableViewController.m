@@ -28,9 +28,9 @@
 	self.tableView.editing = NO;
 	
 	if (self.isInitial) {
-        self.title=NSLocalizedString(@"Initial Budget ",@"Initial Budget List Title");
+        self.title=NSLocalizedString(@"Fixed Costs Budget ",@"Initial Budget List Title");
     } else {
-        self.title = self.title=NSLocalizedString(@"Running Budget ",@"Running Budget List Title");
+        self.title = self.title=NSLocalizedString(@"Monthly Budget ",@"Running Budget List Title");
     }
 	//add a button
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -70,10 +70,16 @@
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section{
 	if(section == 0){
-		return NSLocalizedString(@"Expenses", @"Budget List Expenses Header section text");
+        if (self.isInitial)
+            return NSLocalizedString(@"Fixed Costs", @"Budget List Fixed Costs Header section text");
+        else
+            return NSLocalizedString(@"Expenses", @"Budget List Expenses Header section text");
 	}
 	else{
-        return NSLocalizedString(@"Income", @"Budget List Income Header section text");
+        if (self.isInitial)
+            return NSLocalizedString(@"Savings", @"Budget List Savings Header section text");
+        else
+            return NSLocalizedString(@"Income", @"Budget List Income Header section text");
 	}
 }
 
@@ -88,12 +94,20 @@
         if (cell == nil) {
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
+        NSString *text;
         if(indexPath.section == 0){
-            cell.textLabel.text = NSLocalizedString(@"Add an Expense", @"Budget List Expenses add an item text");
+            if (isInitial)
+                text = NSLocalizedString(@"Add Fixed Cost Item", @"Budget List Fixed Cost add an item text");
+            else
+                text = NSLocalizedString(@"Add a monthly expense", @"Budget List Expense add an item text");
         }
         else{
-            cell.textLabel.text = NSLocalizedString(@"Add an Income", @"Budget List Income add an item text");
+            if (isInitial)
+                text = NSLocalizedString(@"Add Savings Item", @"Budget List Savings add an item text");
+            else
+                text = NSLocalizedString(@"Add an Income", @"Budget List Income add an item text");
         }
+        cell.textLabel.text = text;
         //TODO set the imageView of the cell to be a + image.
         return cell;
     } else {
