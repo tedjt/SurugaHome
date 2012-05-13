@@ -85,8 +85,8 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ((indexPath.section == 0 && indexPath.row == costItems.count) ||
-        (indexPath.section == 1 && indexPath.row == incomeItems.count)) {
+    if ((indexPath.section == 0 && indexPath.row == incomeItems.count) ||
+        (indexPath.section == 1 && indexPath.row == costItems.count)) {
         //TODO - create a special add cell.
         static NSString *CellIdentifier = @"AddItemCellIdentifier";
         
@@ -126,7 +126,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     // Configure the cell
-    NSMutableArray *a = indexPath.section == 0 ? costItems : incomeItems;
+    NSMutableArray *a = indexPath.section == 0 ? incomeItems : costItems;
 	BudgetItem *item = (BudgetItem *) [a objectAtIndex:indexPath.row];    
     // Configure the cell to show the Budget Item's details
     UILabel *label;
@@ -145,8 +145,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     BudgetItem *item;
-    if((indexPath.section == 0 && indexPath.row == costItems.count) ||
-       (indexPath.section == 1 && indexPath.row == incomeItems.count)){
+    if((indexPath.section == 0 && indexPath.row == incomeItems.count) ||
+       (indexPath.section == 1 && indexPath.row == costItems.count)){
         //TODO - Add a new budget item
         item = (BudgetItem*) [NSEntityDescription insertNewObjectForEntityForName:@"BudgetItem" inManagedObjectContext:managedObjectContext];
         item.isExpense = [NSNumber numberWithBool:(indexPath.section == 0)];
@@ -154,11 +154,11 @@
         // hardcode all manually created budget items to always show up.
         item.isRenting = [NSNumber numberWithInt:3];
         //Insert the object into the table view
-        NSMutableArray *a = indexPath.section == 0 ? costItems : incomeItems;
+        NSMutableArray *a = indexPath.section == 0 ? incomeItems : costItems;
         [a addObject:item];
     }
     else {
-        NSMutableArray *a = indexPath.section == 0 ? costItems : incomeItems;
+        NSMutableArray *a = indexPath.section == 0 ? incomeItems : costItems;
         item = (BudgetItem *)[a objectAtIndex:indexPath.row];
             
     }
@@ -174,7 +174,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSMutableArray *a = indexPath.section == 0 ? costItems : incomeItems;
+        NSMutableArray *a = indexPath.section == 0 ? incomeItems : costItems;
         BudgetItem * itemToDelete = [a objectAtIndex:indexPath.row];
 		[managedObjectContext deleteObject:itemToDelete];
 		
@@ -191,8 +191,8 @@
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     //TODO make this conditional so last row ads a cell
-    if((indexPath.section == 0 && indexPath.row == costItems.count) ||
-       (indexPath.section == 1 && indexPath.row == incomeItems.count)){
+    if((indexPath.section == 0 && indexPath.row == incomeItems.count) ||
+       (indexPath.section == 1 && indexPath.row == costItems.count)){
         return UITableViewCellEditingStyleNone;
     } else{
         return UITableViewCellEditingStyleDelete;
@@ -244,7 +244,7 @@
             NSIndexPath *path = [self.tableView indexPathForCell: cell];
             
             // now use the index path
-            NSMutableArray *a = path.section == 0 ? costItems : incomeItems;
+            NSMutableArray *a = path.section == 0 ? incomeItems : costItems;
             BudgetItem *item = [a objectAtIndex:path.row];
             item.amount = [NSNumber numberWithInt: [textField.text intValue]];
             NSError *error;
