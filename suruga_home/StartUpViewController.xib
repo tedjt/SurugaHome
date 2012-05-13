@@ -327,22 +327,6 @@
 									<string key="NSResourceName">home_cross_section.png</string>
 								</object>
 							</object>
-							<object class="IBUIImageView" id="1055068800">
-								<reference key="NSNextResponder" ref="267242936"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{15, 331}, {83, 64}}</string>
-								<reference key="NSSuperview" ref="267242936"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="191363350"/>
-								<reference key="IBUIBackgroundColor" ref="111274255"/>
-								<int key="IBUIContentMode">1</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage" id="843024202">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">budget_icon.png</string>
-								</object>
-							</object>
 							<object class="IBUIImageView" id="1051906245">
 								<reference key="NSNextResponder" ref="267242936"/>
 								<int key="NSvFlags">292</int>
@@ -354,7 +338,10 @@
 								<int key="IBUIContentMode">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUIImage" ref="843024202"/>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">budget_icon.png</string>
+								</object>
 							</object>
 							<object class="IBUILabel" id="95798241">
 								<reference key="NSNextResponder" ref="267242936"/>
@@ -532,7 +519,7 @@
 								<string key="NSFrame">{{117, 258}, {172, 63}}</string>
 								<reference key="NSSuperview" ref="267242936"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="1055068800"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -732,7 +719,6 @@
 							<reference ref="295781170"/>
 							<reference ref="58161224"/>
 							<reference ref="191363350"/>
-							<reference ref="1055068800"/>
 							<reference ref="937988615"/>
 							<reference ref="1051906245"/>
 						</object>
@@ -835,11 +821,6 @@
 						<reference key="parent" ref="267242936"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">67</int>
-						<reference key="object" ref="1055068800"/>
-						<reference key="parent" ref="267242936"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">65</int>
 						<reference key="object" ref="937988615"/>
 						<reference key="parent" ref="267242936"/>
@@ -879,7 +860,6 @@
 					<string>6.IBPluginDependency</string>
 					<string>65.IBPluginDependency</string>
 					<string>66.IBPluginDependency</string>
-					<string>67.IBPluginDependency</string>
 					<string>85.IBPluginDependency</string>
 					<string>87.IBPluginDependency</string>
 					<string>89.IBPluginDependency</string>
@@ -890,7 +870,6 @@
 					<string>StartUpViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
