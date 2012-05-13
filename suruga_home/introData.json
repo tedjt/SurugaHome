@@ -52,7 +52,7 @@
                        "order": 1},
                        {"name": "Open household account",
                        "order": 2,
-                       "advisor_url": "http://tedjt.scripts.mit.edu/suruga/advisor/answer/general-deposit"},
+                       "advisor_url": "http://glurban10.mit.edu/suruga/advisor/answer/general-deposit"},
                        {"name": "Buy renters insurance",
                        "order": 3}
                        ]

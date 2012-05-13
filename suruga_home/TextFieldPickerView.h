@@ -11,6 +11,7 @@
 @interface TextFieldPickerView : UIPickerView <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, retain) NSArray *mOptions;
+@property (nonatomic, retain) NSArray *componentWidths;
 // Use a weak reference to avoid a retain cycle.
 @property (nonatomic, assign) UITextField *mTextField;
 

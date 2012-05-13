@@ -38,37 +38,35 @@
 {
     NSArray *options = [NSArray arrayWithObjects:
                         [NSArray arrayWithObjects:
-                         NSLocalizedString(@"0 L", @"0 L"),
-                         NSLocalizedString(@"1 L", @"1 L"),
-                         NSLocalizedString(@"2 L", @"2 L"),
-                         NSLocalizedString(@"3 L", @"3 L"),
-                         NSLocalizedString(@"4 L", @"4 L"),
-                         NSLocalizedString(@"5 L", @"5 L"),
-                         NSLocalizedString(@"6 L", @"6 L"),
-                         NSLocalizedString(@"7 L", @"7 L"),
+                         NSLocalizedString(@"0 Room", @"0 Room"),
+                         NSLocalizedString(@"1 Room", @"1 Room"),
+                         NSLocalizedString(@"2 Room", @"2 Room"),
+                         NSLocalizedString(@"3 Room", @"3 Room"),
+                         NSLocalizedString(@"4 Room", @"4 Room"),
+                         NSLocalizedString(@"5 Room", @"5 Room"),
+                         NSLocalizedString(@"6 Room", @"6 Room"),
+                         NSLocalizedString(@"7 Room", @"7 Room"),
                          nil],
                         [NSArray arrayWithObjects:
-                         NSLocalizedString(@"0 D", @"0 D"),
-                         NSLocalizedString(@"1 D", @"1 D"),
-                         NSLocalizedString(@"2 D", @"2 D"),
-                         NSLocalizedString(@"3 D", @"3 D"),
-                         NSLocalizedString(@"4 D", @"4 D"),
-                         NSLocalizedString(@"5 D", @"5 D"),
-                         NSLocalizedString(@"6 D", @"6 D"),
-                         NSLocalizedString(@"7 D", @"7 D"),
+                         NSLocalizedString(@"", @"Blank"),
+                         NSLocalizedString(@"L", @"L"),
+                         nil],
+                        [NSArray arrayWithObjects:
+                         NSLocalizedString(@"", @"Blank"),
+                         NSLocalizedString(@"D", @"D"),
                          nil], 
                         [NSArray arrayWithObjects:
-                         NSLocalizedString(@"0 K", @"0 K"),
-                         NSLocalizedString(@"1 K", @"1 K"),
-                         NSLocalizedString(@"2 K", @"2 K"),
-                         NSLocalizedString(@"3 K", @"3 K"),
-                         NSLocalizedString(@"4 K", @"4 K"),
-                         NSLocalizedString(@"5 K", @"5 K"),
-                         NSLocalizedString(@"6 K", @"6 K"),
-                         NSLocalizedString(@"7 K", @"7 K"),
+                         NSLocalizedString(@"", @"Blank"),
+                         NSLocalizedString(@"K", @"K"),
                          nil], 
                         nil];
-    [[[TextFieldPickerView alloc] initWithTextField:layoutTextField options:options useNewButton:NO] autorelease];
+    TextFieldPickerView *p = [[[TextFieldPickerView alloc] initWithTextField:layoutTextField options:options useNewButton:NO] autorelease];
+    p.componentWidths = [NSArray arrayWithObjects:
+                         [NSNumber numberWithInt: 120],
+                         [NSNumber numberWithInt: 60],
+                         [NSNumber numberWithInt: 60],
+                         [NSNumber numberWithInt: 60],
+                         nil];
 }
 
 - (void) updateAddressCoordinates {

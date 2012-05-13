@@ -35,7 +35,7 @@
         <attribute name="phone" optional="YES" attributeType="String"/>
         <attribute name="size" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="stationDistance" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="budgetItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HomeBudgetItem" inverseName="home" inverseEntity="HomeBudgetItem" syncable="YES"/>
+        <relationship name="budgetItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HomeBudgetItem" inverseName="home" inverseEntity="HomeBudgetItem" syncable="YES"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="home" inverseEntity="Image"/>
         <relationship name="rating" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Rating" inverseName="home" inverseEntity="Rating"/>
     </entity>

@@ -11,6 +11,7 @@
 @implementation TextFieldPickerView
 @synthesize mOptions;
 @synthesize mTextField;
+@synthesize componentWidths;
 
 - (id) initWithTextField: (UITextField *)textField options: (NSArray *)options useNewButton:(BOOL) useNewButton {
     
@@ -96,6 +97,15 @@
         
         // Set textfield text to joined array
         self.mTextField.text = [sa componentsJoinedByString:joinerString];
+    }
+}
+
+- (CGFloat) pickerView: (UIPickerView *) thePickerView widthForComponent:(NSInteger)component {
+    if (self.componentWidths != nil) {
+        return [(NSNumber *)[componentWidths objectAtIndex:component] floatValue];
+    }
+    else{
+        return 300.0/[self.mOptions count];
     }
 }
 

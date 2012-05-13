@@ -209,7 +209,7 @@
 
     /* Dynamic advice
     if (nil == self.adviceDict) {
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://tedjt.scripts.mit.edu/suruga/advisor/budget?running=%d&initial=%d", runningAmount, initialAmount]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://glurban10.mit.edu/suruga/advisor/budget?running=%d&initial=%d", runningAmount, initialAmount]];
         __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
         [request setCompletionBlock:^{
             // Use when fetching binary data
