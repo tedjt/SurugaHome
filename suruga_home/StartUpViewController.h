@@ -13,7 +13,6 @@
 @interface StartUpViewController : UIViewController <UITextFieldDelegate> {
     UITextField *nameTextField;
     UITextField *reasonTextField;
-    UITextField *layoutTextField;
     UIScrollView *scrollView;
     UITextField *activeField;
     
@@ -21,7 +20,6 @@
 }
 @property (nonatomic, retain) IBOutlet UITextField *nameTextField;
 @property (nonatomic, retain) IBOutlet UITextField *reasonTextField;
-@property (nonatomic, retain) IBOutlet UITextField *layoutTextField;
 @property (retain, nonatomic) IBOutlet UITextField *sizeTextField;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 

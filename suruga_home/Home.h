@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * layout;
+@property (nonatomic, retain) NSString * nearestStation;
 @property (nonatomic, retain) NSNumber * size;
 @property (nonatomic, retain) NSNumber * stationDistance;
 @property (nonatomic, retain) NSNumber * isRent;

@@ -29,6 +29,12 @@
 @synthesize isRentingSwitch;
 @synthesize inititalBudgetButton;
 @synthesize financialAdviceButton;
+@synthesize initialIncomeTotalLabel;
+@synthesize initialExpenseTotalLabel;
+@synthesize initialTotalTotalLabel;
+@synthesize runningIncomeTotalLabel;
+@synthesize runningExpenseTotalLabel;
+@synthesize runningTotalTotalLabel;
 @synthesize adviceDict;
 
 #pragma mark Private Methods
@@ -93,12 +99,12 @@
     } 
     //Set label Text
     //TODO internationalize
-    initialExpenseLabel.text = [NSString stringWithFormat:@"$%d",(int)initialCost];
-    initialIncomeLabel.text = [NSString stringWithFormat:@"$%d",(int)initialIncome];
-    initialTotalLabel.text = [NSString stringWithFormat:@"$%d",(int)initialLeftover];
-    runningExpenseLabel.text = [NSString stringWithFormat:@"$%d",(int)runningCost];
-    runningIncomeLabel.text = [NSString stringWithFormat:@"$%d",(int)runningIncome];
-    runningTotalLabel.text = [NSString stringWithFormat:@"$%d",(int)runningLeftover];
+    initialExpenseTotalLabel.text = [NSString stringWithFormat:@"$%d",(int)initialCost];
+    initialIncomeTotalLabel.text = [NSString stringWithFormat:@"$%d",(int)initialIncome];
+    initialTotalTotalLabel.text = [NSString stringWithFormat:@"$%d",(int)initialLeftover];
+    runningExpenseTotalLabel.text = [NSString stringWithFormat:@"$%d",(int)runningCost];
+    runningIncomeTotalLabel.text = [NSString stringWithFormat:@"$%d",(int)runningIncome];
+    runningTotalTotalLabel.text = [NSString stringWithFormat:@"$%d",(int)runningLeftover];
     
     //Set class instance variables
     initialAmount = (int)(initialIncome - initialCost);
@@ -149,6 +155,12 @@
     [loadingIndicator release];
     loadingIndicator = nil;
     [self setIsRentingSwitch:nil];
+    [self setInitialIncomeTotalLabel:nil];
+    [self setInitialExpenseTotalLabel:nil];
+    [self setInitialTotalTotalLabel:nil];
+    [self setRunningIncomeTotalLabel:nil];
+    [self setRunningExpenseTotalLabel:nil];
+    [self setRunningTotalTotalLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -167,6 +179,12 @@
     [adviceDict release];
     [loadingIndicator release];
     [isRentingSwitch release];
+    [initialIncomeTotalLabel release];
+    [initialExpenseTotalLabel release];
+    [initialTotalTotalLabel release];
+    [runningIncomeTotalLabel release];
+    [runningExpenseTotalLabel release];
+    [runningTotalTotalLabel release];
     [super dealloc];
 }
 - (IBAction)initialBudgetClicked:(id)sender {

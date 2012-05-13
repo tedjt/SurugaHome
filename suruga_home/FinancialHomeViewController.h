@@ -39,6 +39,12 @@
 @property (retain, nonatomic) IBOutlet DCRoundSwitch *isRentingSwitch;
 @property (nonatomic, retain) IBOutlet UIButton *inititalBudgetButton;
 @property (nonatomic, retain) IBOutlet UIButton *financialAdviceButton;
+@property (retain, nonatomic) IBOutlet UILabel *initialIncomeTotalLabel;
+@property (retain, nonatomic) IBOutlet UILabel *initialExpenseTotalLabel;
+@property (retain, nonatomic) IBOutlet UILabel *initialTotalTotalLabel;
+@property (retain, nonatomic) IBOutlet UILabel *runningIncomeTotalLabel;
+@property (retain, nonatomic) IBOutlet UILabel *runningExpenseTotalLabel;
+@property (retain, nonatomic) IBOutlet UILabel *runningTotalTotalLabel;
 @property (nonatomic, retain) NSDictionary *adviceDict;
 
 

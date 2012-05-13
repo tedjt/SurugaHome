@@ -21,7 +21,6 @@
 @implementation StartUpViewController
 @synthesize nameTextField;
 @synthesize reasonTextField;
-@synthesize layoutTextField;
 @synthesize sizeTextField;
 @synthesize scrollView;
 @synthesize userData;
@@ -114,24 +113,7 @@ bool isNew = YES;
     [[[TextFieldPickerView alloc] initWithTextField:reasonTextField options:options useNewButton:YES] autorelease];
 
 }
-- (void)keyBoardLayoutPicker 
-{
-    NSArray *options = [NSArray arrayWithObjects:
-                              [NSArray arrayWithObjects:
-                                NSLocalizedString(@"0 Baths", @"0 Baths"),
-                                NSLocalizedString(@"1 Baths", @"1 Baths"),
-                                NSLocalizedString(@"2 Baths", @"2 Baths"),
-                                NSLocalizedString(@"3 Baths", @"3 Baths"),
-                                  nil],
-                              [NSArray arrayWithObjects:
-                               NSLocalizedString(@"0 Bedrooms", @"0 Bedrooms"),
-                               NSLocalizedString(@"1 Bedrooms", @"1 Bedrooms"),
-                               NSLocalizedString(@"2 Bedrooms", @"2 Bedrooms"),
-                               NSLocalizedString(@"3 Bedrooms", @"3 Bedrooms"),
-                               nil], 
-                            nil];
-    [[[TextFieldPickerView alloc] initWithTextField:layoutTextField options:options useNewButton:NO] autorelease];
-}
+
 - (void)keyBoardSizePicker 
 {
     NSArray *options = [NSArray arrayWithObjects:
@@ -159,7 +141,6 @@ bool isNew = YES;
     
     //Setup date keyboard view
     [self keyBoardReasonPicker];
-    [self keyBoardLayoutPicker];
     [self keyBoardSizePicker];
     
     self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, 1300);
@@ -179,7 +160,6 @@ bool isNew = YES;
         //Fill in values
         nameTextField.text = userData.name;
         reasonTextField.text = userData.reason;
-        layoutTextField.text = [NSString stringWithFormat:@"%d Baths, %d Bedrooms", [userData.numBaths intValue], [userData.numBeds intValue]];
         sizeTextField.text = [userData.numPeople stringValue];
         isNew = NO;
     }
@@ -193,7 +173,6 @@ bool isNew = YES;
     [self setNameTextField:nil];
     [self setReasonTextField:nil];
     [self setScrollView:nil];
-    [self setLayoutTextField:nil];
     [self setSizeTextField:nil];
     
     [super viewDidUnload];
@@ -214,7 +193,6 @@ bool isNew = YES;
             __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
             [request setCompletionBlock:^{
                 // Use when fetching text data
-                NSString *s = [request responseString];
                 [self buildStaticData: [request responseString]];
             }];
             [request startAsynchronous];
@@ -249,7 +227,6 @@ bool isNew = YES;
     [nameTextField release];
     [reasonTextField release];
     [scrollView release];
-    [layoutTextField release];
     [sizeTextField release];
     
     [super dealloc];

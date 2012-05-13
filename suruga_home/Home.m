@@ -26,6 +26,7 @@
 @dynamic address;
 @dynamic latitude;
 @dynamic longitude;
+@dynamic nearestStation;
 
 + (NSArray *)fetchAllHomesWithContext: (NSManagedObjectContext *) context {
     //Initialize Data Arrays

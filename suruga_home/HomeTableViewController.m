@@ -13,6 +13,7 @@
 #import "HomeMapAnnotation.h"
 #import "UIButton+setTitleText.h"
 #import "BudgetTableViewController.h"
+#import "SurplusDetailsViewController.h"
 
 //#import "TaskTableViewCell.h"
 
@@ -50,7 +51,7 @@ enum {
     self.mTableView.rowHeight = 117.0;
     
 	
-	self.title=NSLocalizedString(@"Home List",@"Home List Title");
+	self.title=NSLocalizedString(@"Comparison List",@"Home List Title");
     
     // Configure the add button.
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addHome)] autorelease];
@@ -197,7 +198,7 @@ enum {
     // Set initial cost labels
     initialCost.text = [NSString stringWithFormat:NSLocalizedString(@"$%d", @"Dollar formated cost"),[home getInitialCost]];
     [initialCapacity setTitleText: [NSString stringWithFormat:NSLocalizedString(@"$%d", @"Dollar formated cost"),[home getInitialCapacity]]];
-    [initialCapacity addTarget:self action:@selector(initialBudgetClicked:)
+    [initialCapacity addTarget:self action:@selector(runningBudgetClicked:)
      forControlEvents:UIControlEventTouchUpInside];
     // Set Running cost labels
     runningCost.text = [NSString stringWithFormat:NSLocalizedString(@"$%d", @"Dollar formated cost"),[home getRunningCost]];
@@ -216,17 +217,22 @@ enum {
 
 //Budget Actions
 - (IBAction)initialBudgetClicked:(id)sender {
-    BudgetTableViewController *budgetController = [[[BudgetTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
-    budgetController.managedObjectContext = self.managedObjectContext;
-    budgetController.isInitial = YES;
-    [self.navigationController pushViewController:budgetController animated:YES];
+//    BudgetTableViewController *budgetController = [[[BudgetTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+//    budgetController.managedObjectContext = self.managedObjectContext;
+//    budgetController.isInitial = YES;
+//    [self.navigationController pushViewController:budgetController animated:YES];
 }
 
 - (IBAction)runningBudgetClicked:(id)sender {
-    BudgetTableViewController *budgetController = [[[BudgetTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
-    budgetController.managedObjectContext = self.managedObjectContext;
-    budgetController.isInitial = NO;
-    [self.navigationController pushViewController:budgetController animated:YES];
+    UITableViewCell *clickedCell = (UITableViewCell *) [[sender superview] superview];
+    NSIndexPath *indexPath = [self.mTableViewPrice indexPathForCell:clickedCell];
+    Home  *home = [fetchedResultsController objectAtIndexPath:indexPath];
+    SurplusDetailsViewController *svc = [[[SurplusDetailsViewController alloc] initWithNibName:@"SurplusDetailsViewController" bundle:nil initialSurplus:[home getInitialCapacity] runningSurplus:[home getRunningCapacity]] autorelease];
+    [self.navigationController pushViewController:svc animated:YES];
+//    BudgetTableViewController *budgetController = [[[BudgetTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+//    budgetController.managedObjectContext = self.managedObjectContext;
+//    budgetController.isInitial = NO;
+//    [self.navigationController pushViewController:budgetController animated:YES];
 }
 
 

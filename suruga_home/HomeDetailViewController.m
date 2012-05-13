@@ -25,11 +25,11 @@
 @synthesize isRentSwitch;
 @synthesize scrollView;
 @synthesize nameTextField;
-@synthesize phoneTextField;
 @synthesize addressTextField;
 @synthesize sizeTextField;
 @synthesize layoutTextField;
 @synthesize stationTextField;
+@synthesize nearestStationTextField;
 @synthesize mapView;
 @synthesize doneButton, saveButton;
 
@@ -126,8 +126,8 @@
         self.title = self.home.name;
         self.nameTextField.text = self.home.name;
     } else { self.title = NSLocalizedString(@"New Home", @"New Home Nav Title");}
-    if (home.phone != nil)
-        self.phoneTextField.text = self.home.phone;
+    if (home.nearestStation != nil)
+        self.nearestStationTextField.text = self.home.nearestStation;
     if (home.address != nil)
         self.addressTextField.text = self.home.address;
     self.isRentSwitch.on = [self.home.isRent boolValue];
@@ -158,7 +158,6 @@
 - (void)viewDidUnload
 {
     [self setNameTextField:nil];
-    [self setPhoneTextField:nil];
     [self setAddressTextField:nil];
     //[self setMapView:nil];
     [self setImageButton:nil];
@@ -172,6 +171,7 @@
     [self setScrollView:nil];
     [self setDoneButton:nil];
     [self setSaveButton:nil];
+    [self setNearestStationTextField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -187,7 +187,6 @@
     self.mapView = nil;
     [home release];
     [nameTextField release];
-    [phoneTextField release];
     [addressTextField release];
     //[mapView release];
     [imageButton release];
@@ -201,6 +200,7 @@
     [scrollView release];
     [doneButton release];
     [saveButton release];
+    [nearestStationTextField release];
     [super dealloc];
 }
 
@@ -377,7 +377,7 @@
 - (void) updateHomeObject {
     self.home.name = nameTextField.text;
     self.home.notes = notesTextField.text;
-    self.home.phone = phoneTextField.text;
+    self.home.nearestStation = nearestStationTextField.text;
     if (![self.home.address isEqualToString:addressTextField.text]) {
         self.home.address = addressTextField.text;
         [self updateAddressCoordinates]; 

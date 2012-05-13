@@ -61,7 +61,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == 1) {
         return self.costItems.count + 1;
     } else {
         return self.incomeItems.count + 1;
@@ -69,17 +69,17 @@
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section{
-	if(section == 0){
+	if(section == 1){
         if (self.isInitial)
-            return NSLocalizedString(@"Fixed Costs", @"Budget List Fixed Costs Header section text");
+            return NSLocalizedString(@"Allocated Costs US $", @"Budget List Fixed Costs Header section text");
         else
-            return NSLocalizedString(@"Expenses", @"Budget List Expenses Header section text");
+            return NSLocalizedString(@"Expenses US$/Month", @"Budget List Expenses Header section text");
 	}
 	else{
         if (self.isInitial)
-            return NSLocalizedString(@"Savings", @"Budget List Savings Header section text");
+            return NSLocalizedString(@"Savings US $", @"Budget List Savings Header section text");
         else
-            return NSLocalizedString(@"Income", @"Budget List Income Header section text");
+            return NSLocalizedString(@"Income US$/Month", @"Budget List Income Header section text");
 	}
 }
 
@@ -95,7 +95,7 @@
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         NSString *text;
-        if(indexPath.section == 0){
+        if(indexPath.section == 1){
             if (isInitial)
                 text = NSLocalizedString(@"Add Fixed Cost Item", @"Budget List Fixed Cost add an item text");
             else

@@ -22,7 +22,6 @@
     Home *home;
     id <HomeDetailViewControllerDelegate> parentController;
     UITextField *nameTextField;
-    UITextField *phoneTextField;
     UITextField *addressTextField;
     UITextField *activeField;
     MKMapView *mapView;
@@ -35,11 +34,11 @@
 @property (nonatomic, assign) id <HomeDetailViewControllerDelegate>parentController;
 
 @property (nonatomic, retain) IBOutlet UITextField *nameTextField;
-@property (nonatomic, retain) IBOutlet UITextField *phoneTextField;
 @property (nonatomic, retain) IBOutlet UITextField *addressTextField;
 @property (retain, nonatomic) IBOutlet UITextField *sizeTextField;
 @property (retain, nonatomic) IBOutlet UITextField *layoutTextField;
 @property (retain, nonatomic) IBOutlet UITextField *stationTextField;
+@property (retain, nonatomic) IBOutlet UITextField *nearestStationTextField;
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) IBOutlet UIButton *imageButton;
 @property (nonatomic, retain) IBOutlet UIButton *ratingButton;

@@ -27,7 +27,7 @@
     [super viewDidLoad];
     
 	self.tableView.editing = NO;
-    self.title = self.title=NSLocalizedString(@"Price Costs ",@"Individual Home Prices title.");
+    self.title = self.title=NSLocalizedString(@"Home Costs ",@"Individual Home Prices title.");
 	//add a button
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
     //Done button
@@ -81,10 +81,10 @@
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section{
 	if(section == 0){
-		return NSLocalizedString(@"Fixed Costs", @"Home Fixed Costs List Header section text");
+		return NSLocalizedString(@"Initial Costs US$", @"Home Fixed Costs List Header section text");
 	}
 	else{
-        return NSLocalizedString(@"Running Costs", @"Home Running Costs List Header section text");
+        return NSLocalizedString(@"Running Costs US$/month", @"Home Running Costs List Header section text");
 	}
 }
 
@@ -100,7 +100,7 @@
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         if(indexPath.section == 0){
-            cell.textLabel.text = NSLocalizedString(@"Add an initial Expense", @"Home Budget List add Initial item text");
+            cell.textLabel.text = NSLocalizedString(@"Add an initial cost", @"Home Budget List add Initial item text");
         }
         else{
             cell.textLabel.text = NSLocalizedString(@"Add a recurring expense", @"Budget List add running item text");
