@@ -142,7 +142,7 @@
         [self.ratingButton setImage: [UIImage imageNamed:[NSString stringWithFormat:@"%d_stars.png", [self.home.rating.overall intValue]]] forState:UIControlStateNormal];                                          
     }
     if (self.home.budgetItems != nil) {
-        NSString *title = [NSString stringWithFormat:@"$%d",[self.home getInitialCost]];
+        NSString *title = [NSString stringWithFormat:@"$%d", [self.home.isRent boolValue] ? [self.home getRunningCost]: [self.home getInitialCost]];
         [self.priceButton setTitleText:title];
     }
 }
@@ -318,9 +318,8 @@
 
 - (void)updatePrice
 {
-    //TODO change this depending on rent vs buy
     //TODO change to use yen instead of dollars.
-    NSString *title = [NSString stringWithFormat:@"$%d",[self.home getInitialCost]];
+    NSString *title = [NSString stringWithFormat:@"$%d", [self.home.isRent boolValue] ? [self.home getRunningCost]: [self.home getInitialCost]];
     [self.priceButton setTitleText:title];
 }
 

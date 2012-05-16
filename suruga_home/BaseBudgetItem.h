@@ -14,6 +14,7 @@
 }
 
 @property (nonatomic, retain) NSNumber * amount;
+@property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSNumber * isRenting;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * advisorUrl;

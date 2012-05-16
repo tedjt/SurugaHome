@@ -8,6 +8,7 @@
         <attribute name="isRenting" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Category" representedClassName="Category">
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -46,6 +47,7 @@
         <attribute name="isRenting" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="home" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Home" inverseName="budgetItems" inverseEntity="Home" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image">
@@ -92,11 +94,11 @@
         <attribute name="when" optional="YES" attributeType="Date"/>
     </entity>
     <elements>
-        <element name="BudgetItem" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="BudgetItem" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Category" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Furniture" positionX="160" positionY="192" width="128" height="150"/>
         <element name="Home" positionX="160" positionY="192" width="128" height="255"/>
-        <element name="HomeBudgetItem" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="HomeBudgetItem" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Rating" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Room" positionX="160" positionY="192" width="128" height="120"/>

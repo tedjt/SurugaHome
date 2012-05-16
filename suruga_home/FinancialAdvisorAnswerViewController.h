@@ -12,7 +12,6 @@
     UILabel *overallDetailLabel;
     UILabel *keyDetailLabel;
     UILabel *compareDetailLabel;
-    UILabel *surugaLabel;
     UILabel *overalTitleLabel;
     UILabel *keyTitleLabel;
     UILabel *compareTitleLabel;
@@ -27,14 +26,16 @@
 @property (nonatomic, retain) IBOutlet UILabel *overallDetailLabel;
 @property (nonatomic, retain) IBOutlet UILabel *keyDetailLabel;
 @property (nonatomic, retain) IBOutlet UILabel *compareDetailLabel;
-@property (nonatomic, retain) IBOutlet UILabel *surugaLabel;
 @property (nonatomic, retain) IBOutlet UILabel *overalTitleLabel;
 @property (nonatomic, retain) IBOutlet UILabel *keyTitleLabel;
 @property (nonatomic, retain) IBOutlet UILabel *compareTitleLabel;
+@property (retain, nonatomic) IBOutlet UIButton *surugaButton;
+@property (retain, nonatomic) NSString *surugaLink;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) NSDictionary *dataDict;
 @property (nonatomic, retain) NSURL *requestUrl;
 @property (nonatomic, retain) NSMutableData *responseData;
+- (IBAction)surugaLinkClicked:(id)sender;
 
 @end

@@ -149,6 +149,8 @@
         item.inInitialBudget = [NSNumber numberWithBool:(indexPath.section == 0)];
         // hardcode all manually created budget items to always show up.
         item.isRenting = [NSNumber numberWithInt:3];
+        // hardcode order to be 100 to come after all pre-populated ones.
+        item.order = [NSNumber numberWithInt:100];
         //Insert the object into the table view
         NSMutableArray *a = indexPath.section == 0 ? initialItems : runningItems;
         [a addObject:item];

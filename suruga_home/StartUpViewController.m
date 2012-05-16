@@ -63,6 +63,7 @@ bool isNew = YES;
         b.isExpense = [NSNumber numberWithInt:[[item objectForKey:@"isExpense"] intValue]];
         b.inInitialBudget = [NSNumber numberWithInt:[[item objectForKey:@"inInitialBudget"] intValue]];
         b.isRenting = [NSNumber numberWithInt:[[item objectForKey:@"isRenting"] intValue]];
+        b.order = [NSNumber numberWithInt:[[item objectForKey:@"order"] intValue]];
     }
     // Home Budget Items
     NSArray *homeBudgetItems = [results objectForKey:@"home_budget_items"];
@@ -76,6 +77,7 @@ bool isNew = YES;
         //b.home = nil;
         b.inInitialBudget = [NSNumber numberWithInt:[[item objectForKey:@"inInitialBudget"] intValue]];
         b.isRenting = [NSNumber numberWithInt:[[item objectForKey:@"isRenting"] intValue]];
+        b.order = [NSNumber numberWithInt:[[item objectForKey:@"order"] intValue]];
     }
     
     //Rooms
@@ -189,13 +191,17 @@ bool isNew = YES;
         self.userData.reason = reasonTextField.text;
         
         if (isNew) {
-            NSURL *url = [NSURL URLWithString:@"http://glurban10.mit.edu/suruga/initial_data"];
-            __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-            [request setCompletionBlock:^{
-                // Use when fetching text data
-                [self buildStaticData: [request responseString]];
-            }];
-            [request startAsynchronous];
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"introData_jp" ofType:@"json"];
+            NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+            [self buildStaticData: fileContent];
+            
+//            NSURL *url = [NSURL URLWithString:@"http://glurban10.mit.edu/suruga/initial_data"];
+//            __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+//            [request setCompletionBlock:^{
+//                // Use when fetching text data
+//                [self buildStaticData: [request responseString]];
+//            }];
+//            [request startAsynchronous];
         }
 
         NSError *error;

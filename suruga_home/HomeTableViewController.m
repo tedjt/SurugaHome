@@ -14,6 +14,7 @@
 #import "UIButton+setTitleText.h"
 #import "BudgetTableViewController.h"
 #import "SurplusDetailsViewController.h"
+#import "SimpleSurplusViewController.h"
 
 //#import "TaskTableViewCell.h"
 
@@ -224,11 +225,15 @@ enum {
 }
 
 - (IBAction)runningBudgetClicked:(id)sender {
-    UITableViewCell *clickedCell = (UITableViewCell *) [[sender superview] superview];
-    NSIndexPath *indexPath = [self.mTableViewPrice indexPathForCell:clickedCell];
-    Home  *home = [fetchedResultsController objectAtIndexPath:indexPath];
-    SurplusDetailsViewController *svc = [[[SurplusDetailsViewController alloc] initWithNibName:@"SurplusDetailsViewController" bundle:nil initialSurplus:[home getInitialCapacity] runningSurplus:[home getRunningCapacity]] autorelease];
+//    UITableViewCell *clickedCell = (UITableViewCell *) [[sender superview] superview];
+//    NSIndexPath *indexPath = [self.mTableViewPrice indexPathForCell:clickedCell];
+//    Home  *home = [fetchedResultsController objectAtIndexPath:indexPath];
+//    SurplusDetailsViewController *svc = [[[SurplusDetailsViewController alloc] initWithNibName:@"SurplusDetailsViewController" bundle:nil initialSurplus:[home getInitialCapacity] runningSurplus:[home getRunningCapacity]] autorelease];
+    
+    SimpleSurplusViewController *svc = [[SimpleSurplusViewController alloc] initWithNibName:@"SimpleSurplusViewController" bundle:nil];
     [self.navigationController pushViewController:svc animated:YES];
+    
+    
 //    BudgetTableViewController *budgetController = [[[BudgetTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
 //    budgetController.managedObjectContext = self.managedObjectContext;
 //    budgetController.isInitial = NO;

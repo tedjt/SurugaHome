@@ -114,8 +114,9 @@
     NSSet *filteredHomes = [self.budgetItems filteredSetUsingPredicate: testForInitialAndRent];
     
     // Edit the sort key as appropriate.
+    NSSortDescriptor *orderDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES] autorelease];
     NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO] autorelease];
-    NSArray *sortDescriptors = [[[NSArray alloc] initWithObjects:sortDescriptor, nil] autorelease];
+    NSArray *sortDescriptors = [[[NSArray alloc] initWithObjects:orderDescriptor, sortDescriptor, nil] autorelease];
     
     //Return mutable array
     return [NSMutableArray arrayWithArray: [filteredHomes sortedArrayUsingDescriptors:sortDescriptors]]; 

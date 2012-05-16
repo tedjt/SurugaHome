@@ -27,8 +27,9 @@
     [NSPredicate predicateWithFormat:@"inInitialBudget == %@ AND isExpense == %@ AND (isRenting == %@ OR isRenting == %@)", [NSNumber numberWithBool:inInitial], [NSNumber numberWithBool:expense], [NSNumber numberWithBool:isRenting], [NSNumber numberWithInt:3]];
     [fetchRequest setPredicate:testForInitialAndExpense];
     // Edit the sort key as appropriate.
+    NSSortDescriptor *orderDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES] autorelease];
     NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO] autorelease];
-    NSArray *sortDescriptors = [[[NSArray alloc] initWithObjects:sortDescriptor, nil] autorelease];
+    NSArray *sortDescriptors = [[[NSArray alloc] initWithObjects:orderDescriptor, sortDescriptor, nil] autorelease];
     [fetchRequest setSortDescriptors:sortDescriptors];
     NSError *error;
     // Fetch Cost Items

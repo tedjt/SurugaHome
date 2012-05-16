@@ -8,20 +8,23 @@
 
 #import "FinancialAdvisorAnswerViewController.h"
 #import "extThree20JSON/SBJson.h"
+#import "Three20/Three20.h"
+#import "UIButton+setTitleText.h"
 
 @implementation FinancialAdvisorAnswerViewController
 @synthesize overallDetailLabel;
 @synthesize keyDetailLabel;
 @synthesize compareDetailLabel;
-@synthesize surugaLabel;
 @synthesize overalTitleLabel;
 @synthesize keyTitleLabel;
 @synthesize compareTitleLabel;
+@synthesize surugaButton;
 @synthesize loadingIndicator;
 @synthesize scrollView;
 @synthesize dataDict;
 @synthesize requestUrl;
 @synthesize responseData;
+@synthesize surugaLink;
 
 # pragma mark PRIVATE FUNCTIONS
 - (void)setUpViewFromDictionary {
@@ -43,6 +46,8 @@
         NSString *overalText = [dataDict objectForKey:@"overall_text"];
         NSString *keyText = [dataDict objectForKey:@"good_text"];
         NSString *compareText = [dataDict objectForKey:@"compare_text"];
+        NSString *surugaText = [dataDict objectForKey:@"suruga_text"];
+        self.surugaLink = [dataDict objectForKey:@"suruga_link"];
         
         //HANDLE OVERALL DETAIL LABEL
         CGSize expectedLabelSize = [overalText sizeWithFont:overallDetailLabel.font 
@@ -80,14 +85,14 @@
         
         ///////////BREAK////////////
         
-        //HANDLE KEY TITLE LABEL
+        //HANDLE Compare TITLE LABEL
         newFrame = compareTitleLabel.frame;
         newFrame.origin.y = currentY;
         compareTitleLabel.frame = newFrame;
         
         currentY += compareTitleLabel.frame.size.height + spacing;
         
-        //HANDLE KEY DETAIL LABEL
+        //HANDLE Compare DETAIL LABEL
         expectedLabelSize = [compareText sizeWithFont:compareDetailLabel.font 
             constrainedToSize:maximumLabelSize 
             lineBreakMode:compareDetailLabel.lineBreakMode]; 
@@ -100,9 +105,30 @@
         
         currentY += expectedLabelSize.height + spacing;
         
+        ////////////////BREAK//////////////////////
+       
+        //HANDLE Suruga Link Button
+        newFrame = surugaButton.frame;
+        newFrame.origin.y = currentY;
+        surugaButton.frame = newFrame;
+        
+        currentY += surugaButton.frame.size.height + spacing;
+        
         overallDetailLabel.text = overalText;
         keyDetailLabel.text = keyText;
         compareDetailLabel.text = compareText;
+        [surugaButton setTitleText:surugaText];
+        
+        //Make invisible if text is empty
+        if (overalText.length == 0)
+            overalTitleLabel.hidden = YES;
+        if (keyText.length == 0)
+            keyTitleLabel.hidden = YES;
+        if (compareText.length == 0)
+            compareTitleLabel.hidden = YES;
+        if (surugaLink.length == 0 || surugaText.length == 0)
+            surugaButton.hidden = YES;
+        
         
         //SET UP SCROLL VIEW
         [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width, currentY)];
@@ -155,7 +181,6 @@
     [self setOverallDetailLabel:nil];
     [self setKeyDetailLabel:nil];
     [self setCompareDetailLabel:nil];
-    [self setSurugaLabel:nil];
     self.overalTitleLabel = nil;
     self.keyTitleLabel = nil;
     self.compareTitleLabel = nil;
@@ -164,6 +189,8 @@
     self.responseData = nil;
     self.requestUrl = nil;
     self.dataDict = nil;
+    [self setSurugaButton:nil];
+    self.surugaLink = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -209,7 +236,6 @@
     [overallDetailLabel release];
     [keyDetailLabel release];
     [compareDetailLabel release];
-    [surugaLabel release];
     [overalTitleLabel release];
     [keyTitleLabel release];
     [compareTitleLabel release];
@@ -218,6 +244,11 @@
     [loadingIndicator release];
     [responseData release];
     [requestUrl release];
+    [surugaButton release];
+    [surugaLink release];
     [super dealloc];
+}
+- (IBAction)surugaLinkClicked:(id)sender {
+    TTOpenURL(self.surugaLink);
 }
 @end

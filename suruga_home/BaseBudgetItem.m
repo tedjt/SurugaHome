@@ -10,6 +10,7 @@
 
 @implementation BaseBudgetItem
 @dynamic amount;
+@dynamic order;
 @dynamic isRenting;
 @dynamic name;
 @dynamic notes;

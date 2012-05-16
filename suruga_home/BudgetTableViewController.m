@@ -28,7 +28,7 @@
 	self.tableView.editing = NO;
 	
 	if (self.isInitial) {
-        self.title=NSLocalizedString(@"Fixed Costs Budget ",@"Initial Budget List Title");
+        self.title=NSLocalizedString(@"Fixed Costs",@"Initial Budget List Title");
     } else {
         self.title = self.title=NSLocalizedString(@"Monthly Budget ",@"Running Budget List Title");
     }
@@ -71,9 +71,9 @@
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section{
 	if(section == 1){
         if (self.isInitial)
-            return NSLocalizedString(@"Allocated Costs US $", @"Budget List Fixed Costs Header section text");
+            return NSLocalizedString(@"Allocated Costs US \n Except new home costs", @"Budget List Fixed Costs Header section text");
         else
-            return NSLocalizedString(@"Expenses US$/Month", @"Budget List Expenses Header section text");
+            return NSLocalizedString(@"Expenses US$/Month \n Except new home costs.", @"Budget List Expenses Header section text");
 	}
 	else{
         if (self.isInitial)
@@ -149,10 +149,12 @@
        (indexPath.section == 1 && indexPath.row == costItems.count)){
         //TODO - Add a new budget item
         item = (BudgetItem*) [NSEntityDescription insertNewObjectForEntityForName:@"BudgetItem" inManagedObjectContext:managedObjectContext];
-        item.isExpense = [NSNumber numberWithBool:(indexPath.section == 0)];
+        item.isExpense = [NSNumber numberWithBool:(indexPath.section != 0)];
         item.inInitialBudget = [NSNumber numberWithBool:self.isInitial];
         // hardcode all manually created budget items to always show up.
         item.isRenting = [NSNumber numberWithInt:3];
+        // hardcode order to be 100 to come after all pre-populated ones.
+        item.order = [NSNumber numberWithInt:100];
         //Insert the object into the table view
         NSMutableArray *a = indexPath.section == 0 ? incomeItems : costItems;
         [a addObject:item];

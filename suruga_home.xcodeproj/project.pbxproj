@@ -12,6 +12,8 @@
 		2A03846D149E65D3000E0B49 /* PhotoAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A03846B149E65D3000E0B49 /* PhotoAppViewController.xib */; };
 		2A0DAB6A155D287900A33849 /* SurplusDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0DAB68155D287900A33849 /* SurplusDetailsViewController.m */; };
 		2A0DAB6B155D287900A33849 /* SurplusDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A0DAB69155D287900A33849 /* SurplusDetailsViewController.xib */; };
+		2A0DAB70156373A800A33849 /* SimpleSurplusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0DAB6E156373A800A33849 /* SimpleSurplusViewController.m */; };
+		2A0DAB71156373A800A33849 /* SimpleSurplusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A0DAB6F156373A800A33849 /* SimpleSurplusViewController.xib */; };
 		2A0FA6D714BAB66E00E601A4 /* circle-check-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A0FA6D514BAB66E00E601A4 /* circle-check-logo.png */; };
 		2A0FA6D814BAB66E00E601A4 /* unchecked_circle-check-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A0FA6D614BAB66E00E601A4 /* unchecked_circle-check-logo.png */; };
 		2A0FA6DB14BAB80900E601A4 /* TaskListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FA6DA14BAB80900E601A4 /* TaskListTableViewCell.m */; };
@@ -221,6 +223,9 @@
 		2A0DAB67155D287900A33849 /* SurplusDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SurplusDetailsViewController.h; sourceTree = "<group>"; };
 		2A0DAB68155D287900A33849 /* SurplusDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SurplusDetailsViewController.m; sourceTree = "<group>"; };
 		2A0DAB69155D287900A33849 /* SurplusDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurplusDetailsViewController.xib; sourceTree = "<group>"; };
+		2A0DAB6D156373A800A33849 /* SimpleSurplusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleSurplusViewController.h; sourceTree = "<group>"; };
+		2A0DAB6E156373A800A33849 /* SimpleSurplusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleSurplusViewController.m; sourceTree = "<group>"; };
+		2A0DAB6F156373A800A33849 /* SimpleSurplusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleSurplusViewController.xib; sourceTree = "<group>"; };
 		2A0FA6D514BAB66E00E601A4 /* circle-check-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-check-logo.png"; sourceTree = "<group>"; };
 		2A0FA6D614BAB66E00E601A4 /* unchecked_circle-check-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unchecked_circle-check-logo.png"; sourceTree = "<group>"; };
 		2A0FA6D914BAB80900E601A4 /* TaskListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListTableViewCell.h; sourceTree = "<group>"; };
@@ -536,6 +541,9 @@
 				2A0DAB67155D287900A33849 /* SurplusDetailsViewController.h */,
 				2A0DAB68155D287900A33849 /* SurplusDetailsViewController.m */,
 				2A0DAB69155D287900A33849 /* SurplusDetailsViewController.xib */,
+				2A0DAB6D156373A800A33849 /* SimpleSurplusViewController.h */,
+				2A0DAB6E156373A800A33849 /* SimpleSurplusViewController.m */,
+				2A0DAB6F156373A800A33849 /* SimpleSurplusViewController.xib */,
 			);
 			name = SurplusView;
 			sourceTree = "<group>";
@@ -1156,6 +1164,7 @@
 				2A1755341558F24100027978 /* README.markdown in Resources */,
 				2A1755361559078500027978 /* tab_checklist.png in Resources */,
 				2A0DAB6B155D287900A33849 /* SurplusDetailsViewController.xib in Resources */,
+				2A0DAB71156373A800A33849 /* SimpleSurplusViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1238,6 +1247,7 @@
 				2A1755321558F24100027978 /* GoogleLocalObject.m in Sources */,
 				2A1755331558F24100027978 /* GTMNSString+URLArguments.m in Sources */,
 				2A0DAB6A155D287900A33849 /* SurplusDetailsViewController.m in Sources */,
+				2A0DAB70156373A800A33849 /* SimpleSurplusViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
