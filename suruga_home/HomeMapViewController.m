@@ -73,9 +73,11 @@
         }
     }
     // add annotations.
+    Home *lastHome = nil;
     for (Home *home in [Home fetchAllHomesWithContext: self.managedObjectContext])
     {
         if (home.address != nil && home.latitude != nil && fabs([home.latitude doubleValue]) > 0.001) {
+            lastHome = home;
             HomeMapAnnotation *annotation = [[[HomeMapAnnotation alloc] init] autorelease];
             annotation.title = home.name;
             annotation.subtitle = home.address;
@@ -87,6 +89,10 @@
             annotation.home = home;
             [self.mapView addAnnotation:annotation];
         }
+    }
+    if (lastHome != nil) {
+        CLLocationCoordinate2D c = CLLocationCoordinate2DMake([lastHome.latitude floatValue], [lastHome.longitude floatValue]);
+        [mapView setRegion: MKCoordinateRegionMakeWithDistance(c, 50000, 50000)];
     }
 }
 
