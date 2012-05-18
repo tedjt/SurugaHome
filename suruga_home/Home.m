@@ -46,7 +46,11 @@
 - (int) getTotalCost {
     int totalCost = 0;
     for (HomeBudgetItem *b in self.budgetItems) {
-        totalCost = totalCost + [b.amount intValue];     
+        if (b.isExpense) {
+            totalCost = totalCost + [b.amount intValue];
+        } else {
+            totalCost = totalCost - [b.amount intValue];
+        }
     }
     return totalCost;
     //return [NSString stringWithFormat:@"$%d",(int)total_cost];
@@ -57,14 +61,18 @@
     NSSet *results = [self.budgetItems filteredSetUsingPredicate: predicate];
     int totalCost = 0;
     for (HomeBudgetItem *b in results) {
-        totalCost = totalCost + [b.amount intValue];     
+        if ([b.isExpense boolValue]) {
+            totalCost = totalCost + [b.amount intValue];
+        } else {
+            totalCost = totalCost - [b.amount intValue];
+        }    
     }
     return totalCost;
     //return [NSString stringWithFormat:@"$%d",(int)total_cost];
 }
 
 - (int) getRunningCost {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"inInitialBudget == %@ AND (isRenting == %@ OR isRenting == %@)", [NSNumber numberWithBool:NO], self.isRent, [NSNumber numberWithInt:3]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"inInitialBudget == %@ AND isExpense == %@ AND (isRenting == %@ OR isRenting == %@)", [NSNumber numberWithBool:NO],[NSNumber numberWithBool:YES], self.isRent, [NSNumber numberWithInt:3]];
     NSSet *results = [self.budgetItems filteredSetUsingPredicate: predicate];
     int totalCost = 0;
     for (HomeBudgetItem *b in results) {
@@ -103,12 +111,12 @@
 
 }
 
-- (NSMutableArray *)fetchBudgetItemsInInitial: (BOOL) inInitial {
+- (NSMutableArray *)fetchBudgetItemsInInitial: (BOOL) inInitial isExpense:(BOOL)isExpense {
     //Figure out if user is renting our not
     bool isRenting = [self.isRent boolValue];
     //Set up predicates
     NSPredicate *testForInitialAndRent =
-    [NSPredicate predicateWithFormat:@"inInitialBudget == %@ AND (isRenting == %@ OR isRenting == %@)", [NSNumber numberWithBool:inInitial], [NSNumber numberWithBool:isRenting], [NSNumber numberWithInt:3]];
+    [NSPredicate predicateWithFormat:@"inInitialBudget == %@ AND isExpense == %@ AND (isRenting == %@ OR isRenting == %@)", [NSNumber numberWithBool:inInitial],[NSNumber numberWithBool:isExpense], [NSNumber numberWithBool:isRenting], [NSNumber numberWithInt:3]];
     
     // get relevant results in a new set
     NSSet *filteredHomes = [self.budgetItems filteredSetUsingPredicate: testForInitialAndRent];

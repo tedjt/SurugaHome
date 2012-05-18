@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "BaseBudgetItem.h"
+#import "BudgetItem.h"
 
 @class Home;
 
-@interface HomeBudgetItem : BaseBudgetItem {
+@interface HomeBudgetItem :BudgetItem {
 @private
 }
 @property (nonatomic, retain) Home *home;

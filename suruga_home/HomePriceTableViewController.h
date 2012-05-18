@@ -17,6 +17,7 @@
 @interface HomePriceTableViewController : UITableViewController < UITextFieldDelegate, BudgetItemDetailDelegate>{
     NSMutableArray *initialItems;
     NSMutableArray *runningItems;
+    NSMutableArray *initialIncomeItems;
 
     UIBarButtonItem * doneButton;
     UITextField * activeField;
@@ -26,6 +27,7 @@
 
 @property (nonatomic, retain) NSMutableArray *initialItems;
 @property (nonatomic, retain) NSMutableArray *runningItems;
+@property (nonatomic, retain) NSMutableArray *initialIncomeItems;
 
 @property (nonatomic, retain) Home *home;
 @property (nonatomic, assign) id <HomePriceTableViewControllerDelegate>parentController;

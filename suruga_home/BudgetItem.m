@@ -12,6 +12,13 @@
 
 @implementation BudgetItem
 @dynamic isExpense;
+@dynamic amount;
+@dynamic order;
+@dynamic isRenting;
+@dynamic name;
+@dynamic notes;
+@dynamic inInitialBudget;
+@dynamic advisorUrl;
 
 + (NSArray *)fetchBudgetItemsWithContext: (NSManagedObjectContext *) context inInitial: (BOOL) inInitial isExpense: (BOOL) expense {
     //Figure out if user is renting our not

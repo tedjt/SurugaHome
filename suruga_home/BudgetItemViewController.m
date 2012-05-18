@@ -7,7 +7,7 @@
 //
 
 #import "BudgetItemViewController.h"
-#import "BaseBudgetItem.h"
+#import "BudgetItem.h"
 #import "FinancialAdviceViewController.h"
 
 @implementation BudgetItemViewController

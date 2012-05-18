@@ -76,6 +76,7 @@ bool isNew = YES;
         b.amount = [NSNumber numberWithInt:[[item objectForKey:@"amount"] intValue]];
         //b.home = nil;
         b.inInitialBudget = [NSNumber numberWithInt:[[item objectForKey:@"inInitialBudget"] intValue]];
+        b.isExpense = [NSNumber numberWithInt:[[item objectForKey:@"isExpense"] intValue]];
         b.isRenting = [NSNumber numberWithInt:[[item objectForKey:@"isRenting"] intValue]];
         b.order = [NSNumber numberWithInt:[[item objectForKey:@"order"] intValue]];
     }
@@ -191,17 +192,17 @@ bool isNew = YES;
         self.userData.reason = reasonTextField.text;
         
         if (isNew) {
-            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"introData_jp" ofType:@"json"];
-            NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-            [self buildStaticData: fileContent];
+//            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"introData_jp" ofType:@"json"];
+//            NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+//            [self buildStaticData: fileContent];
             
-//            NSURL *url = [NSURL URLWithString:@"http://glurban10.mit.edu/suruga/initial_data"];
-//            __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-//            [request setCompletionBlock:^{
-//                // Use when fetching text data
-//                [self buildStaticData: [request responseString]];
-//            }];
-//            [request startAsynchronous];
+            NSURL *url = [NSURL URLWithString:@"http://glurban10.mit.edu/suruga/initial_data"];
+            __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+            [request setCompletionBlock:^{
+                // Use when fetching text data
+                [self buildStaticData: [request responseString]];
+            }];
+            [request startAsynchronous];
         }
 
         NSError *error;

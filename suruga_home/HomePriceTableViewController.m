@@ -10,7 +10,7 @@
 
 @implementation HomePriceTableViewController
 
-@synthesize initialItems, runningItems;
+@synthesize initialItems, runningItems, initialIncomeItems;
 @synthesize doneButton, home;
 @synthesize parentController;
 
@@ -34,8 +34,9 @@
     self.doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)] autorelease];
     
     //Initialize data arrays
-    self.initialItems = [self.home fetchBudgetItemsInInitial:YES];
-    self.runningItems = [self.home fetchBudgetItemsInInitial:NO];
+    self.initialItems = [self.home fetchBudgetItemsInInitial:YES isExpense:YES];
+    self.runningItems = [self.home fetchBudgetItemsInInitial:NO isExpense:YES];
+    self.initialIncomeItems = [self.home fetchBudgetItemsInInitial:YES isExpense:NO];
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
@@ -59,6 +60,7 @@
     // For example: self.myOutlet = nil;
     self.initialItems = nil;
     self.runningItems = nil;
+    self.initialIncomeItems = nil;
     self.home = nil;
     self.doneButton = nil;
 }
@@ -68,30 +70,35 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return self.initialItems.count + 1;
-    } else {
+    } else if (section == 1) {
         return self.runningItems.count + 1;
+    } else {
+        return  self.initialIncomeItems.count +1;
     }
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section{
-	if(section == 0){
+	if (section == 0){
 		return NSLocalizedString(@"Initial Costs US$", @"Home Fixed Costs List Header section text");
 	}
-	else{
+	else if (section ==1) {
         return NSLocalizedString(@"Running Costs US$/month", @"Home Running Costs List Header section text");
-	}
+	} else {
+        return NSLocalizedString(@"Iniital Income Items US$", @"Home Costs Initial Income Header section text");
+    }
 }
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ((indexPath.section == 0 && indexPath.row == initialItems.count) ||
-        (indexPath.section == 1 && indexPath.row == runningItems.count)) {
+        (indexPath.section == 1 && indexPath.row == runningItems.count) ||
+        (indexPath.section == 2 && indexPath.row == initialIncomeItems.count)) {
         //TODO - create a special add cell.
         static NSString *CellIdentifier = @"AddItemCellIdentifier";
         
@@ -102,8 +109,10 @@
         if(indexPath.section == 0){
             cell.textLabel.text = NSLocalizedString(@"Add an initial cost", @"Home Budget List add Initial item text");
         }
-        else{
+        else if (indexPath.section == 1) {
             cell.textLabel.text = NSLocalizedString(@"Add a recurring expense", @"Budget List add running item text");
+        } else {
+           cell.textLabel.text = NSLocalizedString(@"Add an initial income source", @"Budget List add initial income item text"); 
         }
         //TODO set the imageView of the cell to be a + image.
         return cell;
@@ -123,7 +132,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     // Configure the cell
-    NSMutableArray *a = indexPath.section == 0 ? initialItems : runningItems;
+    NSMutableArray *a = indexPath.section == 0 ? initialItems : (indexPath.section ==1 ? runningItems : initialIncomeItems);
 	HomeBudgetItem *item = (HomeBudgetItem *) [a objectAtIndex:indexPath.row];    
     // Configure the cell to show the Budget Item's details
     UILabel *label;
@@ -142,21 +151,23 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HomeBudgetItem *item;
     if((indexPath.section == 0 && indexPath.row == initialItems.count) ||
-       (indexPath.section == 1 && indexPath.row == runningItems.count)){
+       (indexPath.section == 1 && indexPath.row == runningItems.count) ||
+       (indexPath.section == 2 && indexPath.row == initialIncomeItems.count)){
         //TODO - Add a new budget item
         item = (HomeBudgetItem*) [NSEntityDescription insertNewObjectForEntityForName:@"HomeBudgetItem" inManagedObjectContext:home.managedObjectContext];
         item.home = self.home;
-        item.inInitialBudget = [NSNumber numberWithBool:(indexPath.section == 0)];
+        item.inInitialBudget = [NSNumber numberWithBool:(indexPath.section == 0 || indexPath.section == 2)];
+        item.isExpense = [NSNumber numberWithBool:(indexPath.section != 2)];
         // hardcode all manually created budget items to always show up.
         item.isRenting = [NSNumber numberWithInt:3];
         // hardcode order to be 100 to come after all pre-populated ones.
         item.order = [NSNumber numberWithInt:100];
         //Insert the object into the table view
-        NSMutableArray *a = indexPath.section == 0 ? initialItems : runningItems;
+        NSMutableArray *a = indexPath.section == 0 ? initialItems : (indexPath.section ==1 ? runningItems : initialIncomeItems);
         [a addObject:item];
     }
     else {
-        NSMutableArray *a = indexPath.section == 0 ? initialItems : runningItems;
+        NSMutableArray *a = indexPath.section == 0 ? initialItems : (indexPath.section ==1 ? runningItems : initialIncomeItems);
         item = (HomeBudgetItem *)[a objectAtIndex:indexPath.row];
     }
     // Todo - handle details view generic
@@ -171,7 +182,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSMutableArray *a = indexPath.section == 0 ? initialItems : runningItems;
+        NSMutableArray *a = indexPath.section == 0 ? initialItems : (indexPath.section ==1 ? runningItems : initialIncomeItems);
         HomeBudgetItem * itemToDelete = [a objectAtIndex:indexPath.row];
 		[home.managedObjectContext deleteObject:itemToDelete];
 		
@@ -189,7 +200,8 @@
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     //TODO make this conditional so last row ads a cell
     if((indexPath.section == 0 && indexPath.row == initialItems.count) ||
-       (indexPath.section == 1 && indexPath.row == runningItems.count)){
+       (indexPath.section == 1 && indexPath.row == runningItems.count) ||
+       (indexPath.section == 2 && indexPath.row == initialIncomeItems.count)){
         return UITableViewCellEditingStyleNone;
     } else{
         return UITableViewCellEditingStyleDelete;
@@ -241,7 +253,7 @@
             NSIndexPath *path = [self.tableView indexPathForCell: cell];
             
             // now use the index path
-            NSMutableArray *a = path.section == 0 ? initialItems : runningItems;
+            NSMutableArray *a = path.section == 0 ? initialItems : (path.section ==1 ? runningItems : initialIncomeItems);
             HomeBudgetItem *item = [a objectAtIndex:path.row];
             item.amount = [NSNumber numberWithInt: [textField.text intValue]];
             NSError *error;
@@ -268,6 +280,7 @@
 - (void)dealloc {
 	[initialItems release];
     [runningItems release];
+    [initialIncomeItems release];
     [doneButton release];
     [home release];
 	[super dealloc];

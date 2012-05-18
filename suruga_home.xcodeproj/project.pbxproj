@@ -78,7 +78,6 @@
 		2A6D8A4B1549B141006A89F0 /* HomeBudgetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D8A4A1549B141006A89F0 /* HomeBudgetItem.m */; };
 		2A6D8A4E154DDD04006A89F0 /* ManagedObjectCloner.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D8A4D154DDD03006A89F0 /* ManagedObjectCloner.m */; };
 		2A6D8A53154E434E006A89F0 /* HomePriceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D8A51154E434E006A89F0 /* HomePriceTableViewController.m */; };
-		2A6D8A57154E4BF6006A89F0 /* BaseBudgetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D8A56154E4BF4006A89F0 /* BaseBudgetItem.m */; };
 		2A78E9E214B92F0C00DB2305 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 2A78E9DA14B92F0C00DB2305 /* CHANGELOG.md */; };
 		2A78E9E314B92F0C00DB2305 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A78E9DC14B92F0C00DB2305 /* JSONKit.m */; };
 		2A78E9E414B92F0C00DB2305 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2A78E9DD14B92F0C00DB2305 /* README.md */; };
@@ -327,8 +326,6 @@
 		2A6D8A4D154DDD03006A89F0 /* ManagedObjectCloner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedObjectCloner.m; sourceTree = "<group>"; };
 		2A6D8A50154E434E006A89F0 /* HomePriceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePriceTableViewController.h; sourceTree = "<group>"; };
 		2A6D8A51154E434E006A89F0 /* HomePriceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePriceTableViewController.m; sourceTree = "<group>"; };
-		2A6D8A55154E4BF3006A89F0 /* BaseBudgetItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseBudgetItem.h; sourceTree = "<group>"; };
-		2A6D8A56154E4BF4006A89F0 /* BaseBudgetItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseBudgetItem.m; sourceTree = "<group>"; };
 		2A78E9DA14B92F0C00DB2305 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		2A78E9DB14B92F0C00DB2305 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		2A78E9DC14B92F0C00DB2305 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
@@ -687,8 +684,6 @@
 				2AE32A2E14C605C800325402 /* Category.m */,
 				2AE329D814C4C84200325402 /* UserData.h */,
 				2AE329D914C4C84200325402 /* UserData.m */,
-				2A6D8A55154E4BF3006A89F0 /* BaseBudgetItem.h */,
-				2A6D8A56154E4BF4006A89F0 /* BaseBudgetItem.m */,
 				2A6D8A491549B141006A89F0 /* HomeBudgetItem.h */,
 				2A6D8A4A1549B141006A89F0 /* HomeBudgetItem.m */,
 				2A991F9F14C1F1A7002C47AB /* BudgetItem.h */,
@@ -1237,7 +1232,6 @@
 				2A6D8A4B1549B141006A89F0 /* HomeBudgetItem.m in Sources */,
 				2A6D8A4E154DDD04006A89F0 /* ManagedObjectCloner.m in Sources */,
 				2A6D8A53154E434E006A89F0 /* HomePriceTableViewController.m in Sources */,
-				2A6D8A57154E4BF6006A89F0 /* BaseBudgetItem.m in Sources */,
 				2A17551815576C9400027978 /* UIButton+setTitleText.m in Sources */,
 				2A17551C15577CDB00027978 /* UITextField+convertToPicker.m in Sources */,
 				2A17551F15577E6F00027978 /* TextFieldPickerView.m in Sources */,

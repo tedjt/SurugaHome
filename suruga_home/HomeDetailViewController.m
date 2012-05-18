@@ -325,6 +325,7 @@
 
 - (IBAction)isRentSwitched:(id)sender {
     self.home.isRent = [NSNumber numberWithBool: self.isRentSwitch.on];
+    [self updatePrice];
 }
 #pragma mark - SVGeocoderDelegate
 - (void)setMapViewZoom {

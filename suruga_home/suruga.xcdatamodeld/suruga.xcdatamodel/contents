@@ -44,6 +44,7 @@
         <attribute name="advisorUrl" optional="YES" attributeType="String"/>
         <attribute name="amount" optional="YES" attributeType="Integer 32"/>
         <attribute name="inInitialBudget" optional="YES" attributeType="Boolean"/>
+        <attribute name="isExpense" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isRenting" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
@@ -98,7 +99,7 @@
         <element name="Category" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Furniture" positionX="160" positionY="192" width="128" height="150"/>
         <element name="Home" positionX="160" positionY="192" width="128" height="255"/>
-        <element name="HomeBudgetItem" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="HomeBudgetItem" positionX="160" positionY="192" width="128" height="180"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Rating" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Room" positionX="160" positionY="192" width="128" height="120"/>

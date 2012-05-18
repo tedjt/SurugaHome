@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class BaseBudgetItem;
+@class BudgetItem;
 @protocol BudgetItemDetailDelegate;
 
 @interface BudgetItemViewController : UIViewController <UITextFieldDelegate> {
@@ -17,7 +17,7 @@
     UIButton *advisorButton;
     UILabel *notesLabel;
     
-    BaseBudgetItem *item;
+    BudgetItem *item;
     
     id <BudgetItemDetailDelegate> parentController;
 }
@@ -27,7 +27,7 @@
 @property (nonatomic, retain) IBOutlet UITextField *amountTextField;
 @property (nonatomic, retain) IBOutlet UIButton *advisorButton;
 @property (nonatomic, retain) IBOutlet UILabel *notesLabel;
-@property (nonatomic, retain) BaseBudgetItem *item;
+@property (nonatomic, retain) BudgetItem *item;
 @property (nonatomic, assign) id <BudgetItemDetailDelegate>parentController;
 - (IBAction)advisorButtonClicked:(id)sender;
 @end

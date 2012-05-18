@@ -41,7 +41,7 @@
 - (int) getInitialCapacity;
 - (void) populateDefaultBudgetItems;
 
-- (NSMutableArray *)fetchBudgetItemsInInitial: (BOOL) inInitial;
+- (NSMutableArray *)fetchBudgetItemsInInitial: (BOOL) inInitial isExpense: (BOOL) isExpense;
 - (CLLocationCoordinate2D) getCoordinate;
 
 @end

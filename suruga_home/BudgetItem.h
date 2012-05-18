@@ -6,13 +6,21 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "BaseBudgetItem.h"
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface BudgetItem : BaseBudgetItem {
+@interface BudgetItem : NSManagedObject {
 @private
 }
 
 @property (nonatomic, retain) NSNumber * isExpense;
+@property (nonatomic, retain) NSNumber * amount;
+@property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSNumber * isRenting;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * advisorUrl;
+@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSNumber * inInitialBudget;
 
 + (NSArray *)fetchBudgetItemsWithContext: (NSManagedObjectContext *) context inInitial: (BOOL) inInitial isExpense: (BOOL) expense;
 
