@@ -121,7 +121,6 @@
 		2ABF0FB914CF6B9F00509EE8 /* bedroom_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABF0FB814CF6B9F00509EE8 /* bedroom_icon.png */; };
 		2ABF0FBB14CF6E0A00509EE8 /* advisor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABF0FBA14CF6E0A00509EE8 /* advisor.png */; };
 		2AC22BE714D86C4700429892 /* suruga_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AC22BE614D86C4700429892 /* suruga_logo.png */; };
-		2ACDE02914E10C06003D1A9C /* libextThree20JSON+SBJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ACDE02014E10BD6003D1A9C /* libextThree20JSON+SBJSON.a */; };
 		2ACDE02A14E10C06003D1A9C /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ACDE00E14E10BC8003D1A9C /* libThree20.a */; };
 		2ACDE03114E10C06003D1A9C /* libThree20Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ACDE02B14E10C06003D1A9C /* libThree20Core.a */; };
 		2ACDE03214E10C06003D1A9C /* libThree20Network.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ACDE02C14E10C06003D1A9C /* libThree20Network.a */; };
@@ -146,7 +145,6 @@
 		2ADDB3E814D1D82A0000956B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADDB3E714D1D82A0000956B /* libz.dylib */; };
 		2ADDB3EC14D318200000956B /* BudgetItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ADDB3EE14D318200000956B /* BudgetItemViewController.xib */; };
 		2AE3297014C4841000325402 /* StartUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE3296E14C4841000325402 /* StartUpViewController.m */; };
-		2AE3297114C4841000325402 /* StartUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AE3296F14C4841000325402 /* StartUpViewController.xib */; };
 		2AE3297614C48FBE00325402 /* home_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE3297514C48FBE00325402 /* home_background.png */; };
 		2AE329D014C4B99F00325402 /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE329C914C4B99F00325402 /* DCRoundSwitch.m */; };
 		2AE329D114C4B99F00325402 /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE329CB14C4B99F00325402 /* DCRoundSwitchKnobLayer.m */; };
@@ -159,6 +157,7 @@
 		2AE32A3114C61B3700325402 /* introData.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AE32A3014C61B3700325402 /* introData.json */; };
 		2AEFBEA714D9096100AF4A5E /* introData_jp.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AEFBEA614D9096100AF4A5E /* introData_jp.json */; };
 		2AF92394151AD18700175774 /* FinancialHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AF92395151AD18700175774 /* FinancialHomeViewController.xib */; };
+		9F64548F15AF8B6200B6D9BB /* StartUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F64549115AF8B6200B6D9BB /* StartUpViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,40 +175,12 @@
 			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
 			remoteInfo = Three20UnitTests;
 		};
-		2ACDE01F14E10BD6003D1A9C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2ACDE01314E10BD5003D1A9C /* extThree20JSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
-			remoteInfo = "extThree20JSON+SBJSON";
-		};
-		2ACDE02114E10BD6003D1A9C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2ACDE01314E10BD5003D1A9C /* extThree20JSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6E645BD91187751200F08CB1;
-			remoteInfo = "extThree20JSON+YAJL";
-		};
-		2ACDE02314E10BD6003D1A9C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2ACDE01314E10BD5003D1A9C /* extThree20JSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
-			remoteInfo = "extThree20JSONUnitTests+SBJSON";
-		};
 		2ACDE02514E10BFA003D1A9C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2ACDDFE214E10BC7003D1A9C /* Three20.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = BEF31F390F352DF5000DE5D2;
 			remoteInfo = Three20;
-		};
-		2ACDE02714E10BFA003D1A9C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2ACDE01314E10BD5003D1A9C /* extThree20JSON.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BEF31F390F352DF5000DE5D2;
-			remoteInfo = "extThree20JSON+SBJSON";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -378,7 +349,6 @@
 		2AA6EB2A14CE7EEA0097F647 /* BudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BudgetViewController.h; sourceTree = "<group>"; };
 		2AA6EB2B14CE7EEA0097F647 /* BudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetViewController.m; sourceTree = "<group>"; };
 		2AA6EB2E14CF48370097F647 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		2AA6EB3014CF484B0097F647 /* ja-JP */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ja-JP"; path = "ja-JP.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2AA6EB3414CF4F3F0097F647 /* tab_home_finder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_home_finder.png; sourceTree = "<group>"; };
 		2AA6EB3614CF51450097F647 /* tab_budget_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_budget_icon.png; sourceTree = "<group>"; };
 		2AA6EB3814CF53D60097F647 /* tab_move_in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_move_in.png; sourceTree = "<group>"; };
@@ -388,7 +358,7 @@
 		2ABF0FBA14CF6E0A00509EE8 /* advisor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = advisor.png; sourceTree = "<group>"; };
 		2AC22BE614D86C4700429892 /* suruga_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suruga_logo.png; sourceTree = "<group>"; };
 		2ACDDFE214E10BC7003D1A9C /* Three20.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20.xcodeproj; path = ../three20/src/Three20/Three20.xcodeproj; sourceTree = "<group>"; };
-		2ACDE01314E10BD5003D1A9C /* extThree20JSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = extThree20JSON.xcodeproj; path = ../three20/src/extThree20JSON/extThree20JSON.xcodeproj; sourceTree = "<group>"; };
+		2ACDE01314E10BD5003D1A9C /* extThree20JSON.xcodeproj */ = {isa = PBXFileReference; name = extThree20JSON.xcodeproj; path = ../three20/src/extThree20JSON/extThree20JSON.xcodeproj; sourceTree = SOURCE_ROOT; };
 		2ACDE02B14E10C06003D1A9C /* libThree20Core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libThree20Core.a; path = "../../../../../Library/Developer/Xcode/DerivedData/suruga_home-djiohxyssqarujhdixnmvlpzcyet/Build/Products/Debug-iphoneos/libThree20Core.a"; sourceTree = "<group>"; };
 		2ACDE02C14E10C06003D1A9C /* libThree20Network.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libThree20Network.a; path = "../../../../../Library/Developer/Xcode/DerivedData/suruga_home-djiohxyssqarujhdixnmvlpzcyet/Build/Products/Debug-iphoneos/libThree20Network.a"; sourceTree = "<group>"; };
 		2ACDE02D14E10C06003D1A9C /* libThree20Style.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libThree20Style.a; path = "../../../../../Library/Developer/Xcode/DerivedData/suruga_home-djiohxyssqarujhdixnmvlpzcyet/Build/Products/Debug-iphoneos/libThree20Style.a"; sourceTree = "<group>"; };
@@ -426,7 +396,6 @@
 		2ADDB3ED14D318200000956B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BudgetItemViewController.xib; sourceTree = "<group>"; };
 		2AE3296D14C4841000325402 /* StartUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartUpViewController.h; sourceTree = "<group>"; };
 		2AE3296E14C4841000325402 /* StartUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartUpViewController.m; sourceTree = "<group>"; };
-		2AE3296F14C4841000325402 /* StartUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartUpViewController.xib; sourceTree = "<group>"; };
 		2AE3297514C48FBE00325402 /* home_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_background.png; sourceTree = "<group>"; };
 		2AE329C814C4B99F00325402 /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
 		2AE329C914C4B99F00325402 /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
@@ -446,6 +415,9 @@
 		2AE32A3014C61B3700325402 /* introData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = introData.json; sourceTree = "<group>"; };
 		2AEFBEA614D9096100AF4A5E /* introData_jp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = introData_jp.json; sourceTree = "<group>"; };
 		2AF92395151AD18700175774 /* FinancialHomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinancialHomeViewController.xib; sourceTree = "<group>"; };
+		9F64549015AF8B6200B6D9BB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/StartUpViewController.xib; sourceTree = "<group>"; };
+		9F64549415AF8EC200B6D9BB /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/StartUpViewController.xib; sourceTree = "<group>"; };
+		9F64549515AF8F5800B6D9BB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -459,7 +431,6 @@
 				2ACDE03414E10C06003D1A9C /* libThree20UI.a in Frameworks */,
 				2ACDE03514E10C06003D1A9C /* libThree20UICommon.a in Frameworks */,
 				2ACDE03614E10C06003D1A9C /* libThree20UINavigator.a in Frameworks */,
-				2ACDE02914E10C06003D1A9C /* libextThree20JSON+SBJSON.a in Frameworks */,
 				2ACDE02A14E10C06003D1A9C /* libThree20.a in Frameworks */,
 				2ADDB3E814D1D82A0000956B /* libz.dylib in Frameworks */,
 				2ADDB3E614D1D8120000956B /* MobileCoreServices.framework in Frameworks */,
@@ -576,7 +547,7 @@
 				2A6D8A421548A992006A89F0 /* TabBarController.m */,
 				2AE3296D14C4841000325402 /* StartUpViewController.h */,
 				2AE3296E14C4841000325402 /* StartUpViewController.m */,
-				2AE3296F14C4841000325402 /* StartUpViewController.xib */,
+				9F64549115AF8B6200B6D9BB /* StartUpViewController.xib */,
 				2A17551D15577E6A00027978 /* TextFieldPickerView.h */,
 				2A17551E15577E6B00027978 /* TextFieldPickerView.m */,
 			);
@@ -920,16 +891,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2ACDE01414E10BD5003D1A9C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2ACDE02014E10BD6003D1A9C /* libextThree20JSON+SBJSON.a */,
-				2ACDE02214E10BD6003D1A9C /* libextThree20JSON+YAJL.a */,
-				2ACDE02414E10BD6003D1A9C /* extJSONUnitTests+SBJSON.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		2ADDB3BC14D1D7BD0000956B /* ASIHTTP */ = {
 			isa = PBXGroup;
 			children = (
@@ -1014,7 +975,6 @@
 			);
 			dependencies = (
 				2ACDE02614E10BFA003D1A9C /* PBXTargetDependency */,
-				2ACDE02814E10BFA003D1A9C /* PBXTargetDependency */,
 			);
 			name = suruga_home;
 			productName = suruga_home;
@@ -1036,15 +996,13 @@
 			knownRegions = (
 				en,
 				"ja-JP",
+				es,
+				ja,
 			);
 			mainGroup = 2A7EDBDD148C20D3003B4C14;
 			productRefGroup = 2A7EDBE9148C20D3003B4C14 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 2ACDE01414E10BD5003D1A9C /* Products */;
-					ProjectRef = 2ACDE01314E10BD5003D1A9C /* extThree20JSON.xcodeproj */;
-				},
 				{
 					ProductGroup = 2ACDDFE314E10BC7003D1A9C /* Products */;
 					ProjectRef = 2ACDDFE214E10BC7003D1A9C /* Three20.xcodeproj */;
@@ -1070,27 +1028,6 @@
 			fileType = wrapper.cfbundle;
 			path = Three20UnitTests.octest;
 			remoteRef = 2ACDE00F14E10BC8003D1A9C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2ACDE02014E10BD6003D1A9C /* libextThree20JSON+SBJSON.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libextThree20JSON+SBJSON.a";
-			remoteRef = 2ACDE01F14E10BD6003D1A9C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2ACDE02214E10BD6003D1A9C /* libextThree20JSON+YAJL.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libextThree20JSON+YAJL.a";
-			remoteRef = 2ACDE02114E10BD6003D1A9C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2ACDE02414E10BD6003D1A9C /* extJSONUnitTests+SBJSON.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "extJSONUnitTests+SBJSON.octest";
-			remoteRef = 2ACDE02314E10BD6003D1A9C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1129,7 +1066,7 @@
 				2A991FA614C229DA002C47AB /* BudgetCell.xib in Resources */,
 				2ADDB3EC14D318200000956B /* BudgetItemViewController.xib in Resources */,
 				2A501A0414C35B6E00ECA0D8 /* PriceViewController.xib in Resources */,
-				2AE3297114C4841000325402 /* StartUpViewController.xib in Resources */,
+				9F64548F15AF8B6200B6D9BB /* StartUpViewController.xib in Resources */,
 				2AE3297614C48FBE00325402 /* home_background.png in Resources */,
 				2AE329DF14C4E3FD00325402 /* FinancialAdviceViewController.xib in Resources */,
 				2AE32A3114C61B3700325402 /* introData.json in Resources */,
@@ -1253,11 +1190,6 @@
 			name = Three20;
 			targetProxy = 2ACDE02514E10BFA003D1A9C /* PBXContainerItemProxy */;
 		};
-		2ACDE02814E10BFA003D1A9C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "extThree20JSON+SBJSON";
-			targetProxy = 2ACDE02714E10BFA003D1A9C /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1281,7 +1213,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2AA6EB2E14CF48370097F647 /* en */,
-				2AA6EB3014CF484B0097F647 /* ja-JP */,
+				9F64549515AF8F5800B6D9BB /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1292,6 +1224,15 @@
 				2ADDB3ED14D318200000956B /* en */,
 			);
 			name = BudgetItemViewController.xib;
+			sourceTree = "<group>";
+		};
+		9F64549115AF8B6200B6D9BB /* StartUpViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F64549015AF8B6200B6D9BB /* en */,
+				9F64549415AF8EC200B6D9BB /* ja */,
+			);
+			name = StartUpViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

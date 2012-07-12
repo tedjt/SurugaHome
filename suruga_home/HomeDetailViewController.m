@@ -34,7 +34,7 @@
 @synthesize doneButton, saveButton;
 
 #pragma mark - Private Functions
-- (void)keyBoardLayoutPicker 
+- (void)keyBoardLayoutPicker
 {
     NSArray *options = [NSArray arrayWithObjects:
                         [NSArray arrayWithObjects:
@@ -48,17 +48,17 @@
                          NSLocalizedString(@"7 Room", @"7 Room"),
                          nil],
                         [NSArray arrayWithObjects:
-                         NSLocalizedString(@"", @"Blank"),
+                         @"",
                          NSLocalizedString(@"L", @"L"),
                          nil],
                         [NSArray arrayWithObjects:
-                         NSLocalizedString(@"", @"Blank"),
+                         @"",
                          NSLocalizedString(@"D", @"D"),
-                         nil], 
+                         nil],
                         [NSArray arrayWithObjects:
-                         NSLocalizedString(@"", @"Blank"),
+                         @"",
                          NSLocalizedString(@"K", @"K"),
-                         nil], 
+                         nil],
                         nil];
     TextFieldPickerView *p = [[[TextFieldPickerView alloc] initWithTextField:layoutTextField options:options useNewButton:NO] autorelease];
     p.componentWidths = [NSArray arrayWithObjects:
@@ -88,36 +88,36 @@
     //Set renting switch
     self.isRentSwitch.onText = NSLocalizedString(@"Renting", @"Renting Option");
 	self.isRentSwitch.offText = NSLocalizedString(@"Buying", @"Buying Option");
-    
+
     self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, 1200);
-    
+
     //Register for keyboard events
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
             selector:@selector(keyboardWillBeHidden:)
             name:UIKeyboardWillHideNotification object:nil];
-    
+
     //Map View
     //Get forward geocoded address
     if(self.home.latitude != nil) {
         [self setMapViewZoom];
-    } else { 
-        [mapView.userLocation addObserver:self  
-            forKeyPath:@"location"  
-            options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)  
-            context:NULL]; 
+    } else {
+        [mapView.userLocation addObserver:self
+            forKeyPath:@"location"
+            options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)
+            context:NULL];
     }
 
     //Nav bar buttons
     self.saveButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)] autorelease];
     self.navigationItem.rightBarButtonItem = self.saveButton;
-    
+
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)] autorelease];
-    
+
     //Done button
     self.doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)] autorelease];
-    
+
     // Load home values if not nil
     // Do any additional setup after loading the view from its nib.
     if(self.home.name != nil) {
@@ -139,7 +139,7 @@
     if ([home.stationDistance intValue] != 0)
         self.stationTextField.text = [self.home.stationDistance stringValue];
     if (self.home.rating != nil) {
-        [self.ratingButton setImage: [UIImage imageNamed:[NSString stringWithFormat:@"%d_stars.png", [self.home.rating.overall intValue]]] forState:UIControlStateNormal];                                          
+        [self.ratingButton setImage: [UIImage imageNamed:[NSString stringWithFormat:@"%d_stars.png", [self.home.rating.overall intValue]]] forState:UIControlStateNormal];
     }
     if (self.home.budgetItems != nil) {
         NSString *title = [NSString stringWithFormat:@"$%d", [self.home.isRent boolValue] ? [self.home getRunningCost]: [self.home getInitialCost]];
@@ -202,20 +202,20 @@
     [super dealloc];
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath  
-                     ofObject:(id)object  
-                       change:(NSDictionary *)change  
-                      context:(void *)context {  
-    
+-(void)observeValueForKeyPath:(NSString *)keyPath
+                     ofObject:(id)object
+                       change:(NSDictionary *)change
+                      context:(void *)context {
+
     if ([self.mapView showsUserLocation] && CLLocationCoordinate2DIsValid(self.mapView.userLocation.coordinate)) {
         MKCoordinateRegion region;
-        region.center = self.mapView.userLocation.coordinate;  
-        
-        MKCoordinateSpan span; 
+        region.center = self.mapView.userLocation.coordinate;
+
+        MKCoordinateSpan span;
         span.latitudeDelta  = 0.01; // Change these values to change the zoom
-        span.longitudeDelta = 0.01; 
+        span.longitudeDelta = 0.01;
         region.span = span;
-        
+
         [self.mapView setRegion:region animated:YES];
         // and of course you can use here old and new location values
     }
@@ -254,11 +254,11 @@
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
+
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
     scrollView.contentInset = contentInsets;
     scrollView.scrollIndicatorInsets = contentInsets;
-    
+
     // If active text field is hidden by keyboard, scroll it so it's visible
     // Your application might not need or want this behavior.
     CGRect aRect = self.view.frame;
@@ -295,7 +295,7 @@
     }
     RatingViewController *ratingView = [[RatingViewController alloc] initWithNibName:@"RatingViewController" bundle:nil rating: self.home.rating];
     ratingView.parentController = self;
-    
+
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:ratingView];
 	[self presentModalViewController:navController animated:YES];
     [ratingView release];
@@ -332,16 +332,16 @@
     CLLocationCoordinate2D c = [self.home getCoordinate];
     if (fabs(c.latitude) > 0.0001) {
         [self.mapView addAnnotation: [[[MKPlacemark alloc] initWithCoordinate:c addressDictionary:nil] autorelease]];
-                                      
+
     //     SVPlacemark *placemark = [[SVPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng) addressDictionary:formattedAddressDict]
         MKCoordinateRegion region;
         region.center = c;
-        
-        MKCoordinateSpan span; 
+
+        MKCoordinateSpan span;
         span.latitudeDelta  = 0.01; // Change these values to change the zoom
-        span.longitudeDelta = 0.01; 
+        span.longitudeDelta = 0.01;
         region.span = span;
-        
+
         [self.mapView setRegion:region animated:YES];
     } else{
         [self updateAddressCoordinates];
@@ -352,7 +352,7 @@
     //set address values;
     self.home.latitude = [NSNumber numberWithDouble:placemark.coordinate.latitude];
     self.home.longitude = [NSNumber numberWithDouble:placemark.coordinate.longitude];
-    
+
     [self setMapViewZoom];
     if ([(NSObject *) self.parentController conformsToProtocol:@protocol(HomeMapViewDelegate)])
     {
@@ -361,14 +361,14 @@
 }
 - (void)geocoder:(SVGeocoder *)geocoder didFailWithError:(NSError *)error
 {
-    //[mapView.userLocation addObserver:self  
-    //    forKeyPath:@"location"  
-    //    options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)  
+    //[mapView.userLocation addObserver:self
+    //    forKeyPath:@"location"
+    //    options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)
     //                               context:NULL];
     //TODO - do I need to manually observe value
     //TODO - reset address lat/long object to nil or go with last known good value?
     [self observeValueForKeyPath:@"location" ofObject:self.mapView.userLocation change:nil context:nil];
-    
+
 }
 
 #pragma mark - Model Methods
@@ -378,7 +378,7 @@
     self.home.nearestStation = nearestStationTextField.text;
     if (![self.home.address isEqualToString:addressTextField.text]) {
         self.home.address = addressTextField.text;
-        [self updateAddressCoordinates]; 
+        [self updateAddressCoordinates];
     }
     self.home.size = [NSNumber numberWithInt:[self.sizeTextField.text intValue]];
     self.home.layout = self.layoutTextField.text;
